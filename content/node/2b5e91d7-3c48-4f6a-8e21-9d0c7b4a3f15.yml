@@ -1,0 +1,50 @@
+# An About page, using Drupal CMS's own `page` content type.
+#
+# `field_content` is a plain `text_long` field, not a Canvas component tree, so
+# this is ordinary rich text in the `content_format` filter format.
+#
+# No `path` alias here on purpose: Pathauto's `/[node:title]` pattern generates
+# `/about` from the title, and a hand-written alias would only be overwritten.
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: About
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  # Drupal CMS puts content behind an editorial workflow, so a node is only
+  # actually published when its moderation state says so.
+  moderation_state:
+    -
+      value: published
+  field_description:
+    -
+      value: 'What this site is and how its front end is built.'
+  field_content:
+    # One element per line, with no newlines inside a paragraph:
+    # `content_format` runs `filter_autop`, which turns source line breaks
+    # into <br> and hard-wraps the rendered text.
+    -
+      format: content_format
+      value: "<h2>About this site</h2>\r\n<p>This is an ordinary Drupal CMS content page. It uses the <strong>Page</strong> content type, and its body is rich text — the kind of content an editor writes in the admin UI without touching code.</p>\r\n<h2>How the front end is built</h2>\r\n<p>The components this site renders are authored in a separate codebase, as React files, and pushed here with the Drupal Canvas CLI. Editors then compose pages from those components in Canvas, the same way they compose this page's text.</p>\r\n<p>Replace this page with something of your own — it exists so a freshly installed site has more than a home page.</p>"

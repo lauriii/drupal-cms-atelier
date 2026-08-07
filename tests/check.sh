@@ -44,16 +44,41 @@ $DRUSH site:install "recipes/$RECIPE_NAME" \
   --account-name=admin --account-pass=admin --site-name=Nebula -y >/dev/null
 echo "    installed in $((SECONDS - install_start))s"
 
+# Probe before rebuilding caches, so the report says whether the rebuild was
+# actually needed rather than hiding it.
+if [[ -n "${SITE_URL:-}" ]]; then
+  echo "    HTTP / straight after install: $(curl -sk -o /dev/null -w '%{http_code}' "$SITE_URL/")"
+fi
+
+# `drush site:install` leaves a container that does not know about every module
+# the recipe installed, so the first requests die with PluginNotFoundException
+# for entity types like `oauth2_scope`. Rebuild before touching the site.
+echo "==> Rebuilding caches"
+$DRUSH cr >/dev/null 2>&1 || true
+
+# `automated_cron` otherwise fires on the first anonymous request, and the first
+# cron on a fresh Drupal CMS site takes long enough to fail that request. Get it
+# out of the way, which also populates the search index.
+echo "==> Running cron once"
+$DRUSH cron >/dev/null 2>&1 || true
+
 echo "==> Asserting the installed site"
 
 # The one thing that makes this a selectable site template rather than an
 # ordinary recipe. If the Drupal CMS installer is present, ask its own
 # discovery code; otherwise check the discriminator directly.
 if ev 'print (int) is_dir(DRUPAL_ROOT . "/profiles/contrib/drupal_cms_installer");' | grep -q 1; then
-  check 'offered as a site template by the installer' "$RECIPE_NAME" \
+  # `scan()` is a generator that only catches RecipeFileException, so a sibling
+  # recipe throwing anything else aborts it mid-iteration. That happens here
+  # but never during a real install, because it is triggered by config the
+  # already-applied recipes left behind. Collect what it yields before any
+  # throw rather than asserting on the complete list.
+  check 'offered as a site template by the installer' yes \
     "$(ev "require_once DRUPAL_ROOT . '/profiles/contrib/drupal_cms_installer/src/RecipeHandler.php';
       \$h = new \Drupal\drupal_cms_installer\RecipeHandler(\Drupal::state(), \Drupal::messenger());
-      print implode(',', array_keys(iterator_to_array(\$h->scan('Site'))));")"
+      \$found = [];
+      try { foreach (\$h->scan('Site') as \$n => \$r) { \$found[] = \$n; } } catch (\Throwable) {}
+      print in_array('$RECIPE_NAME', \$found, TRUE) ? 'yes' : 'no';")"
 else
   check 'recipe type is Site' Site \
     "$(ev "print \Drupal\Core\Recipe\Recipe::createFromDirectory(DRUPAL_ROOT . '/../recipes/$RECIPE_NAME')->type;")"
@@ -65,6 +90,37 @@ check 'code component entity type available' 1 \
   "$(ev 'print (int) \Drupal::entityTypeManager()->hasDefinition("js_component");')"
 check 'default theme' mercury \
   "$(ev 'print \Drupal::config("system.theme")->get("default");')"
+
+# The Drupal CMS foundation, inherited from drupal_cms_site_template_base.
+check 'admin theme is Gin' gin \
+  "$(ev 'print \Drupal::config("system.theme")->get("admin");')"
+for module in navigation dashboard gin_toolbar coffee project_browser \
+              pathauto metatag scheduler workflows trash field_ui
+do
+  check "module $module installed" 1 \
+    "$(ev "print (int) \Drupal::moduleHandler()->moduleExists('$module');")"
+done
+check 'content_editor role' 1 \
+  "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("user_role")->load("content_editor");')"
+check 'content editors can manage code components' 1 \
+  "$(ev 'print (int) \Drupal::entityTypeManager()->getStorage("user_role")->load("content_editor")->hasPermission("administer code components");')"
+check 'page content type (Drupal CMS)' 1 \
+  "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("node_type")->load("page");')"
+check 'content_format text format' 1 \
+  "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("filter_format")->load("content_format");')"
+check 'welcome dashboard' 1 \
+  "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("dashboard")->load("welcome");')"
+# `drupal_cms_helper`'s RecipeSubscriber rewrites `page.front` from an alias to
+# its internal system path on apply, so this reads `/page/1`, not `/home`.
+# Assert the relationship rather than the literal.
+# @see \Drupal\drupal_cms_helper\EventSubscriber\RecipeSubscriber::onApply()
+check 'front page is the landing page' 1 \
+  "$(ev 'print (int) (\Drupal::service("path_alias.manager")->getPathByAlias("/home") === \Drupal::config("system.site")->get("page.front"));')"
+# Setting page.front must not clobber the 403 the base recipe sets.
+check 'base 403 page preserved' /user/login \
+  "$(ev 'print \Drupal::config("system.site")->get("page.403");')"
+check 'landing page is a canvas_page' Home \
+  "$(ev 'print \Drupal::entityTypeManager()->getStorage("canvas_page")->load(1)?->label();')"
 
 # Config entities a recipe-installed module does NOT get for free.
 # @see \Drupal\Core\Recipe\RecipeRunner::installModules()
@@ -95,10 +151,29 @@ check 'image media type' 1 \
   "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("media_type")->load("image");')"
 check 'cms_content search index' 1 \
   "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("search_api_index")->load("cms_content");')"
-check 'main menu link' 1 \
+# Default content: a home page and an About page, both in the main menu.
+check 'main menu links' 2 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name"=>"main"]));')"
-check 'get started article' 1 \
-  "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"article"]));')"
+check 'About page exists and is published' 1 \
+  "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15");
+    print (int) ($n && $n->isPublished() && $n->bundle() === "page");')"
+# Pathauto generates this from the title; nothing in the recipe hard-codes it.
+check 'About page alias' /about \
+  "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15");
+    print $n ? \Drupal::service("path_alias.manager")->getAliasByPath("/node/" . $n->id()) : "";')"
+check 'home page is published' 1 \
+  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
+    print (int) ($p && $p->isPublished());')"
+
+# The front end gets its header, navigation and footer from Canvas page
+# regions. Without them a Mercury site renders no site chrome at all, because
+# block placements are theme config entities and core skips those when a recipe
+# installs a theme.
+for region in header footer; do
+  check "page region mercury.$region enabled" 1 \
+    "$(ev "\$r = \Drupal::entityTypeManager()->getStorage('page_region')->load('mercury.$region');
+      print (int) (\$r && \$r->status() && count(\$r->get('component_tree')) > 0);")"
+done
 
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \
@@ -108,9 +183,27 @@ base_url="$(ev 'print \Drupal::request()->getSchemeAndHttpHost();')"
 if [[ -n "$base_url" && "$base_url" != http* ]]; then base_url=""; fi
 if [[ -n "${SITE_URL:-}" ]]; then base_url="$SITE_URL"; fi
 if [[ -n "$base_url" ]]; then
-  for path in /jsonapi /jsonapi/menu_items/main /jsonapi/index/cms_content /jsonapi/node/article; do
+  # `/` first: it is the page a human opens after installing, and a stale
+  # container or a front page pointing at nothing both surface here and
+  # nowhere else.
+  for path in / /home /about \
+              /jsonapi /jsonapi/menu_items/main /jsonapi/index/cms_content /jsonapi/node/article; do
+    # -L because `/home` 301s to `/`: it is the front page, and Drupal CMS's
+    # `redirect` module canonicalises the alias onto it.
     check "GET $path (anonymous)" 200 \
-      "$(curl -sk -o /dev/null -w '%{http_code}' "$base_url$path")"
+      "$(curl -skL -o /dev/null -w '%{http_code}' "$base_url$path")"
+  done
+  # Site chrome, not just a 200. This is what "the navigation is missing"
+  # looks like from the outside, and a status code will not catch it.
+  body="$(curl -sk "$base_url/")"
+  check 'front end renders a <nav>' yes \
+    "$(grep -qi '<nav' <<<"$body" && echo yes || echo no)"
+  # Newlines stripped first: the anchor text sits on its own line, so a
+  # line-based grep for `>Home<` misses it.
+  flat="$(tr -d '\n' <<<"$body")"
+  for item in Home About; do
+    check "front end renders the '$item' menu link" yes \
+      "$(grep -qE ">[[:space:]]*$item[[:space:]]*<" <<<"$flat" && echo yes || echo no)"
   done
 else
   echo "  skip  HTTP checks (set SITE_URL to enable)"

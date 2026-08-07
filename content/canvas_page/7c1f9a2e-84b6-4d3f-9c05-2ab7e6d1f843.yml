@@ -1,0 +1,59 @@
+# The home page: a Canvas landing page, which is the pattern Drupal CMS's own
+# Blank and Starter templates use, at the same `/home` path Starter uses.
+#
+# A Canvas page rather than a node on purpose. Drupal CMS ships Pathauto with a
+# `/[node:title]` pattern, so a node cannot keep a hand-written alias from a
+# recipe (Pathauto's opt-out is a computed field property that default content
+# cannot set). Canvas pages have no Pathauto pattern, so this alias sticks.
+#
+# Nebula's `examples/pages/homepage.json` also targets `/home`. Pushing it
+# without adopting this page first leaves two pages on one alias, and the newer
+# one wins path lookups. See README.md, "Get a component onto the site".
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Home
+  components:
+    -
+      uuid: 9f2b7c14-5d83-4a6e-b019-3c8fa25d7e06
+      component_id: sdc.mercury.cta
+      inputs:
+        heading_text: 'Your front end lives in code'
+        level: 1
+        text: 'This site is the backend for a Nebula codebase. Author components in React, push them with the Canvas CLI, and compose pages here.'
+        text_align: center
+        overlay_opacity: 20%
+    -
+      parent_uuid: 9f2b7c14-5d83-4a6e-b019-3c8fa25d7e06
+      slot: actions
+      uuid: 4e6d8b30-1a75-42c9-8f2b-6d0c94e7a51f
+      component_id: sdc.mercury.button
+      inputs:
+        variant: primary
+        size: large
+        label: 'Edit this page in Canvas'
+        mobile_width: false
+        icon: arrow-right
+        icon_first: false
+        disabled: false
+  path:
+    -
+      alias: /home
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

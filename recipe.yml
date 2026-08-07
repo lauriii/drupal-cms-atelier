@@ -4,30 +4,25 @@ name: Nebula
 # the literal string `Site`; core itself treats `type` as free-form.
 # @see \Drupal\drupal_cms_installer\RecipeHandler::scan()
 type: Site
-description: 'A Drupal site set up as the backend for a Nebula code components codebase. Authoring happens in your editor with React and Tailwind; this template configures the Drupal side that the Canvas CLI pushes to.'
+description: 'A Drupal CMS site set up as the backend for a Nebula code components codebase. Authoring happens in your editor with React and Tailwind; this template configures the Drupal side that the Canvas CLI pushes to.'
 
 recipes:
-  # A generic administrator role, with all permissions.
-  - core/recipes/administrator_role
-  # Image media, so that Canvas can store the images `canvas reconcile-media`
-  # uploads. Dependency recipes are applied before this recipe's own config, so
-  # `media.type.image` exists by the time the `canvas:media:image:create` scope
-  # in `config/` is imported — that scope declares it as an enforced dependency.
-  - core/recipes/image_media_type
-  # The `article` content type, including `field_image`. The `related_articles`
-  # example component queries `node--article` and reads `field_image`, `uid`,
-  # `created`, `title` and `path`.
+  # The Drupal CMS foundation: Gin, the navigation sidebar, dashboards, media
+  # types, editorial workflow, SEO and privacy tooling, the `page` content type
+  # with its Canvas component tree, the `content_editor` role, and Canvas
+  # itself. Everything a Drupal CMS site is expected to have.
+  #
+  # A site template should be built on this rather than on another site
+  # template. Applying it also covers `core/recipes/administrator_role`,
+  # `content_editor_role` and the media-type recipes, so this template does not
+  # repeat them.
+  - drupal_cms_site_template_base
+  # Drupal CMS ships a `page` type, not an `article` one. The
+  # `related_articles` example component queries `node--article` and reads
+  # `field_image`, `uid`, `created`, `title` and `path`, so add it.
   - core/recipes/article_content_type
-  # A rich-text format for the article body. Canvas ships its own formats for
-  # HTML props, but nothing usable for ordinary node fields.
-  - core/recipes/basic_html_format_editor
 
 install:
-  # Drupal Canvas itself. Code components (`canvas.js_component` entities) are
-  # part of the module; there is no separate submodule to install.
-  - canvas
-  # Canvas breaks in strange ways if this theme is not installed.
-  - canvas_stark
   # Authentication for the Canvas CLI. The declarative parts live here; the
   # key pair and the consumer secret cannot be shipped in a recipe.
   # @see README.md, "Finish the OAuth setup".
@@ -48,9 +43,9 @@ install:
   # Content is indexed on cron, so make sure cron runs even without a real
   # cron job.
   - automated_cron
-  # The front-end theme. Its `header` and `footer` regions are the targets of
-  # the `regions/header.json` and `regions/footer.json` files in a Nebula
-  # codebase.
+  # The front-end theme, and the same one Drupal CMS's own Starter template
+  # uses. Its `header` and `footer` regions are the targets of the
+  # `regions/header.json` and `regions/footer.json` files in a Nebula codebase.
   - mercury
 
 config:
@@ -61,33 +56,28 @@ config:
     # When a recipe installs a module, core deliberately skips the config
     # *entities* in that module's `config/install`; only simple config is
     # created. Every config entity a module ships has to be imported here.
+    # The base recipe already imports `canvas` and `filter`; these are the
+    # extensions this template adds on top.
     # @see \Drupal\Core\Recipe\RecipeRunner::installModules()
     #
-    # Text formats and editors for HTML props, and the image styles code
-    # components render through — including `canvas_parametrized_width`, which
-    # backs the `alternateWidths` convention in the example components.
-    canvas: '*'
     # The `canvas:*` OAuth scopes the CLI asks for.
     canvas_oauth: '*'
     # The bundles of the `oauth2_token` entity type. Without these, tokens
     # cannot be stored and every CLI request fails to authenticate.
     simple_oauth: '*'
-    # `filter.settings.fallback_format` points at `plain_text`, so that format
-    # has to exist even though nothing references it directly.
-    filter:
-      - filter.format.plain_text
   actions:
+    # The base recipe sets the admin theme to Gin but leaves the front end to
+    # the site template, which is this one's job.
     system.theme:
       simpleConfigUpdate:
         default: mercury
-    # The front page is the "Get started" article shipped below. A recipe has
-    # no way to print a message once it is applied, so this page is where the
-    # handoff instructions live. Point the front page at your own Canvas page
-    # once you have pushed one.
+    # The Canvas landing page shipped in `content/`, same as Drupal CMS's Blank
+    # and Starter templates. Dotted, not nested: `simpleConfigUpdate` calls
+    # `Config::set()` per key, so a nested `page:` mapping would replace the
+    # whole `page` array and wipe the `page.403` the base recipe sets.
     system.site:
       simpleConfigUpdate:
-        page:
-          front: /start
+        page.front: /home
     # Code components fetch from JSON:API in the visitor's browser, so
     # anonymous users need read access to content and media.
     user.role.anonymous:
@@ -98,6 +88,12 @@ config:
       grantPermissions:
         - 'access content'
         - 'view media'
+    # Content editors work in Canvas, so let them manage the code components
+    # and page templates the CLI pushes.
+    user.role.content_editor:
+      grantPermissions:
+        - 'administer code components'
+        - 'administer page template'
 
 extra:
   drupal_cms_installer:

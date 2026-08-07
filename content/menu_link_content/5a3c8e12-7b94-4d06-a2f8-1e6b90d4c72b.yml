@@ -1,23 +1,19 @@
-# Main-menu link to the home page.
-#
-# Linked by `target_uuid` rather than a path, the same way Drupal CMS's own
-# templates do it, so the link follows the entity instead of a URL that
-# Pathauto or an editor might change.
+# Main-menu link to the About page.
 _meta:
   version: '1.0'
   entity_type: menu_link_content
-  uuid: 9d0d0f0e-6f2a-4a1d-9a5b-1c7f5e3a2b40
+  uuid: 5a3c8e12-7b94-4d06-a2f8-1e6b90d4c72b
   bundle: menu_link_content
   default_langcode: en
   depends:
-    7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843: canvas_page
+    2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15: node
 default:
   enabled:
     -
       value: true
   title:
     -
-      value: Home
+      value: About
   menu_name:
     -
       value: main
@@ -25,7 +21,7 @@ default:
     -
       title: ''
       options: {  }
-      target_uuid: 7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843
+      target_uuid: 2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15
   external:
     -
       value: false
@@ -34,7 +30,7 @@ default:
       value: true
   weight:
     -
-      value: 0
+      value: 10
   expanded:
     -
       value: false
