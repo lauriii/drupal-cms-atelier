@@ -164,6 +164,15 @@ check 'About page alias' /about \
 check 'home page is published' 1 \
   "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
     print (int) ($p && $p->isPublished());')"
+# The home page is a hero plus two card sections. If a component id or an enum
+# value is wrong, Canvas drops the item, so assert the tree survived intact.
+check 'home page component count' 12 \
+  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
+    print $p ? iterator_count($p->getComponentTree()) : 0;')"
+check 'home page uses cards' 6 \
+  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
+    $n = 0; foreach ($p?->getComponentTree() ?? [] as $i) { if ($i->getComponentId() === "sdc.mercury.card") { $n++; } }
+    print $n;')"
 
 # The front end gets its header, navigation and footer from Canvas page
 # regions. Without them a Mercury site renders no site chrome at all, because
@@ -205,6 +214,16 @@ if [[ -n "$base_url" ]]; then
     check "front end renders the '$item' menu link" yes \
       "$(grep -qE ">[[:space:]]*$item[[:space:]]*<" <<<"$flat" && echo yes || echo no)"
   done
+  # Content, not just chrome: a component that fails to render leaves the
+  # surrounding markup intact, so check for the text itself.
+  for phrase in 'How this site works' 'Already configured for you' \
+                'Author in your editor' 'Compose in Canvas'; do
+    check "front end renders '$phrase'" yes \
+      "$(grep -qF "$phrase" <<<"$flat" && echo yes || echo no)"
+  done
+  # The footer is a region too, and it rendered empty until it got branding.
+  check 'footer region renders content' yes \
+    "$(grep -qE '<footer' <<<"$flat" && echo yes || echo no)"
 else
   echo "  skip  HTTP checks (set SITE_URL to enable)"
 fi

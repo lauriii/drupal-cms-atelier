@@ -1,8 +1,14 @@
 # The front-end footer. @see canvas.page_region.mercury.header.yml
+#
+# Site branding sits in `footer_first` so the footer is not empty on a fresh
+# install: the only enabled link in Drupal CMS's footer menu points at the
+# Privacy policy, which ships as an unpublished draft, so the menu renders
+# nothing until someone writes and publishes it.
 langcode: en
 status: true
 dependencies:
   config:
+    - canvas.component.block.system_branding_block
     - canvas.component.block.system_menu_block.footer
     - canvas.component.sdc.mercury.footer
   theme:
@@ -17,6 +23,18 @@ component_tree:
     component_version: d696cea1796b650e
     inputs:
       align: true
+  '0:footer_first:0:a1f47c8b-3e29-4d60-95b7-08c2fe61d4a9':
+    parent_uuid: bd25d2aa-d623-479e-86c7-89ecffdd3dfa
+    slot: footer_first
+    uuid: a1f47c8b-3e29-4d60-95b7-08c2fe61d4a9
+    component_id: block.system_branding_block
+    component_version: 7d528e00f56b3abf
+    inputs:
+      label: 'Site branding'
+      label_display: '0'
+      use_site_logo: true
+      use_site_name: true
+      use_site_slogan: false
   '0:footer_utility_first:0:c792f1a5-fd27-40de-8d91-12b2ced91e61':
     parent_uuid: bd25d2aa-d623-479e-86c7-89ecffdd3dfa
     slot: footer_utility_first
