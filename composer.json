@@ -1,0 +1,15 @@
+{
+    "name": "drupal/nebula",
+    "description": "A Drupal site template for authoring Drupal Canvas code components with a Nebula codebase.",
+    "type": "drupal-recipe",
+    "license": ["GPL-2.0-or-later"],
+    "require": {
+        "drupal/canvas": "^1.2",
+        "drupal/jsonapi_menu_items": "^1.2",
+        "drupal/jsonapi_search_api": "^1.0@RC",
+        "drupal/mercury": "^1.0.5",
+        "drupal/search_api": "^1.39",
+        "drupal/simple_oauth": "^6"
+    },
+    "version": "1.x-dev"
+}

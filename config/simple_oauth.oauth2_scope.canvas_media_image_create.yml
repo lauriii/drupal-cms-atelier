@@ -1,0 +1,35 @@
+# `canvas_oauth` normally creates this scope for every image-source media type
+# in `canvas_oauth_install()`, but that hook early-returns when `$is_syncing`,
+# and installing a module from a recipe always sets syncing to TRUE.
+# @see canvas_oauth_install()
+# @see \Drupal\Core\Recipe\RecipeRunner::installModules()
+#
+# Without it the CLI's default scope string is rejected with `invalid_scope`,
+# because `canvas:media:image:create` is part of it.
+# @see packages/cli/src/config.ts, DEFAULT_SCOPES
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - canvas_oauth
+    config:
+      - media.type.image
+id: canvas_media_image_create
+name: 'canvas:media:image:create'
+description: 'Drupal Canvas: Create Image media'
+grant_types:
+  authorization_code:
+    status: true
+    description: 'Authorization code access for creating Image media'
+  refresh_token:
+    status: true
+    description: 'Refresh token access for creating Image media'
+  client_credentials:
+    status: true
+    description: 'Client credentials access for creating Image media'
+umbrella: false
+parent: null
+granularity_id: permission
+granularity_configuration:
+  permission: 'create image media'

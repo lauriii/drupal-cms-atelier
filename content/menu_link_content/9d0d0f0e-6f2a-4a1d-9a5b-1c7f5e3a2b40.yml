@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 9d0d0f0e-6f2a-4a1d-9a5b-1c7f5e3a2b40
+  bundle: menu_link_content
+  default_langcode: en
+default:
+  title:
+    -
+      value: Home
+  link:
+    -
+      uri: 'internal:/'
+      title: ''
+      options: {  }
+  weight:
+    -
+      value: 0
+  menu_name:
+    -
+      value: main
+  enabled:
+    -
+      value: true

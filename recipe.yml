@@ -1,0 +1,109 @@
+name: Nebula
+# This key, and only this key, is what makes a recipe selectable as a site
+# template in the Drupal CMS installer. It is compared case-sensitively against
+# the literal string `Site`; core itself treats `type` as free-form.
+# @see \Drupal\drupal_cms_installer\RecipeHandler::scan()
+type: Site
+description: 'A Drupal site set up as the backend for a Nebula code components codebase. Authoring happens in your editor with React and Tailwind; this template configures the Drupal side that the Canvas CLI pushes to.'
+
+recipes:
+  # A generic administrator role, with all permissions.
+  - core/recipes/administrator_role
+  # Image media, so that Canvas can store the images `canvas reconcile-media`
+  # uploads. Dependency recipes are applied before this recipe's own config, so
+  # `media.type.image` exists by the time the `canvas:media:image:create` scope
+  # in `config/` is imported — that scope declares it as an enforced dependency.
+  - core/recipes/image_media_type
+  # The `article` content type, including `field_image`. The `related_articles`
+  # example component queries `node--article` and reads `field_image`, `uid`,
+  # `created`, `title` and `path`.
+  - core/recipes/article_content_type
+  # A rich-text format for the article body. Canvas ships its own formats for
+  # HTML props, but nothing usable for ordinary node fields.
+  - core/recipes/basic_html_format_editor
+
+install:
+  # Drupal Canvas itself. Code components (`canvas.js_component` entities) are
+  # part of the module; there is no separate submodule to install.
+  - canvas
+  # Canvas breaks in strange ways if this theme is not installed.
+  - canvas_stark
+  # Authentication for the Canvas CLI. The declarative parts live here; the
+  # key pair and the consumer secret cannot be shipped in a recipe.
+  # @see README.md, "Finish the OAuth setup".
+  - canvas_oauth
+  - consumers
+  - simple_oauth
+  # JSON:API, used by code components that read data from this site at runtime.
+  - jsonapi
+  - jsonapi_resources
+  # Exposes /jsonapi/menu_items/{menu}, which the `main_navigation` example
+  # component fetches for the `main` menu.
+  - jsonapi_menu_items
+  # Exposes /jsonapi/index/{index}, which the `search_results` example
+  # component queries.
+  - jsonapi_search_api
+  - search_api
+  - search_api_db
+  # Content is indexed on cron, so make sure cron runs even without a real
+  # cron job.
+  - automated_cron
+  # The front-end theme. Its `header` and `footer` regions are the targets of
+  # the `regions/header.json` and `regions/footer.json` files in a Nebula
+  # codebase.
+  - mercury
+
+config:
+  # Existing configuration wins, so this template can be applied on top of a
+  # site that already has some of it.
+  strict: false
+  import:
+    # When a recipe installs a module, core deliberately skips the config
+    # *entities* in that module's `config/install`; only simple config is
+    # created. Every config entity a module ships has to be imported here.
+    # @see \Drupal\Core\Recipe\RecipeRunner::installModules()
+    #
+    # Text formats and editors for HTML props, and the image styles code
+    # components render through — including `canvas_parametrized_width`, which
+    # backs the `alternateWidths` convention in the example components.
+    canvas: '*'
+    # The `canvas:*` OAuth scopes the CLI asks for.
+    canvas_oauth: '*'
+    # The bundles of the `oauth2_token` entity type. Without these, tokens
+    # cannot be stored and every CLI request fails to authenticate.
+    simple_oauth: '*'
+    # `filter.settings.fallback_format` points at `plain_text`, so that format
+    # has to exist even though nothing references it directly.
+    filter:
+      - filter.format.plain_text
+  actions:
+    system.theme:
+      simpleConfigUpdate:
+        default: mercury
+    # The front page is the "Get started" article shipped below. A recipe has
+    # no way to print a message once it is applied, so this page is where the
+    # handoff instructions live. Point the front page at your own Canvas page
+    # once you have pushed one.
+    system.site:
+      simpleConfigUpdate:
+        page:
+          front: /start
+    # Code components fetch from JSON:API in the visitor's browser, so
+    # anonymous users need read access to content and media.
+    user.role.anonymous:
+      grantPermissions:
+        - 'access content'
+        - 'view media'
+    user.role.authenticated:
+      grantPermissions:
+        - 'access content'
+        - 'view media'
+
+extra:
+  drupal_cms_installer:
+    creator: 'Drupal Canvas'
+    links:
+      - url: 'https://github.com/acquia/nebula'
+        text: 'Nebula codebase template'
+      - url: 'https://www.drupal.org/project/canvas'
+        text: 'Learn more'

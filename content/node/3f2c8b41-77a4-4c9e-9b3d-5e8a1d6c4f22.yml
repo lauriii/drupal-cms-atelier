@@ -1,0 +1,69 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3f2c8b41-77a4-4c9e-9b3d-5e8a1d6c4f22
+  bundle: article
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Get started with Nebula'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: /start
+      langcode: en
+  body:
+    # `basic_html` does not allow <pre>, so commands use <code> with <br>.
+    -
+      format: basic_html
+      value: |
+        <p>This site is configured as the backend for a Nebula codebase. Code
+        components are authored in your editor and pushed here with the Canvas
+        CLI. The full handoff is in the recipe's README.</p>
+
+        <h2>1. Finish the OAuth setup</h2>
+        <p>A recipe is declarative configuration, so it cannot ship a key pair
+        or a client secret. Generate them once:</p>
+        <p><code>drush simple-oauth:generate-keys ../keys<br>
+        drush config:set simple_oauth.settings public_key ../keys/public.key<br>
+        drush config:set simple_oauth.settings private_key ../keys/private.key</code></p>
+        <p>Then add a consumer at <a href="/admin/config/services/consumer/add">/admin/config/services/consumer/add</a>
+        with a client ID, a secret, the <em>Client credentials</em> grant type,
+        <em>Is Confidential?</em> checked, a non-anonymous user, and every
+        <code>canvas:*</code> scope selected. Canvas also ships an interactive
+        Drush command that does all of this; run
+        <code>drush list | grep canvas</code> to see whether your version has
+        it.</p>
+
+        <h2>2. Scaffold the codebase</h2>
+        <p><code>npx @drupal-canvas/create my-site --site-url https://example.ddev.site</code></p>
+        <p>That writes a <code>.env</code> containing
+        <code>CANVAS_SITE_URL</code>. Add the client ID and secret from step 1
+        to it as <code>CANVAS_CLIENT_ID</code> and
+        <code>CANVAS_CLIENT_SECRET</code>.</p>
+
+        <h2>3. Get a component onto this site</h2>
+        <p><code>cp -R examples/components/card src/components/<br>
+        npx canvas push</code></p>
+        <p>Copy the whole dependency closure — components under
+        <code>examples/</code> import each other through
+        <code>@/components/*</code>, and the build fails if one is missing.</p>
+        <p>Pushed pages arrive unpublished. Publish one at
+        <a href="/admin/content/pages">/admin/content/pages</a>, then point the
+        front page at it:</p>
+        <p><code>drush config:set system.site page.front /home</code></p>
+        <p>Until you push a page template, this site has no header or footer.
+        That is expected: they come from the <code>regions/</code> files in your
+        Nebula codebase.</p>
