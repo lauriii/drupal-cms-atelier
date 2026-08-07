@@ -88,8 +88,19 @@ check 'canvas module installed' 1 \
   "$(ev 'print (int) \Drupal::moduleHandler()->moduleExists("canvas");')"
 check 'code component entity type available' 1 \
   "$(ev 'print (int) \Drupal::entityTypeManager()->hasDefinition("js_component");')"
-check 'default theme' mercury \
+check 'default theme' nebula_theme \
   "$(ev 'print \Drupal::config("system.theme")->get("default");')"
+# The shell theme must strip Drupal's own CSS and declare the regions Canvas
+# page regions bind to. `regions:` replaces the default set wholesale, so a
+# missing `content` region silently loses main content and messages.
+check 'shell theme removes system/base CSS' 1 \
+  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("nebula_theme");
+    print (int) (($t->info["libraries-override"]["system/base"] ?? NULL) === FALSE);')"
+check 'shell theme regions' content,footer,header \
+  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("nebula_theme");
+    $r = array_keys($t->info["regions"] ?? []); sort($r); print implode(",", $r);')"
+check 'no Mercury installed' 0 \
+  "$(ev 'print (int) \Drupal::service("theme_handler")->themeExists("mercury");')"
 
 # The Drupal CMS foundation, inherited from drupal_cms_site_template_base.
 check 'admin theme is Gin' gin \
@@ -119,8 +130,6 @@ check 'front page is the landing page' 1 \
 # Setting page.front must not clobber the 403 the base recipe sets.
 check 'base 403 page preserved' /user/login \
   "$(ev 'print \Drupal::config("system.site")->get("page.403");')"
-check 'landing page is a canvas_page' Home \
-  "$(ev 'print \Drupal::entityTypeManager()->getStorage("canvas_page")->load(1)?->label();')"
 
 # Config entities a recipe-installed module does NOT get for free.
 # @see \Drupal\Core\Recipe\RecipeRunner::installModules()
@@ -161,28 +170,12 @@ check 'About page exists and is published' 1 \
 check 'About page alias' /about \
   "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15");
     print $n ? \Drupal::service("path_alias.manager")->getAliasByPath("/node/" . $n->id()) : "";')"
-check 'home page is published' 1 \
-  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
-    print (int) ($p && $p->isPublished());')"
-# The home page is a hero plus two card sections. If a component id or an enum
-# value is wrong, Canvas drops the item, so assert the tree survived intact.
-check 'home page component count' 12 \
-  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
-    print $p ? iterator_count($p->getComponentTree()) : 0;')"
-check 'home page uses cards' 6 \
-  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
-    $n = 0; foreach ($p?->getComponentTree() ?? [] as $i) { if ($i->getComponentId() === "sdc.mercury.card") { $n++; } }
-    print $n;')"
-
-# The front end gets its header, navigation and footer from Canvas page
-# regions. Without them a Mercury site renders no site chrome at all, because
-# block placements are theme config entities and core skips those when a recipe
-# installs a theme.
-for region in header footer; do
-  check "page region mercury.$region enabled" 1 \
-    "$(ev "\$r = \Drupal::entityTypeManager()->getStorage('page_region')->load('mercury.$region');
-      print (int) (\$r && \$r->status() && count(\$r->get('component_tree')) > 0);")"
-done
+check 'Home page exists and is published' 1 \
+  "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "4d81a3f6-9b52-4e07-a1c8-6e2f0b73d59a");
+    print (int) ($n && $n->isPublished() && $n->bundle() === "page");')"
+check 'Home page alias' /home \
+  "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "4d81a3f6-9b52-4e07-a1c8-6e2f0b73d59a");
+    print $n ? \Drupal::service("path_alias.manager")->getAliasByPath("/node/" . $n->id()) : "";')"
 
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \
@@ -202,28 +195,32 @@ if [[ -n "$base_url" ]]; then
     check "GET $path (anonymous)" 200 \
       "$(curl -skL -o /dev/null -w '%{http_code}' "$base_url$path")"
   done
-  # Site chrome, not just a 200. This is what "the navigation is missing"
-  # looks like from the outside, and a status code will not catch it.
-  body="$(curl -sk "$base_url/")"
-  check 'front end renders a <nav>' yes \
-    "$(grep -qi '<nav' <<<"$body" && echo yes || echo no)"
-  # Newlines stripped first: the anchor text sits on its own line, so a
-  # line-based grep for `>Home<` misses it.
+  body="$(curl -skL "$base_url/")"
   flat="$(tr -d '\n' <<<"$body")"
+
+  # There is deliberately no server-rendered navigation: the shell theme emits
+  # no chrome, and a Nebula codebase renders the menu itself with its
+  # `main_navigation` component. So the menu has to be available as *data*,
+  # which is what that component consumes, rather than as markup.
+  menu_json="$(curl -sk "$base_url/jsonapi/menu_items/main")"
   for item in Home About; do
-    check "front end renders the '$item' menu link" yes \
-      "$(grep -qE ">[[:space:]]*$item[[:space:]]*<" <<<"$flat" && echo yes || echo no)"
+    check "main menu exposes '$item' over JSON:API" yes \
+      "$(grep -qF "\"title\":\"$item\"" <<<"$menu_json" && echo yes || echo no)"
   done
-  # Content, not just chrome: a component that fails to render leaves the
-  # surrounding markup intact, so check for the text itself.
-  for phrase in 'How this site works' 'Already configured for you' \
-                'Author in your editor' 'Compose in Canvas'; do
+
+  # Content, not just a status code: a page that renders nothing still 200s.
+  for phrase in 'Your front end lives in code' 'blank shell on purpose'; do
     check "front end renders '$phrase'" yes \
       "$(grep -qF "$phrase" <<<"$flat" && echo yes || echo no)"
   done
-  # The footer is a region too, and it rendered empty until it got branding.
-  check 'footer region renders content' yes \
-    "$(grep -qE '<footer' <<<"$flat" && echo yes || echo no)"
+
+  # The whole point of the shell theme. Before anything is pushed, Drupal
+  # contributes no CSS and no JS at all; the only assets on a paired site are
+  # the ones the components bring.
+  check 'no stylesheets on the page' yes \
+    "$(grep -qE '<link[^>]*rel="stylesheet"' <<<"$flat" && echo no || echo yes)"
+  check 'no scripts on the page' yes \
+    "$(grep -qE '<script[^>]*src=' <<<"$flat" && echo no || echo yes)"
 else
   echo "  skip  HTTP checks (set SITE_URL to enable)"
 fi

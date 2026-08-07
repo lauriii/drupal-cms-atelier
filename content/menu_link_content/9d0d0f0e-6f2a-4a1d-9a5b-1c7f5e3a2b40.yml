@@ -10,7 +10,7 @@ _meta:
   bundle: menu_link_content
   default_langcode: en
   depends:
-    7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843: canvas_page
+    4d81a3f6-9b52-4e07-a1c8-6e2f0b73d59a: node
 default:
   enabled:
     -
@@ -25,7 +25,7 @@ default:
     -
       title: ''
       options: {  }
-      target_uuid: 7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843
+      target_uuid: 4d81a3f6-9b52-4e07-a1c8-6e2f0b73d59a
   external:
     -
       value: false

@@ -43,10 +43,19 @@ install:
   # Content is indexed on cron, so make sure cron runs even without a real
   # cron job.
   - automated_cron
-  # The front-end theme, and the same one Drupal CMS's own Starter template
-  # uses. Its `header` and `footer` regions are the targets of the
-  # `regions/header.json` and `regions/footer.json` files in a Nebula codebase.
-  - mercury
+  # A blank shell theme, generated at composer install by
+  # `drupal/site_template_helper` from the `extra.drupal-site-template` block
+  # in composer.json. It has no templates, no CSS and no SDCs — it renders the
+  # Canvas component tree and nothing else, because every pixel of this site's
+  # front end comes from the code components you push.
+  #
+  # Its `header`, `content` and `footer` regions are the targets of the
+  # `regions/*.json` files in a Nebula codebase. `content` must be declared:
+  # `regions:` replaces the default set wholesale rather than merging with it,
+  # and without it main page content and status messages silently disappear.
+  # @see \Drupal\Core\Extension\ExtensionList::createExtensionInfo()
+  # @see \Drupal\block\Plugin\DisplayVariant\BlockPageVariant::build()
+  - nebula_theme
 
 config:
   # Existing configuration wins, so this template can be applied on top of a
@@ -67,10 +76,11 @@ config:
     simple_oauth: '*'
   actions:
     # The base recipe sets the admin theme to Gin but leaves the front end to
-    # the site template, which is this one's job.
+    # the site template, which is this one's job. Gin stays: the shell theme is
+    # deliberately unusable for administration.
     system.theme:
       simpleConfigUpdate:
-        default: mercury
+        default: nebula_theme
     # The Canvas landing page shipped in `content/`, same as Drupal CMS's Blank
     # and Starter templates. Dotted, not nested: `simpleConfigUpdate` calls
     # `Config::set()` per key, so a nested `page:` mapping would replace the

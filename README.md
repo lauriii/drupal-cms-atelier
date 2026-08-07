@@ -55,8 +55,7 @@ drush recipe /absolute/path/to/recipes/nebula
 `drupal_cms_site_template_base`, the same foundation Drupal CMS's own Starter
 template uses, so you get the whole Drupal CMS admin experience rather than a
 bare Drupal install: Gin as the admin theme, the navigation sidebar, dashboards,
-Coffee, Project Browser, the `page` content type with its Canvas component tree,
-the media types, the `content_editor` role, editorial workflow, Trash, Scheduler,
+Coffee, Project Browser, the `page` content type, the media types, the `content_editor` role, editorial workflow, Trash, Scheduler,
 Pathauto, Metatag and the SEO and privacy tooling.
 
 A site template should be built on that base rather than on another site
@@ -75,35 +74,53 @@ with all eleven `canvas:*` OAuth scopes imported, including
 `canvas:media:image:create`. That last one matters: the CLI asks for it in its
 default scope string, and without it every push fails with `invalid_scope`.
 
-**A theme with the regions Nebula targets, and a front end that works before
-you push anything.** `mercury`, whose `header` and `footer` regions are what
-`regions/header.json` and `regions/footer.json` in a Nebula codebase map onto.
+**A blank shell theme — no Drupal design system.** `nebula_theme` is generated
+at composer install by `drupal/site_template_helper`, from the
+`extra.drupal-site-template` block in `composer.json`, with `from: false`. That
+writes a theme consisting of nothing but an `.info.yml`: no templates, no CSS,
+no SDCs.
 
-Block placements are theme config entities, and core skips those when a recipe
-installs a theme — so a Mercury site set up by a recipe renders no header,
-navigation or footer at all unless the template supplies them. The mechanism
-that supplies them is Canvas **page regions**, and this template ships two,
-with the same structure Drupal CMS's own Starter template uses:
+That is the point. On a code-components site every pixel comes from the
+components you push, and their Tailwind build styles the whole page. Installing
+a Drupal-side design system such as Mercury alongside it puts two front-end
+systems on one page, and they fight: Mercury's CSS visibly breaks the layout of
+Nebula's own header component.
 
-| Region | Contents |
-| --- | --- |
-| `mercury.header` | `sdc.mercury.navbar`, with `block.system_branding_block` in its `logo` slot and `block.system_menu_block.main` in its `navigation` slot |
-| `mercury.footer` | `sdc.mercury.footer`, with `block.system_menu_block.footer` in its `footer_utility_first` slot |
+The theme declares three regions — `header`, `content`, `footer` — which are
+what `regions/*.json` in a Nebula codebase map onto. Two details there are
+load-bearing:
 
-`canvas push` replaces both with the trees from your `regions/*.json`, so they
-are a working default rather than a fixture.
+- `regions:` **replaces** the default region set rather than merging with it, so
+  every region you want must be listed. `content` is not optional:
+  `BlockPageVariant` hardcodes it as the fallback for main page content and
+  status messages, and omitting it makes both silently disappear.
+- `libraries-override: {system/base: false}` is what actually removes Drupal's
+  own CSS. `libraries-remove` is not a real key — info.yml has no allowlist and
+  no schema, so a wrong key fails silently. Before any push, a page from this
+  template carries zero stylesheets and zero scripts.
 
-**Pages, so the site is not empty.** Two of them, both in the main menu:
+The template ships **no page regions**. `canvas push` creates them, bound to
+whichever theme is active, from your `regions/*.json`.
 
-- **Home** — a Canvas page at `/home`, set as the front page. Same pattern, and
-  same path, as Drupal CMS's Blank and Starter templates. A Canvas page rather
-  than a node on purpose; see the notes below.
-- **About** — a node of Drupal CMS's own `page` type, published through the
-  editorial workflow. Ordinary rich text, the kind of content an editor writes
-  without touching code, to sit alongside the component-built home page.
+**Pages, so the site is not empty.** Two of them, both in the main menu, both
+ordinary `page` nodes with rich text:
 
-The menu links reference their targets by `target_uuid` rather than by path, so
-they follow the entities instead of breaking when an alias changes.
+- **Home**, set as the front page.
+- **About**.
+
+They are content rather than component-built pages on purpose. A Canvas
+component tree can only reference components that already exist, and here every
+component arrives later via `canvas push`. A template shipping a component-built
+page would have to vendor a copy of your components as config — duplicating the
+codebase it pairs with — or ship a page that cannot render on a fresh install.
+So the shipped pages are plain content, and the component-built front end is
+what you push on top of them.
+
+The menu is what Nebula's `main_navigation` component consumes, over
+`/jsonapi/menu_items/main`. There is deliberately no server-rendered navigation:
+the shell theme emits no chrome, so the menu is data, not markup. Its links
+reference their targets by `target_uuid` rather than by path, so they follow the
+entities instead of breaking when an alias changes.
 
 **The content model the examples actually expect** — no more:
 
@@ -336,12 +353,14 @@ not need this site for day-to-day component work — only to push.
   a recipe is applied, so `page.front: /home` ends up stored as `/page/1`. That
   is deliberate — core expects a system path there — so assert the relationship,
   not the literal.
-- **Component versions in page regions are site-specific.** A page region pins
-  `component_version` per component. The `sdc.mercury.*` hashes match Drupal
-  CMS Starter's, but the `block.*` ones did not — they are derived from the
-  site's block plugin configuration. Generate them from a real install rather
-  than copying another template's, and re-check after a Mercury or Canvas
-  upgrade.
+- **Page regions pin `component_version` per component, and those hashes are
+  site-specific.** Only relevant if you ever ship page regions from a recipe:
+  generate them from a real install rather than copying another template's. The
+  `sdc.*` hashes tend to match across sites; `block.*` ones are derived from the
+  site's own block plugin configuration and do not.
+- **The anonymous page cache hides a push.** After `canvas push`, an already
+  cached page keeps serving the pre-push markup — byte for byte, which makes it
+  look like the push did nothing. `drush cr`.
 
 ## Automated check
 
