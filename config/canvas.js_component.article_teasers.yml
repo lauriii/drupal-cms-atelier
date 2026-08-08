@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: article_teasers
+name: 'Article teasers'
+props:
+  count:
+    type: string
+    enum:
+      - '3'
+      - '5'
+      - '8'
+    'meta:enum':
+      3: Three
+      5: Five
+      8: Eight
+    title: Count
+    examples:
+      - '3'
+required: {  }
+slots: {  }
+js:
+  original: "import { DrupalJsonApiParams } from 'drupal-jsonapi-params';\nimport { JsonApiClient, getNodePath } from 'drupal-canvas';\nimport useSWR from 'swr';\n\nconst client = new JsonApiClient();\n\nconst formatted = (value) =>\n  new Date(value).toLocaleDateString('en', {\n    day: 'numeric',\n    month: 'short',\n    year: 'numeric',\n  });\n\n/**\n * Article teasers — the newest articles, live from Drupal.\n *\n * Editors publish; this updates. No rebuild, no redeploy — the argument for\n * code components that a static library cannot make.\n */\nconst ArticleTeasers = ({ count }) => {\n  const limit = Number(count) || 3;\n  const { data, error, isLoading } = useSWR(\n    ['node--article', limit],\n    ([type, pageLimit]) =>\n      client.getCollection(type, {\n        queryString: new DrupalJsonApiParams()\n          .addFields('node--article', ['title', 'created', 'path'])\n          .addSort('created', 'DESC')\n          .addPageLimit(pageLimit)\n          .getQueryString(),\n      }),\n  );\n\n  if (isLoading || error || !data?.length) {\n    return null;\n  }\n  return (\n    <ul className=\"divide-y divide-hairline border-t border-hairline\">\n      {data.map((article) => (\n        <li key={article.id}>\n          <a\n            href={getNodePath(article)}\n            className=\"group flex items-baseline justify-between gap-8 py-6 transition-opacity duration-150 hover:opacity-60\"\n          >\n            <span className=\"font-display text-[1.375rem] font-light leading-snug\">\n              {article.title}\n            </span>\n            <time\n              dateTime={article.created}\n              className=\"shrink-0 text-[0.9375rem] text-ink-muted\"\n            >\n              {formatted(article.created)}\n            </time>\n          </a>\n        </li>\n      ))}\n    </ul>\n  );\n};\n\nexport default ArticleTeasers;\n"
+  compiled: "import { jsx, jsxs } from \"react/jsx-runtime\";\nimport { DrupalJsonApiParams } from \"drupal-jsonapi-params\";\nimport { JsonApiClient, getNodePath } from \"drupal-canvas\";\nimport useSWR from \"swr\";\nconst client = new JsonApiClient();\nconst formatted = (value) => new Date(value).toLocaleDateString(\"en\", {\n  day: \"numeric\",\n  month: \"short\",\n  year: \"numeric\"\n});\nconst ArticleTeasers = ({ count }) => {\n  const limit = Number(count) || 3;\n  const { data, error, isLoading } = useSWR(\n    [\"node--article\", limit],\n    ([type, pageLimit]) => client.getCollection(type, {\n      queryString: new DrupalJsonApiParams().addFields(\"node--article\", [\"title\", \"created\", \"path\"]).addSort(\"created\", \"DESC\").addPageLimit(pageLimit).getQueryString()\n    })\n  );\n  if (isLoading || error || !(data == null ? void 0 : data.length)) {\n    return null;\n  }\n  return /* @__PURE__ */ jsx(\"ul\", { className: \"divide-y divide-hairline border-t border-hairline\", children: data.map((article) => /* @__PURE__ */ jsx(\"li\", { children: /* @__PURE__ */ jsxs(\n    \"a\",\n    {\n      href: getNodePath(article),\n      className: \"group flex items-baseline justify-between gap-8 py-6 transition-opacity duration-150 hover:opacity-60\",\n      children: [\n        /* @__PURE__ */ jsx(\"span\", { className: \"font-display text-[1.375rem] font-light leading-snug\", children: article.title }),\n        /* @__PURE__ */ jsx(\n          \"time\",\n          {\n            dateTime: article.created,\n            className: \"shrink-0 text-[0.9375rem] text-ink-muted\",\n            children: formatted(article.created)\n          }\n        )\n      ]\n    }\n  ) }, article.id)) });\n};\nexport {\n  ArticleTeasers as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies:
+  drupalSettings:
+    - v0.baseUrl
+    - v0.jsonapiSettings

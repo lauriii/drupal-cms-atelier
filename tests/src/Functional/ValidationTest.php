@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\nebula\Functional;
+namespace Drupal\Tests\atelier\Functional;
 
 use Drupal\Core\Config\FileStorage;
 use Drupal\canvas\Entity\ComponentTreeEntityInterface;
@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 /**
  * Tests that this site template can be applied without errors.
  */
-#[Group('nebula')]
+#[Group('atelier')]
 #[IgnoreDeprecations]
 #[RunTestsInSeparateProcesses]
 class ValidationTest extends BrowserTestBase {

@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.grid
+  module:
+    - options
+label: Grid
+id: js.grid
+source: js
+source_local_id: grid
+provider: null
+active_version: cdb8b1e59b057151
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        columns:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        gap:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: md
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Items

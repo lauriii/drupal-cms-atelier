@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.site_nav
+label: 'Site navigation'
+id: js.site_nav
+source: js
+source_local_id: site_nav
+provider: null
+active_version: 4dcdabd14b685df2
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        menu:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: main
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions: {  }

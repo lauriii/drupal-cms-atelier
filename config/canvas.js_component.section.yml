@@ -4,25 +4,60 @@ dependencies: {  }
 machineName: section
 name: Section
 props:
+  background:
+    type: string
+    enum:
+      - paper
+      - wash
+      - ink
+    'meta:enum':
+      paper: Paper
+      wash: Wash
+      ink: Ink
+    title: Background
+    examples:
+      - paper
+  spacing:
+    type: string
+    enum:
+      - sm
+      - md
+      - lg
+    'meta:enum':
+      sm: Small
+      md: Medium
+      lg: Large
+    title: Spacing
+    examples:
+      - md
   width:
     type: string
     enum:
-      - normal
+      - narrow
+      - default
       - wide
     'meta:enum':
-      normal: Normal
+      narrow: Narrow
+      default: Default
       wide: Wide
     title: Width
     examples:
-      - normal
+      - default
+  divider:
+    type: boolean
+    title: Divider
+    examples:
+      - false
 required:
+  - background
+  - spacing
   - width
 slots:
   content:
     title: Content
 js:
-  original: "import { cva } from 'class-variance-authority';\n\nconst sectionVariants = cva('m-auto my-8 px-4', {\n  variants: {\n    width: {\n      normal: 'max-w-2xl',\n      wide: 'max-w-4xl',\n    },\n  },\n});\n\nconst Section = ({ width, content }) => {\n  return <div className={sectionVariants({ width })}>{content}</div>;\n};\n\nexport default Section;\n"
-  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nconst sectionVariants = cva(\"m-auto my-8 px-4\", {\n  variants: {\n    width: {\n      normal: \"max-w-2xl\",\n      wide: \"max-w-4xl\"\n    }\n  }\n});\nconst Section = ({ width, content }) => {\n  return /* @__PURE__ */ jsx(\"div\", { className: sectionVariants({ width }), children: content });\n};\nexport {\n  Section as default\n};\n"
+  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\n/**\n * Section — the vertical rhythm of the whole site.\n *\n * Every band on a page is a Section. Spacing comes from three tokens rather\n * than per-instance values, which is what keeps an editor-composed page\n * looking designed.\n */\nconst section = cva('w-full', {\n  variants: {\n    background: {\n      paper: 'bg-paper text-ink',\n      wash: 'bg-wash text-ink',\n      ink: 'bg-ink text-paper',\n    },\n    spacing: {\n      sm: 'py-[var(--spacing-section-sm)]',\n      md: 'py-[var(--spacing-section-md)]',\n      lg: 'py-[var(--spacing-section-lg)]',\n    },\n    divider: { true: 'border-t border-hairline', false: '' },\n  },\n  defaultVariants: { background: 'paper', spacing: 'md', divider: false },\n});\n\nconst Section = ({ background, spacing, divider, width, content }) => (\n  <section className={cn(section({ background, spacing, divider }))}>\n    <div\n      className={cn(\n        'mx-auto px-6 md:px-10',\n        width === 'narrow' && 'max-w-[46rem]',\n        width === 'wide' && 'max-w-[82rem]',\n        width === 'full' && 'max-w-none px-0 md:px-0',\n        (!width || width === 'default') && 'max-w-[64rem]',\n      )}\n    >\n      {content}\n    </div>\n  </section>\n);\n\nexport default Section;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst section = cva(\"w-full\", {\n  variants: {\n    background: {\n      paper: \"bg-paper text-ink\",\n      wash: \"bg-wash text-ink\",\n      ink: \"bg-ink text-paper\"\n    },\n    spacing: {\n      sm: \"py-[var(--spacing-section-sm)]\",\n      md: \"py-[var(--spacing-section-md)]\",\n      lg: \"py-[var(--spacing-section-lg)]\"\n    },\n    divider: { true: \"border-t border-hairline\", false: \"\" }\n  },\n  defaultVariants: { background: \"paper\", spacing: \"md\", divider: false }\n});\nconst Section = ({ background, spacing, divider, width, content }) => /* @__PURE__ */ jsx(\"section\", { className: cn(section({ background, spacing, divider })), children: /* @__PURE__ */ jsx(\n  \"div\",\n  {\n    className: cn(\n      \"mx-auto px-6 md:px-10\",\n      width === \"narrow\" && \"max-w-[46rem]\",\n      width === \"wide\" && \"max-w-[82rem]\",\n      width === \"full\" && \"max-w-none px-0 md:px-0\",\n      (!width || width === \"default\") && \"max-w-[64rem]\"\n    ),\n    children: content\n  }\n) });\nexport {\n  Section as default\n};\n"
 css:
   original: ''
   compiled: ''

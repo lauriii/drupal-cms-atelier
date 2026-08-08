@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 652290dd-9da0-405a-b08b-829d2eda6288
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: atelier-logo-3.jpg
+  uri:
+    -
+      value: 'public://atelier-logo-3.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 6200
+  status:
+    -
+      value: true

@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.site_header
+label: 'Site header'
+id: js.site_header
+source: js
+source_local_id: site_header
+provider: null
+active_version: 4cba7e27aebca009
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        wordmark:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Atelier
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: 'Navigation and actions'

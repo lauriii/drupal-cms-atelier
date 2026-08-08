@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: cta
+name: 'Call to action'
+props:
+  title:
+    type: string
+    title: Title
+    examples:
+      - 'Start with the template'
+  lede:
+    type: string
+    title: Lede
+    examples:
+      - 'Install it, point your codebase at it, and push.'
+required:
+  - title
+slots:
+  content:
+    title: Actions
+js:
+  original: "/** Call to action — the closing band. */\nconst Cta = ({ title, lede, content }) => (\n  <div className=\"border-y border-hairline bg-wash px-6 py-24 md:px-10 md:py-28\">\n    <div className=\"mx-auto max-w-[42rem] text-center\">\n      <h2 className=\"font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-light leading-[1.05] text-balance\">\n        {title}\n      </h2>\n      {lede ? (\n        <p className=\"mx-auto mt-6 max-w-[34rem] text-[1.0625rem] leading-[1.7] text-ink-muted text-pretty\">\n          {lede}\n        </p>\n      ) : null}\n      <div className=\"mt-10 flex flex-wrap justify-center gap-6\">{content}</div>\n    </div>\n  </div>\n);\n\nexport default Cta;\n"
+  compiled: "import { jsx, jsxs } from \"react/jsx-runtime\";\nconst Cta = ({ title, lede, content }) => /* @__PURE__ */ jsx(\"div\", { className: \"border-y border-hairline bg-wash px-6 py-24 md:px-10 md:py-28\", children: /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto max-w-[42rem] text-center\", children: [\n  /* @__PURE__ */ jsx(\"h2\", { className: \"font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-light leading-[1.05] text-balance\", children: title }),\n  lede ? /* @__PURE__ */ jsx(\"p\", { className: \"mx-auto mt-6 max-w-[34rem] text-[1.0625rem] leading-[1.7] text-ink-muted text-pretty\", children: lede }) : null,\n  /* @__PURE__ */ jsx(\"div\", { className: \"mt-10 flex flex-wrap justify-center gap-6\", children: content })\n] }) });\nexport {\n  Cta as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

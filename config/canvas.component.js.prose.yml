@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.prose
+    - filter.format.canvas_html_block
+  module:
+    - text
+label: Prose
+id: js.prose
+source: js
+source_local_id: prose
+provider: null
+active_version: e0407f20af1ba1e5
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Long-form copy, styled to match the rest of the system.</p>'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+    fallback_metadata:
+      slot_definitions: {  }

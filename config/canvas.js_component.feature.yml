@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: feature
+name: Feature
+props:
+  marker:
+    type: string
+    title: Marker
+    description: 'A short label, shown above the title.'
+    examples:
+      - Authoring
+  title:
+    type: string
+    title: Title
+    examples:
+      - 'Write components in your editor'
+  text:
+    type: string
+    contentMediaType: text/html
+    x-formatting-context: block
+    title: Text
+    examples:
+      - '<p>React files with Tailwind, previewed locally.</p>'
+  framed:
+    type: boolean
+    title: Framed
+    examples:
+      - true
+required:
+  - title
+  - framed
+slots: {  }
+js:
+  original: "import { cn } from 'drupal-canvas';\nimport { FormattedText } from 'drupal-canvas';\n\n/** Feature — one idea, stated plainly. */\nconst Feature = ({ title, text, marker, framed }) => (\n  <article\n    className={cn('flex flex-col', framed && 'border-t border-hairline pt-7')}\n  >\n    {marker ? (\n      <p className=\"font-display text-[1.375rem] font-light text-ink-muted\">\n        {marker}\n      </p>\n    ) : null}\n    <h3 className=\"font-display mt-3 text-[1.5rem] font-light leading-snug\">\n      {title}\n    </h3>\n    {text ? (\n      <div className=\"mt-4 text-[1.0625rem] leading-[1.7] text-ink-muted\">\n        <FormattedText>{text}</FormattedText>\n      </div>\n    ) : null}\n  </article>\n);\n\nexport default Feature;\n"
+  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nimport { FormattedText, cn } from \"drupal-canvas\";\nconst Feature = ({ title, text, marker, framed }) => /* @__PURE__ */ jsxs(\n  \"article\",\n  {\n    className: cn(\"flex flex-col\", framed && \"border-t border-hairline pt-7\"),\n    children: [\n      marker ? /* @__PURE__ */ jsx(\"p\", { className: \"font-display text-[1.375rem] font-light text-ink-muted\", children: marker }) : null,\n      /* @__PURE__ */ jsx(\"h3\", { className: \"font-display mt-3 text-[1.5rem] font-light leading-snug\", children: title }),\n      text ? /* @__PURE__ */ jsx(\"div\", { className: \"mt-4 text-[1.0625rem] leading-[1.7] text-ink-muted\", children: /* @__PURE__ */ jsx(FormattedText, { children: text }) }) : null\n    ]\n  }\n);\nexport {\n  Feature as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

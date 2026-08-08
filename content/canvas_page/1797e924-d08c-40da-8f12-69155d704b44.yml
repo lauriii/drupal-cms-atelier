@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 1797e924-d08c-40da-8f12-69155d704b44
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: Journal
+  components:
+    -
+      uuid: 3c9b74d2-0015-4a00-8000-000000000015
+      component_id: js.hero
+      inputs:
+        eyebrow: Journal
+        title: 'Notes from the bench'
+        lede: 'Occasional writing about timber, tools, and the things that go wrong. Roughly monthly, sometimes not.'
+    -
+      uuid: 3c9b74d2-0016-4a00-8000-000000000016
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: wide
+        divider: false
+    -
+      parent_uuid: 3c9b74d2-0016-4a00-8000-000000000016
+      slot: content
+      uuid: 3c9b74d2-0017-4a00-8000-000000000017
+      component_id: js.article_teasers
+      inputs:
+        count: 5
+  path:
+    -
+      alias: /journal
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

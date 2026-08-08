@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.article_teasers
+  module:
+    - options
+label: 'Article teasers'
+id: js.article_teasers
+source: js
+source_local_id: article_teasers
+provider: null
+active_version: efbde9fdcc65373a
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        count:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: '3'
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions: {  }

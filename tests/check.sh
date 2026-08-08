@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Checks that the Nebula site template installs a working site and can be
+# Checks that the Atelier site template installs a working site and can be
 # applied twice without duplicating anything.
 #
 # DESTRUCTIVE: this drops and rebuilds the target site's database. Run it
@@ -41,7 +41,7 @@ ev() { $DRUSH ev "$1" 2>/dev/null | tr -d '[:space:]'; }
 echo "==> Installing a fresh site from recipes/$RECIPE_NAME"
 install_start=$SECONDS
 $DRUSH site:install "recipes/$RECIPE_NAME" \
-  --account-name=admin --account-pass=admin --site-name=Nebula -y >/dev/null
+  --account-name=admin --account-pass=admin --site-name=Atelier -y >/dev/null
 echo "    installed in $((SECONDS - install_start))s"
 
 # Probe before rebuilding caches, so the report says whether the rebuild was
@@ -88,7 +88,7 @@ check 'canvas module installed' 1 \
   "$(ev 'print (int) \Drupal::moduleHandler()->moduleExists("canvas");')"
 check 'code component entity type available' 1 \
   "$(ev 'print (int) \Drupal::entityTypeManager()->hasDefinition("js_component");')"
-check 'default theme' nebula_theme \
+check 'default theme' atelier_theme \
   "$(ev 'print \Drupal::config("system.theme")->get("default");')"
 # The shell theme must strip Drupal's own CSS and declare the regions Canvas
 # page regions bind to. `regions:` replaces the default set wholesale, so a
@@ -98,15 +98,15 @@ check 'default theme' nebula_theme \
 # A per-file override silently no-ops if the path does not match
 # system.libraries.yml exactly, so assert the shape as well as the outcome.
 check 'shell theme drops Drupal styling CSS' 4 \
-  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("nebula_theme");
+  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("atelier_theme");
     $o = $t->info["libraries-override"]["system/base"]["css"]["component"] ?? [];
     print count(array_filter($o, fn ($v) => $v === FALSE));')"
 check 'shell theme keeps hidden.module.css' 1 \
-  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("nebula_theme");
+  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("atelier_theme");
     $o = $t->info["libraries-override"]["system/base"]["css"]["component"] ?? [];
     print (int) !array_key_exists("css/components/hidden.module.css", $o);')"
 check 'shell theme regions' content,footer,header \
-  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("nebula_theme");
+  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("atelier_theme");
     $r = array_keys($t->info["regions"] ?? []); sort($r); print implode(",", $r);')"
 check 'no Mercury installed' 0 \
   "$(ev 'print (int) \Drupal::service("theme_handler")->themeExists("mercury");')"
@@ -160,7 +160,7 @@ check 'canvas:* OAuth scopes' 11 \
 check 'canvas:media:image:create scope' 1 \
   "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("oauth2_scope")->load("canvas_media_image_create");')"
 
-# The content model the Nebula examples expect.
+# The content model the Atelier pages expect.
 check 'article node type' 1 \
   "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("node_type")->load("article");')"
 check 'article field_image' 1 \
@@ -169,7 +169,7 @@ check 'image media type' 1 \
   "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("media_type")->load("image");')"
 check 'cms_content search index' 1 \
   "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("search_api_index")->load("cms_content");')"
-# The vendored snapshot of the Nebula code components. Without these the site
+# The vendored snapshot of the Atelier code components. Without these the site
 # has no front end of its own until someone runs `canvas push`.
 # @see tests/regenerate-components.sh
 check 'code components shipped' 18 \
@@ -177,10 +177,24 @@ check 'code components shipped' 18 \
 check 'global CSS applied' 1 \
   "$(ev 'print (int) str_contains(\Drupal::config("canvas.asset_library.global")->get("css.compiled") ?? "", "tailwindcss");')"
 for region in header footer; do
-  check "page region nebula_theme.$region" 1 \
-    "$(ev "\$r = \Drupal::entityTypeManager()->getStorage('page_region')->load('nebula_theme.$region');
+  check "page region atelier_theme.$region" 1 \
+    "$(ev "\$r = \Drupal::entityTypeManager()->getStorage('page_region')->load('atelier_theme.$region');
       print (int) (\$r && \$r->status() && count(\$r->get('component_tree')) > 0);")"
 done
+# Loading a region by ID is not enough: the page variant looks regions up by
+# theme, which goes through the config entity lookup key store. That store can
+# hold one region and not another, which renders the site with a header and no
+# footer while every by-ID check above still passes.
+# @see \Drupal\canvas\Plugin\DisplayVariant\CanvasPageVariant::build()
+check 'regions discoverable by theme' 2 \
+  "$(ev 'print count(\Drupal\canvas\Entity\PageRegion::loadForTheme("atelier_theme"));')"
+
+# A visitor should never meet a contrib module's PHP notice mid-page. Errors
+# still reach the log. Read past the override layer: a development environment
+# (DDEV writes `verbose` into settings) would otherwise mask what the template
+# actually stored.
+check 'front end error display hidden' hide \
+  "$(ev 'print \Drupal::configFactory()->getEditable("system.logging")->get("error_level");')"
 
 # Imagery, shipped as file + media content so the pages have something to show
 # on a fresh install. The component inputs reference media by UUID
@@ -197,21 +211,25 @@ check 'Project Browser uses the shipped list' recommended \
 check 'media shipped' 8 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
 check 'hero image reference resolved' 1 \
-  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
+  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "4b3d5e15-3a8d-46c8-a502-1255c2b1ad26");
     foreach ($p?->getComponentTree() ?? [] as $i) {
       if ($i->getComponentId() === "js.hero") {
-        $ref = $i->getInputs()["backgroundImage"]["target_id"] ?? NULL;
+        $ref = $i->getInputs()["image"]["target_id"] ?? NULL;
         print (int) ($ref && \Drupal::entityTypeManager()->getStorage("media")->load($ref));
         return;
       }
     }
     print 0;')"
 
-# Default content: a home page and an About page, both composed from those
-# components, both in the main menu.
-check 'main menu links' 2 \
+# Default content: four pages composed from those components, three of them in
+# the main menu. Every menu link must resolve — a template that ships a nav
+# pointing at a 404 is worse than one that ships no nav.
+check 'main menu links' 3 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name"=>"main"]));')"
-for page in "Home:7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843:/home:14" "About:2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15:/about:3"; do
+for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:29" \
+            "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:14" \
+            "Journal:1797e924-d08c-40da-8f12-69155d704b44:/journal:3" \
+            "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9"; do
   IFS=: read -r label uuid alias count <<<"$page"
   check "$label page published at $alias" 1 \
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
@@ -222,6 +240,16 @@ for page in "Home:7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843:/home:14" "About:2b5e91d7
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
       print \$p ? iterator_count(\$p->getComponentTree()) : 0;")"
 done
+
+# The journal index prints publication dates, so they have to survive import.
+# Without a pinned `created` every article lands on the install timestamp and
+# the journal reads as three posts filed on the same afternoon.
+check 'article dates are distinct' 3 \
+  "$(ev '$d = [];
+    foreach (\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type" => "article"]) as $n) {
+      $d[date("Y-m-d", $n->getCreatedTime())] = TRUE;
+    }
+    print count($d);')"
 
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \
@@ -234,7 +262,7 @@ if [[ -n "$base_url" ]]; then
   # `/` first: it is the page a human opens after installing, and a stale
   # container or a front page pointing at nothing both surface here and
   # nowhere else.
-  for path in / /home /about \
+  for path in / /home /studio /journal /contact \
               /jsonapi /jsonapi/menu_items/main /jsonapi/index/cms_content /jsonapi/node/article; do
     # -L because `/home` 301s to `/`: it is the front page, and Drupal CMS's
     # `redirect` module canonicalises the alias onto it.
@@ -245,11 +273,11 @@ if [[ -n "$base_url" ]]; then
   flat="$(tr -d '\n' <<<"$body")"
 
   # There is deliberately no server-rendered navigation: the shell theme emits
-  # no chrome, and a Nebula codebase renders the menu itself with its
-  # `main_navigation` component. So the menu has to be available as *data*,
+  # no chrome, and the site_nav component renders the menu itself in the
+  # browser. So the menu has to be available as *data*,
   # which is what that component consumes, rather than as markup.
   menu_json="$(curl -sk "$base_url/jsonapi/menu_items/main")"
-  for item in Home About; do
+  for item in Studio Journal Contact; do
     check "main menu exposes '$item' over JSON:API" yes \
       "$(grep -qF "\"title\":\"$item\"" <<<"$menu_json" && echo yes || echo no)"
   done
@@ -260,9 +288,9 @@ if [[ -n "$base_url" ]]; then
     "$(grep -qE '<canvas-island' <<<"$flat" && echo yes || echo no)"
   # The imagery actually resolves to a derivative, rather than a broken ref.
   check 'front end renders the shipped imagery' yes \
-    "$(grep -qE 'nebula-(hero|card-[123])\.jpg' <<<"$flat" && echo yes || echo no)"
+    "$(grep -qE 'atelier-work-(hero|[123])\.jpg' <<<"$flat" && echo yes || echo no)"
   check 'front end renders the logo row' yes \
-    "$(grep -qE 'nebula-logo-[1234]\.jpg' <<<"$flat" && echo yes || echo no)"
+    "$(grep -qE 'atelier-logo-[1234]\.jpg' <<<"$flat" && echo yes || echo no)"
   check 'footer credits Drupal CMS' yes \
     "$(grep -qF 'Powered by Drupal CMS' <<<"$flat" && echo yes || echo no)"
   # Styling comes from the vendored global CSS, and from nothing else: the

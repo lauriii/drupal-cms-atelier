@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 38704492-8089-402d-8501-9194735bc5e6
+  bundle: article
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  created:
+    -
+      value: '2026-06-24T08:40:00+00:00'
+  title:
+    -
+      value: 'Sourcing ash from a single Hampshire woodland'
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /sourcing-ash-single-hampshire-woodland-0
+      langcode: en

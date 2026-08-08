@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: site_header
+name: 'Site header'
+props:
+  wordmark:
+    type: string
+    title: Wordmark
+    examples:
+      - Atelier
+required:
+  - wordmark
+slots:
+  content:
+    title: 'Navigation and actions'
+js:
+  original: "/** Site header — wordmark and navigation, on a hairline. */\nconst SiteHeader = ({ wordmark, content }) => (\n  <header className=\"border-b border-hairline bg-paper\">\n    <div className=\"mx-auto flex max-w-[82rem] items-center justify-between gap-8 px-6 py-7 md:px-10\">\n      <a href=\"/\" className=\"font-display text-[1.5rem] font-light tracking-tight\">\n        {wordmark}\n      </a>\n      <div className=\"flex items-center gap-8\">{content}</div>\n    </div>\n  </header>\n);\n\nexport default SiteHeader;\n"
+  compiled: "import { jsx, jsxs } from \"react/jsx-runtime\";\nconst SiteHeader = ({ wordmark, content }) => /* @__PURE__ */ jsx(\"header\", { className: \"border-b border-hairline bg-paper\", children: /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto flex max-w-[82rem] items-center justify-between gap-8 px-6 py-7 md:px-10\", children: [\n  /* @__PURE__ */ jsx(\"a\", { href: \"/\", className: \"font-display text-[1.5rem] font-light tracking-tight\", children: wordmark }),\n  /* @__PURE__ */ jsx(\"div\", { className: \"flex items-center gap-8\", children: content })\n] }) });\nexport {\n  SiteHeader as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

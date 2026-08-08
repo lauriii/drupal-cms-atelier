@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\nebula\Kernel;
+namespace Drupal\Tests\atelier\Kernel;
 
 use Composer\InstalledVersions;
 use Drupal\Component\Serialization\Json;
@@ -20,7 +20,7 @@ use Symfony\Component\Finder\Finder;
  * specific reason to do so. The requirements for site templates are documented
  * in GET-STARTED.md.
  */
-#[Group('nebula')]
+#[Group('atelier')]
 #[RunTestsInSeparateProcesses]
 final class RequirementsTest extends KernelTestBase {
 

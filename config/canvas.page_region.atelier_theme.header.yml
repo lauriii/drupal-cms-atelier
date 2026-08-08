@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.js.button
+    - canvas.component.js.site_header
+    - canvas.component.js.site_nav
+  module:
+    - link
+    - options
+  theme:
+    - atelier_theme
+id: atelier_theme.header
+theme: atelier_theme
+region: header
+component_tree:
+  5ca6982a-71d0-5c80-90ac-40bc43f52512:
+    uuid: 5ca6982a-71d0-5c80-90ac-40bc43f52512
+    component_id: js.site_header
+    component_version: 4cba7e27aebca009
+    inputs:
+      wordmark: Atelier
+  1b0e3d0d-5501-5740-bd45-5c0ff6978673:
+    parent_uuid: 5ca6982a-71d0-5c80-90ac-40bc43f52512
+    slot: content
+    uuid: 1b0e3d0d-5501-5740-bd45-5c0ff6978673
+    component_id: js.site_nav
+    component_version: 4dcdabd14b685df2
+    inputs:
+      menu: main
+  9004d66b-54b5-54e8-8a3e-e231b5096dc1:
+    parent_uuid: 5ca6982a-71d0-5c80-90ac-40bc43f52512
+    slot: content
+    uuid: 9004d66b-54b5-54e8-8a3e-e231b5096dc1
+    component_id: js.button
+    component_version: ffaf79915dd2e357
+    inputs:
+      label: Enquire
+      url: /studio
+      variant: outline
+      size: sm
+      fullWidth: false

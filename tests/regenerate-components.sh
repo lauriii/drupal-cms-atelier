@@ -42,7 +42,7 @@ rm -f "$CONFIG_DIR"/canvas.js_component.*.yml "$CONFIG_DIR"/canvas.page_region.*
 # before comparing recipe config with active config, so leaving them in would
 # only add noise.
 $DRUSH ev '
-$dir = "/var/www/html/recipes/nebula/config";
+$dir = "/var/www/html/recipes/atelier/config";
 $written = 0;
 foreach (["js_component", "page_region", "component"] as $type) {
   foreach (\Drupal::entityTypeManager()->getStorage($type)->loadMultiple() as $entity) {
@@ -78,7 +78,7 @@ $action = [
 $yaml = \Symfony\Component\Yaml\Yaml::dump($action, 6, 2);
 // Indent to sit under `config.actions:`.
 $yaml = preg_replace("/^/m", "    ", rtrim($yaml)) . "\n";
-file_put_contents("/tmp/nebula-asset-library.yml", $yaml);
+file_put_contents("/tmp/atelier-asset-library.yml", $yaml);
 print "prepared asset library action\n";
 '
 
@@ -86,7 +86,7 @@ python3 - "$RECIPE_DIR" <<'PY'
 import pathlib, subprocess, sys
 recipe = pathlib.Path(sys.argv[1]) / 'recipe.yml'
 block = subprocess.run(
-    ['ddev', 'exec', 'cat', '/tmp/nebula-asset-library.yml'],
+    ['ddev', 'exec', 'cat', '/tmp/atelier-asset-library.yml'],
     capture_output=True, text=True, check=True).stdout.rstrip('\n')
 BEGIN = '    # BEGIN generated: global CSS. @see tests/regenerate-components.sh\n'
 END = '    # END generated\n'

@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 62f5db67-143a-4b08-b7ae-2e4814a29834
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: atelier-work-hero.jpg
+  uri:
+    -
+      value: 'public://atelier-work-hero.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 50324
+  status:
+    -
+      value: true

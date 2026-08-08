@@ -4,48 +4,61 @@ dependencies: {  }
 machineName: button
 name: Button
 props:
+  label:
+    type: string
+    title: Label
+    examples:
+      - 'Get started'
+  url:
+    type: string
+    format: uri-reference
+    title: Url
+    description: 'Leave empty to render a plain button.'
+    examples:
+      - /about
   variant:
     type: string
     enum:
       - solid
-      - outline_dark
-      - outline_light
-      - ghost_neutral
-      - ghost_light
+      - secondary
+      - outline
+      - ghost
       - link
-      - link_underline
-      - link_dark
-      - link_light
-      - nav_link_dark
     'meta:enum':
       solid: Solid
-      outline_dark: 'Outline Dark'
-      outline_light: 'Outline Light'
-      ghost_neutral: 'Ghost Neutral'
-      ghost_light: 'Ghost Light'
+      secondary: Secondary
+      outline: Outline
+      ghost: Ghost
       link: Link
-      link_underline: 'Link Underline'
-      link_dark: 'Link Dark'
-      link_light: 'Link Light'
-      nav_link_dark: 'Nav Link Dark'
     title: Variant
     examples:
       - solid
-  text:
+  size:
     type: string
-    title: Text
+    enum:
+      - sm
+      - md
+      - lg
+    'meta:enum':
+      sm: Small
+      md: Medium
+      lg: Large
+    title: Size
     examples:
-      - Button
-  link:
-    type: string
-    format: uri-reference
-    title: Link
+      - md
+  fullWidth:
+    type: boolean
+    title: 'Full width'
+    examples:
+      - false
 required:
-  - text
+  - label
+  - variant
+  - size
 slots: {  }
 js:
-  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\nconst baseStyles = {\n  disable: 'disabled:pointer-events-none disabled:opacity-50',\n  focus:\n    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:no-underline focus-visible:outline-primary-500 focus-visible:rounded-lg focus-visible:border-transparent',\n  svg: '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',\n};\n\nconst buttonVariants = cva(\n  cn(\n    'inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors',\n    baseStyles.disable,\n    baseStyles.focus,\n    baseStyles.svg,\n  ),\n  {\n    variants: {\n      variant: {\n        solid:\n          'border border-transparent bg-primary-600 text-white hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-800',\n        outline_dark:\n          'border border-primary-600 text-primary-600 hover:border-primary-800 hover:bg-primary-100 hover:text-primary-800 focus:border-primary-800 focus:bg-primary-100 focus:text-primary-800 active:border-primary-900 active:bg-primary-200 active:text-primary-900',\n        outline_light:\n          'border border-white text-white hover:border-gray-300 hover:bg-gray-800 focus:border-gray-300 focus:bg-gray-800 active:border-gray-400 active:bg-gray-700',\n        ghost:\n          'border border-transparent text-primary-600 hover:bg-primary-100 hover:text-primary-800 focus:bg-primary-100 focus:text-primary-800 active:bg-primary-200 active:text-primary-900',\n        ghost_neutral:\n          'border border-transparent text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:bg-gray-200 focus:text-gray-800 active:bg-gray-300 active:text-gray-900',\n        ghost_light:\n          'border border-transparent text-white hover:border-gray-300 hover:bg-gray-800 focus:border-gray-300 focus:bg-gray-800 active:border-gray-400 active:bg-gray-700',\n        link: 'p-0 text-primary-600 hover:text-primary-800 hover:underline hover:underline-offset-2 focus:text-primary-800 active:text-primary-900',\n        link_underline:\n          'p-0 text-gray-900 underline underline-offset-3 hover:text-primary-600 focus:text-primary-600 active:text-primary-800',\n        link_dark:\n          'p-0 text-gray-900 hover:text-primary-600 hover:underline hover:underline-offset-3 focus:text-primary-600 active:text-primary-800',\n        link_light:\n          'p-0 text-white hover:text-primary-200 hover:underline hover:underline-offset-3 focus:text-primary-200 active:text-primary-300',\n        nav_link_dark:\n          'rounded-none border-s-0 border-transparent hover:border-primary-600 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 active:border-primary-800 active:text-primary-800 md:px-1 md:py-3',\n      },\n    },\n    defaultVariants: {\n      variant: 'solid',\n    },\n  },\n);\n\nconst Button = ({\n  text = '',\n  children = '',\n  className = '',\n  link = '#',\n  variant,\n  ...props\n}) => {\n  return (\n    <a\n      className={cn(buttonVariants({ variant }), className)}\n      href={link}\n      {...props}\n    >\n      {text}\n      {children}\n    </a>\n  );\n};\n\nexport default Button;\n"
-  compiled: "var __defProp = Object.defineProperty;\nvar __defProps = Object.defineProperties;\nvar __getOwnPropDescs = Object.getOwnPropertyDescriptors;\nvar __getOwnPropSymbols = Object.getOwnPropertySymbols;\nvar __hasOwnProp = Object.prototype.hasOwnProperty;\nvar __propIsEnum = Object.prototype.propertyIsEnumerable;\nvar __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;\nvar __spreadValues = (a, b) => {\n  for (var prop in b || (b = {}))\n    if (__hasOwnProp.call(b, prop))\n      __defNormalProp(a, prop, b[prop]);\n  if (__getOwnPropSymbols)\n    for (var prop of __getOwnPropSymbols(b)) {\n      if (__propIsEnum.call(b, prop))\n        __defNormalProp(a, prop, b[prop]);\n    }\n  return a;\n};\nvar __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));\nvar __objRest = (source, exclude) => {\n  var target = {};\n  for (var prop in source)\n    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)\n      target[prop] = source[prop];\n  if (source != null && __getOwnPropSymbols)\n    for (var prop of __getOwnPropSymbols(source)) {\n      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))\n        target[prop] = source[prop];\n    }\n  return target;\n};\nimport { jsxs } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst baseStyles = {\n  disable: \"disabled:pointer-events-none disabled:opacity-50\",\n  focus: \"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:no-underline focus-visible:outline-primary-500 focus-visible:rounded-lg focus-visible:border-transparent\",\n  svg: \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\"\n};\nconst buttonVariants = cva(\n  cn(\n    \"inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors\",\n    baseStyles.disable,\n    baseStyles.focus,\n    baseStyles.svg\n  ),\n  {\n    variants: {\n      variant: {\n        solid: \"border border-transparent bg-primary-600 text-white hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-800\",\n        outline_dark: \"border border-primary-600 text-primary-600 hover:border-primary-800 hover:bg-primary-100 hover:text-primary-800 focus:border-primary-800 focus:bg-primary-100 focus:text-primary-800 active:border-primary-900 active:bg-primary-200 active:text-primary-900\",\n        outline_light: \"border border-white text-white hover:border-gray-300 hover:bg-gray-800 focus:border-gray-300 focus:bg-gray-800 active:border-gray-400 active:bg-gray-700\",\n        ghost: \"border border-transparent text-primary-600 hover:bg-primary-100 hover:text-primary-800 focus:bg-primary-100 focus:text-primary-800 active:bg-primary-200 active:text-primary-900\",\n        ghost_neutral: \"border border-transparent text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:bg-gray-200 focus:text-gray-800 active:bg-gray-300 active:text-gray-900\",\n        ghost_light: \"border border-transparent text-white hover:border-gray-300 hover:bg-gray-800 focus:border-gray-300 focus:bg-gray-800 active:border-gray-400 active:bg-gray-700\",\n        link: \"p-0 text-primary-600 hover:text-primary-800 hover:underline hover:underline-offset-2 focus:text-primary-800 active:text-primary-900\",\n        link_underline: \"p-0 text-gray-900 underline underline-offset-3 hover:text-primary-600 focus:text-primary-600 active:text-primary-800\",\n        link_dark: \"p-0 text-gray-900 hover:text-primary-600 hover:underline hover:underline-offset-3 focus:text-primary-600 active:text-primary-800\",\n        link_light: \"p-0 text-white hover:text-primary-200 hover:underline hover:underline-offset-3 focus:text-primary-200 active:text-primary-300\",\n        nav_link_dark: \"rounded-none border-s-0 border-transparent hover:border-primary-600 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 active:border-primary-800 active:text-primary-800 md:px-1 md:py-3\"\n      }\n    },\n    defaultVariants: {\n      variant: \"solid\"\n    }\n  }\n);\nconst Button = (_a) => {\n  var _b = _a, {\n    text = \"\",\n    children = \"\",\n    className = \"\",\n    link = \"#\",\n    variant\n  } = _b, props = __objRest(_b, [\n    \"text\",\n    \"children\",\n    \"className\",\n    \"link\",\n    \"variant\"\n  ]);\n  return /* @__PURE__ */ jsxs(\n    \"a\",\n    __spreadProps(__spreadValues({\n      className: cn(buttonVariants({ variant }), className),\n      href: link\n    }, props), {\n      children: [\n        text,\n        children\n      ]\n    })\n  );\n};\nexport {\n  Button as default\n};\n"
+  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\n/**\n * Button — the shadcn/ui pattern, with Atelier's tokens.\n *\n * Renders an anchor when given a URL and a button otherwise, so a call to\n * action and a form control share one component without lying about semantics.\n */\nconst button = cva(\n  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-medium ' +\n    'transition-colors duration-150 disabled:pointer-events-none disabled:opacity-50 ' +\n    'rounded-full',\n  {\n    variants: {\n      variant: {\n        solid: 'bg-ink text-paper hover:opacity-80',\n        secondary: 'bg-wash text-ink hover:bg-hairline',\n        outline: 'border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper',\n        ghost: 'bg-transparent text-ink underline underline-offset-[6px] decoration-hairline hover:decoration-ink px-0',\n        link: 'bg-transparent text-ink underline underline-offset-[6px] decoration-hairline hover:decoration-ink px-0',\n      },\n      size: {\n        sm: 'h-10 px-5 text-[0.9375rem]',\n        md: 'h-12 px-6 text-[1rem]',\n        lg: 'h-14 px-8 text-[1.0625rem]',\n      },\n    },\n    defaultVariants: { variant: 'solid', size: 'md' },\n  },\n);\n\nconst Button = ({ label, url, variant, size, fullWidth }) => {\n  const className = cn(button({ variant, size }), fullWidth && 'w-full');\n  if (url) {\n    return (\n      <a href={url} className={className}>\n        {label}\n      </a>\n    );\n  }\n  return (\n    <button type=\"button\" className={className}>\n      {label}\n    </button>\n  );\n};\n\nexport default Button;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst button = cva(\n  \"inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-medium transition-colors duration-150 disabled:pointer-events-none disabled:opacity-50 rounded-full\",\n  {\n    variants: {\n      variant: {\n        solid: \"bg-ink text-paper hover:opacity-80\",\n        secondary: \"bg-wash text-ink hover:bg-hairline\",\n        outline: \"border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper\",\n        ghost: \"bg-transparent text-ink underline underline-offset-[6px] decoration-hairline hover:decoration-ink px-0\",\n        link: \"bg-transparent text-ink underline underline-offset-[6px] decoration-hairline hover:decoration-ink px-0\"\n      },\n      size: {\n        sm: \"h-10 px-5 text-[0.9375rem]\",\n        md: \"h-12 px-6 text-[1rem]\",\n        lg: \"h-14 px-8 text-[1.0625rem]\"\n      }\n    },\n    defaultVariants: { variant: \"solid\", size: \"md\" }\n  }\n);\nconst Button = ({ label, url, variant, size, fullWidth }) => {\n  const className = cn(button({ variant, size }), fullWidth && \"w-full\");\n  if (url) {\n    return /* @__PURE__ */ jsx(\"a\", { href: url, className, children: label });\n  }\n  return /* @__PURE__ */ jsx(\"button\", { type: \"button\", className, children: label });\n};\nexport {\n  Button as default\n};\n"
 css:
   original: ''
   compiled: ''

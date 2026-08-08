@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: badge
+name: Badge
+props:
+  label:
+    type: string
+    title: Label
+    examples:
+      - New
+  variant:
+    type: string
+    enum:
+      - accent
+      - neutral
+      - outline
+    'meta:enum':
+      accent: Accent
+      neutral: Neutral
+      outline: Outline
+    title: Variant
+    examples:
+      - accent
+required:
+  - label
+  - variant
+slots: {  }
+js:
+  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\n/** Badge — a quiet marker, not a coloured pill. */\nconst badge = cva('inline-flex items-center text-[0.9375rem]', {\n  variants: {\n    variant: {\n      accent: 'text-ink',\n      neutral: 'text-ink-muted',\n      outline: 'border border-hairline px-3 py-1 text-ink-muted',\n    },\n  },\n  defaultVariants: { variant: 'neutral' },\n});\n\nconst Badge = ({ label, variant }) => (\n  <span className={cn(badge({ variant }))}>{label}</span>\n);\n\nexport default Badge;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst badge = cva(\"inline-flex items-center text-[0.9375rem]\", {\n  variants: {\n    variant: {\n      accent: \"text-ink\",\n      neutral: \"text-ink-muted\",\n      outline: \"border border-hairline px-3 py-1 text-ink-muted\"\n    }\n  },\n  defaultVariants: { variant: \"neutral\" }\n});\nconst Badge = ({ label, variant }) => /* @__PURE__ */ jsx(\"span\", { className: cn(badge({ variant })), children: label });\nexport {\n  Badge as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

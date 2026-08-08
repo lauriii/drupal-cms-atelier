@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cec4fc43-86ee-4e94-84fc-d46cea329cfd
+  bundle: image
+  default_langcode: en
+  depends:
+    a21e2884-9ce5-4b6c-975f-e471937cfcf8: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Lattice
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: Lattice
+      title: ''
+      width: 640
+      height: 200
+      entity: a21e2884-9ce5-4b6c-975f-e471937cfcf8

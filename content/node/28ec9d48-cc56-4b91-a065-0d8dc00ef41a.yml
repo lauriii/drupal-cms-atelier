@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 28ec9d48-cc56-4b91-a065-0d8dc00ef41a
+  bundle: article
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  created:
+    -
+      value: '2026-05-19T09:12:00+00:00'
+  title:
+    -
+      value: 'What we learned making two hundred of the same stool'
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /what-we-learned-making-two-hundred-same-stool-0
+      langcode: en

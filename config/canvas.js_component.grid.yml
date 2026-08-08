@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: grid
+name: Grid
+props:
+  columns:
+    type: string
+    enum:
+      - '2'
+      - '3'
+      - '4'
+    'meta:enum':
+      2: Two
+      3: Three
+      4: Four
+    title: Columns
+    examples:
+      - '3'
+  gap:
+    type: string
+    enum:
+      - sm
+      - md
+      - lg
+    'meta:enum':
+      sm: Small
+      md: Medium
+      lg: Large
+    title: Gap
+    examples:
+      - md
+required:
+  - columns
+  - gap
+slots:
+  content:
+    title: Items
+js:
+  original: "import { cn } from 'drupal-canvas';\n\n/** Grid — responsive columns for cards, stats and logos. */\nconst Grid = ({ columns, gap, content }) => (\n  <div\n    className={cn(\n      'grid grid-cols-1',\n      columns === '2' && 'sm:grid-cols-2',\n      columns === '3' && 'sm:grid-cols-2 lg:grid-cols-3',\n      columns === '4' && 'grid-cols-2 lg:grid-cols-4',\n      gap === 'sm' ? 'gap-6' : gap === 'lg' ? 'gap-12' : 'gap-8',\n    )}\n  >\n    {content}\n  </div>\n);\n\nexport default Grid;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cn } from \"drupal-canvas\";\nconst Grid = ({ columns, gap, content }) => /* @__PURE__ */ jsx(\n  \"div\",\n  {\n    className: cn(\n      \"grid grid-cols-1\",\n      columns === \"2\" && \"sm:grid-cols-2\",\n      columns === \"3\" && \"sm:grid-cols-2 lg:grid-cols-3\",\n      columns === \"4\" && \"grid-cols-2 lg:grid-cols-4\",\n      gap === \"sm\" ? \"gap-6\" : gap === \"lg\" ? \"gap-12\" : \"gap-8\"\n    ),\n    children: content\n  }\n);\nexport {\n  Grid as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

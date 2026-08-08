@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.logo_wall
+label: 'Logo wall'
+id: js.logo_wall
+source: js
+source_local_id: logo_wall
+provider: null
+active_version: c30d704e8eeccd81
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Trusted by teams shipping on Drupal'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Logos

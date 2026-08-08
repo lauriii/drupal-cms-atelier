@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.stat
+label: Stat
+id: js.stat
+source: js
+source_local_id: stat
+provider: null
+active_version: dd7fcef1dc8b620d
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        value:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '13'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        label:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Components
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions: {  }

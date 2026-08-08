@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 05dea198-8232-4cb5-8b1d-26f8610a2d3b
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: atelier-work-2.jpg
+  uri:
+    -
+      value: 'public://atelier-work-2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 37356
+  status:
+    -
+      value: true

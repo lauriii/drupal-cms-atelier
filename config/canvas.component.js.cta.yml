@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.cta
+label: 'Call to action'
+id: js.cta
+source: js
+source_local_id: cta
+provider: null
+active_version: 1a75ef0685f7c7fd
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Start with the template'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        lede:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Install it, point your codebase at it, and push.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Actions

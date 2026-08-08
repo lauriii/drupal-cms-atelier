@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: site_footer
+name: 'Site footer'
+props:
+  wordmark:
+    type: string
+    title: Wordmark
+    examples:
+      - Atelier
+  note:
+    type: string
+    title: Note
+    examples:
+      - 'Powered by Drupal CMS'
+required:
+  - wordmark
+slots:
+  content:
+    title: Links
+js:
+  original: "/** Site footer — wordmark, a line of credit, and whatever is slotted in. */\nconst SiteFooter = ({ wordmark, note, content }) => (\n  <footer className=\"border-t border-hairline bg-paper\">\n    <div className=\"mx-auto flex max-w-7xl flex-col gap-8 px-6 py-12 md:flex-row md:items-center md:justify-between md:px-10\">\n      <div>\n        <p className=\"font-display text-lg tracking-tight\">{wordmark}</p>\n        {note ? (\n          <p className=\"mt-2 text-[0.9375rem] text-ink-muted\">\n            {note}\n          </p>\n        ) : null}\n      </div>\n      <div className=\"flex items-center gap-7\">{content}</div>\n    </div>\n  </footer>\n);\n\nexport default SiteFooter;\n"
+  compiled: "import { jsx, jsxs } from \"react/jsx-runtime\";\nconst SiteFooter = ({ wordmark, note, content }) => /* @__PURE__ */ jsx(\"footer\", { className: \"border-t border-hairline bg-paper\", children: /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto flex max-w-7xl flex-col gap-8 px-6 py-12 md:flex-row md:items-center md:justify-between md:px-10\", children: [\n  /* @__PURE__ */ jsxs(\"div\", { children: [\n    /* @__PURE__ */ jsx(\"p\", { className: \"font-display text-lg tracking-tight\", children: wordmark }),\n    note ? /* @__PURE__ */ jsx(\"p\", { className: \"mt-2 text-[0.9375rem] text-ink-muted\", children: note }) : null\n  ] }),\n  /* @__PURE__ */ jsx(\"div\", { className: \"flex items-center gap-7\", children: content })\n] }) });\nexport {\n  SiteFooter as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

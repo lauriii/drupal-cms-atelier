@@ -1,0 +1,158 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 41c22c99-9e7a-4601-ab8c-517b366306d4
+  default_langcode: en
+  depends:
+    62f5db67-143a-4b08-b7ae-2e4814a29834: file
+    2fed5eb0-0ebe-4b89-9fd2-e776c4690480: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'The studio'
+  components:
+    -
+      uuid: 7f2a1c33-0001-4a00-8000-000000000001
+      component_id: js.hero
+      inputs:
+        eyebrow: 'The studio'
+        title: 'Six people, two benches, about ninety pieces a year'
+        lede: 'We started in 2009 in a rented bay behind a car repair shop in Petersfield. We are still in Petersfield, in a better building, doing roughly the same thing.'
+    -
+      parent_uuid: 7f2a1c33-0001-4a00-8000-000000000001
+      slot: content
+      uuid: 7f2a1c33-0002-4a00-8000-000000000002
+      component_id: js.button
+      inputs:
+        label: 'Start a commission'
+        url: 'mailto:studio@atelier.example'
+        variant: solid
+        size: lg
+        fullWidth: false
+    -
+      uuid: 7f2a1c33-0003-4a00-8000-000000000003
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: wide
+        divider: false
+    -
+      parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
+      slot: content
+      uuid: 7f2a1c33-0004-4a00-8000-000000000004
+      component_id: js.prose
+      inputs:
+        text: "<p>Everything is made here. We do not subcontract carcassing, we do not buy in doors, and we do not finish anything in a spray booth on an industrial estate forty miles away. It is slower and it is the entire point.</p><p>Timber comes from two merchants we have used for fifteen years, and increasingly from a single woodland near Selborne that mills its own ash. We work in solid stock. Where a piece needs a panel we make the panel.</p><p>We do not stain. If a client wants a darker piece we find a darker timber, which costs more and takes longer and looks correct in ten years' time.</p>"
+    -
+      uuid: 7f2a1c33-0005-4a00-8000-000000000005
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: md
+        width: wide
+        divider: true
+    -
+      parent_uuid: 7f2a1c33-0005-4a00-8000-000000000005
+      slot: content
+      uuid: 7f2a1c33-0006-4a00-8000-000000000006
+      component_id: js.section_intro
+      inputs:
+        eyebrow: ''
+        title: 'How a commission goes'
+        lede: 'Three steps, in this order, every time. Nothing is made before the second one is signed off.'
+        align: left
+        level: h2
+    -
+      parent_uuid: 7f2a1c33-0005-4a00-8000-000000000005
+      slot: content
+      uuid: 7f2a1c33-0007-4a00-8000-000000000007
+      component_id: js.grid
+      inputs:
+        columns: 3
+        gap: lg
+    -
+      parent_uuid: 7f2a1c33-0007-4a00-8000-000000000007
+      slot: content
+      uuid: 7f2a1c33-0008-4a00-8000-000000000008
+      component_id: js.feature
+      inputs:
+        marker: '1'
+        title: 'You describe the piece'
+        text: 'Usually a photograph of the room, a rough size, and what it has to hold. We visit if you are within an hour of the workshop.'
+        framed: false
+    -
+      parent_uuid: 7f2a1c33-0007-4a00-8000-000000000007
+      slot: content
+      uuid: 7f2a1c33-0009-4a00-8000-000000000009
+      component_id: js.feature
+      inputs:
+        marker: '2'
+        title: 'We draw it and price it'
+        text: 'A dimensioned drawing and a fixed price, inside two weeks. Both are yours to keep whether or not you go ahead.'
+        framed: false
+    -
+      parent_uuid: 7f2a1c33-0007-4a00-8000-000000000007
+      slot: content
+      uuid: 7f2a1c33-0010-4a00-8000-000000000010
+      component_id: js.feature
+      inputs:
+        marker: '3'
+        title: 'We make it and deliver it'
+        text: 'Eight to sixteen weeks, depending on the timber and how dry it is. We deliver and install it ourselves.'
+        framed: false
+    -
+      uuid: 7f2a1c33-0011-4a00-8000-000000000011
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: wide
+        divider: false
+    -
+      parent_uuid: 7f2a1c33-0011-4a00-8000-000000000011
+      slot: content
+      uuid: 7f2a1c33-0012-4a00-8000-000000000012
+      component_id: js.figure
+      inputs:
+        title: 'Bench No. 4'
+        caption: 'Working drawing. Ash, 2.4 metres, for a farmhouse kitchen in Alton.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 2fed5eb0-0ebe-4b89-9fd2-e776c4690480
+            target_type: media
+        url: ''
+    -
+      uuid: 7f2a1c33-0013-4a00-8000-000000000013
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: md
+        width: narrow
+        divider: true
+    -
+      parent_uuid: 7f2a1c33-0013-4a00-8000-000000000013
+      slot: content
+      uuid: 7f2a1c33-0014-4a00-8000-000000000014
+      component_id: js.testimonial
+      inputs:
+        quote: 'They talked me out of the thing I asked for and drew something better on the back of the delivery note. That was four years ago and I still have both.'
+        name: 'Ruth Okafor'
+        role: 'Client, Alton'
+        avatar: ''
+  path:
+    -
+      alias: /studio
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

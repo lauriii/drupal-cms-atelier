@@ -20,9 +20,201 @@ id: js.hero
 source: js
 source_local_id: hero
 provider: null
-active_version: 99c226ef94605d56
+active_version: a927b9a9944dcb09
 versioned_properties:
   active:
+    settings:
+      prop_field_definitions:
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Drupal Canvas'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'A component library your editors can actually use'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        lede:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Authored as React. Composed in Drupal. Shipped without a deploy.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        image:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles: { image: image, svg_image: svg_image }
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Actions
+  5e7b0b8f63bdc575:
+    settings:
+      prop_field_definitions:
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Drupal Canvas'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'A component library your editors can actually use'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        lede:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Authored as React. Composed in Drupal. Shipped without a deploy.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        image:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles: { image: image, svg_image: svg_image }
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        meta:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Components: 13 | Stack: React + Tailwind | Deploy: not required'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Actions
+  6f017d2938ac1e67:
+    settings:
+      prop_field_definitions:
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Drupal Canvas'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'A component library your editors can actually use'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        lede:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Authored as React. Composed in Drupal. Shipped without a deploy.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        image:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles: { image: image, svg_image: svg_image }
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        meta:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Components: 13 | Stack: React + Tailwind | Deploy: not required'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Actions
+  99c226ef94605d56:
     settings:
       prop_field_definitions:
         backgroundImage:

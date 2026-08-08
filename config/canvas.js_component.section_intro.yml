@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: section_intro
+name: 'Section intro'
+props:
+  eyebrow:
+    type: string
+    title: Eyebrow
+    examples:
+      - 'What you get'
+  title:
+    type: string
+    title: Title
+    examples:
+      - 'Components you can actually ship'
+  lede:
+    type: string
+    title: Lede
+    examples:
+      - 'A small library, built as code, composed by editors.'
+  align:
+    type: string
+    enum:
+      - left
+      - center
+    'meta:enum':
+      left: Left
+      center: Centre
+    title: Align
+    examples:
+      - left
+  level:
+    type: string
+    enum:
+      - h1
+      - h2
+      - h3
+    'meta:enum':
+      h1: H1
+      h2: H2
+      h3: H3
+    title: Level
+    examples:
+      - h2
+required:
+  - title
+  - align
+  - level
+slots: {  }
+js:
+  original: "import { cn } from 'drupal-canvas';\n\n/**\n * Section intro — eyebrow, title, lede.\n *\n * The eyebrow is set in the body face at reading size rather than as spaced\n * uppercase mono; the hierarchy comes from the display face below it.\n */\nconst Intro = ({ eyebrow, title, lede, align, level }) => {\n  const Heading = level === 'h1' ? 'h1' : level === 'h3' ? 'h3' : 'h2';\n  const centered = align === 'center';\n  return (\n    <header className={cn('max-w-[42rem]', centered && 'mx-auto text-center')}>\n      {eyebrow ? (\n        <p className=\"text-[0.9375rem] text-ink-muted\">{eyebrow}</p>\n      ) : null}\n      <Heading\n        className={cn(\n          'font-display font-light text-balance',\n          eyebrow ? 'mt-4' : '',\n          level === 'h1'\n            ? 'text-[clamp(2.75rem,6vw,4.5rem)] leading-[1.02]'\n            : 'text-[clamp(2.25rem,4.6vw,3.5rem)] leading-[1.05]',\n        )}\n      >\n        {title}\n      </Heading>\n      {lede ? (\n        <p className=\"mt-6 text-[1.0625rem] leading-[1.7] text-ink-muted text-pretty\">\n          {lede}\n        </p>\n      ) : null}\n    </header>\n  );\n};\n\nexport default Intro;\n"
+  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nimport { cn } from \"drupal-canvas\";\nconst Intro = ({ eyebrow, title, lede, align, level }) => {\n  const Heading = level === \"h1\" ? \"h1\" : level === \"h3\" ? \"h3\" : \"h2\";\n  const centered = align === \"center\";\n  return /* @__PURE__ */ jsxs(\"header\", { className: cn(\"max-w-[42rem]\", centered && \"mx-auto text-center\"), children: [\n    eyebrow ? /* @__PURE__ */ jsx(\"p\", { className: \"text-[0.9375rem] text-ink-muted\", children: eyebrow }) : null,\n    /* @__PURE__ */ jsx(\n      Heading,\n      {\n        className: cn(\n          \"font-display font-light text-balance\",\n          eyebrow ? \"mt-4\" : \"\",\n          level === \"h1\" ? \"text-[clamp(2.75rem,6vw,4.5rem)] leading-[1.02]\" : \"text-[clamp(2.25rem,4.6vw,3.5rem)] leading-[1.05]\"\n        ),\n        children: title\n      }\n    ),\n    lede ? /* @__PURE__ */ jsx(\"p\", { className: \"mt-6 text-[1.0625rem] leading-[1.7] text-ink-muted text-pretty\", children: lede }) : null\n  ] });\n};\nexport {\n  Intro as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

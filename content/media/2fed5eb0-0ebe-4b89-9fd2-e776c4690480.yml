@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2fed5eb0-0ebe-4b89-9fd2-e776c4690480
+  bundle: image
+  default_langcode: en
+  depends:
+    62f5db67-143a-4b08-b7ae-2e4814a29834: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Bench No. 4'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Bench No. 4'
+      title: ''
+      width: 1600
+      height: 1100
+      entity: 62f5db67-143a-4b08-b7ae-2e4814a29834

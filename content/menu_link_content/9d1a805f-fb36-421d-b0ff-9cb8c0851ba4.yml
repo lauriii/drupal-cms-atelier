@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 9d1a805f-fb36-421d-b0ff-9cb8c0851ba4
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    41c22c99-9e7a-4601-ab8c-517b366306d4: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Contact
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      title: null
+      options: {  }
+      target_uuid: 41c22c99-9e7a-4601-ab8c-517b366306d4
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: 30
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true

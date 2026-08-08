@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6a55d47f-c5b0-4856-96dd-a3d0b1ae7dee
+  bundle: image
+  default_langcode: en
+  depends:
+    50fc8aa3-61b5-4698-8fc5-6ca90ce9ac3d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Stackline
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: Stackline
+      title: ''
+      width: 640
+      height: 200
+      entity: 50fc8aa3-61b5-4698-8fc5-6ca90ce9ac3d

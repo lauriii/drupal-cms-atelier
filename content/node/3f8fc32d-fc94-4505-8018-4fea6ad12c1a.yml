@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3f8fc32d-fc94-4505-8018-4fea6ad12c1a
+  bundle: article
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  created:
+    -
+      value: '2026-07-21T15:05:00+00:00'
+  title:
+    -
+      value: 'Notes from the bench: joinery without fixings'
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /notes-bench-joinery-without-fixings-0
+      langcode: en

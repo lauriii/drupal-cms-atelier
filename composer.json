@@ -1,6 +1,6 @@
 {
-    "name": "drupal/nebula",
-    "description": "A Drupal CMS site template for authoring Drupal Canvas code components with a Nebula codebase.",
+    "name": "drupal/atelier",
+    "description": "A Drupal CMS site template with a shadcn/ui-based library of Drupal Canvas code components.",
     "type": "drupal-recipe",
     "license": [
         "GPL-2.0-or-later"
@@ -17,10 +17,10 @@
     "extra": {
         "drupal-site-template": {
             "generate-theme": {
-                "name": "nebula_theme",
+                "name": "atelier_theme",
                 "from": false,
                 "info": {
-                    "name": "Nebula",
+                    "name": "Atelier",
                     "description": "A blank shell theme. It renders the Canvas component tree and nothing else; all styling comes from the code components pushed by the Canvas CLI.",
                     "regions": {
                         "header": "Header",

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\nebula\Functional;
+namespace Drupal\Tests\atelier\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 /**
  * Tests that this site template can be used to install Drupal.
  */
-#[Group('nebula')]
+#[Group('atelier')]
 #[IgnoreDeprecations]
 #[RunTestsInSeparateProcesses]
 class InstallTest extends BrowserTestBase {

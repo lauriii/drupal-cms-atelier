@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: stat
+name: Stat
+props:
+  value:
+    type: string
+    title: Value
+    examples:
+      - '13'
+  label:
+    type: string
+    title: Label
+    examples:
+      - Components
+required:
+  - value
+  - label
+slots: {  }
+js:
+  original: "/** Stat — a figure and what it measures. */\nconst Stat = ({ value, label }) => (\n  <div>\n    <p className=\"font-display text-[clamp(2.75rem,5vw,4rem)] font-light leading-none\">\n      {value}\n    </p>\n    <p className=\"mt-4 text-[0.9375rem] leading-snug text-ink-muted\">{label}</p>\n  </div>\n);\n\nexport default Stat;\n"
+  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nconst Stat = ({ value, label }) => /* @__PURE__ */ jsxs(\"div\", { children: [\n  /* @__PURE__ */ jsx(\"p\", { className: \"font-display text-[clamp(2.75rem,5vw,4rem)] font-light leading-none\", children: value }),\n  /* @__PURE__ */ jsx(\"p\", { className: \"mt-4 text-[0.9375rem] leading-snug text-ink-muted\", children: label })\n] });\nexport {\n  Stat as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

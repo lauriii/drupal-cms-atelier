@@ -1,0 +1,106 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 5c31bfce-a14c-4aec-9928-e175a9502815
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: Contact
+  components:
+    -
+      uuid: 5d6e8a91-0018-4a00-8000-000000000018
+      component_id: js.hero
+      inputs:
+        eyebrow: Contact
+        title: 'Come and see the workshop'
+        lede: 'We would rather talk about a piece standing next to the timber than over email, but email is fine too.'
+    -
+      uuid: 5d6e8a91-0019-4a00-8000-000000000019
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: wide
+        divider: false
+    -
+      parent_uuid: 5d6e8a91-0019-4a00-8000-000000000019
+      slot: content
+      uuid: 5d6e8a91-0020-4a00-8000-000000000020
+      component_id: js.grid
+      inputs:
+        columns: 3
+        gap: lg
+    -
+      parent_uuid: 5d6e8a91-0020-4a00-8000-000000000020
+      slot: content
+      uuid: 5d6e8a91-0021-4a00-8000-000000000021
+      component_id: js.feature
+      inputs:
+        marker: ''
+        title: 'Where we are'
+        text: 'Unit 4, Ramshill Yard, Petersfield, Hampshire GU31 4AR. Park in the yard, not on the lane.'
+        framed: false
+    -
+      parent_uuid: 5d6e8a91-0020-4a00-8000-000000000020
+      slot: content
+      uuid: 5d6e8a91-0022-4a00-8000-000000000022
+      component_id: js.feature
+      inputs:
+        marker: ''
+        title: 'When to come'
+        text: 'Tuesday to Friday, 9am to 5pm, and Saturday mornings by arrangement. We are here on Mondays but the machines are loud and nobody hears the door.'
+        framed: false
+    -
+      parent_uuid: 5d6e8a91-0020-4a00-8000-000000000020
+      slot: content
+      uuid: 5d6e8a91-0023-4a00-8000-000000000023
+      component_id: js.feature
+      inputs:
+        marker: ''
+        title: 'How to reach us'
+        text: 'studio@atelier.example, or 01730 000 000. Email is read twice a day; the phone is answered when someone is near it.'
+        framed: false
+    -
+      uuid: 5d6e8a91-0024-4a00-8000-000000000024
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: md
+        width: wide
+        divider: true
+    -
+      parent_uuid: 5d6e8a91-0024-4a00-8000-000000000024
+      slot: content
+      uuid: 5d6e8a91-0025-4a00-8000-000000000025
+      component_id: js.cta
+      inputs:
+        title: 'Tell us what the piece has to do'
+        lede: 'A photograph of the room and a rough size is enough to start. We answer every enquiry, including the ones we turn down.'
+    -
+      parent_uuid: 5d6e8a91-0025-4a00-8000-000000000025
+      slot: content
+      uuid: 5d6e8a91-0026-4a00-8000-000000000026
+      component_id: js.button
+      inputs:
+        label: 'Email the studio'
+        url: 'mailto:studio@atelier.example'
+        variant: solid
+        size: lg
+        fullWidth: false
+  path:
+    -
+      alias: /contact
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

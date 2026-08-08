@@ -1,0 +1,318 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 4b3d5e15-3a8d-46c8-a502-1255c2b1ad26
+  default_langcode: en
+  depends:
+    62f5db67-143a-4b08-b7ae-2e4814a29834: file
+    2fed5eb0-0ebe-4b89-9fd2-e776c4690480: media
+    9121fc97-2a9c-40f4-ad65-05777bc5813a: file
+    38105a5a-27c2-4dd6-825d-3a671f2dbc45: media
+    05dea198-8232-4cb5-8b1d-26f8610a2d3b: file
+    3587db33-00d2-4295-811e-7d7de53ce915: media
+    e85a38c0-7c5a-48d0-be3c-dd69d1c3cf1b: file
+    8afef070-72a2-49a2-a704-971f5f959d57: media
+    d14ea3c9-8d6e-44b2-9a9e-252e7fbf8a71: file
+    98b7f218-a4ab-4a83-934a-3e5c56012de6: media
+    50fc8aa3-61b5-4698-8fc5-6ca90ce9ac3d: file
+    6a55d47f-c5b0-4856-96dd-a3d0b1ae7dee: media
+    652290dd-9da0-405a-b08b-829d2eda6288: file
+    d429ffd1-4902-4d6f-91ac-44ab2118c1aa: media
+    a21e2884-9ce5-4b6c-975f-e471937cfcf8: file
+    cec4fc43-86ee-4e94-84fc-d46cea329cfd: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Atelier
+  components:
+    -
+      uuid: 565d154b-0001-4a00-8000-000000000001
+      component_id: js.hero
+      inputs:
+        eyebrow: 'Furniture and objects, made in Hampshire'
+        title: 'Pieces built to outlast the people who commission them'
+        lede: 'Atelier is a six-person workshop. We design and make furniture in small runs, in solid timber, for houses and the occasional restaurant.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 2fed5eb0-0ebe-4b89-9fd2-e776c4690480
+            target_type: media
+    -
+      parent_uuid: 565d154b-0001-4a00-8000-000000000001
+      slot: content
+      uuid: 215a25dd-0002-4a00-8000-000000000002
+      component_id: js.button
+      inputs:
+        label: 'See the studio'
+        url: 'mailto:studio@atelier.example'
+        variant: solid
+        size: lg
+        fullWidth: false
+    -
+      parent_uuid: 565d154b-0001-4a00-8000-000000000001
+      slot: content
+      uuid: b8537467-0003-4a00-8000-000000000003
+      component_id: js.button
+      inputs:
+        label: 'Read the journal'
+        url: /journal
+        variant: ghost
+        size: lg
+        fullWidth: false
+    -
+      uuid: cf5444f1-0004-4a00-8000-000000000004
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: md
+        width: wide
+        divider: true
+    -
+      parent_uuid: cf5444f1-0004-4a00-8000-000000000004
+      slot: content
+      uuid: 5130d152-0005-4a00-8000-000000000005
+      component_id: js.section_intro
+      inputs:
+        eyebrow: 'What we do'
+        title: 'Three things, done properly'
+        lede: 'We keep the list short so the work stays good.'
+        align: center
+        level: h2
+    -
+      parent_uuid: cf5444f1-0004-4a00-8000-000000000004
+      slot: content
+      uuid: 2637e1c4-0006-4a00-8000-000000000006
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 2637e1c4-0006-4a00-8000-000000000006
+      slot: content
+      uuid: bf3eb07e-0007-4a00-8000-000000000007
+      component_id: js.feature
+      inputs:
+        title: Commissions
+        text: '<p>One-off pieces for a room you already live in. We visit, measure, and draw before we quote.</p>'
+        framed: true
+    -
+      parent_uuid: 2637e1c4-0006-4a00-8000-000000000006
+      slot: content
+      uuid: c83980e8-0008-4a00-8000-000000000008
+      component_id: js.feature
+      inputs:
+        title: 'Small runs'
+        text: '<p>Batches of twenty to two hundred, for restaurants, studios and shops that want the same piece repeatedly.</p>'
+        framed: true
+    -
+      parent_uuid: 2637e1c4-0006-4a00-8000-000000000006
+      slot: content
+      uuid: 58869d79-0009-4a00-8000-000000000009
+      component_id: js.feature
+      inputs:
+        title: Restoration
+        text: '<p>Bringing older furniture back into use, with new joinery where the old has given up.</p>'
+        framed: true
+    -
+      uuid: 2f81adef-0010-4a00-8000-000000000010
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: wide
+        divider: false
+    -
+      parent_uuid: 2f81adef-0010-4a00-8000-000000000010
+      slot: content
+      uuid: 0c982b6d-0011-4a00-8000-000000000011
+      component_id: js.section_intro
+      inputs:
+        eyebrow: 'Selected work'
+        title: 'Recent pieces'
+        align: left
+        level: h2
+        lede: "We publish the drawings. The pieces themselves are in other people's houses, and we do not photograph well."
+    -
+      parent_uuid: 2f81adef-0010-4a00-8000-000000000010
+      slot: content
+      uuid: 7b9f1bfb-0012-4a00-8000-000000000012
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
+      slot: content
+      uuid: e2964a41-0013-4a00-8000-000000000013
+      component_id: js.figure
+      inputs:
+        title: 'Vessel study'
+        caption: 'Working drawing. Turned ash, oiled, one of nine.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 38105a5a-27c2-4dd6-825d-3a671f2dbc45
+            target_type: media
+    -
+      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
+      slot: content
+      uuid: 95917ad7-0014-4a00-8000-000000000014
+      component_id: js.figure
+      inputs:
+        title: 'Shelf system'
+        caption: 'Working drawing. Douglas fir, wall-hung, made to a stairwell.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3587db33-00d2-4295-811e-7d7de53ce915
+            target_type: media
+    -
+      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
+      slot: content
+      uuid: 0bf5ef74-0015-4a00-8000-000000000015
+      component_id: js.figure
+      inputs:
+        title: 'Folded chair'
+        caption: 'Working drawing. Steam-bent oak, still on its third prototype.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 8afef070-72a2-49a2-a704-971f5f959d57
+            target_type: media
+    -
+      uuid: 7cf2dfe2-0016-4a00-8000-000000000016
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: sm
+        width: wide
+        divider: true
+    -
+      parent_uuid: 7cf2dfe2-0016-4a00-8000-000000000016
+      slot: content
+      uuid: e5fb8e58-0017-4a00-8000-000000000017
+      component_id: js.logo_wall
+      inputs:
+        label: 'Stocked by'
+    -
+      parent_uuid: e5fb8e58-0017-4a00-8000-000000000017
+      slot: content
+      uuid: 92fcbece-0018-4a00-8000-000000000018
+      component_id: js.logo
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 98b7f218-a4ab-4a83-934a-3e5c56012de6
+            target_type: media
+    -
+      parent_uuid: e5fb8e58-0017-4a00-8000-000000000017
+      slot: content
+      uuid: 0243a35f-0019-4a00-8000-000000000019
+      component_id: js.logo
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 6a55d47f-c5b0-4856-96dd-a3d0b1ae7dee
+            target_type: media
+    -
+      parent_uuid: e5fb8e58-0017-4a00-8000-000000000017
+      slot: content
+      uuid: 754493c9-0020-4a00-8000-000000000020
+      component_id: js.logo
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d429ffd1-4902-4d6f-91ac-44ab2118c1aa
+            target_type: media
+    -
+      parent_uuid: e5fb8e58-0017-4a00-8000-000000000017
+      slot: content
+      uuid: 27b578ae-0021-4a00-8000-000000000021
+      component_id: js.logo
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: cec4fc43-86ee-4e94-84fc-d46cea329cfd
+            target_type: media
+    -
+      uuid: 50b24838-0022-4a00-8000-000000000022
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: default
+        divider: true
+    -
+      parent_uuid: 50b24838-0022-4a00-8000-000000000022
+      slot: content
+      uuid: c9bb1982-0023-4a00-8000-000000000023
+      component_id: js.section_intro
+      inputs:
+        eyebrow: Journal
+        title: 'From the workshop'
+        lede: 'Occasional notes on what we are making and how.'
+        align: left
+        level: h2
+    -
+      parent_uuid: 50b24838-0022-4a00-8000-000000000022
+      slot: content
+      uuid: bebc2914-0024-4a00-8000-000000000024
+      component_id: js.article_teasers
+      inputs:
+        count: '3'
+    -
+      uuid: 20d8bcb7-0025-4a00-8000-000000000025
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: 20d8bcb7-0025-4a00-8000-000000000025
+      slot: content
+      uuid: 57df8c21-0026-4a00-8000-000000000026
+      component_id: js.testimonial
+      inputs:
+        quote: 'They asked better questions than our architect did, and the table has not moved a millimetre in four years.'
+        name: 'Marta Oyelaran'
+        role: 'Wilder & Co.'
+    -
+      uuid: ced6dd9b-0027-4a00-8000-000000000027
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: sm
+        width: wide
+        divider: false
+    -
+      parent_uuid: ced6dd9b-0027-4a00-8000-000000000027
+      slot: content
+      uuid: b9d1ed0d-0028-4a00-8000-000000000028
+      component_id: js.cta
+      inputs:
+        title: 'Tell us what you need'
+        lede: 'Most commissions start with a photograph of the room and a rough measurement.'
+    -
+      parent_uuid: b9d1ed0d-0028-4a00-8000-000000000028
+      slot: content
+      uuid: 296ef09c-0029-4a00-8000-000000000029
+      component_id: js.button
+      inputs:
+        label: 'Start a commission'
+        url: 'mailto:studio@atelier.example'
+        variant: solid
+        size: lg
+        fullWidth: false
+  path:
+    -
+      alias: /home
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'
