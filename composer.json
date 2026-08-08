@@ -11,7 +11,8 @@
         "drupal/jsonapi_menu_items": "^1.2",
         "drupal/jsonapi_search_api": "^1.0@RC",
         "drupal/search_api": "^1.39",
-        "drupal/simple_oauth": "^6"
+        "drupal/simple_oauth": "^6",
+        "drupal/site_template_helper": "^1.0.4"
     },
     "extra": {
         "drupal-site-template": {

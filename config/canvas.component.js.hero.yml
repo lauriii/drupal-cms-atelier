@@ -1,0 +1,133 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.hero
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - filter.format.canvas_html_block
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - media
+    - media_library
+    - options
+    - text
+label: Hero
+id: js.hero
+source: js
+source_local_id: hero
+provider: null
+active_version: 99c226ef94605d56
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        backgroundImage:
+          required: true
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles: { image: image, svg_image: svg_image }
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        layout:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: left_aligned
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        preHeading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Mission
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        headingElement:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h2
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        headingSize:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: extra_large
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'This space deserves a hero.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        text:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: 'This is a space to welcome visitors to the site. Grab their attention with copy that clearly states what the site is about.'
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        textColor:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: dark
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions:
+        buttons:
+          title: Buttons

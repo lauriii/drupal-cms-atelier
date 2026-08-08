@@ -16,6 +16,9 @@
 #
 # It writes:
 #   config/canvas.js_component.*.yml   one per component
+#   config/canvas.component.js.*.yml   the Canvas wrapper for each, which pins
+#                                      the `component_version` that page regions
+#                                      and pages reference
 #   config/canvas.page_region.*.yml    the header/footer trees
 #   recipe.yml                         the global CSS, spliced between markers
 #
@@ -33,7 +36,7 @@ RECIPE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONFIG_DIR="$RECIPE_DIR/config"
 
 echo "==> Exporting code components and page regions"
-rm -f "$CONFIG_DIR"/canvas.js_component.*.yml "$CONFIG_DIR"/canvas.page_region.*.yml
+rm -f "$CONFIG_DIR"/canvas.js_component.*.yml "$CONFIG_DIR"/canvas.page_region.*.yml "$CONFIG_DIR"/canvas.component.js.*.yml
 
 # `uuid` and `_core` are site-specific; recipes ship neither. Core strips both
 # before comparing recipe config with active config, so leaving them in would
@@ -41,11 +44,16 @@ rm -f "$CONFIG_DIR"/canvas.js_component.*.yml "$CONFIG_DIR"/canvas.page_region.*
 $DRUSH ev '
 $dir = "/var/www/html/recipes/nebula/config";
 $written = 0;
-foreach (["js_component", "page_region"] as $type) {
+foreach (["js_component", "page_region", "component"] as $type) {
   foreach (\Drupal::entityTypeManager()->getStorage($type)->loadMultiple() as $entity) {
     $data = $entity->toArray();
     unset($data["uuid"], $data["_core"]);
     $name = $entity->getEntityType()->getConfigPrefix() . "." . $entity->id();
+    // Only the wrappers for our own code components; Canvas regenerates the
+    // block and SDC ones from whatever else the site has installed.
+    if ($type === "component" && !str_starts_with($entity->id(), "js.")) {
+      continue;
+    }
     file_put_contents("$dir/$name.yml", \Symfony\Component\Yaml\Yaml::dump($data, 8, 2));
     $written++;
   }

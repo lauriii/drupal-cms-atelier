@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.section
+  module:
+    - options
+label: Section
+id: js.section
+source: js
+source_local_id: section
+provider: null
+active_version: 27b0cb8d893d96c8
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        width:
+          required: true
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: normal
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content

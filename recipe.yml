@@ -88,6 +88,16 @@ config:
     system.site:
       simpleConfigUpdate:
         page.front: /home
+    # Point Project Browser at the recommended add-ons list this template
+    # ships as a file, rather than at a remote URL. Same approach as
+    # drupal_cms_blank, and it works on a site with no network access.
+    # @see content/file/6b2f19d4-8a07-4e53-91c6-3d05f8be71a2.yml
+    project_browser.admin_settings:
+      simpleConfigUpdate:
+        enabled_sources.recommended:
+          uri: 'public://recommended-add-ons.yaml'
+          ttl: 86400
+        default_source: recommended
     # Code components fetch from JSON:API in the visitor's browser, so
     # anonymous users need read access to content and media.
     user.role.anonymous:

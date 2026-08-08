@@ -80,6 +80,15 @@ at composer install by `drupal/site_template_helper`, from the
 writes a theme consisting of nothing but an `.info.yml`: no templates, no CSS,
 no SDCs.
 
+This is the same mechanism, and the same three regions, that
+`drupal_cms_blank` uses for its `blank` theme — there is no separate theme
+project to depend on in either case, since the plugin generates it at install
+time. Two deliberate differences from blank: this template strips Drupal's
+`system/base` CSS per file (see the notes), and it does not disable asset
+aggregation or switch on theme development mode. Blank does both because you
+are expected to build a theme on top of it; here the front end arrives as
+pushed components, so neither helps.
+
 That is the point. On a code-components site every pixel comes from the
 components you push, and their Tailwind build styles the whole page. Installing
 a Drupal-side design system such as Mercury alongside it puts two front-end
@@ -94,6 +103,12 @@ load-bearing:
   every region you want must be listed. `content` is not optional:
   `BlockPageVariant` hardcodes it as the fallback for main page content and
   status messages, and omitting it makes both silently disappear.
+- **`libraries-override: {core/normalize: false}` does nothing under
+  `from: false`,** which is worth knowing because `drupal_cms_blank` carries
+  that line. `core/normalize` is attached only by a theme's own `libraries:`
+  list, and a theme generated with `from: false` has none, so there is nothing
+  to remove. It would take effect if `from` were a starterkit. The line that
+  actually removes Drupal's CSS is the `system/base` override below.
 - `libraries-override` on `system/base` is what removes Drupal's own CSS, but
   it is applied **per file**, not to the whole library. `system/base` bundles
   five files and one of them, `hidden.module.css`, defines `.visually-hidden`
@@ -397,15 +412,49 @@ not need this site for day-to-day component work — only to push.
   cached page keeps serving the pre-push markup — byte for byte, which makes it
   look like the push did nothing. `drush cr`.
 
-## Automated check
+## Tests
+
+The three tests every Drupal CMS site template ships, modelled on the
+marketplace templates:
+
+| Test | What it covers |
+| --- | --- |
+| `tests/src/Kernel/RequirementsTest.php` | Conformance. No bundled code, `type: Site`, a valid unprefixed `composer.json` with a licence and no pinned or patched dependencies, and no `_core` or stray `uuid` keys in any shipped config. Unmodified from the canonical version — do not customise it. |
+| `tests/src/Functional/ValidationTest.php` | Applies the recipe to an empty site, then asserts every component used in any component tree has a matching `canvas.component.*.yml` in `config/`. |
+| `tests/src/Functional/InstallTest.php` | Installs Drupal from this recipe as a site template. |
+
+`ValidationTest` re-registers the `json-schema-definitions` stream wrapper in
+`rebuildAll()`. Any Canvas-based template needs that, or the rebuild fails.
+
+Core's `phpunit.xml.dist` only discovers `recipes/*/tests` relative to
+`web/core`, so in a project where this recipe sits at the root run them by
+path:
 
 ```
-tests/check.sh
+vendor/bin/phpunit -c web/core/phpunit.xml.dist recipes/nebula/tests/src/Kernel/RequirementsTest.php
 ```
 
-Installs a throwaway site from the recipe, asserts the pieces above are in
-place, applies the recipe a second time, and asserts nothing was duplicated.
-It rebuilds the site's database, so only run it against a disposable site.
+There is also `tests/check.sh`, which is not a substitute for the above. It
+installs a throwaway site and asserts the rendered result — the front end
+serving the components, the imagery resolving, the menu exposed over JSON:API,
+Drupal's own CSS staying off the page. Those are things a PHPUnit test of the
+recipe does not look at. It rebuilds the site's database, so only run it
+against a disposable site.
+
+## Where this differs from the marketplace templates
+
+Every shipped site template puts its components in a companion theme project
+and ships only `canvas.component.*` wrappers pointing at that theme's SDCs.
+This one vendors the code components themselves, as
+`canvas.js_component.*.yml`, because its companion is a Nebula codebase rather
+than a theme. Nothing forbids it — `RequirementsTest` only bans bundled
+`*.info.yml` — but there is no precedent for it, so the snapshot is generated
+by `tests/regenerate-components.sh` rather than hand-maintained.
+
+Two things the marketplace templates ship that this one does not, both because
+they only make sense once the project is on drupal.org: `.gitlab-ci.yml` (a
+thin include of the Drupal Association's CI templates) and `.tugboat/`, which
+is what powers the "Demo" link on a template's installer card.
 
 ## License
 

@@ -187,6 +187,13 @@ done
 # (CANVAS_ENTITY_REFERENCE), which Canvas remaps to the local serial ID on
 # import — numeric IDs in an exported tree would only work by coincidence.
 # @see \Drupal\canvas\EventSubscriber\DefaultContentSubscriber
+# Project Browser reads the recommended add-ons list from a file this template
+# ships, rather than from a remote URL it cannot have until publication.
+check 'recommended add-ons list on disk' 1 \
+  "$(ev 'print (int) file_exists("public://recommended-add-ons.yaml");')"
+check 'Project Browser uses the shipped list' recommended \
+  "$(ev 'print \Drupal::config("project_browser.admin_settings")->get("default_source");')"
+
 check 'media shipped' 8 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
 check 'hero image reference resolved' 1 \

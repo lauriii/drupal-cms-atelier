@@ -1,12 +1,6 @@
-# The footer credit is a deliberate override of Nebula's own default, which
-# reads "Built with Acquia Source". `tests/regenerate-components.sh` re-exports
-# this region from a site the CLI has pushed to, so it will revert the text —
-# re-apply the change after regenerating.
 langcode: en
 status: true
 dependencies:
-  config:
-    - canvas.component.js.footer
   theme:
     - nebula_theme
 id: nebula_theme.footer

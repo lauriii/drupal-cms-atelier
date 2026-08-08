@@ -1,1 +1,3 @@
+# Dev-only paths, stripped from the packaged release. Matches what the shipped
+# Drupal CMS site templates export-ignore.
 /tests export-ignore

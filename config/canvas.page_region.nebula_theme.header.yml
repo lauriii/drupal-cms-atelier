@@ -1,10 +1,6 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - canvas.component.js.header
-    - canvas.component.js.logo
-    - canvas.component.js.main_navigation
   theme:
     - nebula_theme
 id: nebula_theme.header
