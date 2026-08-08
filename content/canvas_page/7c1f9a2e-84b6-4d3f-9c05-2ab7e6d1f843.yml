@@ -12,6 +12,14 @@ _meta:
     28568064-0b00-4452-aff7-0cd8eb283b9b: media
     d79f8805-2a7f-4103-bee2-261a8ec416a8: file
     8301d61c-49eb-4272-8af1-0a77311a8ea6: media
+    9d20eadc-5824-454f-87aa-e19ca944ef17: file
+    432024f4-a91a-4139-8eaf-17de8866523e: media
+    11c64db7-6118-4594-82ba-7d6c2459d34f: file
+    eab55613-dc4c-4882-8dd9-8381d2496b9a: media
+    ee811352-7e0d-4f65-babb-f43a21a90a27: file
+    3ce9782e-c734-406e-883f-971c548825f9: media
+    2236d7e4-90e3-404f-a775-da50d24070a9: file
+    346a8d7f-76d0-4d45-b04e-7d9d03599448: media
 default:
   revision_user:
     -
@@ -50,9 +58,15 @@ default:
         variant: solid
         text: 'Edit this page in Canvas'
     -
+      uuid: e2f61a03-7c48-4b95-8d17-4a0b93e7c250
+      component_id: js.spacer
+      inputs:
+        height: large
+    -
       uuid: d5901ba6-4f37-4e82-b70c-2a68e91d4f03
       component_id: js.card_container
       inputs:
+        preHeading: 'The workflow'
         heading: 'How this site works'
         headingElement: h2
         headingSize: large
@@ -104,6 +118,67 @@ default:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 8301d61c-49eb-4272-8af1-0a77311a8ea6
             target_type: media
+    -
+      uuid: b7d4085c-31e9-4f26-a0b8-56c1e94d7f38
+      component_id: js.spacer
+      inputs:
+        height: large
+    -
+      uuid: c60fa192-4d73-4e08-b512-8f37a0d6e4b9
+      component_id: js.card_container
+      inputs:
+        preHeading: 'You are in good company'
+        heading: 'Built with Drupal Canvas'
+        headingElement: h2
+        headingSize: large
+        headingPosition: center_aligned
+        textColor: dark
+        layout: 25-25-25-25
+    -
+      parent_uuid: c60fa192-4d73-4e08-b512-8f37a0d6e4b9
+      slot: content
+      uuid: 0a5c37e8-9b41-4d62-83f7-1e05a4c92b76
+      component_id: js.logo_card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 432024f4-a91a-4139-8eaf-17de8866523e
+            target_type: media
+    -
+      parent_uuid: c60fa192-4d73-4e08-b512-8f37a0d6e4b9
+      slot: content
+      uuid: 5f18b3d0-6e27-4a94-b0c3-97d2e6a41b58
+      component_id: js.logo_card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: eab55613-dc4c-4882-8dd9-8381d2496b9a
+            target_type: media
+    -
+      parent_uuid: c60fa192-4d73-4e08-b512-8f37a0d6e4b9
+      slot: content
+      uuid: 7c93e604-2a58-41bd-9e70-b3f18d05c2a4
+      component_id: js.logo_card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3ce9782e-c734-406e-883f-971c548825f9
+            target_type: media
+    -
+      parent_uuid: c60fa192-4d73-4e08-b512-8f37a0d6e4b9
+      slot: content
+      uuid: 1d47f8b2-05e3-4c96-a8d1-62b409e7f350
+      component_id: js.logo_card
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 346a8d7f-76d0-4d45-b04e-7d9d03599448
+            target_type: media
+    -
+      uuid: 9a02d5f7-8c14-4b3e-a761-0e58d29c4f6b
+      component_id: js.spacer
+      inputs:
+        height: extra_large
   path:
     -
       alias: /home

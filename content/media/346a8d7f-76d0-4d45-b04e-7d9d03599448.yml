@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 346a8d7f-76d0-4d45-b04e-7d9d03599448
+  bundle: image
+  default_langcode: en
+  depends:
+    2236d7e4-90e3-404f-a775-da50d24070a9: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Latticework
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Latticework logo'
+      title: ''
+      width: 560
+      height: 200
+      entity: 2236d7e4-90e3-404f-a775-da50d24070a9

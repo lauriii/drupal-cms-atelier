@@ -93,9 +93,18 @@ check 'default theme' nebula_theme \
 # The shell theme must strip Drupal's own CSS and declare the regions Canvas
 # page regions bind to. `regions:` replaces the default set wholesale, so a
 # missing `content` region silently loses main content and messages.
-check 'shell theme removes system/base CSS' 1 \
+# Drupal's styling CSS is dropped file by file, but `hidden.module.css` is
+# kept: it defines `.visually-hidden`, which core's own skip link relies on.
+# A per-file override silently no-ops if the path does not match
+# system.libraries.yml exactly, so assert the shape as well as the outcome.
+check 'shell theme drops Drupal styling CSS' 4 \
   "$(ev '$t = \Drupal::service("theme_handler")->getTheme("nebula_theme");
-    print (int) (($t->info["libraries-override"]["system/base"] ?? NULL) === FALSE);')"
+    $o = $t->info["libraries-override"]["system/base"]["css"]["component"] ?? [];
+    print count(array_filter($o, fn ($v) => $v === FALSE));')"
+check 'shell theme keeps hidden.module.css' 1 \
+  "$(ev '$t = \Drupal::service("theme_handler")->getTheme("nebula_theme");
+    $o = $t->info["libraries-override"]["system/base"]["css"]["component"] ?? [];
+    print (int) !array_key_exists("css/components/hidden.module.css", $o);')"
 check 'shell theme regions' content,footer,header \
   "$(ev '$t = \Drupal::service("theme_handler")->getTheme("nebula_theme");
     $r = array_keys($t->info["regions"] ?? []); sort($r); print implode(",", $r);')"
@@ -178,7 +187,7 @@ done
 # (CANVAS_ENTITY_REFERENCE), which Canvas remaps to the local serial ID on
 # import — numeric IDs in an exported tree would only work by coincidence.
 # @see \Drupal\canvas\EventSubscriber\DefaultContentSubscriber
-check 'media shipped' 4 \
+check 'media shipped' 8 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
 check 'hero image reference resolved' 1 \
   "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
@@ -195,7 +204,7 @@ check 'hero image reference resolved' 1 \
 # components, both in the main menu.
 check 'main menu links' 2 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name"=>"main"]));')"
-for page in "Home:7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843:/home:6" "About:2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15:/about:3"; do
+for page in "Home:7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843:/home:14" "About:2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15:/about:3"; do
   IFS=: read -r label uuid alias count <<<"$page"
   check "$label page published at $alias" 1 \
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
@@ -245,6 +254,10 @@ if [[ -n "$base_url" ]]; then
   # The imagery actually resolves to a derivative, rather than a broken ref.
   check 'front end renders the shipped imagery' yes \
     "$(grep -qE 'nebula-(hero|card-[123])\.jpg' <<<"$flat" && echo yes || echo no)"
+  check 'front end renders the logo row' yes \
+    "$(grep -qE 'nebula-logo-[1234]\.jpg' <<<"$flat" && echo yes || echo no)"
+  check 'footer credits Drupal CMS' yes \
+    "$(grep -qF 'Powered by Drupal CMS' <<<"$flat" && echo yes || echo no)"
   # Styling comes from the vendored global CSS, and from nothing else: the
   # shell theme contributes no Drupal CSS of its own.
   check 'component CSS on the page' yes \
@@ -254,10 +267,17 @@ if [[ -n "$base_url" ]]; then
   css_href="$(grep -oE 'href="/sites/default/files/css/[^"]*"' <<<"$flat" \
     | head -1 | sed 's/href="//; s/"$//; s/&amp;/\&/g')"
   if [[ -n "$css_href" ]]; then
-    check 'stylesheet carries no Drupal base CSS' yes \
-      "$(curl -sk "$base_url$css_href" | grep -qE '\.clearfix|\.visually-hidden|\.js-hide' && echo no || echo yes)"
+    agg="$(curl -sk "$base_url$css_href")"
+    # Drupal's styling CSS must be gone...
+    check 'stylesheet carries no Drupal styling CSS' yes \
+      "$(grep -qE '\.clearfix|\.js-hide|\.container-inline' <<<"$agg" && echo no || echo yes)"
+    # ...but `.visually-hidden` has to survive, or core's own skip link renders
+    # as visible text at the top of every page.
+    check 'visually-hidden utility kept' yes \
+      "$(grep -qE '\.visually-hidden' <<<"$agg" && echo yes || echo no)"
   else
-    check 'stylesheet carries no Drupal base CSS' yes no
+    check 'stylesheet carries no Drupal styling CSS' yes no
+    check 'visually-hidden utility kept' yes no
   fi
 
 else

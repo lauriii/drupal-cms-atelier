@@ -88,4 +88,7 @@ recipe.write_text(s[:i] + BEGIN + block + '\n' + s[j:])
 print('spliced global CSS into recipe.yml')
 PY
 
+echo
+echo "NOTE: the footer page region carries a deliberate 'Powered by Drupal CMS'"
+echo "      credit that a push overwrites with Nebula's default. Check the diff."
 echo "==> Done. Review the diff, then re-run tests/check.sh."

@@ -94,10 +94,15 @@ load-bearing:
   every region you want must be listed. `content` is not optional:
   `BlockPageVariant` hardcodes it as the fallback for main page content and
   status messages, and omitting it makes both silently disappear.
-- `libraries-override: {system/base: false}` is what actually removes Drupal's
-  own CSS. `libraries-remove` is not a real key — info.yml has no allowlist and
-  no schema, so a wrong key fails silently. Before any push, a page from this
-  template carries zero stylesheets and zero scripts.
+- `libraries-override` on `system/base` is what removes Drupal's own CSS, but
+  it is applied **per file**, not to the whole library. `system/base` bundles
+  five files and one of them, `hidden.module.css`, defines `.visually-hidden`
+  — which core's own skip link depends on. Dropping the library wholesale
+  leaves "Skip to main content" rendering as visible text at the top of every
+  page. The other four are pure styling and are dropped.
+  `libraries-remove` is not a real key, and a per-file override silently
+  no-ops if the path does not match `system.libraries.yml` exactly: info.yml
+  has no allowlist and no schema, so neither mistake reports an error.
 
 **The Nebula components, vendored as config.** All 18 of them, one file each in
 `config/canvas.js_component.*.yml`, plus the header and footer page regions and

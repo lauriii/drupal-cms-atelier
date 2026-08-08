@@ -27,7 +27,16 @@
                         "footer": "Footer"
                     },
                     "libraries-override": {
-                        "system/base": false
+                        "system/base": {
+                            "css": {
+                                "component": {
+                                    "css/components/align.module.css": false,
+                                    "css/components/container-inline.module.css": false,
+                                    "css/components/clearfix.module.css": false,
+                                    "css/components/js.module.css": false
+                                }
+                            }
+                        }
                     }
                 }
             }

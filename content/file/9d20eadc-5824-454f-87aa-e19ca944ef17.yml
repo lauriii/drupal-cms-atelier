@@ -1,24 +1,24 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: ac7e7387-20cb-4e53-b5d4-ee27a6044bea
+  uuid: 9d20eadc-5824-454f-87aa-e19ca944ef17
   default_langcode: en
 default:
   uid:
     -
-      target_id: 1
+      target_id: 0
   filename:
     -
-      value: nebula-card-1.jpg
+      value: nebula-logo-1.jpg
   uri:
     -
-      value: 'public://nebula-card-1.jpg'
+      value: 'public://nebula-logo-1.jpg'
   filemime:
     -
       value: image/jpeg
   filesize:
     -
-      value: 14980
+      value: 7497
   status:
     -
       value: true
