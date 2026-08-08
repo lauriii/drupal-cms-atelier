@@ -125,9 +125,22 @@ names.
 **Pages, so the site is not empty.** Two Canvas pages, both in the main menu,
 both composed from the shipped components:
 
-- **Home** at `/home`, set as the front page — a section with a heading and
-  intro, then a card container with three cards.
+- **Home** at `/home`, set as the front page — a full-bleed hero over a
+  background image, then a card container with three illustrated cards.
 - **About** at `/about`.
+
+The imagery ships too, as `file` and `media` content plus the JPEGs themselves.
+They are generated gradients rather than stock photography, so there is no
+licence attached to anything this template vendors.
+
+Component inputs that reference an entity must be exported, not hand-written.
+Canvas rewrites them to `CANVAS_ENTITY_REFERENCE` with a `target_uuid` on
+export and back to the local serial ID on import; a hand-written numeric
+`target_id` points at whatever media happens to hold that ID on the target
+site. Note also that the input takes the reference at the top level —
+`image: {target_id: N}` — not as a delta list. A delta list validates, renders,
+and exports without the UUID rewrite, so it fails only on another site.
+@see `\Drupal\canvas\EventSubscriber\DefaultContentSubscriber`
 
 Canvas pages rather than nodes: Pathauto would rewrite a node's alias, and a
 node's rich-text body renders unstyled once the components' Tailwind build

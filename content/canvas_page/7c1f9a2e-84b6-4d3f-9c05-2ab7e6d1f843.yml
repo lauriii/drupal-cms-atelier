@@ -1,17 +1,17 @@
-# The home page, composed from the Nebula code components this template ships.
-#
-# A Canvas page rather than a node: Drupal CMS's Pathauto pattern would rewrite
-# a node's alias, and more importantly a node's body is plain rich text, which
-# renders unstyled once the components' Tailwind build resets the page.
-#
-# Every component id and enum value below comes from the vendored
-# `config/canvas.js_component.*.yml`. Canvas validates them on save and drops
-# anything that does not match, so tests/check.sh asserts the tree survived.
 _meta:
   version: '1.0'
   entity_type: canvas_page
   uuid: 7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843
   default_langcode: en
+  depends:
+    87db9406-fc05-462c-b2d0-e5f5f19c72f2: file
+    70e4bf30-d53f-4feb-b97c-0b0074021561: media
+    ac7e7387-20cb-4e53-b5d4-ee27a6044bea: file
+    cadf97ab-02d4-422b-9153-5ccdea888bdd: media
+    c1297353-3896-47f9-b32a-991d5d1805e0: file
+    28568064-0b00-4452-aff7-0cd8eb283b9b: media
+    d79f8805-2a7f-4103-bee2-261a8ec416a8: file
+    8301d61c-49eb-4272-8af1-0a77311a8ea6: media
 default:
   revision_user:
     -
@@ -28,29 +28,27 @@ default:
   components:
     -
       uuid: 3a71c05e-6b28-4d9f-8e14-70c3b25da961
-      component_id: js.section
+      component_id: js.hero
       inputs:
-        width: wide
-    -
-      parent_uuid: 3a71c05e-6b28-4d9f-8e14-70c3b25da961
-      slot: content
-      uuid: 8c24f019-5e7b-4a63-9d80-1f6ae03c7b52
-      component_id: js.heading
-      inputs:
-        heading: 'Your front end lives in code'
+        backgroundImage:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 70e4bf30-d53f-4feb-b97c-0b0074021561
+            target_type: media
+        layout: centered
         headingElement: h1
         headingSize: extra_large
-        textColor: dark
-        layout: center_aligned
+        textColor: light
+        preHeading: 'Drupal Canvas + Nebula'
+        heading: 'Your front end lives in code'
+        text: '<p>Components are authored in React, pushed with the Canvas CLI, and composed into pages by editors — no deploy in between.</p>'
     -
       parent_uuid: 3a71c05e-6b28-4d9f-8e14-70c3b25da961
-      slot: content
-      uuid: b6e83d47-2c10-49af-85b3-d9207fe41c68
-      component_id: js.text
+      slot: buttons
+      uuid: 8c24f019-5e7b-4a63-9d80-1f6ae03c7b52
+      component_id: js.button
       inputs:
-        text: '<p>This site is the backend for a Nebula codebase. Components are authored in React, pushed here with the Canvas CLI, and composed into pages by editors — no deploy in between. This page is built from those components.</p>'
-        textSize: large
-        textColor: dark
+        variant: solid
+        text: 'Edit this page in Canvas'
     -
       uuid: d5901ba6-4f37-4e82-b70c-2a68e91d4f03
       component_id: js.card_container
@@ -72,6 +70,10 @@ default:
         heading: 'Author in your editor'
         headingElement: h3
         text: '<p>Write components as React files, with Tailwind for styling and the Workbench for local preview.</p>'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: cadf97ab-02d4-422b-9153-5ccdea888bdd
+            target_type: media
     -
       parent_uuid: d5901ba6-4f37-4e82-b70c-2a68e91d4f03
       slot: content
@@ -83,6 +85,10 @@ default:
         heading: 'Push with the CLI'
         headingElement: h3
         text: '<p>Run canvas push. Components, pages, global regions and content templates sync over an authenticated API.</p>'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 28568064-0b00-4452-aff7-0cd8eb283b9b
+            target_type: media
     -
       parent_uuid: d5901ba6-4f37-4e82-b70c-2a68e91d4f03
       slot: content
@@ -94,6 +100,10 @@ default:
         heading: 'Compose in Canvas'
         headingElement: h3
         text: '<p>Editors build pages from your components in the Canvas UI, without touching the codebase.</p>'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 8301d61c-49eb-4272-8af1-0a77311a8ea6
+            target_type: media
   path:
     -
       alias: /home
@@ -101,3 +111,6 @@ default:
   revision_translation_affected:
     -
       value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

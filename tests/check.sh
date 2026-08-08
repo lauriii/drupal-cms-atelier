@@ -173,11 +173,29 @@ for region in header footer; do
       print (int) (\$r && \$r->status() && count(\$r->get('component_tree')) > 0);")"
 done
 
+# Imagery, shipped as file + media content so the pages have something to show
+# on a fresh install. The component inputs reference media by UUID
+# (CANVAS_ENTITY_REFERENCE), which Canvas remaps to the local serial ID on
+# import — numeric IDs in an exported tree would only work by coincidence.
+# @see \Drupal\canvas\EventSubscriber\DefaultContentSubscriber
+check 'media shipped' 4 \
+  "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
+check 'hero image reference resolved' 1 \
+  "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843");
+    foreach ($p?->getComponentTree() ?? [] as $i) {
+      if ($i->getComponentId() === "js.hero") {
+        $ref = $i->getInputs()["backgroundImage"]["target_id"] ?? NULL;
+        print (int) ($ref && \Drupal::entityTypeManager()->getStorage("media")->load($ref));
+        return;
+      }
+    }
+    print 0;')"
+
 # Default content: a home page and an About page, both composed from those
 # components, both in the main menu.
 check 'main menu links' 2 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name"=>"main"]));')"
-for page in "Home:7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843:/home:7" "About:2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15:/about:3"; do
+for page in "Home:7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843:/home:6" "About:2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15:/about:3"; do
   IFS=: read -r label uuid alias count <<<"$page"
   check "$label page published at $alias" 1 \
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
@@ -224,6 +242,9 @@ if [[ -n "$base_url" ]]; then
   # hydrated client-side, so count those rather than looking for prose.
   check 'front end renders Canvas components' yes \
     "$(grep -qE '<canvas-island' <<<"$flat" && echo yes || echo no)"
+  # The imagery actually resolves to a derivative, rather than a broken ref.
+  check 'front end renders the shipped imagery' yes \
+    "$(grep -qE 'nebula-(hero|card-[123])\.jpg' <<<"$flat" && echo yes || echo no)"
   # Styling comes from the vendored global CSS, and from nothing else: the
   # shell theme contributes no Drupal CSS of its own.
   check 'component CSS on the page' yes \
