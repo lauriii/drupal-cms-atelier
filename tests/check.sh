@@ -160,22 +160,34 @@ check 'image media type' 1 \
   "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("media_type")->load("image");')"
 check 'cms_content search index' 1 \
   "$(ev 'print (int) (bool) \Drupal::entityTypeManager()->getStorage("search_api_index")->load("cms_content");')"
-# Default content: a home page and an About page, both in the main menu.
+# The vendored snapshot of the Nebula code components. Without these the site
+# has no front end of its own until someone runs `canvas push`.
+# @see tests/regenerate-components.sh
+check 'code components shipped' 18 \
+  "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple());')"
+check 'global CSS applied' 1 \
+  "$(ev 'print (int) str_contains(\Drupal::config("canvas.asset_library.global")->get("css.compiled") ?? "", "tailwindcss");')"
+for region in header footer; do
+  check "page region nebula_theme.$region" 1 \
+    "$(ev "\$r = \Drupal::entityTypeManager()->getStorage('page_region')->load('nebula_theme.$region');
+      print (int) (\$r && \$r->status() && count(\$r->get('component_tree')) > 0);")"
+done
+
+# Default content: a home page and an About page, both composed from those
+# components, both in the main menu.
 check 'main menu links' 2 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name"=>"main"]));')"
-check 'About page exists and is published' 1 \
-  "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15");
-    print (int) ($n && $n->isPublished() && $n->bundle() === "page");')"
-# Pathauto generates this from the title; nothing in the recipe hard-codes it.
-check 'About page alias' /about \
-  "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15");
-    print $n ? \Drupal::service("path_alias.manager")->getAliasByPath("/node/" . $n->id()) : "";')"
-check 'Home page exists and is published' 1 \
-  "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "4d81a3f6-9b52-4e07-a1c8-6e2f0b73d59a");
-    print (int) ($n && $n->isPublished() && $n->bundle() === "page");')"
-check 'Home page alias' /home \
-  "$(ev '$n = \Drupal::service("entity.repository")->loadEntityByUuid("node", "4d81a3f6-9b52-4e07-a1c8-6e2f0b73d59a");
-    print $n ? \Drupal::service("path_alias.manager")->getAliasByPath("/node/" . $n->id()) : "";')"
+for page in "Home:7c1f9a2e-84b6-4d3f-9c05-2ab7e6d1f843:/home:7" "About:2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15:/about:3"; do
+  IFS=: read -r label uuid alias count <<<"$page"
+  check "$label page published at $alias" 1 \
+    "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
+      print (int) (\$p && \$p->isPublished() && \$p->get('path')->alias === '$alias');")"
+  # Canvas drops tree items whose component id or enum values do not validate,
+  # so a wrong value shows up as a short tree rather than an error.
+  check "$label page component tree intact" "$count" \
+    "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
+      print \$p ? iterator_count(\$p->getComponentTree()) : 0;")"
+done
 
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \
@@ -208,19 +220,25 @@ if [[ -n "$base_url" ]]; then
       "$(grep -qF "\"title\":\"$item\"" <<<"$menu_json" && echo yes || echo no)"
   done
 
-  # Content, not just a status code: a page that renders nothing still 200s.
-  for phrase in 'Your front end lives in code' 'blank shell on purpose'; do
-    check "front end renders '$phrase'" yes \
-      "$(grep -qF "$phrase" <<<"$flat" && echo yes || echo no)"
-  done
+  # The components render. Their markup is a `canvas-island` per component,
+  # hydrated client-side, so count those rather than looking for prose.
+  check 'front end renders Canvas components' yes \
+    "$(grep -qE '<canvas-island' <<<"$flat" && echo yes || echo no)"
+  # Styling comes from the vendored global CSS, and from nothing else: the
+  # shell theme contributes no Drupal CSS of its own.
+  check 'component CSS on the page' yes \
+    "$(grep -qE '<link[^>]*rel="stylesheet"' <<<"$flat" && echo yes || echo no)"
+  # Drupal aggregates every stylesheet into one file, so a path check proves
+  # nothing — fetch the aggregate and look for core's own base CSS in it.
+  css_href="$(grep -oE 'href="/sites/default/files/css/[^"]*"' <<<"$flat" \
+    | head -1 | sed 's/href="//; s/"$//; s/&amp;/\&/g')"
+  if [[ -n "$css_href" ]]; then
+    check 'stylesheet carries no Drupal base CSS' yes \
+      "$(curl -sk "$base_url$css_href" | grep -qE '\.clearfix|\.visually-hidden|\.js-hide' && echo no || echo yes)"
+  else
+    check 'stylesheet carries no Drupal base CSS' yes no
+  fi
 
-  # The whole point of the shell theme. Before anything is pushed, Drupal
-  # contributes no CSS and no JS at all; the only assets on a paired site are
-  # the ones the components bring.
-  check 'no stylesheets on the page' yes \
-    "$(grep -qE '<link[^>]*rel="stylesheet"' <<<"$flat" && echo no || echo yes)"
-  check 'no scripts on the page' yes \
-    "$(grep -qE '<script[^>]*src=' <<<"$flat" && echo no || echo yes)"
 else
   echo "  skip  HTTP checks (set SITE_URL to enable)"
 fi

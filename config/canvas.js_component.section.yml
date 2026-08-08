@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: section
+name: Section
+props:
+  width:
+    type: string
+    enum:
+      - normal
+      - wide
+    'meta:enum':
+      normal: Normal
+      wide: Wide
+    title: Width
+    examples:
+      - normal
+required:
+  - width
+slots:
+  content:
+    title: Content
+js:
+  original: "import { cva } from 'class-variance-authority';\n\nconst sectionVariants = cva('m-auto my-8 px-4', {\n  variants: {\n    width: {\n      normal: 'max-w-2xl',\n      wide: 'max-w-4xl',\n    },\n  },\n});\n\nconst Section = ({ width, content }) => {\n  return <div className={sectionVariants({ width })}>{content}</div>;\n};\n\nexport default Section;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nconst sectionVariants = cva(\"m-auto my-8 px-4\", {\n  variants: {\n    width: {\n      normal: \"max-w-2xl\",\n      wide: \"max-w-4xl\"\n    }\n  }\n});\nconst Section = ({ width, content }) => {\n  return /* @__PURE__ */ jsx(\"div\", { className: sectionVariants({ width }), children: content });\n};\nexport {\n  Section as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

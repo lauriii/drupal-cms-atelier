@@ -1,0 +1,52 @@
+# The About page. @see the home page for why these are Canvas pages.
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 2b5e91d7-3c48-4f6a-8e21-9d0c7b4a3f15
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: About
+  components:
+    -
+      uuid: 6d3b8f21-04ae-4759-b1c6-92e05a7d3f48
+      component_id: js.section
+      inputs:
+        width: normal
+    -
+      parent_uuid: 6d3b8f21-04ae-4759-b1c6-92e05a7d3f48
+      slot: content
+      uuid: c8125e60-3f74-4a9d-86b2-15e7d049a3c1
+      component_id: js.heading
+      inputs:
+        heading: 'About this site'
+        headingElement: h1
+        headingSize: large
+        textColor: dark
+        layout: left_aligned
+    -
+      parent_uuid: 6d3b8f21-04ae-4759-b1c6-92e05a7d3f48
+      slot: content
+      uuid: 5a90e2c7-8b13-4f06-9d47-3e18c6b05fa2
+      component_id: js.text
+      inputs:
+        text: '<p>This site pairs with a <strong>Nebula</strong> codebase. The components it renders are authored there as React files and pushed here with the Drupal Canvas CLI. Editors then compose pages from them in Canvas, the same way this page was composed.</p><p>The theme is a blank shell: no CSS, no templates, no components of its own. Everything you see is either Drupal content or a pushed component, so there is no Drupal design system competing with your own.</p><p>Replace this page with something of your own — it exists so a freshly installed site has more than a home page.</p>'
+        textSize: normal
+        textColor: dark
+  path:
+    -
+      alias: /about
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

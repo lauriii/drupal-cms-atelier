@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: grid_container
+name: 'Grid container'
+props:
+  layout:
+    type: string
+    enum:
+      - 50-50
+      - 33-33-33
+      - 75-25
+      - 25-75
+      - 67-33
+      - 33-67
+      - 50-25-25
+      - 25-25-50
+      - 25-25-25-25
+    'meta:enum':
+      50-50: 50-50
+      33-33-33: 33-33-33
+      75-25: 75-25
+      25-75: 25-75
+      67-33: 67-33
+      33-67: 33-67
+      50-25-25: 50-25-25
+      25-25-50: 25-25-50
+      25-25-25-25: 25-25-25-25
+    title: Layout
+    examples:
+      - 33-33-33
+  gap:
+    type: string
+    enum:
+      - extra_small
+      - small
+      - medium
+      - large
+      - extra_large
+    'meta:enum':
+      extra_small: 'Extra Small'
+      small: Small
+      medium: Medium
+      large: Large
+      extra_large: 'Extra Large'
+    title: Gap
+    examples:
+      - medium
+required:
+  - layout
+slots:
+  content:
+    title: Content
+js:
+  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\nconst gridVariants = cva('grid w-full', {\n  variants: {\n    layout: {\n      '50-50': 'md:grid-cols-[1fr_1fr]',\n      '33-33-33': 'md:grid-cols-[1fr_1fr_1fr]',\n      '75-25': 'md:grid-cols-[3fr_1fr]',\n      '25-75': 'md:grid-cols-[1fr_3fr]',\n      '67-33': 'md:grid-cols-[2fr_1fr]',\n      '33-67': 'md:grid-cols-[1fr_2fr]',\n      '50-25-25': 'md:grid-cols-[2fr_1fr_1fr]',\n      '25-25-50': 'md:grid-cols-[1fr_1fr_2fr]',\n      '25-25-25-25': 'sm:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr]',\n    },\n    gap: {\n      extra_small: 'gap-1',\n      small: 'gap-2',\n      medium: 'gap-4',\n      large: 'gap-6',\n      extra_large: 'gap-8',\n    },\n  },\n  defaultVariants: {\n    gap: 'medium',\n    layout: '33-33-33',\n  },\n});\n\nconst GridContainer = ({ layout, gap, className, content, ...props }) => {\n  return (\n    <div className=\"mx-auto w-full max-w-[1360px] px-6\">\n      <div\n        className={cn(gridVariants({ layout, gap, className }), className)}\n        {...props}\n      >\n        {content}\n      </div>\n    </div>\n  );\n};\nexport default GridContainer;\n"
+  compiled: "var __defProp = Object.defineProperty;\nvar __defProps = Object.defineProperties;\nvar __getOwnPropDescs = Object.getOwnPropertyDescriptors;\nvar __getOwnPropSymbols = Object.getOwnPropertySymbols;\nvar __hasOwnProp = Object.prototype.hasOwnProperty;\nvar __propIsEnum = Object.prototype.propertyIsEnumerable;\nvar __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;\nvar __spreadValues = (a, b) => {\n  for (var prop in b || (b = {}))\n    if (__hasOwnProp.call(b, prop))\n      __defNormalProp(a, prop, b[prop]);\n  if (__getOwnPropSymbols)\n    for (var prop of __getOwnPropSymbols(b)) {\n      if (__propIsEnum.call(b, prop))\n        __defNormalProp(a, prop, b[prop]);\n    }\n  return a;\n};\nvar __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));\nvar __objRest = (source, exclude) => {\n  var target = {};\n  for (var prop in source)\n    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)\n      target[prop] = source[prop];\n  if (source != null && __getOwnPropSymbols)\n    for (var prop of __getOwnPropSymbols(source)) {\n      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))\n        target[prop] = source[prop];\n    }\n  return target;\n};\nimport { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst gridVariants = cva(\"grid w-full\", {\n  variants: {\n    layout: {\n      \"50-50\": \"md:grid-cols-[1fr_1fr]\",\n      \"33-33-33\": \"md:grid-cols-[1fr_1fr_1fr]\",\n      \"75-25\": \"md:grid-cols-[3fr_1fr]\",\n      \"25-75\": \"md:grid-cols-[1fr_3fr]\",\n      \"67-33\": \"md:grid-cols-[2fr_1fr]\",\n      \"33-67\": \"md:grid-cols-[1fr_2fr]\",\n      \"50-25-25\": \"md:grid-cols-[2fr_1fr_1fr]\",\n      \"25-25-50\": \"md:grid-cols-[1fr_1fr_2fr]\",\n      \"25-25-25-25\": \"sm:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_1fr]\"\n    },\n    gap: {\n      extra_small: \"gap-1\",\n      small: \"gap-2\",\n      medium: \"gap-4\",\n      large: \"gap-6\",\n      extra_large: \"gap-8\"\n    }\n  },\n  defaultVariants: {\n    gap: \"medium\",\n    layout: \"33-33-33\"\n  }\n});\nconst GridContainer = (_a) => {\n  var _b = _a, { layout, gap, className, content } = _b, props = __objRest(_b, [\"layout\", \"gap\", \"className\", \"content\"]);\n  return /* @__PURE__ */ jsx(\"div\", { className: \"mx-auto w-full max-w-[1360px] px-6\", children: /* @__PURE__ */ jsx(\n    \"div\",\n    __spreadProps(__spreadValues({\n      className: cn(gridVariants({ layout, gap, className }), className)\n    }, props), {\n      children: content\n    })\n  ) });\n};\nexport {\n  GridContainer as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

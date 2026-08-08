@@ -1,0 +1,107 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    config:
+      - canvas.js_component.two_column_text
+machineName: hero
+name: Hero
+props:
+  backgroundImage:
+    type: object
+    $ref: 'json-schema-definitions://canvas.module/image'
+    title: 'Background Image'
+    examples:
+      -
+        src: 'https://placehold.co/1920x1080@2x.png'
+        alt: 'Example image placeholder'
+        width: 1920
+        height: 1080
+  layout:
+    type: string
+    enum:
+      - left_aligned
+      - centered
+    'meta:enum':
+      left_aligned: 'Left aligned'
+      centered: Centered
+    title: Layout
+    examples:
+      - left_aligned
+  preHeading:
+    type: string
+    title: 'Pre Heading'
+    examples:
+      - Mission
+  headingElement:
+    type: string
+    enum:
+      - h1
+      - h2
+      - h3
+      - h4
+      - h5
+      - h6
+    'meta:enum':
+      h1: h1
+      h2: h2
+      h3: h3
+      h4: h4
+      h5: h5
+      h6: h6
+    title: 'Heading Element'
+    examples:
+      - h2
+  headingSize:
+    type: string
+    enum:
+      - extra_large
+      - large
+      - medium
+      - small
+    'meta:enum':
+      extra_large: 'Extra Large'
+      large: Large
+      medium: Medium
+      small: Small
+    title: 'Heading Size'
+    examples:
+      - extra_large
+  heading:
+    type: string
+    title: Heading
+    examples:
+      - 'This space deserves a hero.'
+  text:
+    type: string
+    contentMediaType: text/html
+    x-formatting-context: block
+    title: Text
+    examples:
+      - 'This is a space to welcome visitors to the site. Grab their attention with copy that clearly states what the site is about.'
+  textColor:
+    type: string
+    enum:
+      - dark
+      - light
+    'meta:enum':
+      dark: Dark
+      light: Light
+    title: 'Text Color'
+    examples:
+      - dark
+required:
+  - backgroundImage
+  - layout
+  - headingSize
+  - textColor
+slots:
+  buttons:
+    title: Buttons
+js:
+  original: "import TwoColumnText from '@/components/two_column_text';\nimport { cva } from 'class-variance-authority';\n\nconst backgroundVariants = cva('align-center h-full w-full px-8 py-16', {\n  variants: {\n    darkenImage: {\n      false: null,\n      true: 'backdrop-brightness-75',\n    },\n  },\n});\n\nconst Hero = ({\n  layout,\n  preHeading,\n  heading,\n  headingElement,\n  headingSize = 'large',\n  text,\n  textColor = 'dark',\n  buttons,\n  backgroundImage,\n  darkenImage,\n}) => {\n  const backgroundImageUrl = backgroundImage?.src\n    ? `url(${backgroundImage.src})`\n    : undefined;\n\n  return (\n    <div\n      className=\"flex min-h-[672px] w-full justify-start bg-cover bg-center bg-no-repeat\"\n      style={\n        backgroundImageUrl ? { backgroundImage: backgroundImageUrl } : undefined\n      }\n    >\n      <div className={backgroundVariants({ darkenImage })}>\n        <TwoColumnText\n          heading={heading}\n          headingElement={headingElement}\n          headingSize={headingSize}\n          layout={layout}\n          preHeading={preHeading}\n          text={text}\n          textColor={textColor}\n          buttons={buttons}\n          textShadow=\"medium\"\n        />\n      </div>\n    </div>\n  );\n};\n\nexport default Hero;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport TwoColumnText from \"@/components/two_column_text\";\nimport { cva } from \"class-variance-authority\";\nconst backgroundVariants = cva(\"align-center h-full w-full px-8 py-16\", {\n  variants: {\n    darkenImage: {\n      false: null,\n      true: \"backdrop-brightness-75\"\n    }\n  }\n});\nconst Hero = ({\n  layout,\n  preHeading,\n  heading,\n  headingElement,\n  headingSize = \"large\",\n  text,\n  textColor = \"dark\",\n  buttons,\n  backgroundImage,\n  darkenImage\n}) => {\n  const backgroundImageUrl = (backgroundImage == null ? void 0 : backgroundImage.src) ? `url(${backgroundImage.src})` : void 0;\n  return /* @__PURE__ */ jsx(\n    \"div\",\n    {\n      className: \"flex min-h-[672px] w-full justify-start bg-cover bg-center bg-no-repeat\",\n      style: backgroundImageUrl ? { backgroundImage: backgroundImageUrl } : void 0,\n      children: /* @__PURE__ */ jsx(\"div\", { className: backgroundVariants({ darkenImage }), children: /* @__PURE__ */ jsx(\n        TwoColumnText,\n        {\n          heading,\n          headingElement,\n          headingSize,\n          layout,\n          preHeading,\n          text,\n          textColor,\n          buttons,\n          textShadow: \"medium\"\n        }\n      ) })\n    }\n  );\n};\nexport {\n  Hero as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

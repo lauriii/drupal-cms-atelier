@@ -99,22 +99,39 @@ load-bearing:
   no schema, so a wrong key fails silently. Before any push, a page from this
   template carries zero stylesheets and zero scripts.
 
-The template ships **no page regions**. `canvas push` creates them, bound to
-whichever theme is active, from your `regions/*.json`.
+**The Nebula components, vendored as config.** All 18 of them, one file each in
+`config/canvas.js_component.*.yml`, plus the header and footer page regions and
+the Tailwind build they are styled with. A freshly installed site therefore has
+a working, styled front end before anyone runs `canvas push` — it is not a
+backend waiting to be filled in.
 
-**Pages, so the site is not empty.** Two of them, both in the main menu, both
-ordinary `page` nodes with rich text:
+That snapshot is generated, not hand-written: `tests/regenerate-components.sh`
+re-exports it from a site you have pushed to. Run it whenever the paired
+codebase changes, then review the diff.
 
-- **Home**, set as the front page.
-- **About**.
+The global CSS is applied as a `setProperties` config action rather than a
+shipped config file. `canvas.asset_library.global` already exists by the time
+this recipe's config is imported — the base recipe creates it when it installs
+Canvas — and a non-strict recipe only imports config that does not exist yet.
+@see `\Drupal\Core\Recipe\ConfigConfigurator::getConfigStorage()`
 
-They are content rather than component-built pages on purpose. A Canvas
-component tree can only reference components that already exist, and here every
-component arrives later via `canvas push`. A template shipping a component-built
-page would have to vendor a copy of your components as config — duplicating the
-codebase it pairs with — or ship a page that cannot render on a fresh install.
-So the shipped pages are plain content, and the component-built front end is
-what you push on top of them.
+Setting `strict` to a list looks like a way around that and is a trap: a
+non-empty list is truthy, so core returns the entire recipe storage and
+overwrites *every* pre-existing config the recipe touches, not just the listed
+names.
+
+`canvas push` replaces all of it with whatever is in your codebase.
+
+**Pages, so the site is not empty.** Two Canvas pages, both in the main menu,
+both composed from the shipped components:
+
+- **Home** at `/home`, set as the front page — a section with a heading and
+  intro, then a card container with three cards.
+- **About** at `/about`.
+
+Canvas pages rather than nodes: Pathauto would rewrite a node's alias, and a
+node's rich-text body renders unstyled once the components' Tailwind build
+resets the page.
 
 The menu is what Nebula's `main_navigation` component consumes, over
 `/jsonapi/menu_items/main`. There is deliberately no server-rendered navigation:
