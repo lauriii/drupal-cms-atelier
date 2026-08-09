@@ -80,7 +80,7 @@ default:
         title: 'Recent seating'
         align: left
         level: h2
-        lede: 'Chairs are most of what we make. These three are from the last eighteen months.'
+        lede: 'Chairs are most of what we make. These two are from the last eighteen months.'
     -
       parent_uuid: 2f81adef-0010-4a00-8000-000000000010
       slot: content
@@ -111,7 +111,7 @@ default:
       component_id: js.figure
       inputs:
         title: 'Stacking chair'
-        caption: 'Ash, stacking six high. The back rail is one steam-bent piece.'
+        caption: 'Oak, stacking six high. The back is a pressed shell, screwed to the frame so a damaged one can be replaced.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 3587db33-00d2-4295-811e-7d7de53ce915

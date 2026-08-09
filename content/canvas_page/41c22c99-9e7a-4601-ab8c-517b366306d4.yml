@@ -80,10 +80,10 @@ default:
             target_uuid: 69d70d3f-4fff-43f0-a8f7-39740a352758
             target_type: media
         ratio: wide
-        sheet: Workshop
         title: 'Sanding a plank'
         caption: 'Everything is made here. Two of us have been doing it for fifteen years and still measure twice.'
         level: h3
+        availability: 'Commissions open'
     -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005
       component_id: js.section
