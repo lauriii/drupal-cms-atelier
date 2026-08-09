@@ -82,7 +82,7 @@ default:
         title: 'Recent seating'
         align: left
         level: h2
-        lede: 'Chairs are most of what leaves the workshop, and none of it is seen again, so we photograph it before it goes.'
+        lede: 'Chairs are most of what we make. These three are from the last eighteen months.'
     -
       parent_uuid: 2f81adef-0010-4a00-8000-000000000010
       slot: content
@@ -149,7 +149,7 @@ default:
       inputs:
         eyebrow: 'What we do'
         title: 'What we make'
-        lede: 'Three things, and we turn down the rest.'
+        lede: 'Commissions, small runs, restoration.'
         align: left
         level: h2
     -
@@ -285,7 +285,7 @@ default:
       uuid: 57df8c21-0026-4a00-8000-000000000026
       component_id: js.testimonial
       inputs:
-        quote: "They asked better questions than our architect did, and the table hasn't moved a millimetre since it arrived."
+        quote: 'They asked better questions than our architect did. We have eaten off it every day since.'
         name: 'Marta Oyelaran'
         role: 'Dining table, Winchester'
     -
@@ -303,7 +303,7 @@ default:
       component_id: js.cta
       inputs:
         title: 'Start with a photograph'
-        lede: 'A photograph of the room and a rough size is enough for us to draw something. The drawing is yours either way.'
+        lede: 'Send a photograph of the room and a rough size. We will draw something and quote it.'
     -
       parent_uuid: b9d1ed0d-0028-4a00-8000-000000000028
       slot: content

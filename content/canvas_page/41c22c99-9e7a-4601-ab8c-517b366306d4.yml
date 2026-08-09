@@ -23,7 +23,7 @@ default:
       inputs:
         eyebrow: 'The studio'
         title: 'What we are for'
-        lede: "We started in 2009 in a rented bay behind a car repair shop in Petersfield. We're still in Petersfield, in a better building."
+        lede: 'We started in 2009 in a rented bay behind a car repair shop. Six of us now, in a better building on the same road.'
     -
       parent_uuid: 7f2a1c33-0001-4a00-8000-000000000001
       slot: content
@@ -59,7 +59,7 @@ default:
       inputs:
         eyebrow: ''
         title: 'How a commission goes'
-        lede: 'Three steps, in this order, every time. Nothing is made before the second one is signed off.'
+        lede: 'Three steps, in this order. Nothing is cut until the drawing and the price are both agreed.'
         align: left
         level: h2
     -
@@ -89,7 +89,7 @@ default:
       inputs:
         marker: '2'
         title: 'We draw it and price it'
-        text: 'A dimensioned drawing and a fixed price, inside two weeks. Both are yours to keep whether or not you go ahead.'
+        text: 'A dimensioned drawing and a fixed price, inside two weeks. The drawing is yours to keep.'
         framed: false
         level: h3
     -
@@ -140,7 +140,7 @@ default:
       uuid: 7f2a1c33-0014-4a00-8000-000000000014
       component_id: js.testimonial
       inputs:
-        quote: 'Four years on I have stopped noticing it, which I think is the point.'
+        quote: 'It came on a Tuesday and two of them carried it up a staircase I would not have attempted. Not a mark on the wall.'
         name: 'Ruth Okafor'
         role: 'Kitchen table, Alton'
         avatar: ''

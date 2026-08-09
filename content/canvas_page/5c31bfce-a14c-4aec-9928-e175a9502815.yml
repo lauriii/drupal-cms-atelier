@@ -20,7 +20,7 @@ default:
       inputs:
         eyebrow: Contact
         title: 'Come and see the workshop'
-        lede: "We'd rather talk about a piece standing next to the timber. Email works too."
+        lede: 'The workshop is open Tuesday to Friday. Come and stand next to the timber before you decide anything.'
     -
       uuid: 5d6e8a91-0019-4a00-8000-000000000019
       component_id: js.section
@@ -67,7 +67,7 @@ default:
       inputs:
         marker: ''
         title: 'How to reach us'
-        text: '<a href="mailto:studio@atelier.example">studio@atelier.example</a>, or <a href="tel:+441730000000">01730 000 000</a>. Email is read twice a day; the phone is answered when someone is near it.'
+        text: '<a href="mailto:studio@atelier.example">studio@atelier.example</a>, or <a href="tel:+441730000000">01730 000 000</a>. Email is read twice a day.'
         framed: false
         level: h2
     -
@@ -85,7 +85,7 @@ default:
       component_id: js.cta
       inputs:
         title: 'Tell us what the piece has to do'
-        lede: 'We answer every enquiry, including the ones we turn down.'
+        lede: 'We reply to everything within a week.'
     -
       parent_uuid: 5d6e8a91-0025-4a00-8000-000000000025
       slot: content
