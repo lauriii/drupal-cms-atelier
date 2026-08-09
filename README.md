@@ -178,6 +178,23 @@ including commercially and without permission. Attribution is not required by
 the licence but is asked for, so it is given here — and if you keep this
 template's demo content on a public site, keep this table with it:
 
+Photographs are measured, not chosen by eye. `tests/lib/measure-images.py`
+reports mean luminance, mean saturation and a saturation-weighted circular
+mean hue for everything in `content/file/`, and `tests/lib/source-images.py`
+searches Unsplash and returns only candidates already inside the band.
+
+The band -- luminance 62-118, saturation 0.22-0.48, hue 18-46 -- is empirical.
+Warm workshop interiors land there on their own, and wood keeps the hue narrow
+without being asked. An image outside it is not necessarily a bad picture; it
+is necessarily a different picture from the rest, which is what reads on a
+page holding six of them.
+
+**The shipped set does not meet its own brief: 9 of 27.** That is recorded
+here rather than hidden because it is the largest outstanding piece of work in
+this template, and because a measure script that fails on the day it ships
+teaches everyone to ignore it. Replace these photographs with real ones of
+real work, measure them, and the number takes care of itself.
+
 The photographs shipped in `content/file/` are from Unsplash, used under the
 Unsplash License. The set is:
 
