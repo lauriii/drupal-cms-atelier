@@ -12,6 +12,7 @@ props:
   lede:
     type: string
     title: Lede
+    description: 'One sentence on what happens after they act. Put the buttons in the slot below.'
     examples:
       - 'Install it, point your codebase at it, and push.'
 required:
@@ -20,8 +21,8 @@ slots:
   content:
     title: Actions
 js:
-  original: "/** Call to action — the closing band. */\nconst Cta = ({ title, lede, content }) => (\n  <div className=\"border-y border-hairline bg-wash px-6 py-24 md:px-10 md:py-28\">\n    <div className=\"mx-auto max-w-[42rem] text-center\">\n      <h2 className=\"font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-light leading-[1.05] text-balance\">\n        {title}\n      </h2>\n      {lede ? (\n        <p className=\"mx-auto mt-6 max-w-[34rem] text-[1.0625rem] leading-[1.7] text-ink-muted text-pretty\">\n          {lede}\n        </p>\n      ) : null}\n      <div className=\"mt-10 flex flex-wrap justify-center gap-6\">{content}</div>\n    </div>\n  </div>\n);\n\nexport default Cta;\n"
-  compiled: "import { jsx, jsxs } from \"react/jsx-runtime\";\nconst Cta = ({ title, lede, content }) => /* @__PURE__ */ jsx(\"div\", { className: \"border-y border-hairline bg-wash px-6 py-24 md:px-10 md:py-28\", children: /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto max-w-[42rem] text-center\", children: [\n  /* @__PURE__ */ jsx(\"h2\", { className: \"font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-light leading-[1.05] text-balance\", children: title }),\n  lede ? /* @__PURE__ */ jsx(\"p\", { className: \"mx-auto mt-6 max-w-[34rem] text-[1.0625rem] leading-[1.7] text-ink-muted text-pretty\", children: lede }) : null,\n  /* @__PURE__ */ jsx(\"div\", { className: \"mt-10 flex flex-wrap justify-center gap-6\", children: content })\n] }) });\nexport {\n  Cta as default\n};\n"
+  original: "/**\n * Call to action — the closing ask.\n *\n * Deliberately owns no background, border or page padding: the Section it sits\n * in supplies the band. A component that brings its own ground ends up drawing\n * a wash card on a wash band, with its borders floating free of the edges.\n */\nconst Cta = ({ title, lede, content }) => (\n  <div className=\"mx-auto max-w-intro text-center\">\n    <h2 className=\"font-display tracking-display text-[clamp(2.25rem,4.6vw,3.5rem)] leading-[1.05] font-light text-balance\">\n      {title}\n    </h2>\n    {lede ? (\n      <p className=\"text-[length:var(--text-body)] text-ink mx-auto mt-6 max-w-[34rem] leading-[1.7] text-pretty\">\n        {lede}\n      </p>\n    ) : null}\n    {content ? (\n      <div className=\"mt-10 flex flex-wrap justify-center gap-6\">{content}</div>\n    ) : null}\n  </div>\n);\n\nexport default Cta;\n"
+  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nconst Cta = ({ title, lede, content }) => /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto max-w-intro text-center\", children: [\n  /* @__PURE__ */ jsx(\"h2\", { className: \"font-display tracking-display text-[clamp(2.25rem,4.6vw,3.5rem)] leading-[1.05] font-light text-balance\", children: title }),\n  lede ? /* @__PURE__ */ jsx(\"p\", { className: \"text-[length:var(--text-body)] text-ink mx-auto mt-6 max-w-[34rem] leading-[1.7] text-pretty\", children: lede }) : null,\n  content ? /* @__PURE__ */ jsx(\"div\", { className: \"mt-10 flex flex-wrap justify-center gap-6\", children: content }) : null\n] });\nexport {\n  Cta as default\n};\n"
 css:
   original: ''
   compiled: ''

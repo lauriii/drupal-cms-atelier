@@ -12,8 +12,8 @@ props:
   url:
     type: string
     format: uri-reference
-    title: Url
-    description: 'Leave empty to render a plain button.'
+    title: URL
+    description: 'Where the button goes. Leave empty to render a plain button, for use in a form.'
     examples:
       - /about
   variant:
@@ -22,15 +22,14 @@ props:
       - solid
       - secondary
       - outline
-      - ghost
       - link
     'meta:enum':
       solid: Solid
       secondary: Secondary
       outline: Outline
-      ghost: Ghost
-      link: Link
+      link: 'Text link'
     title: Variant
+    description: 'Solid for the main action on a page, outline or secondary for the one beside it, text link for anything quieter.'
     examples:
       - solid
   size:
@@ -49,6 +48,7 @@ props:
   fullWidth:
     type: boolean
     title: 'Full width'
+    description: 'Stretches the button to fill its column. Useful on narrow screens.'
     examples:
       - false
 required:
@@ -57,8 +57,8 @@ required:
   - size
 slots: {  }
 js:
-  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\n/**\n * Button — the shadcn/ui pattern, with Atelier's tokens.\n *\n * Renders an anchor when given a URL and a button otherwise, so a call to\n * action and a form control share one component without lying about semantics.\n */\nconst button = cva(\n  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-medium ' +\n    'transition-colors duration-150 disabled:pointer-events-none disabled:opacity-50 ' +\n    'rounded-full',\n  {\n    variants: {\n      variant: {\n        solid: 'bg-ink text-paper hover:opacity-80',\n        secondary: 'bg-wash text-ink hover:bg-hairline',\n        outline: 'border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper',\n        ghost: 'bg-transparent text-ink underline underline-offset-[6px] decoration-hairline hover:decoration-ink px-0',\n        link: 'bg-transparent text-ink underline underline-offset-[6px] decoration-hairline hover:decoration-ink px-0',\n      },\n      size: {\n        sm: 'h-10 px-5 text-[0.9375rem]',\n        md: 'h-12 px-6 text-[1rem]',\n        lg: 'h-14 px-8 text-[1.0625rem]',\n      },\n    },\n    defaultVariants: { variant: 'solid', size: 'md' },\n  },\n);\n\nconst Button = ({ label, url, variant, size, fullWidth }) => {\n  const className = cn(button({ variant, size }), fullWidth && 'w-full');\n  if (url) {\n    return (\n      <a href={url} className={className}>\n        {label}\n      </a>\n    );\n  }\n  return (\n    <button type=\"button\" className={className}>\n      {label}\n    </button>\n  );\n};\n\nexport default Button;\n"
-  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst button = cva(\n  \"inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-medium transition-colors duration-150 disabled:pointer-events-none disabled:opacity-50 rounded-full\",\n  {\n    variants: {\n      variant: {\n        solid: \"bg-ink text-paper hover:opacity-80\",\n        secondary: \"bg-wash text-ink hover:bg-hairline\",\n        outline: \"border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper\",\n        ghost: \"bg-transparent text-ink underline underline-offset-[6px] decoration-hairline hover:decoration-ink px-0\",\n        link: \"bg-transparent text-ink underline underline-offset-[6px] decoration-hairline hover:decoration-ink px-0\"\n      },\n      size: {\n        sm: \"h-10 px-5 text-[0.9375rem]\",\n        md: \"h-12 px-6 text-[1rem]\",\n        lg: \"h-14 px-8 text-[1.0625rem]\"\n      }\n    },\n    defaultVariants: { variant: \"solid\", size: \"md\" }\n  }\n);\nconst Button = ({ label, url, variant, size, fullWidth }) => {\n  const className = cn(button({ variant, size }), fullWidth && \"w-full\");\n  if (url) {\n    return /* @__PURE__ */ jsx(\"a\", { href: url, className, children: label });\n  }\n  return /* @__PURE__ */ jsx(\"button\", { type: \"button\", className, children: label });\n};\nexport {\n  Button as default\n};\n"
+  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\n/**\n * Button — square-cornered, like everything else here.\n *\n * Renders an anchor when given a URL and a button otherwise, so a call to\n * action and a form control share one component without lying about semantics.\n */\nconst button = cva(\n  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-medium ' +\n    'transition-[color,background-color,border-color,opacity] duration-150',\n  {\n    variants: {\n      variant: {\n        solid: 'bg-ink text-paper hover:opacity-85',\n        secondary: 'border border-hairline bg-wash text-ink hover:bg-hairline',\n        outline:\n          'border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper',\n        // A text link, not a button in disguise: underlined at rest, because a\n        // link nobody can see is not an affordance.\n        link: 'bg-transparent text-ink underline underline-offset-[6px] decoration-ink/40 hover:decoration-ink',\n      },\n      size: {\n        sm: 'h-10 px-5 text-[length:var(--text-caption)]',\n        md: 'h-12 px-6 text-[1rem]',\n        lg: 'h-14 px-8 text-[length:var(--text-body)]',\n      },\n      fullWidth: { true: 'w-full', false: '' },\n    },\n    // The size variant sets horizontal padding, so a `link` has to drop it\n    // afterwards: tailwind-merge resolves by source order, not by intent.\n    compoundVariants: [\n      { variant: 'link', class: 'h-auto px-0' },\n    ],\n    defaultVariants: { variant: 'solid', size: 'md', fullWidth: false },\n  },\n);\n\nconst Button = ({ label, url, variant, size, fullWidth }) => {\n  const className = cn(button({ variant, size, fullWidth: !!fullWidth }));\n  if (url) {\n    return (\n      <a href={url} className={className}>\n        {label}\n      </a>\n    );\n  }\n  return (\n    <button type=\"button\" className={className}>\n      {label}\n    </button>\n  );\n};\n\nexport default Button;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst button = cva(\n  \"inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-medium transition-[color,background-color,border-color,opacity] duration-150\",\n  {\n    variants: {\n      variant: {\n        solid: \"bg-ink text-paper hover:opacity-85\",\n        secondary: \"border border-hairline bg-wash text-ink hover:bg-hairline\",\n        outline: \"border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper\",\n        // A text link, not a button in disguise: underlined at rest, because a\n        // link nobody can see is not an affordance.\n        link: \"bg-transparent text-ink underline underline-offset-[6px] decoration-ink/40 hover:decoration-ink\"\n      },\n      size: {\n        sm: \"h-10 px-5 text-[length:var(--text-caption)]\",\n        md: \"h-12 px-6 text-[1rem]\",\n        lg: \"h-14 px-8 text-[length:var(--text-body)]\"\n      },\n      fullWidth: { true: \"w-full\", false: \"\" }\n    },\n    // The size variant sets horizontal padding, so a `link` has to drop it\n    // afterwards: tailwind-merge resolves by source order, not by intent.\n    compoundVariants: [\n      { variant: \"link\", class: \"h-auto px-0\" }\n    ],\n    defaultVariants: { variant: \"solid\", size: \"md\", fullWidth: false }\n  }\n);\nconst Button = ({ label, url, variant, size, fullWidth }) => {\n  const className = cn(button({ variant, size, fullWidth: !!fullWidth }));\n  if (url) {\n    return /* @__PURE__ */ jsx(\"a\", { href: url, className, children: label });\n  }\n  return /* @__PURE__ */ jsx(\"button\", { type: \"button\", className, children: label });\n};\nexport {\n  Button as default\n};\n"
 css:
   original: ''
   compiled: ''

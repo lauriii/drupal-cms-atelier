@@ -208,7 +208,7 @@ check 'recommended add-ons list on disk' 1 \
 check 'Project Browser uses the shipped list' recommended \
   "$(ev 'print \Drupal::config("project_browser.admin_settings")->get("default_source");')"
 
-check 'media shipped' 8 \
+check 'media shipped' 9 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
 check 'hero image reference resolved' 1 \
   "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "4b3d5e15-3a8d-46c8-a502-1255c2b1ad26");
@@ -280,6 +280,18 @@ if [[ -n "$base_url" ]]; then
   for item in Studio Journal Contact; do
     check "main menu exposes '$item' over JSON:API" yes \
       "$(grep -qF "\"title\":\"$item\"" <<<"$menu_json" && echo yes || echo no)"
+  done
+  # Titles are not enough. The links reference pages by entity ID, which is
+  # reassigned on every install, so a link can carry the right label and open
+  # the wrong page — which is exactly what happened once.
+  for pair in Studio:/studio Journal:/journal Contact:/contact; do
+    IFS=: read -r title alias <<<"$pair"
+    check "main menu link '$title' opens $alias" 1 \
+      "$(ev "\$links = \Drupal::entityTypeManager()->getStorage('menu_link_content')->loadByProperties(['title' => '$title', 'menu_name' => 'main']);
+        \$link = reset(\$links);
+        if (!\$link) { print 0; return; }
+        \$url = \$link->getUrlObject();
+        print (int) (\$url->toString() === \Drupal::service('path_alias.manager')->getPathByAlias('$alias') || \$url->toString() === '$alias');")"
   done
 
   # The components render. Their markup is a `canvas-island` per component,

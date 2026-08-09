@@ -7,6 +7,7 @@ props:
   label:
     type: string
     title: Label
+    description: 'A line above the marks, such as "Stocked by".'
     examples:
       - 'Trusted by teams shipping on Drupal'
 required: {  }
@@ -14,8 +15,8 @@ slots:
   content:
     title: Logos
 js:
-  original: "/**\n * Logo wall — a row of marks.\n *\n * Not a <ul>: Canvas wraps each slot child in its own element, so an <li>\n * would never be a direct child of the list and the parser hoists it out.\n */\nconst LogoWall = ({ label, content }) => (\n  <div>\n    {label ? (\n      <p className=\"text-center text-[0.9375rem] text-ink-muted\">{label}</p>\n    ) : null}\n    <div className=\"mt-12 grid grid-cols-2 items-center gap-x-12 gap-y-12 sm:grid-cols-4\">\n      {content}\n    </div>\n  </div>\n);\n\nexport default LogoWall;\n"
-  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nconst LogoWall = ({ label, content }) => /* @__PURE__ */ jsxs(\"div\", { children: [\n  label ? /* @__PURE__ */ jsx(\"p\", { className: \"text-center text-[0.9375rem] text-ink-muted\", children: label }) : null,\n  /* @__PURE__ */ jsx(\"div\", { className: \"mt-12 grid grid-cols-2 items-center gap-x-12 gap-y-12 sm:grid-cols-4\", children: content })\n] });\nexport {\n  LogoWall as default\n};\n"
+  original: "/**\n * Logo wall — a row of marks.\n *\n * Not a <ul>: Canvas wraps each slot child in its own element, so an <li>\n * would never be a direct child of the list and the parser hoists it out.\n */\nconst LogoWall = ({ label, content }) => (\n  <div className=\"flex flex-col gap-10\">\n    {label ? (\n      <p className=\"text-key text-ink-muted text-center\">{label}</p>\n    ) : null}\n    <div className=\"grid grid-cols-2 items-center gap-12 sm:grid-cols-4\">\n      {content}\n    </div>\n  </div>\n);\n\nexport default LogoWall;\n"
+  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nconst LogoWall = ({ label, content }) => /* @__PURE__ */ jsxs(\"div\", { className: \"flex flex-col gap-10\", children: [\n  label ? /* @__PURE__ */ jsx(\"p\", { className: \"text-key text-ink-muted text-center\", children: label }) : null,\n  /* @__PURE__ */ jsx(\"div\", { className: \"grid grid-cols-2 items-center gap-12 sm:grid-cols-4\", children: content })\n] });\nexport {\n  LogoWall as default\n};\n"
 css:
   original: ''
   compiled: ''

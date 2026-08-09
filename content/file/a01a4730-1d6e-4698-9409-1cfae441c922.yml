@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: 62f5db67-143a-4b08-b7ae-2e4814a29834
+  uuid: a01a4730-1d6e-4698-9409-1cfae441c922
   default_langcode: en
 default:
   uid:
@@ -9,16 +9,16 @@ default:
       target_id: 1
   filename:
     -
-      value: atelier-work-hero.jpg
+      value: login-wallpaper.png
   uri:
     -
-      value: 'public://atelier-work-hero.jpg'
+      value: 'public://login-wallpaper.png'
   filemime:
     -
-      value: image/jpeg
+      value: image/png
   filesize:
     -
-      value: 70127
+      value: 245436
   status:
     -
       value: true

@@ -13,12 +13,13 @@ dependencies:
     - link
     - media
     - media_library
+    - options
 label: Figure
 id: js.figure
 source: js
 source_local_id: figure
 provider: null
-active_version: ad7e443fa0ffa501
+active_version: a4369f0a861ce2e3
 versioned_properties:
   active:
     settings:
@@ -73,5 +74,17 @@ versioned_properties:
           derived_schema_metadata:
             string_shape:
               format: uri-reference
+        level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h3
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
     fallback_metadata:
       slot_definitions: {  }

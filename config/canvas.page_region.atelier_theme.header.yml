@@ -25,7 +25,7 @@ component_tree:
     slot: content
     uuid: 1b0e3d0d-5501-5740-bd45-5c0ff6978673
     component_id: js.site_nav
-    component_version: 4dcdabd14b685df2
+    component_version: 38b31d1f5c40ccef
     inputs:
       menu: main
   9004d66b-54b5-54e8-8a3e-e231b5096dc1:
@@ -33,7 +33,7 @@ component_tree:
     slot: content
     uuid: 9004d66b-54b5-54e8-8a3e-e231b5096dc1
     component_id: js.button
-    component_version: ffaf79915dd2e357
+    component_version: 7f1fc8c10644f943
     inputs:
       label: Enquire
       url: /studio

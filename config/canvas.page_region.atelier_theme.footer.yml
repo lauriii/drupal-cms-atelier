@@ -25,12 +25,10 @@ component_tree:
     slot: content
     uuid: 3c176124-e504-5bf6-bc02-31ff6b7bd022
     component_id: js.button
-    component_version: ffaf79915dd2e357
+    component_version: 7f1fc8c10644f943
     inputs:
       label: Documentation
-      url:
-        uri: 'internal:/about'
-        options: {  }
+      url: 'https://www.drupal.org/docs/develop/drupal-canvas'
       variant: link
       size: sm
       fullWidth: false
@@ -39,7 +37,7 @@ component_tree:
     slot: content
     uuid: 58c40fa3-2ef9-5ab1-9121-de23258cbcb2
     component_id: js.button
-    component_version: ffaf79915dd2e357
+    component_version: 7f1fc8c10644f943
     inputs:
       label: Drupal.org
       url:

@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: Stackline
+      value: Northam
   revision_translation_affected:
     -
       value: true
@@ -27,6 +27,6 @@ default:
     -
       alt: Stackline
       title: ''
-      width: 640
-      height: 200
+      width: 760
+      height: 180
       entity: 50fc8aa3-61b5-4698-8fc5-6ca90ce9ac3d

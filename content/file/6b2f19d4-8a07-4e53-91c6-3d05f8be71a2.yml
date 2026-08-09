@@ -1,6 +1,3 @@
-# Ships the recommended add-ons list as a file, the way drupal_cms_blank does,
-# so Project Browser can read it without a published canonical URL.
-# @see recipe.yml, project_browser.admin_settings
 _meta:
   version: '1.0'
   entity_type: file
@@ -15,7 +12,7 @@ default:
       value: recommended-add-ons.yaml
   uri:
     -
-      value: 'public://recommended-add-ons.yaml'
+      value: 'public://recommended-add-ons_3.yaml'
   filemime:
     -
       value: text/plain

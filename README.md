@@ -195,21 +195,52 @@ the shell theme emits no chrome, so the menu is data, not markup. Its links
 reference their targets by `target_uuid` rather than by path, so they follow the
 entities instead of breaking when an alias changes.
 
-**The content model the examples actually expect** — no more:
+## The components
 
-| Example component | What it needs, and what this template provides |
+Eighteen, and no more: the point is a small library composed well, not breadth.
+
+| Component | What it is |
 | --- | --- |
-| `main_navigation` | `jsonapi_menu_items` exposing `/jsonapi/menu_items/main`, and a `main` menu with at least one link. Both provided. |
-| `related_articles` | An `article` node type with `field_image`, `uid`, `created`, `title` and `path`, readable at `/jsonapi/node/article`. Drupal CMS ships a `page` type, not an `article` one, so this template adds `core/recipes/article_content_type`. |
-| `search_results` | `jsonapi_search_api` exposing `/jsonapi/index/cms_content`, backed by a Search API index of that exact name over nodes and Canvas pages. Provided. |
-| `logo` | A site name and front page in `system.site`. Provided. |
-| `breadcrumb` | Nothing beyond `canvas`. |
-| The other 20 examples | Nothing. They are presentational, with static props. |
+| `hero` | The opening statement, optionally over a full-width image. Renders the page's `h1`. |
+| `section` | Every band on a page. Owns the padding above and below it, the gap between the components stacked inside it, its ground (paper, wash, or an inverted ink), and an optional rule along the top. |
+| `section_intro` | The eyebrow, heading, and lede that name a band. Takes a heading level. |
+| `grid` | Two, three, or four columns on a wide screen, one on a phone. |
+| `feature` | One idea: an optional marker, a heading, and text. Takes a heading level. |
+| `figure` | A drawing or photograph with a title and caption, optionally linked. Takes a heading level. |
+| `prose` | Long-form rich text, styled against the same tokens as everything else. |
+| `stat` | A figure and what it measures. The value is a string, so "90 a year" works. |
+| `testimonial` | A quotation, attributed. Quotation marks come from the page language. |
+| `cta` | A closing ask, with a slot for buttons. Brings no ground of its own. |
+| `logo_wall` | A labelled row of marks. |
+| `logo` | One mark, optionally linked. |
+| `badge` | A short label, plain or in a ruled box. |
+| `button` | Solid, secondary, outline, or text link, at three sizes. Renders an anchor with a URL and a button without one. |
+| `article_teasers` | The newest articles, fetched from JSON:API in the browser. Loading, error, and empty states are all distinct. |
+| `site_header` | Wordmark plus a slot, on a hairline. Emits a `div`; the theme region is already the banner landmark. |
+| `site_nav` | A Drupal menu, fetched from `/jsonapi/menu_items/{menu}`. One level deep. |
+| `site_footer` | Wordmark, a credit line, and a slot. |
 
-Nothing beyond that was invented. No content templates in particular:
-`canvas.config.json` in a scaffolded codebase points at a `content-templates/`
-directory, but nothing here ships one, so building one would be guesswork.
-Create it in your codebase and push it.
+Two of them prove the argument for code components over a static library:
+`site_nav` and `article_teasers` read live Drupal data in the browser, so an
+editor publishing an article or reordering a menu changes the front end with no
+rebuild and no deploy.
+
+**What the backend has to provide for those two**
+
+| Component | What it needs, and what this template provides |
+| --- | --- |
+| `site_nav` | `jsonapi_menu_items` exposing `/jsonapi/menu_items/main`, and a `main` menu with links. Both provided, and every shipped link resolves to a page this recipe also ships. |
+| `article_teasers` | An `article` node type readable at `/jsonapi/node/article`. Drupal CMS ships a `page` type, not an `article` one, so this template adds `core/recipes/article_content_type`. |
+
+`search_api`, `search_api_db`, and `jsonapi_search_api` are installed with a
+`cms_content` index over nodes and Canvas pages. No shipped component queries
+it: it is there so that a search component you write has an endpoint to query
+without another round of backend setup. Drop them from `recipe.yml` if you would
+rather not carry them.
+
+No content templates, in particular: `canvas.config.json` in a scaffolded
+codebase points at a `content-templates/` directory, but nothing here ships one,
+so building one would be guesswork. Create it in your codebase and push it.
 
 **A screenshot for the installer.** `screenshot.webp`, 500×400, which the
 Drupal CMS installer shows on the template's card. Without one it falls back to
@@ -409,10 +440,9 @@ not need this site for day-to-day component work — only to push.
   `drush cron` once after installing.
 - **Pathauto rewrites aliases on nodes in default content.** Drupal CMS ships a
   `/[node:title]` pattern, so a *node* shipped in a recipe's `content/` will not
-  keep a hand-written alias. The About page here therefore ships no alias at
-  all and lets Pathauto generate `/about` from the title. Canvas pages have no
-  Pathauto pattern, which is why the home page is a `canvas_page` and its
-  `/home` alias sticks.
+  keep a hand-written alias, so the articles this template ships let Pathauto
+  generate theirs. Canvas pages have no Pathauto pattern, which is why all four
+  pages are `canvas_page` entities and their aliases stick.
 - **`content_format` runs `filter_autop`.** Source line breaks inside a
   paragraph become `<br>` and the rendered text hard-wraps. Keep each HTML
   element on one line in `content/`, rather than using a YAML block scalar.

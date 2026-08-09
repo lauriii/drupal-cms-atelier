@@ -5,13 +5,14 @@ dependencies:
     - canvas.js_component.feature
     - filter.format.canvas_html_block
   module:
+    - options
     - text
 label: Feature
 id: js.feature
 source: js
 source_local_id: feature
 provider: null
-active_version: 76e5800aaeb995c5
+active_version: 42e05292423b1116
 versioned_properties:
   active:
     settings:
@@ -67,6 +68,18 @@ versioned_properties:
             -
               value: true
           expression: ℹ︎boolean␟value
+          derived_schema_metadata: {  }
+        level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h3
+          expression: ℹ︎list_string␟value
           derived_schema_metadata: {  }
     fallback_metadata:
       slot_definitions: {  }

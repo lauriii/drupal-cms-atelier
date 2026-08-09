@@ -7,28 +7,28 @@ props:
   label:
     type: string
     title: Label
+    description: 'A word or two.'
     examples:
       - New
   variant:
     type: string
     enum:
-      - accent
-      - neutral
-      - outline
+      - plain
+      - boxed
     'meta:enum':
-      accent: Accent
-      neutral: Neutral
-      outline: Outline
+      plain: Plain
+      boxed: Boxed
     title: Variant
+    description: 'Boxed puts the label in a ruled box, the way a drawing labels a part.'
     examples:
-      - accent
+      - plain
 required:
   - label
   - variant
 slots: {  }
 js:
-  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\n/** Badge — a quiet marker, not a coloured pill. */\nconst badge = cva('inline-flex items-center text-[0.9375rem]', {\n  variants: {\n    variant: {\n      accent: 'text-ink',\n      neutral: 'text-ink-muted',\n      outline: 'border border-hairline px-3 py-1 text-ink-muted',\n    },\n  },\n  defaultVariants: { variant: 'neutral' },\n});\n\nconst Badge = ({ label, variant }) => (\n  <span className={cn(badge({ variant }))}>{label}</span>\n);\n\nexport default Badge;\n"
-  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst badge = cva(\"inline-flex items-center text-[0.9375rem]\", {\n  variants: {\n    variant: {\n      accent: \"text-ink\",\n      neutral: \"text-ink-muted\",\n      outline: \"border border-hairline px-3 py-1 text-ink-muted\"\n    }\n  },\n  defaultVariants: { variant: \"neutral\" }\n});\nconst Badge = ({ label, variant }) => /* @__PURE__ */ jsx(\"span\", { className: cn(badge({ variant })), children: label });\nexport {\n  Badge as default\n};\n"
+  original: "import { cva } from 'class-variance-authority';\nimport { cn } from 'drupal-canvas';\n\n/** Badge — a quiet marker, not a coloured pill. */\nconst badge = cva('inline-flex items-center text-[length:var(--text-caption)]', {\n  variants: {\n    variant: {\n      plain: 'text-ink-muted',\n      // A drawing convention: the label sits in its own ruled box.\n      boxed: 'border border-hairline px-3 py-1 text-ink-muted',\n    },\n  },\n  defaultVariants: { variant: 'plain' },\n});\n\nconst Badge = ({ label, variant }) => (\n  <span className={cn(badge({ variant }))}>{label}</span>\n);\n\nexport default Badge;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nimport { cva } from \"class-variance-authority\";\nimport { cn } from \"drupal-canvas\";\nconst badge = cva(\"inline-flex items-center text-[length:var(--text-caption)]\", {\n  variants: {\n    variant: {\n      plain: \"text-ink-muted\",\n      // A drawing convention: the label sits in its own ruled box.\n      boxed: \"border border-hairline px-3 py-1 text-ink-muted\"\n    }\n  },\n  defaultVariants: { variant: \"plain\" }\n});\nconst Badge = ({ label, variant }) => /* @__PURE__ */ jsx(\"span\", { className: cn(badge({ variant })), children: label });\nexport {\n  Badge as default\n};\n"
 css:
   original: ''
   compiled: ''

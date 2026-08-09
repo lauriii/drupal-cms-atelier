@@ -4,8 +4,8 @@ _meta:
   uuid: 41c22c99-9e7a-4601-ab8c-517b366306d4
   default_langcode: en
   depends:
-    62f5db67-143a-4b08-b7ae-2e4814a29834: file
-    2fed5eb0-0ebe-4b89-9fd2-e776c4690480: media
+    29feba9b-7936-473f-ac59-0210b190bcaa: file
+    69d70d3f-4fff-43f0-a8f7-39740a352758: media
 default:
   status:
     -
@@ -22,7 +22,7 @@ default:
       component_id: js.hero
       inputs:
         eyebrow: 'The studio'
-        title: 'Six people, two benches, about ninety pieces a year'
+        title: 'What we are for'
         lede: 'We started in 2009 in a rented bay behind a car repair shop in Petersfield. We are still in Petersfield, in a better building, doing roughly the same thing.'
     -
       parent_uuid: 7f2a1c33-0001-4a00-8000-000000000001
@@ -30,7 +30,7 @@ default:
       uuid: 7f2a1c33-0002-4a00-8000-000000000002
       component_id: js.button
       inputs:
-        label: 'Start a commission'
+        label: Enquire
         url: 'mailto:studio@atelier.example'
         variant: solid
         size: lg
@@ -41,8 +41,8 @@ default:
       inputs:
         background: paper
         spacing: sm
-        width: wide
-        divider: false
+        width: default
+        divider: true
     -
       parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
       slot: content
@@ -56,7 +56,7 @@ default:
       inputs:
         background: wash
         spacing: md
-        width: wide
+        width: default
         divider: true
     -
       parent_uuid: 7f2a1c33-0005-4a00-8000-000000000005
@@ -85,8 +85,9 @@ default:
       inputs:
         marker: '1'
         title: 'You describe the piece'
-        text: 'Usually a photograph of the room, a rough size, and what it has to hold. We visit if you are within an hour of the workshop.'
+        text: 'What it has to hold, where it goes, and how much room there is. We visit if you are within an hour of the workshop.'
         framed: false
+        level: h3
     -
       parent_uuid: 7f2a1c33-0007-4a00-8000-000000000007
       slot: content
@@ -97,6 +98,7 @@ default:
         title: 'We draw it and price it'
         text: 'A dimensioned drawing and a fixed price, inside two weeks. Both are yours to keep whether or not you go ahead.'
         framed: false
+        level: h3
     -
       parent_uuid: 7f2a1c33-0007-4a00-8000-000000000007
       slot: content
@@ -107,13 +109,14 @@ default:
         title: 'We make it and deliver it'
         text: 'Eight to sixteen weeks, depending on the timber and how dry it is. We deliver and install it ourselves.'
         framed: false
+        level: h3
     -
       uuid: 7f2a1c33-0011-4a00-8000-000000000011
       component_id: js.section
       inputs:
         background: paper
         spacing: md
-        width: wide
+        width: default
         divider: false
     -
       parent_uuid: 7f2a1c33-0011-4a00-8000-000000000011
@@ -121,20 +124,21 @@ default:
       uuid: 7f2a1c33-0012-4a00-8000-000000000012
       component_id: js.figure
       inputs:
-        title: 'Bench No. 4'
-        caption: 'Working drawing. Ash, 2.4 metres, for a farmhouse kitchen in Alton.'
+        title: 'Bench No. 4, leg to top'
+        caption: 'The tenon goes through the top and is wedged from above. There is no glue in this joint, so it can be knocked apart and re-wedged.'
         image:
           CANVAS_ENTITY_REFERENCE:
-            target_uuid: 2fed5eb0-0ebe-4b89-9fd2-e776c4690480
+            target_uuid: 69d70d3f-4fff-43f0-a8f7-39740a352758
             target_type: media
         url: ''
+        level: h3
     -
       uuid: 7f2a1c33-0013-4a00-8000-000000000013
       component_id: js.section
       inputs:
         background: wash
         spacing: md
-        width: narrow
+        width: default
         divider: true
     -
       parent_uuid: 7f2a1c33-0013-4a00-8000-000000000013
@@ -142,9 +146,9 @@ default:
       uuid: 7f2a1c33-0014-4a00-8000-000000000014
       component_id: js.testimonial
       inputs:
-        quote: 'They talked me out of the thing I asked for and drew something better on the back of the delivery note. That was four years ago and I still have both.'
+        quote: 'They talked me out of what I asked for and drew something better on the back of the delivery note. I kept the note.'
         name: 'Ruth Okafor'
-        role: 'Client, Alton'
+        role: 'Kitchen, Alton'
         avatar: ''
   path:
     -

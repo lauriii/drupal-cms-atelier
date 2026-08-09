@@ -1,11 +1,11 @@
 _meta:
   version: '1.0'
   entity_type: media
-  uuid: cec4fc43-86ee-4e94-84fc-d46cea329cfd
+  uuid: 69d70d3f-4fff-43f0-a8f7-39740a352758
   bundle: image
   default_langcode: en
   depends:
-    a21e2884-9ce5-4b6c-975f-e471937cfcf8: file
+    29feba9b-7936-473f-ac59-0210b190bcaa: file
 default:
   status:
     -
@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'Lewes Works'
+      value: 'Bench No. 4, leg detail'
   revision_translation_affected:
     -
       value: true
@@ -25,8 +25,8 @@ default:
       alias: null
   field_media_image:
     -
-      alt: Lattice
+      alt: 'Section through the leg-to-top joint of Bench No. 4, showing a through tenon wedged from above.'
       title: ''
-      width: 760
-      height: 180
-      entity: a21e2884-9ce5-4b6c-975f-e471937cfcf8
+      width: 1560
+      height: 720
+      entity: 29feba9b-7936-473f-ac59-0210b190bcaa

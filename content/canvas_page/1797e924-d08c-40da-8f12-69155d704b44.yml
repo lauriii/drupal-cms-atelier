@@ -19,16 +19,16 @@ default:
       component_id: js.hero
       inputs:
         eyebrow: Journal
-        title: 'Notes from the bench'
-        lede: 'Occasional writing about timber, tools, and the things that go wrong. Roughly monthly, sometimes not.'
+        title: 'From the bench'
+        lede: 'Notes on timber, tools, and the things that go wrong.'
     -
       uuid: 3c9b74d2-0016-4a00-8000-000000000016
       component_id: js.section
       inputs:
         background: paper
         spacing: sm
-        width: wide
-        divider: false
+        width: default
+        divider: true
     -
       parent_uuid: 3c9b74d2-0016-4a00-8000-000000000016
       slot: content

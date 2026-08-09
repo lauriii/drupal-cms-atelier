@@ -8,8 +8,11 @@
 #   tests/regenerate-content.sh
 #   DRUSH="ddev drush" tests/regenerate-content.sh
 #
-# Binary files are not re-exported: `drush content:export` writes the file
-# entity, not the bytes. The JPEGs in content/file/ are checked in and stay put.
+# File *entities* are exported; their bytes are not. `drush content:export`
+# writes the entity, so a media item added since the last run would otherwise
+# reference a file the recipe does not ship and the install would abort on
+# `field_media_image=This value should not be null`. The JPEGs themselves are
+# checked in alongside and are left alone.
 
 set -euo pipefail
 
@@ -21,17 +24,19 @@ for type in canvas_page media menu_link_content node; do
   rm -rf "${CONTENT:?}/$type"
   mkdir -p "$CONTENT/$type"
 done
+# Only the entity YAMLs go; the binaries beside them stay.
+find "$CONTENT/file" -name '*.yml' -delete
 
 echo "==> Exporting"
 $DRUSH ev '
   $out = [];
-  foreach (["canvas_page", "media", "menu_link_content", "node"] as $t) {
+  foreach (["canvas_page", "media", "menu_link_content", "node", "file"] as $t) {
     foreach (\Drupal::entityTypeManager()->getStorage($t)->loadMultiple() as $e) {
       $out[] = "$t:" . $e->id() . ":" . $e->uuid();
     }
   }
   print implode("\n", $out) . "\n";' \
-  | grep -E '^(canvas_page|media|menu_link_content|node):' > /tmp/atelier-entities.txt
+  | grep -E '^(canvas_page|media|menu_link_content|node|file):' > /tmp/atelier-entities.txt
 
 count=0
 while IFS=: read -r type id uuid; do
@@ -58,7 +63,7 @@ pinned = 0
 for path in (pathlib.Path(sys.argv[1]) / 'node').glob('*.yml'):
     text = path.read_text()
     for title, when in dates.items():
-        if title in text and 'created:' not in text:
+        if title in text and '\n  created:\n' not in text:
             path.write_text(text.replace('  title:\n', f"  created:\n    -\n      value: {when}\n  title:\n", 1))
             pinned += 1
             break

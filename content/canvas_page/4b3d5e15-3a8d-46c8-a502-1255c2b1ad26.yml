@@ -35,9 +35,9 @@ default:
       uuid: 565d154b-0001-4a00-8000-000000000001
       component_id: js.hero
       inputs:
-        eyebrow: 'Furniture and objects, made in Hampshire'
-        title: 'Pieces built to outlast the people who commission them'
-        lede: 'Atelier is a six-person workshop. We design and make furniture in small runs, in solid timber, for houses and the occasional restaurant.'
+        eyebrow: 'Furniture and objects, Petersfield'
+        title: 'Six people, two benches, about ninety pieces a year'
+        lede: 'We design and make furniture in small runs, in solid timber, for houses and the occasional restaurant. Everything is drawn before it is cut, and we publish the drawings.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 2fed5eb0-0ebe-4b89-9fd2-e776c4690480
@@ -48,7 +48,7 @@ default:
       uuid: 215a25dd-0002-4a00-8000-000000000002
       component_id: js.button
       inputs:
-        label: 'See the studio'
+        label: 'About the studio'
         url: 'mailto:studio@atelier.example'
         variant: solid
         size: lg
@@ -61,16 +61,82 @@ default:
       inputs:
         label: 'Read the journal'
         url: /journal
-        variant: ghost
+        variant: link
         size: lg
         fullWidth: false
+    -
+      uuid: 2f81adef-0010-4a00-8000-000000000010
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: 2f81adef-0010-4a00-8000-000000000010
+      slot: content
+      uuid: 0c982b6d-0011-4a00-8000-000000000011
+      component_id: js.section_intro
+      inputs:
+        eyebrow: 'Selected work'
+        title: 'Recent pieces'
+        align: left
+        level: h2
+        lede: "We publish the drawings. The pieces themselves are in other people's houses."
+    -
+      parent_uuid: 2f81adef-0010-4a00-8000-000000000010
+      slot: content
+      uuid: 7b9f1bfb-0012-4a00-8000-000000000012
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
+      slot: content
+      uuid: e2964a41-0013-4a00-8000-000000000013
+      component_id: js.figure
+      inputs:
+        title: 'Vessel study'
+        caption: 'Turned ash, oiled. One of nine.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 38105a5a-27c2-4dd6-825d-3a671f2dbc45
+            target_type: media
+        level: h3
+    -
+      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
+      slot: content
+      uuid: 95917ad7-0014-4a00-8000-000000000014
+      component_id: js.figure
+      inputs:
+        title: 'Shelf system'
+        caption: 'Douglas fir, wall-hung. The wall is 14mm out over its height, so the uprights follow it.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 3587db33-00d2-4295-811e-7d7de53ce915
+            target_type: media
+        level: h3
+    -
+      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
+      slot: content
+      uuid: 0bf5ef74-0015-4a00-8000-000000000015
+      component_id: js.figure
+      inputs:
+        title: 'Bow-back chair'
+        caption: 'Steam-bent oak, third prototype. The back is a single bent member.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 8afef070-72a2-49a2-a704-971f5f959d57
+            target_type: media
+        level: h3
     -
       uuid: cf5444f1-0004-4a00-8000-000000000004
       component_id: js.section
       inputs:
         background: wash
         spacing: md
-        width: wide
+        width: default
         divider: true
     -
       parent_uuid: cf5444f1-0004-4a00-8000-000000000004
@@ -79,8 +145,8 @@ default:
       component_id: js.section_intro
       inputs:
         eyebrow: 'What we do'
-        title: 'Three things, done properly'
-        lede: 'We keep the list short so the work stays good.'
+        title: 'What we make'
+        lede: 'Three things, and we turn down the rest.'
         align: left
         level: h2
     -
@@ -100,6 +166,7 @@ default:
         title: Commissions
         text: '<p>One-off pieces for a room you already live in. We visit, measure, and draw before we quote.</p>'
         framed: true
+        level: h3
     -
       parent_uuid: 2637e1c4-0006-4a00-8000-000000000006
       slot: content
@@ -109,6 +176,7 @@ default:
         title: 'Small runs'
         text: '<p>Batches of twenty to two hundred, for restaurants, studios and shops that want the same piece repeatedly.</p>'
         framed: true
+        level: h3
     -
       parent_uuid: 2637e1c4-0006-4a00-8000-000000000006
       slot: content
@@ -118,76 +186,14 @@ default:
         title: Restoration
         text: '<p>Bringing older furniture back into use, with new joinery where the old has given up.</p>'
         framed: true
-    -
-      uuid: 2f81adef-0010-4a00-8000-000000000010
-      component_id: js.section
-      inputs:
-        background: paper
-        spacing: md
-        width: wide
-        divider: false
-    -
-      parent_uuid: 2f81adef-0010-4a00-8000-000000000010
-      slot: content
-      uuid: 0c982b6d-0011-4a00-8000-000000000011
-      component_id: js.section_intro
-      inputs:
-        eyebrow: 'Selected work'
-        title: 'Recent pieces'
-        align: left
-        level: h2
-        lede: "We publish the drawings. The pieces themselves are in other people's houses, and we do not photograph well."
-    -
-      parent_uuid: 2f81adef-0010-4a00-8000-000000000010
-      slot: content
-      uuid: 7b9f1bfb-0012-4a00-8000-000000000012
-      component_id: js.grid
-      inputs:
-        columns: '3'
-        gap: lg
-    -
-      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
-      slot: content
-      uuid: e2964a41-0013-4a00-8000-000000000013
-      component_id: js.figure
-      inputs:
-        title: 'Vessel study'
-        caption: 'Working drawing. Turned ash, oiled, one of nine.'
-        image:
-          CANVAS_ENTITY_REFERENCE:
-            target_uuid: 38105a5a-27c2-4dd6-825d-3a671f2dbc45
-            target_type: media
-    -
-      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
-      slot: content
-      uuid: 95917ad7-0014-4a00-8000-000000000014
-      component_id: js.figure
-      inputs:
-        title: 'Shelf system'
-        caption: 'Working drawing. Douglas fir, wall-hung, made to a stairwell.'
-        image:
-          CANVAS_ENTITY_REFERENCE:
-            target_uuid: 3587db33-00d2-4295-811e-7d7de53ce915
-            target_type: media
-    -
-      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
-      slot: content
-      uuid: 0bf5ef74-0015-4a00-8000-000000000015
-      component_id: js.figure
-      inputs:
-        title: 'Folded chair'
-        caption: 'Working drawing. Steam-bent oak, still on its third prototype.'
-        image:
-          CANVAS_ENTITY_REFERENCE:
-            target_uuid: 8afef070-72a2-49a2-a704-971f5f959d57
-            target_type: media
+        level: h3
     -
       uuid: 7cf2dfe2-0016-4a00-8000-000000000016
       component_id: js.section
       inputs:
         background: paper
         spacing: sm
-        width: wide
+        width: default
         divider: true
     -
       parent_uuid: 7cf2dfe2-0016-4a00-8000-000000000016
@@ -251,8 +257,8 @@ default:
       component_id: js.section_intro
       inputs:
         eyebrow: Journal
-        title: 'From the workshop'
-        lede: 'Occasional notes on what we are making and how.'
+        title: 'From the bench'
+        lede: 'Notes on timber, tools, and the things that go wrong.'
         align: left
         level: h2
     -
@@ -276,32 +282,32 @@ default:
       uuid: 57df8c21-0026-4a00-8000-000000000026
       component_id: js.testimonial
       inputs:
-        quote: 'They asked better questions than our architect did, and the table has not moved a millimetre in four years.'
+        quote: "They asked better questions than our architect did, and the table hasn't moved a millimetre since it arrived."
         name: 'Marta Oyelaran'
-        role: 'Wilder & Co.'
+        role: 'Dining table, Winchester'
     -
       uuid: ced6dd9b-0027-4a00-8000-000000000027
       component_id: js.section
       inputs:
-        background: paper
+        background: wash
         spacing: sm
-        width: wide
-        divider: false
+        width: default
+        divider: true
     -
       parent_uuid: ced6dd9b-0027-4a00-8000-000000000027
       slot: content
       uuid: b9d1ed0d-0028-4a00-8000-000000000028
       component_id: js.cta
       inputs:
-        title: 'Tell us what you need'
-        lede: 'Most commissions start with a photograph of the room and a rough measurement.'
+        title: 'Tell us what the piece has to do'
+        lede: 'Send a photograph of the room and a rough size. That is enough for us to draw something.'
     -
       parent_uuid: b9d1ed0d-0028-4a00-8000-000000000028
       slot: content
       uuid: 296ef09c-0029-4a00-8000-000000000029
       component_id: js.button
       inputs:
-        label: 'Start a commission'
+        label: Enquire
         url: 'mailto:studio@atelier.example'
         variant: solid
         size: lg

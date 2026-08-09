@@ -5,7 +5,7 @@ _meta:
   bundle: menu_link_content
   default_langcode: en
   depends:
-    4b3d5e15-3a8d-46c8-a502-1255c2b1ad26: canvas_page
+    1797e924-d08c-40da-8f12-69155d704b44: canvas_page
 default:
   enabled:
     -
@@ -20,7 +20,7 @@ default:
     -
       title: null
       options: {  }
-      target_uuid: 4b3d5e15-3a8d-46c8-a502-1255c2b1ad26
+      target_uuid: 1797e924-d08c-40da-8f12-69155d704b44
   external:
     -
       value: false

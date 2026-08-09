@@ -10,7 +10,7 @@ id: js.badge
 source: js
 source_local_id: badge
 provider: null
-active_version: ff503086db0ddd0b
+active_version: 467125452cf921f3
 versioned_properties:
   active:
     settings:
@@ -36,7 +36,7 @@ versioned_properties:
           field_widget: options_select
           default_value:
             -
-              value: accent
+              value: plain
           expression: ℹ︎list_string␟value
           derived_schema_metadata: {  }
     fallback_metadata:

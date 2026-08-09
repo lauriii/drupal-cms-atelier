@@ -7,11 +7,13 @@ props:
   wordmark:
     type: string
     title: Wordmark
+    description: 'The site name.'
     examples:
       - Atelier
   note:
     type: string
     title: Note
+    description: 'A line under it: a credit, a company number, a registered address.'
     examples:
       - 'Powered by Drupal CMS'
 required:
@@ -20,8 +22,8 @@ slots:
   content:
     title: Links
 js:
-  original: "/** Site footer — wordmark, a line of credit, and whatever is slotted in. */\nconst SiteFooter = ({ wordmark, note, content }) => (\n  <footer className=\"border-t border-hairline bg-paper\">\n    <div className=\"mx-auto flex max-w-7xl flex-col gap-8 px-6 py-12 md:flex-row md:items-center md:justify-between md:px-10\">\n      <div>\n        <p className=\"font-display text-lg tracking-tight\">{wordmark}</p>\n        {note ? (\n          <p className=\"mt-2 text-[0.9375rem] text-ink-muted\">\n            {note}\n          </p>\n        ) : null}\n      </div>\n      <div className=\"flex items-center gap-7\">{content}</div>\n    </div>\n  </footer>\n);\n\nexport default SiteFooter;\n"
-  compiled: "import { jsx, jsxs } from \"react/jsx-runtime\";\nconst SiteFooter = ({ wordmark, note, content }) => /* @__PURE__ */ jsx(\"footer\", { className: \"border-t border-hairline bg-paper\", children: /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto flex max-w-7xl flex-col gap-8 px-6 py-12 md:flex-row md:items-center md:justify-between md:px-10\", children: [\n  /* @__PURE__ */ jsxs(\"div\", { children: [\n    /* @__PURE__ */ jsx(\"p\", { className: \"font-display text-lg tracking-tight\", children: wordmark }),\n    note ? /* @__PURE__ */ jsx(\"p\", { className: \"mt-2 text-[0.9375rem] text-ink-muted\", children: note }) : null\n  ] }),\n  /* @__PURE__ */ jsx(\"div\", { className: \"flex items-center gap-7\", children: content })\n] }) });\nexport {\n  SiteFooter as default\n};\n"
+  original: "/**\n * Site footer — wordmark, a line of credit, and whatever is slotted in.\n *\n * A div for the same reason as the header: the region already supplies the\n * contentinfo landmark.\n */\nconst SiteFooter = ({ wordmark, note, content }) => (\n  <div className=\"border-t border-hairline bg-paper\">\n    <div className=\"mx-auto flex max-w-page flex-col gap-8 px-6 py-12 md:flex-row md:items-center md:justify-between md:px-10\">\n      <div>\n        <p className=\"font-display tracking-display text-[1.375rem] font-normal\">\n          {wordmark}\n        </p>\n        {note ? (\n          <p className=\"text-[length:var(--text-caption)] text-ink-muted mt-2\">{note}</p>\n        ) : null}\n      </div>\n      {content ? (\n        <div className=\"flex flex-wrap items-center gap-x-7 gap-y-3\">\n          {content}\n        </div>\n      ) : null}\n    </div>\n  </div>\n);\n\nexport default SiteFooter;\n"
+  compiled: "import { jsx, jsxs } from \"react/jsx-runtime\";\nconst SiteFooter = ({ wordmark, note, content }) => /* @__PURE__ */ jsx(\"div\", { className: \"border-t border-hairline bg-paper\", children: /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto flex max-w-page flex-col gap-8 px-6 py-12 md:flex-row md:items-center md:justify-between md:px-10\", children: [\n  /* @__PURE__ */ jsxs(\"div\", { children: [\n    /* @__PURE__ */ jsx(\"p\", { className: \"font-display tracking-display text-[1.375rem] font-normal\", children: wordmark }),\n    note ? /* @__PURE__ */ jsx(\"p\", { className: \"text-[length:var(--text-caption)] text-ink-muted mt-2\", children: note }) : null\n  ] }),\n  content ? /* @__PURE__ */ jsx(\"div\", { className: \"flex flex-wrap items-center gap-x-7 gap-y-3\", children: content }) : null\n] }) });\nexport {\n  SiteFooter as default\n};\n"
 css:
   original: ''
   compiled: ''

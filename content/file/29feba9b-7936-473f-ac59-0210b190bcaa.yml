@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: 62f5db67-143a-4b08-b7ae-2e4814a29834
+  uuid: 29feba9b-7936-473f-ac59-0210b190bcaa
   default_langcode: en
 default:
   uid:
@@ -9,16 +9,16 @@ default:
       target_id: 1
   filename:
     -
-      value: atelier-work-hero.jpg
+      value: atelier-work-4.jpg
   uri:
     -
-      value: 'public://atelier-work-hero.jpg'
+      value: 'public://atelier-work-4.jpg'
   filemime:
     -
       value: image/jpeg
   filesize:
     -
-      value: 70127
+      value: 58146
   status:
     -
       value: true

@@ -6,7 +6,7 @@ _meta:
 default:
   uid:
     -
-      target_id: 0
+      target_id: 1
   filename:
     -
       value: atelier-logo-3.jpg
@@ -18,7 +18,7 @@ default:
       value: image/jpeg
   filesize:
     -
-      value: 6200
+      value: 10346
   status:
     -
       value: true

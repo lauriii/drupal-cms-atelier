@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: Northwind
+      value: 'Bramble & Howe'
   revision_translation_affected:
     -
       value: true
@@ -27,6 +27,6 @@ default:
     -
       alt: Northwind
       title: ''
-      width: 640
-      height: 200
+      width: 760
+      height: 180
       entity: d14ea3c9-8d6e-44b2-9a9e-252e7fbf8a71

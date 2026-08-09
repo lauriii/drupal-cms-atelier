@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: Prism
+      value: 'Cole Street'
   revision_translation_affected:
     -
       value: true
@@ -27,6 +27,6 @@ default:
     -
       alt: Prism
       title: ''
-      width: 640
-      height: 200
+      width: 760
+      height: 180
       entity: 652290dd-9da0-405a-b08b-829d2eda6288
