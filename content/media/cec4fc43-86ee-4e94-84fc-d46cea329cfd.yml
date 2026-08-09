@@ -5,7 +5,7 @@ _meta:
   bundle: image
   default_langcode: en
   depends:
-    a21e2884-9ce5-4b6c-975f-e471937cfcf8: file
+    20115fdb-c395-4cc0-9e0a-1607f55fdfd4: file
 default:
   status:
     -
@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'Lewes Works'
+      value: atelier-logo-4.png
   revision_translation_affected:
     -
       value: true
@@ -27,6 +27,6 @@ default:
     -
       alt: 'Lewes Works, italic above letterspaced caps'
       title: ''
-      width: 620
-      height: 80
-      entity: a21e2884-9ce5-4b6c-975f-e471937cfcf8
+      width: 321
+      height: 156
+      entity: 20115fdb-c395-4cc0-9e0a-1607f55fdfd4

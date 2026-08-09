@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: abcfbf7d-0cf1-4e24-b361-30bb3f7e5b39
+  uuid: 7cb948de-2918-4f2e-ae6b-f8415c630a66
   default_langcode: en
 default:
   uid:
@@ -9,16 +9,16 @@ default:
       target_id: 1
   filename:
     -
-      value: default-avatar.svg
+      value: atelier-logo-3.png
   uri:
     -
-      value: 'public://avatars/default-avatar.svg'
+      value: 'public://atelier-logo-3.png'
   filemime:
     -
-      value: image/svg+xml
+      value: image/png
   filesize:
     -
-      value: 405
+      value: 18359
   status:
     -
       value: true

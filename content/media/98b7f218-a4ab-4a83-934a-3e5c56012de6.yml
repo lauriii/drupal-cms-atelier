@@ -5,7 +5,7 @@ _meta:
   bundle: image
   default_langcode: en
   depends:
-    d14ea3c9-8d6e-44b2-9a9e-252e7fbf8a71: file
+    a63f9fb8-aba5-42dd-9242-409015f2eb47: file
 default:
   status:
     -
@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'Bramble & Howe'
+      value: atelier-logo-1.png
   revision_translation_affected:
     -
       value: true
@@ -27,6 +27,6 @@ default:
     -
       alt: 'Bramble and Howe, in a serif wordmark'
       title: ''
-      width: 620
-      height: 80
-      entity: d14ea3c9-8d6e-44b2-9a9e-252e7fbf8a71
+      width: 1000
+      height: 144
+      entity: a63f9fb8-aba5-42dd-9242-409015f2eb47

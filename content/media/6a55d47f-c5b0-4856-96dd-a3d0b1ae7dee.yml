@@ -5,7 +5,7 @@ _meta:
   bundle: image
   default_langcode: en
   depends:
-    50fc8aa3-61b5-4698-8fc5-6ca90ce9ac3d: file
+    7a0ed33f-9dd9-4ec5-9025-ab7d6de42cb8: file
 default:
   status:
     -
@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: Northam
+      value: atelier-logo-2.png
   revision_translation_affected:
     -
       value: true
@@ -27,6 +27,6 @@ default:
     -
       alt: 'northam, in lowercase sans-serif'
       title: ''
-      width: 620
-      height: 80
-      entity: 50fc8aa3-61b5-4698-8fc5-6ca90ce9ac3d
+      width: 445
+      height: 144
+      entity: 7a0ed33f-9dd9-4ec5-9025-ab7d6de42cb8

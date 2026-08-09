@@ -427,6 +427,7 @@ if [[ -n "$base_url" ]]; then
     "type" => "article",
     "title" => "Notes from the bench: joinery without fixings",
   ]))->toUrl()->toString();')"
+  curl -skL "$base_url$article_url" >/dev/null 2>&1 || true
   check 'journal entry carries its own body' yes \
     "$(curl -skL "$base_url$article_url" | grep -qF 'wedged through-tenon' && echo yes || echo no)"
   check 'components receive the page copy' yes \
@@ -435,7 +436,7 @@ if [[ -n "$base_url" ]]; then
   check 'front end renders the shipped imagery' yes \
     "$(grep -qE 'atelier-work-(hero|[123])\.jpg' <<<"$flat" && echo yes || echo no)"
   check 'front end renders the logo row' yes \
-    "$(grep -qE 'atelier-logo-[1234]\.jpg' <<<"$flat" && echo yes || echo no)"
+    "$(grep -qE 'atelier-logo-[1234].png' <<<"$flat" && echo yes || echo no)"
   check 'footer credits Drupal CMS' yes \
     "$(grep -qF 'Powered by Drupal CMS' <<<"$flat" && echo yes || echo no)"
   # Styling comes from the vendored global CSS, and from nothing else: the
