@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9788969e-bbe4-4e49-b8dd-12645cde8f5c
+  bundle: image
+  default_langcode: en
+  depends:
+    91cc11da-179e-4464-b093-2bf8ec83cb9e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Two hundred stools'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Stacked wooden stools in a workshop.'
+      title: ''
+      width: 1400
+      height: 2100
+      entity: 91cc11da-179e-4464-b093-2bf8ec83cb9e

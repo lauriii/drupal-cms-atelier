@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - canvas.component.js.article_teasers
+    - canvas.component.js.post_meta
     - canvas.component.js.hero
     - canvas.component.js.prose
     - canvas.component.js.section_intro
@@ -35,6 +36,20 @@ component_tree:
       image:
         sourceType: entity-field
         expression: 'ℹ︎␜entity:node:article␝field_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}'
+  c0a1e11a-0007-4a00-8000-000000000007:
+    parent_uuid: c0a1e11a-0001-4a00-8000-000000000001
+    slot: content
+    uuid: c0a1e11a-0007-4a00-8000-000000000007
+    component_id: js.post_meta
+    component_version: ab1badbad663cfcb
+    inputs:
+      byline: 'The workshop'
+      date:
+        sourceType: entity-field
+        expression: 'ℹ︎␜entity:node:article␝created␞␟value'
+      body:
+        sourceType: entity-field
+        expression: 'ℹ︎␜entity:node:article␝body␞␟processed'
   c0a1e11a-0002-4a00-8000-000000000002:
     uuid: c0a1e11a-0002-4a00-8000-000000000002
     component_id: js.section

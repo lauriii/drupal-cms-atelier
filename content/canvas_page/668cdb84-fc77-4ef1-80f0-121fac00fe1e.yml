@@ -6,6 +6,12 @@ _meta:
   depends:
     c830eed7-e7a0-4884-a7d5-6b7cb4a93468: file
     1298229c-9e7c-44d5-ae19-7e84c6f8c490: media
+    91cc11da-179e-4464-b093-2bf8ec83cb9e: file
+    9788969e-bbe4-4e49-b8dd-12645cde8f5c: media
+    54b10e19-48ef-4615-a7ad-fe140ca8c621: file
+    7a772863-f13b-4772-b5e9-395057248765: media
+    6732bfb7-544d-4d5c-809f-40e1acb266be: file
+    8288536e-b11d-47d2-997d-acc2ef592ed9: media
 default:
   status:
     -
@@ -169,6 +175,85 @@ default:
         variant: solid
         size: md
         fullWidth: false
+    -
+      parent_uuid: 861f590e-710f-41c8-95ac-3b22bc632b76
+      slot: content
+      uuid: b2d7b916-6012-41af-b19a-c0ff9a2f5272
+      component_id: js.prose
+      inputs:
+        text: '<p>A run is a different problem from a piece. The first one teaches you what the jig should have been; the sixth pays for building it properly. We work in batches of twenty, each checked against a master, because cutting two hundred of anything before you have measured one of them is how you get two hundred of a mistake.</p><p>Everything is designed to come apart. A seat or a back is a part with a number, so a damaged one is a replacement rather than a new chair.</p>'
+    -
+      uuid: 3d0d7032-c6cd-4a4e-9ff2-824f968521e7
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: lg
+        width: default
+        divider: true
+    -
+      parent_uuid: 3d0d7032-c6cd-4a4e-9ff2-824f968521e7
+      slot: content
+      uuid: f838b588-8b24-4f3f-a0ad-4b4e1963680a
+      component_id: js.section_intro
+      inputs:
+        eyebrow: References
+        title: 'Three we can talk about'
+        lede: 'Owners of these are happy to be asked. We will put you in touch.'
+        align: left
+        level: h2
+    -
+      parent_uuid: 3d0d7032-c6cd-4a4e-9ff2-824f968521e7
+      slot: content
+      uuid: 26c7886d-76c2-4230-b3ac-78f44f600d79
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 26c7886d-76c2-4230-b3ac-78f44f600d79
+      slot: content
+      uuid: 101fa507-8ac7-4416-9227-b70db1a9ff5b
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 9788969e-bbe4-4e49-b8dd-12645cde8f5c
+            target_type: media
+        title: 'Two hundred stools'
+        caption: 'Beech, stacking. The Pantry, Winchester, 2024. Four jigs, ten batches of twenty, one master.'
+        sheet: R-12
+        level: h3
+        ratio: tall
+    -
+      parent_uuid: 26c7886d-76c2-4230-b3ac-78f44f600d79
+      slot: content
+      uuid: 3cba9f9d-3288-4acd-962f-fabb535828b8
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 7a772863-f13b-4772-b5e9-395057248765
+            target_type: media
+        title: 'Turned vessels, ninety'
+        caption: 'Ash and sycamore. For a shop in Lewes, 2023. Nine of the first run were kept; the rest went out.'
+        sheet: R-07
+        level: h3
+        ratio: tall
+    -
+      parent_uuid: 26c7886d-76c2-4230-b3ac-78f44f600d79
+      slot: content
+      uuid: 32df4ab8-7c32-4266-b687-641667ae06c7
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 8288536e-b11d-47d2-997d-acc2ef592ed9
+            target_type: media
+        title: 'Café chairs, sixty'
+        caption: 'Steam-bent oak. Bramble & Howe, Petersfield, 2025. Backs unscrew, so a damaged one is a part.'
+        sheet: R-19
+        level: h3
+        ratio: tall
   path:
     -
       alias: /services/small-runs

@@ -1,0 +1,93 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.post_meta
+label: 'Post meta'
+id: js.post_meta
+source: js
+source_local_id: post_meta
+provider: null
+active_version: ab1badbad663cfcb
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        date:
+          required: true
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            -
+              value: 1784646300
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        byline:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'The workshop'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        body:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '<p>Two hundred words of body copy.</p>'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions: {  }
+  9bc86ab29ecb0e83:
+    settings:
+      prop_field_definitions:
+        date:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '1784646300'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        byline:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'The workshop'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        body:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '<p>Two hundred words of body copy.</p>'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions: {  }

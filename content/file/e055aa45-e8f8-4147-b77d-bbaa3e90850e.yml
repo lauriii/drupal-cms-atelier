@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: e055aa45-e8f8-4147-b77d-bbaa3e90850e
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: atelier-ref-restoration-3.jpg
+  uri:
+    -
+      value: 'public://atelier-ref-restoration-3.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 297818
+  status:
+    -
+      value: true

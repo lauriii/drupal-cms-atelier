@@ -6,6 +6,12 @@ _meta:
   depends:
     d8d1517f-6bab-4ae5-8876-4e6aa2961f57: file
     731cb42a-46e3-48a2-b4ef-5fbfab4c46f3: media
+    e814be98-4d11-414d-acb9-914a567de667: file
+    62f8e4aa-d90a-4854-b5b3-1c5a9d44188c: media
+    37248f2f-50de-4635-9819-6170038bdfb2: file
+    fedfd51b-e5e4-4cdc-9bb1-7b810fbce2d7: media
+    e055aa45-e8f8-4147-b77d-bbaa3e90850e: file
+    f53bd614-0d46-4687-85ba-c63f9aa491ea: media
 default:
   status:
     -
@@ -169,6 +175,85 @@ default:
         variant: solid
         size: md
         fullWidth: false
+    -
+      parent_uuid: 84a084e5-0545-474e-851b-489b020f80c7
+      slot: content
+      uuid: cddfe644-d6f5-4f33-bb3e-f63549f0e2d8
+      component_id: js.prose
+      inputs:
+        text: '<p>Most of what arrives needs a joint seeing to rather than a new surface. A loose chair is almost always failed glue in the mortices, and that is a day at the bench. Stripping is the last resort and usually the wrong one: a patina took eighty years to arrive and twenty minutes to remove.</p><p>We look before we quote, and we do not charge for looking. If the hours are worth more than the piece we say so.</p>'
+    -
+      uuid: 52bb4066-cb71-4ce6-9c30-230cfb5ca68b
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: lg
+        width: default
+        divider: true
+    -
+      parent_uuid: 52bb4066-cb71-4ce6-9c30-230cfb5ca68b
+      slot: content
+      uuid: 7be52f7f-1625-4813-8003-c90f12b32780
+      component_id: js.section_intro
+      inputs:
+        eyebrow: References
+        title: 'Three we can talk about'
+        lede: 'Owners of these are happy to be asked. We will put you in touch.'
+        align: left
+        level: h2
+    -
+      parent_uuid: 52bb4066-cb71-4ce6-9c30-230cfb5ca68b
+      slot: content
+      uuid: 751a59c4-f39e-4bfc-bdd4-0d8f470b7267
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 751a59c4-f39e-4bfc-bdd4-0d8f470b7267
+      slot: content
+      uuid: 8b72f198-3676-4168-ba55-161273fa596f
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 62f8e4aa-d90a-4854-b5b3-1c5a9d44188c
+            target_type: media
+        title: 'Windsor chair, c. 1840'
+        caption: 'Elm seat, ash spindles. Petersfield, 2024. Four spindles re-wedged; the surface left exactly as found.'
+        sheet: S-03
+        level: h3
+        ratio: tall
+    -
+      parent_uuid: 751a59c4-f39e-4bfc-bdd4-0d8f470b7267
+      slot: content
+      uuid: ef6fa5cd-a3d2-4a32-82c7-91dfb547974c
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: fedfd51b-e5e4-4cdc-9bb1-7b810fbce2d7
+            target_type: media
+        title: 'Spindle-back, pair'
+        caption: 'Beech. Alton, 2023. New rear legs turned to match wear on the originals, then knocked back with a rag.'
+        sheet: S-11
+        level: h3
+        ratio: tall
+    -
+      parent_uuid: 751a59c4-f39e-4bfc-bdd4-0d8f470b7267
+      slot: content
+      uuid: 39fd14d5-41f8-4e91-877e-5b3cc4bd059c
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f53bd614-0d46-4687-85ba-c63f9aa491ea
+            target_type: media
+        title: 'Dresser top, 1920s'
+        caption: 'Oak. Cole Street, 2025. Cracked cornice let in and glued. Nothing stripped, nothing refinished.'
+        sheet: S-16
+        level: h3
+        ratio: tall
   path:
     -
       alias: /services/restoration

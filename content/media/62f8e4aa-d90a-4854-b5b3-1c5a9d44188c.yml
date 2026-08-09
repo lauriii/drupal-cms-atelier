@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 62f8e4aa-d90a-4854-b5b3-1c5a9d44188c
+  bundle: image
+  default_langcode: en
+  depends:
+    e814be98-4d11-414d-acb9-914a567de667: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Windsor chair, c. 1840'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'An antique wooden chair beside a window.'
+      title: ''
+      width: 1400
+      height: 1923
+      entity: e814be98-4d11-414d-acb9-914a567de667

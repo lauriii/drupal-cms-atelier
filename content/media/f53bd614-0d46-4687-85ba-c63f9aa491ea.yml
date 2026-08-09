@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f53bd614-0d46-4687-85ba-c63f9aa491ea
+  bundle: image
+  default_langcode: en
+  depends:
+    e055aa45-e8f8-4147-b77d-bbaa3e90850e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Dresser top, 1920s'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Stacked plates and a book on a wooden surface.'
+      title: ''
+      width: 1400
+      height: 2100
+      entity: e055aa45-e8f8-4147-b77d-bbaa3e90850e

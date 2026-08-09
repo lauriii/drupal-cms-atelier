@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: post_meta
+name: 'Post meta'
+props:
+  date:
+    type: integer
+    title: Date
+    description: "The published date. Bind this to the entity's `created` field; Drupal hands over a Unix timestamp and this formats it in the site's language."
+    examples:
+      - 1784646300
+  byline:
+    type: string
+    title: Byline
+    description: 'Who wrote it. Left off entirely when empty.'
+    examples:
+      - 'The workshop'
+  body:
+    type: string
+    title: Body
+    description: "Bind this to the entity's body to print a reading time. It is counted from the words, so it stays right when an editor rewrites the piece."
+    examples:
+      - '<p>Two hundred words of body copy.</p>'
+required:
+  - date
+slots: {  }
+js:
+  original: "/**\n * Post meta — the line under a journal title.\n *\n * Drupal hands `created` to a component as a Unix timestamp, and there is no\n * formatted variant to bind instead, so the formatting happens here. That is\n * also why the reading time is computed from the body rather than stored: it\n * cannot drift out of date with the words above it.\n */\nconst MINUTE = 210;\n\nconst formatted = (value) => {\n  const stamp = Number(value);\n  if (!Number.isFinite(stamp) || stamp <= 0) {\n    return '';\n  }\n  // Drupal counts in seconds. A value already in milliseconds would land in\n  // the year 56,000, so the smaller unit is the safe assumption to correct.\n  const date = new Date(stamp < 1e11 ? stamp * 1000 : stamp);\n  return date.toLocaleDateString(\n    typeof document === 'undefined'\n      ? undefined\n      : document.documentElement.lang === 'en'\n        ? 'en-GB'\n        : document.documentElement.lang || undefined,\n    { day: 'numeric', month: 'long', year: 'numeric' },\n  );\n};\n\nconst readingTime = (body) => {\n  if (!body) {\n    return '';\n  }\n  // Strip tags rather than regexing words out of markup, so an attribute\n  // value never counts as prose.\n  const text =\n    typeof DOMParser === 'undefined'\n      ? String(body)\n      : new DOMParser().parseFromString(String(body), 'text/html').body\n          .textContent || '';\n  const words = text.trim().split(/\\s+/).filter(Boolean).length;\n  if (!words) {\n    return '';\n  }\n  return `${Math.max(1, Math.round(words / MINUTE))} min read`;\n};\n\nconst PostMeta = ({ date, byline, body }) => {\n  const parts = [byline, formatted(date), readingTime(body)].filter(Boolean);\n  if (!parts.length) {\n    return null;\n  }\n  return (\n    <p className=\"text-key text-ink-muted flex flex-wrap items-center gap-x-3 gap-y-1\">\n      {parts.map((part, index) => (\n        <span key={part}>\n          {index > 0 ? <span className=\"mr-3 opacity-50\">/</span> : null}\n          {part}\n        </span>\n      ))}\n    </p>\n  );\n};\n\nexport default PostMeta;\n"
+  compiled: "import { jsx, jsxs } from \"react/jsx-runtime\";\nconst MINUTE = 210;\nconst formatted = (value) => {\n  const stamp = Number(value);\n  if (!Number.isFinite(stamp) || stamp <= 0) {\n    return \"\";\n  }\n  const date = new Date(stamp < 1e11 ? stamp * 1e3 : stamp);\n  return date.toLocaleDateString(\n    typeof document === \"undefined\" ? void 0 : document.documentElement.lang === \"en\" ? \"en-GB\" : document.documentElement.lang || void 0,\n    { day: \"numeric\", month: \"long\", year: \"numeric\" }\n  );\n};\nconst readingTime = (body) => {\n  if (!body) {\n    return \"\";\n  }\n  const text = typeof DOMParser === \"undefined\" ? String(body) : new DOMParser().parseFromString(String(body), \"text/html\").body.textContent || \"\";\n  const words = text.trim().split(/\\s+/).filter(Boolean).length;\n  if (!words) {\n    return \"\";\n  }\n  return `${Math.max(1, Math.round(words / MINUTE))} min read`;\n};\nconst PostMeta = ({ date, byline, body }) => {\n  const parts = [byline, formatted(date), readingTime(body)].filter(Boolean);\n  if (!parts.length) {\n    return null;\n  }\n  return /* @__PURE__ */ jsx(\"p\", { className: \"text-key text-ink-muted flex flex-wrap items-center gap-x-3 gap-y-1\", children: parts.map((part, index) => /* @__PURE__ */ jsxs(\"span\", { children: [\n    index > 0 ? /* @__PURE__ */ jsx(\"span\", { className: \"mr-3 opacity-50\", children: \"/\" }) : null,\n    part\n  ] }, part)) });\n};\nexport {\n  PostMeta as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7a772863-f13b-4772-b5e9-395057248765
+  bundle: image
+  default_langcode: en
+  depends:
+    54b10e19-48ef-4615-a7ad-fe140ca8c621: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Turned vessels, ninety'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Turned wooden vessels grouped together.'
+      title: ''
+      width: 1400
+      height: 933
+      entity: 54b10e19-48ef-4615-a7ad-fe140ca8c621

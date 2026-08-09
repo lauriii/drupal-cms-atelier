@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: fedfd51b-e5e4-4cdc-9bb1-7b810fbce2d7
+  bundle: image
+  default_langcode: en
+  depends:
+    37248f2f-50de-4635-9819-6170038bdfb2: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Spindle-back, pair'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A spindle-backed chair against a plain wall.'
+      title: ''
+      width: 1400
+      height: 2100
+      entity: 37248f2f-50de-4635-9819-6170038bdfb2

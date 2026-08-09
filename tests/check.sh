@@ -172,7 +172,7 @@ check 'cms_content search index' 1 \
 # The vendored snapshot of the Atelier code components. Without these the site
 # has no front end of its own until someone runs `canvas push`.
 # @see tests/regenerate-components.sh
-check 'code components shipped' 18 \
+check 'code components shipped' 19 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple());')"
 # `str_contains(..., "tailwindcss")` passed for a build with zero utilities in
 # it. Count real selectors instead.
@@ -239,7 +239,7 @@ check 'recommended add-ons list on disk' 1 \
 check 'Project Browser uses the shipped list' recommended \
   "$(ev 'print \Drupal::config("project_browser.admin_settings")->get("default_source");')"
 
-check 'media shipped' 20 \
+check 'media shipped' 29 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
 check 'hero image reference resolved' 1 \
   "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "4b3d5e15-3a8d-46c8-a502-1255c2b1ad26");
@@ -274,9 +274,9 @@ for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:27" \
             "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9" \
             "Questions:e3409902-6bfb-49e5-b972-f29e66c848d1:/faq:14" \
             "Services:7d18a0aa-b340-483c-b473-ff878d53e804:/services:6" \
-            "Commissions:13595cdc-81b1-47ab-926b-e9c715e6ff07:/services/commissions:17" \
-            "Small runs:668cdb84-fc77-4ef1-80f0-121fac00fe1e:/services/small-runs:17" \
-            "Restoration:3b081827-74f6-4ad8-99d0-41ab13f1fafc:/services/restoration:17"; do
+            "Commissions:13595cdc-81b1-47ab-926b-e9c715e6ff07:/services/commissions:24" \
+            "Small runs:668cdb84-fc77-4ef1-80f0-121fac00fe1e:/services/small-runs:24" \
+            "Restoration:3b081827-74f6-4ad8-99d0-41ab13f1fafc:/services/restoration:24"; do
   IFS=: read -r label uuid alias count <<<"$page"
   check "$label page published at $alias" 1 \
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
@@ -397,6 +397,31 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
     errors="$(printf '%s' "$console_out" | grep -c . | tr -cd '0-9' || true)"
   fi
   check 'no console errors on the front page' 0 "$errors"
+  # The journal index is a list of things you can look at, so a row without its
+  # thumbnail is a regression even though the markup and the fetch both work.
+  agent-browser --session atelier-check open "$SITE_URL/journal" >/dev/null 2>&1 || true
+  sleep 3
+  probe "(function(){var m=document.querySelectorAll('img');for(var i=0;i<m.length;i++){m[i].loading='eager';m[i].src=m[i].src}return m.length})()" >/dev/null
+  sleep 3
+  check 'journal index shows thumbnails' yes \
+    "$(probe "(function(){var t=document.querySelectorAll('li img');if(!t.length)return 'no';for(var i=0;i<t.length;i++){if(!t[i].naturalWidth)return 'no'}return 'yes'})()")"
+
+  # `created` reaches a component as a raw Unix timestamp with no formatted
+  # variant to bind, so the date is formatted client side and can silently
+  # come back as a ten-digit number.
+  agent-browser --session atelier-check open "$SITE_URL/notes-bench-joinery-without-fixings" >/dev/null 2>&1 || true
+  sleep 3
+  check 'journal entry shows a readable date and byline' yes \
+    "$(probe "(function(){var t=document.body.textContent;return /The workshop/.test(t) && /\\d{1,2} [A-Z][a-z]+ \\d{4}/.test(t) && /min read/.test(t) ? 'yes' : 'no'})()")"
+
+  # The submenu is CSS only, so it is one missing class away from a menu that
+  # looks fine and never opens. Reading the computed style straight after
+  # focus catches the transition mid-flight, so let it settle.
+  probe "(function(){var l=document.querySelectorAll('.nav-item');for(var i=0;i<l.length;i++){if(l[i].querySelector('.nav-submenu')){l[i].querySelector('a').focus();return 'ok'}}return 'none'})()" >/dev/null
+  sleep 2
+  check 'services submenu opens on keyboard focus' yes \
+    "$(probe "(function(){var l=document.querySelectorAll('.nav-item');for(var i=0;i<l.length;i++){var s=l[i].querySelector('.nav-submenu');if(s){return getComputedStyle(s).visibility==='visible'&&getComputedStyle(s).opacity==='1'?'yes':'no'}}return 'no'})()")"
+
   # The header is one row wherever it fits and must never push the page sideways.
   agent-browser --session atelier-check set viewport 360 800 >/dev/null 2>&1 || true
   agent-browser --session atelier-check open "$SITE_URL/" >/dev/null 2>&1 || true
@@ -582,7 +607,7 @@ echo "$pass passed, $fail failed"
 # tell "did not run" from "passed" -- this suite has twice reported 0 failed
 # with a third of it silently skipped. Assert the count itself. Raise the floor
 # when you add assertions; lower it only when you delete some on purpose.
-expected=120
+expected=123
 if (( pass + fail < expected )); then
   echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
   echo "A block exited early. Do not read the tally above as a pass." >&2

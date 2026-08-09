@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 54b10e19-48ef-4615-a7ad-fe140ca8c621
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: atelier-ref-runs-2.jpg
+  uri:
+    -
+      value: 'public://atelier-ref-runs-2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 256866
+  status:
+    -
+      value: true

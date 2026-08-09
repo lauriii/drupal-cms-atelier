@@ -6,6 +6,12 @@ _meta:
   depends:
     3557fac7-9d2e-4e0c-acd9-6fb616e9e42c: file
     2fb5efbf-7490-4c1d-8498-f5b1237489e8: media
+    68836066-4b14-4ee6-ab94-0a58404e9ca1: file
+    dae4d2fc-0f4d-49bb-88e2-b71ba7978f6a: media
+    8bfcc6fc-e800-4ebb-9b1d-307cf936e899: file
+    b89493b3-3079-457d-b4c4-484108554830: media
+    b3900c32-a317-45fb-b559-6a78b6d0914a: file
+    d11d6647-13da-4415-9292-4a18750378b3: media
 default:
   status:
     -
@@ -169,6 +175,85 @@ default:
         variant: solid
         size: md
         fullWidth: false
+    -
+      parent_uuid: 549b698e-3056-4d25-b5a8-61e39439478b
+      slot: content
+      uuid: e814867b-03ad-4761-a751-d7051bda93d4
+      component_id: js.prose
+      inputs:
+        text: '<p>A commission starts in the room, not in the workshop. We measure the space, the light, and the route in, then draw the piece at full size for the joints that decide how it will age. The drawing is what you approve; the quote follows it and does not move unless the brief does.</p><p>Most of what we make is one board wide, because a top taken from a single tree moves as one thing. That is why we buy whole boards and carry stock we have no immediate use for.</p>'
+    -
+      uuid: ad841d04-aa09-4fed-a147-7b3454c3c332
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: lg
+        width: default
+        divider: true
+    -
+      parent_uuid: ad841d04-aa09-4fed-a147-7b3454c3c332
+      slot: content
+      uuid: 8880b926-8399-4069-a07e-fd9bdd5dc4b9
+      component_id: js.section_intro
+      inputs:
+        eyebrow: References
+        title: 'Three we can talk about'
+        lede: 'Owners of these are happy to be asked. We will put you in touch.'
+        align: left
+        level: h2
+    -
+      parent_uuid: ad841d04-aa09-4fed-a147-7b3454c3c332
+      slot: content
+      uuid: 47c7bb81-398d-41bf-a388-7d46b6a7b9e9
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 47c7bb81-398d-41bf-a388-7d46b6a7b9e9
+      slot: content
+      uuid: cbe5eaa9-912d-43e1-91c8-91fcd72127d5
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: dae4d2fc-0f4d-49bb-88e2-b71ba7978f6a
+            target_type: media
+        title: 'Dining table and eight chairs'
+        caption: 'Ash from Selborne, 2.6 metres. Oakhanger, 2024. The top is two boards; the client picked the pair off the rack.'
+        sheet: C-41
+        level: h3
+        ratio: tall
+    -
+      parent_uuid: 47c7bb81-398d-41bf-a388-7d46b6a7b9e9
+      slot: content
+      uuid: 434d0944-956a-4ea9-85a6-c55738e1a169
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: b89493b3-3079-457d-b4c4-484108554830
+            target_type: media
+        title: 'Library wall, first floor'
+        caption: 'Douglas fir, 4.2 metres of shelving. Winchester, 2023. Built around a chimney breast 30mm out of square.'
+        sheet: C-38
+        level: h3
+        ratio: tall
+    -
+      parent_uuid: 47c7bb81-398d-41bf-a388-7d46b6a7b9e9
+      slot: content
+      uuid: 4cde403b-0a73-466a-bdfa-d5bd540759bd
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: d11d6647-13da-4415-9292-4a18750378b3
+            target_type: media
+        title: 'Alcove shelves'
+        caption: 'Oak, wall-hung. Alresford, 2025. Scribed on site over two days to a room with no right angles.'
+        sheet: C-52
+        level: h3
+        ratio: tall
   path:
     -
       alias: /services/commissions

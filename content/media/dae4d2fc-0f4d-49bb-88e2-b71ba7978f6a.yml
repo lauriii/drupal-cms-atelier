@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: dae4d2fc-0f4d-49bb-88e2-b71ba7978f6a
+  bundle: image
+  default_langcode: en
+  depends:
+    68836066-4b14-4ee6-ab94-0a58404e9ca1: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Dining table and eight chairs'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Dining table and chairs in a bright room.'
+      title: ''
+      width: 1400
+      height: 2070
+      entity: 68836066-4b14-4ee6-ab94-0a58404e9ca1
