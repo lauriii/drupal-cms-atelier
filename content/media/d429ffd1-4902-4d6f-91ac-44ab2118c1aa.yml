@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: atelier-logo-3.png
+      value: 'Cole Street'
   revision_translation_affected:
     -
       value: true
@@ -25,7 +25,7 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'COLE STREET, letterspaced above a rule'
+      alt: 'Cole Street'
       title: ''
       width: 980
       height: 190

@@ -179,11 +179,11 @@ template's demo content on a public site, keep this table with it:
 
 | File | Photographer | Source |
 | --- | --- | --- |
-| `atelier-work-hero.jpg` | Daniel Chen | https://unsplash.com/photos/brown-wooden-bench-near-window-SoNaNOFT974 |
-| `atelier-work-1.jpg` | Krisztian Tabori | https://unsplash.com/photos/brown-wooden-chair-4nmn1QSbrIA |
-| `atelier-work-2.jpg` | SA . | https://unsplash.com/photos/brown-wooden-chair-near-white-wall-JaQY0oaEL_o |
-| `atelier-work-3.jpg` | ObjectType RAW | https://unsplash.com/photos/a-wooden-chair-with-a-curved-back-wr2xHjbQ00Y |
-| `atelier-work-4.jpg` | yaoyu chen | https://unsplash.com/photos/a-close-up-of-a-wooden-chair-with-a-window-in-the-background-lbiRflem68o |
+| `atelier-work-hero.jpg` | Minh Đức | https://unsplash.com/photos/craftsman-planing-wood-on-a-workbench-P4mxT-OgYho |
+| `atelier-work-1.jpg` | ObjectType RAW | https://unsplash.com/photos/a-wooden-chair-stands-against-a-white-background-ZCarpyNlYPQ |
+| `atelier-work-2.jpg` | Hongly Oung | https://unsplash.com/photos/a-wooden-chair-on-a-white-background-iBxQvOLuKb4 |
+| `atelier-work-3.jpg` | Alinea Design | https://unsplash.com/photos/a-chair-made-out-of-wooden-strips-on-a-white-background-nAcDt_XClxI |
+| `atelier-work-4.jpg` | Minh Đức | https://unsplash.com/photos/carpenters-hands-shaping-wood-on-a-table-saw-RpJIm5Lojyw |
 
 Replace them with your own work before you launch. They are here so a fresh
 install has something to look at, not because a furniture workshop in Hampshire

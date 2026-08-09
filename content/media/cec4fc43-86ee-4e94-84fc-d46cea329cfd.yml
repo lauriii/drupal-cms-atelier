@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: atelier-logo-4.png
+      value: 'Lewes Works'
   revision_translation_affected:
     -
       value: true
@@ -25,7 +25,7 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'Lewes Works, italic above letterspaced caps'
+      alt: 'Lewes Works'
       title: ''
       width: 980
       height: 190

@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'A bench in a room'
+      value: 'At the bench'
   revision_translation_affected:
     -
       value: true
@@ -25,7 +25,7 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'A low timber bench under a round window, with cushions on the floor beside it in afternoon light.'
+      alt: 'A maker planing a board flat at a workbench, hand planes and shavings around the work.'
       title: ''
       width: 1700
       height: 1050

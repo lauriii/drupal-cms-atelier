@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: atelier-logo-2.png
+      value: Northam
   revision_translation_affected:
     -
       value: true
@@ -25,7 +25,7 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'northam, in lowercase sans-serif'
+      alt: Northam
       title: ''
       width: 980
       height: 190

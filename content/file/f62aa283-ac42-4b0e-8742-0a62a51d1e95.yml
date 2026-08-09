@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: 29feba9b-7936-473f-ac59-0210b190bcaa
+  uuid: f62aa283-ac42-4b0e-8742-0a62a51d1e95
   default_langcode: en
 default:
   uid:
@@ -12,7 +12,7 @@ default:
       value: atelier-work-4.jpg
   uri:
     -
-      value: 'public://atelier-work-4.jpg'
+      value: 'public://atelier-work-4_4.jpg'
   filemime:
     -
       value: image/jpeg
