@@ -49,7 +49,7 @@ default:
       component_id: js.section_intro
       inputs:
         eyebrow: 'How it goes'
-        title: 'Four visits and one drawing'
+        title: 'Measure, draw, then cut'
         lede: 'Nothing goes on the saw until you have signed the drawing.'
         align: left
         level: h2
@@ -121,8 +121,8 @@ default:
       uuid: 1a570dfb-b7d9-4016-b344-d299fb661bdb
       component_id: js.stat
       inputs:
-        value: '14'
-        label: 'weeks from drawing to delivery'
+        value: '0'
+        label: 'changes to the price after the drawing'
     -
       parent_uuid: ef20e8d7-c68d-42bd-b9a9-0423065663fa
       slot: content
@@ -162,8 +162,8 @@ default:
       uuid: afbd02c5-2591-4263-b36e-32bc2da40ee0
       component_id: js.cta
       inputs:
-        title: 'Start with a photograph'
-        lede: 'A photograph of the room and a rough size is enough for a first drawing.'
+        title: 'Book a visit'
+        lede: 'An hour in the room with a tape and a camera, and we draw from that.'
     -
       parent_uuid: afbd02c5-2591-4263-b36e-32bc2da40ee0
       slot: content
@@ -209,12 +209,12 @@ default:
       uuid: cbe5eaa9-912d-43e1-91c8-91fcd72127d5
       component_id: js.figure
       inputs:
+        title: 'Table and chairs, garden room'
+        caption: 'Ash, Oakhanger, 2024. The client kept their own chairs; we made the table and two more to sit with them.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: dae4d2fc-0f4d-49bb-88e2-b71ba7978f6a
             target_type: media
-        title: 'Dining table and eight chairs'
-        caption: 'Ash from Selborne, 2.6 metres. Oakhanger, 2024. The top is two boards; the client picked the pair off the rack.'
         sheet: C-41
         level: h3
         ratio: tall
@@ -224,12 +224,12 @@ default:
       uuid: 434d0944-956a-4ea9-85a6-c55738e1a169
       component_id: js.figure
       inputs:
+        title: 'Library wall, first floor'
+        caption: "Douglas fir carcasses, painted at the client's request. Winchester, 2023. Built around a chimney breast 30mm out of square."
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: b89493b3-3079-457d-b4c4-484108554830
             target_type: media
-        title: 'Library wall, first floor'
-        caption: 'Douglas fir, 4.2 metres of shelving. Winchester, 2023. Built around a chimney breast 30mm out of square.'
         sheet: C-38
         level: h3
         ratio: tall

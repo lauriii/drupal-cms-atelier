@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: disclosure
+name: Disclosure
+props:
+  title:
+    type: string
+    title: Title
+    description: 'The question, or whatever the reader is deciding to open.'
+    examples:
+      - 'How long does a commission take?'
+  text:
+    type: string
+    title: Text
+    description: 'The answer. Rich text, so it can hold a list or a link.'
+    examples:
+      - '<p>Between ten and sixteen weeks from the deposit.</p>'
+  level:
+    type: string
+    enum:
+      - h2
+      - h3
+      - h4
+    'meta:enum':
+      h2: 'Heading 2'
+      h3: 'Heading 3'
+      h4: 'Heading 4'
+    title: Level
+    description: 'The heading level for the title. Pick the one that keeps the page outline in order.'
+    examples:
+      - h3
+  open:
+    type: boolean
+    title: Open
+    description: 'Start open. Use it on the first one if the page needs to show what an answer looks like; otherwise leave them all shut.'
+    examples:
+      - false
+required:
+  - title
+  - level
+slots: {  }
+js:
+  original: "import { FormattedText } from 'drupal-canvas';\n\n/**\n * Disclosure — one question, opening onto its answer.\n *\n * Built on <details>, not on state and a click handler. The element already\n * knows how to open on Enter and Space, already exposes expanded/collapsed to\n * a screen reader, and already works before the island hydrates — which\n * matters here because these components are client=\"only\", so a JavaScript\n * accordion is a list of unreadable titles until the bundle lands.\n *\n * The marker is a rotating plus rather than a chevron glyph, so it needs no\n * icon font and no SVG, and it is hidden from assistive tech because <details>\n * announces its own state.\n */\nconst Disclosure = ({ title, text, level, open }) => {\n  const Heading = level === 'h2' ? 'h2' : level === 'h4' ? 'h4' : 'h3';\n  return (\n    <details className=\"group border-hairline border-b\" open={open === true}>\n      <summary className=\"flex cursor-pointer list-none items-baseline justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden\">\n        <Heading className=\"text-[length:var(--text-title)] leading-snug font-medium\">\n          {title}\n        </Heading>\n        <span\n          aria-hidden=\"true\"\n          className=\"text-ink-muted shrink-0 text-[length:var(--text-title)] leading-none font-light transition-transform duration-150 group-open:rotate-45\"\n        >\n          +\n        </span>\n      </summary>\n      {text ? (\n        <div className=\"text-[length:var(--text-body)] text-ink max-w-measure pb-6 leading-[1.7] [&_a]:underline [&_a]:underline-offset-4 [&_li]:mt-2 [&_p]:mt-4 [&>*:first-child]:mt-0 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6\">\n          <FormattedText>{text}</FormattedText>\n        </div>\n      ) : null}\n    </details>\n  );\n};\n\nexport default Disclosure;\n"
+  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nimport { FormattedText } from \"drupal-canvas\";\nconst Disclosure = ({ title, text, level, open }) => {\n  const Heading = level === \"h2\" ? \"h2\" : level === \"h4\" ? \"h4\" : \"h3\";\n  return /* @__PURE__ */ jsxs(\"details\", { className: \"group border-hairline border-b\", open: open === true, children: [\n    /* @__PURE__ */ jsxs(\"summary\", { className: \"flex cursor-pointer list-none items-baseline justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden\", children: [\n      /* @__PURE__ */ jsx(Heading, { className: \"text-[length:var(--text-title)] leading-snug font-medium\", children: title }),\n      /* @__PURE__ */ jsx(\n        \"span\",\n        {\n          \"aria-hidden\": \"true\",\n          className: \"text-ink-muted shrink-0 text-[length:var(--text-title)] leading-none font-light transition-transform duration-150 group-open:rotate-45\",\n          children: \"+\"\n        }\n      )\n    ] }),\n    text ? /* @__PURE__ */ jsx(\"div\", { className: \"text-[length:var(--text-body)] text-ink max-w-measure pb-6 leading-[1.7] [&_a]:underline [&_a]:underline-offset-4 [&_li]:mt-2 [&_p]:mt-4 [&>*:first-child]:mt-0 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6\", children: /* @__PURE__ */ jsx(FormattedText, { children: text }) }) : null\n  ] });\n};\nexport {\n  Disclosure as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }

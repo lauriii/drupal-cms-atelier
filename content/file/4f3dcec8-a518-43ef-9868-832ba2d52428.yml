@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4f3dcec8-a518-43ef-9868-832ba2d52428
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: atelier-workshop-door.jpg
+  uri:
+    -
+      value: 'public://atelier-workshop-door.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 554656
+  status:
+    -
+      value: true

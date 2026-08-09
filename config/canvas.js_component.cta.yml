@@ -4,6 +4,20 @@ dependencies: {  }
 machineName: cta
 name: 'Call to action'
 props:
+  level:
+    type: string
+    enum:
+      - h2
+      - h3
+      - h4
+    'meta:enum':
+      h2: 'Heading 2'
+      h3: 'Heading 3'
+      h4: 'Heading 4'
+    title: Level
+    description: 'The heading level this renders. Pick the one that keeps the page outline in order; it does not change the size.'
+    examples:
+      - h2
   title:
     type: string
     title: Title
@@ -21,8 +35,8 @@ slots:
   content:
     title: Actions
 js:
-  original: "/**\n * Call to action — the closing ask.\n *\n * Deliberately owns no background, border or page padding: the Section it sits\n * in supplies the band. A component that brings its own ground ends up drawing\n * a wash card on a wash band, with its borders floating free of the edges.\n */\nconst Cta = ({ title, lede, content }) => (\n  <div className=\"mx-auto max-w-intro text-center\">\n    <h2 className=\"font-display tracking-display text-[clamp(2.25rem,4.6vw,3.5rem)] leading-[1.05] font-light text-balance\">\n      {title}\n    </h2>\n    {lede ? (\n      <p className=\"text-[length:var(--text-body)] text-ink mx-auto mt-6 max-w-[34rem] leading-[1.7] text-pretty\">\n        {lede}\n      </p>\n    ) : null}\n    {content ? (\n      <div className=\"mt-10 flex flex-wrap justify-center gap-6\">{content}</div>\n    ) : null}\n  </div>\n);\n\nexport default Cta;\n"
-  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nconst Cta = ({ title, lede, content }) => /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto max-w-intro text-center\", children: [\n  /* @__PURE__ */ jsx(\"h2\", { className: \"font-display tracking-display text-[clamp(2.25rem,4.6vw,3.5rem)] leading-[1.05] font-light text-balance\", children: title }),\n  lede ? /* @__PURE__ */ jsx(\"p\", { className: \"text-[length:var(--text-body)] text-ink mx-auto mt-6 max-w-[34rem] leading-[1.7] text-pretty\", children: lede }) : null,\n  content ? /* @__PURE__ */ jsx(\"div\", { className: \"mt-10 flex flex-wrap justify-center gap-6\", children: content }) : null\n] });\nexport {\n  Cta as default\n};\n"
+  original: "/**\n * Call to action — the closing ask.\n *\n * Deliberately owns no background, border or page padding: the Section it sits\n * in supplies the band. A component that brings its own ground ends up drawing\n * a wash card on a wash band, with its borders floating free of the edges.\n */\nconst Cta = ({ title, lede, content, level }) => {\n  // Every other heading component takes a level so an editor can keep the\n  // outline in order. This one did not, and it closes six of the ten pages,\n  // so it was the reason a page could end h1 -> h3 -> h2.\n  const Heading = level === 'h3' ? 'h3' : level === 'h4' ? 'h4' : 'h2';\n  return (\n  <div className=\"mx-auto max-w-intro text-center\">\n    <Heading className=\"font-display tracking-display text-[length:var(--text-display-sm)] leading-[1.05] font-light text-balance\">\n      {title}\n    </Heading>\n    {lede ? (\n      <p className=\"text-[length:var(--text-body)] text-ink mx-auto mt-6 max-w-[34rem] leading-[1.7] text-pretty\">\n        {lede}\n      </p>\n    ) : null}\n    {content ? (\n      <div className=\"mt-10 flex flex-wrap justify-center gap-6\">{content}</div>\n    ) : null}\n  </div>\n  );\n};\n\nexport default Cta;\n"
+  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nconst Cta = ({ title, lede, content, level }) => {\n  const Heading = level === \"h3\" ? \"h3\" : level === \"h4\" ? \"h4\" : \"h2\";\n  return /* @__PURE__ */ jsxs(\"div\", { className: \"mx-auto max-w-intro text-center\", children: [\n    /* @__PURE__ */ jsx(Heading, { className: \"font-display tracking-display text-[length:var(--text-display-sm)] leading-[1.05] font-light text-balance\", children: title }),\n    lede ? /* @__PURE__ */ jsx(\"p\", { className: \"text-[length:var(--text-body)] text-ink mx-auto mt-6 max-w-[34rem] leading-[1.7] text-pretty\", children: lede }) : null,\n    content ? /* @__PURE__ */ jsx(\"div\", { className: \"mt-10 flex flex-wrap justify-center gap-6\", children: content }) : null\n  ] });\n};\nexport {\n  Cta as default\n};\n"
 css:
   original: ''
   compiled: ''

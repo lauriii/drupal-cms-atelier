@@ -21,8 +21,8 @@ required:
   - label
 slots: {  }
 js:
-  original: "/** Stat — a figure and what it measures. */\nconst Stat = ({ value, label }) => (\n  <div>\n    <p className=\"font-display tracking-display text-[clamp(2.75rem,5vw,4rem)] leading-none font-light\">\n      {value}\n    </p>\n    <p className=\"text-[length:var(--text-caption)] text-ink-muted mt-4 leading-snug\">{label}</p>\n  </div>\n);\n\nexport default Stat;\n"
-  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nconst Stat = ({ value, label }) => /* @__PURE__ */ jsxs(\"div\", { children: [\n  /* @__PURE__ */ jsx(\"p\", { className: \"font-display tracking-display text-[clamp(2.75rem,5vw,4rem)] leading-none font-light\", children: value }),\n  /* @__PURE__ */ jsx(\"p\", { className: \"text-[length:var(--text-caption)] text-ink-muted mt-4 leading-snug\", children: label })\n] });\nexport {\n  Stat as default\n};\n"
+  original: "/** Stat — a figure and what it measures. */\nconst Stat = ({ value, label }) => (\n  <div>\n    <p className=\"font-display tracking-display text-[length:var(--text-figure)] leading-none font-light\">\n      {value}\n    </p>\n    <p className=\"text-[length:var(--text-caption)] text-ink-muted mt-4 leading-snug\">{label}</p>\n  </div>\n);\n\nexport default Stat;\n"
+  compiled: "import { jsxs, jsx } from \"react/jsx-runtime\";\nconst Stat = ({ value, label }) => /* @__PURE__ */ jsxs(\"div\", { children: [\n  /* @__PURE__ */ jsx(\"p\", { className: \"font-display tracking-display text-[length:var(--text-figure)] leading-none font-light\", children: value }),\n  /* @__PURE__ */ jsx(\"p\", { className: \"text-[length:var(--text-caption)] text-ink-muted mt-4 leading-snug\", children: label })\n] });\nexport {\n  Stat as default\n};\n"
 css:
   original: ''
   compiled: ''

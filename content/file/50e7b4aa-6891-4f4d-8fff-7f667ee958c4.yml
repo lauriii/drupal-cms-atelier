@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 50e7b4aa-6891-4f4d-8fff-7f667ee958c4
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: atelier-workshop-inside.jpg
+  uri:
+    -
+      value: 'public://atelier-workshop-inside.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 667168
+  status:
+    -
+      value: true

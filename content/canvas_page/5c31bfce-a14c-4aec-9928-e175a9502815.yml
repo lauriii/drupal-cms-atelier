@@ -3,6 +3,11 @@ _meta:
   entity_type: canvas_page
   uuid: 5c31bfce-a14c-4aec-9928-e175a9502815
   default_langcode: en
+  depends:
+    50e7b4aa-6891-4f4d-8fff-7f667ee958c4: file
+    5eb80978-a637-4707-8b4d-8b6e9103084c: media
+    4f3dcec8-a518-43ef-9868-832ba2d52428: file
+    f1a3c47b-6333-499e-bcf4-09eac059e143: media
 default:
   status:
     -
@@ -21,6 +26,10 @@ default:
         eyebrow: Contact
         title: 'Come and see the workshop'
         lede: 'The workshop is open Tuesday to Friday. Come and stand next to the timber before you decide anything.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 5eb80978-a637-4707-8b4d-8b6e9103084c
+            target_type: media
     -
       uuid: 5d6e8a91-0019-4a00-8000-000000000019
       component_id: js.section
@@ -97,6 +106,20 @@ default:
         variant: solid
         size: lg
         fullWidth: false
+    -
+      parent_uuid: 5d6e8a91-0019-4a00-8000-000000000019
+      slot: content
+      uuid: 4c24e5f4-2b1b-41b0-b2a4-e1209922527e
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: f1a3c47b-6333-499e-bcf4-09eac059e143
+            target_type: media
+        title: 'What to look for'
+        caption: 'Unit 4 is the one with the sliding door, at the far end of the yard. If it is open we are in.'
+        level: h3
+        ratio: wide
   path:
     -
       alias: /contact

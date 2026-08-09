@@ -224,12 +224,12 @@ default:
       uuid: ef6fa5cd-a3d2-4a32-82c7-91dfb547974c
       component_id: js.figure
       inputs:
+        title: 'Spindle-back chair'
+        caption: 'Beech. Alton, 2023. A new rear leg turned to match the wear on the originals, then knocked back with a rag.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: fedfd51b-e5e4-4cdc-9bb1-7b810fbce2d7
             target_type: media
-        title: 'Spindle-back, pair'
-        caption: 'Beech. Alton, 2023. New rear legs turned to match wear on the originals, then knocked back with a rag.'
         sheet: S-11
         level: h3
         ratio: tall
@@ -239,12 +239,12 @@ default:
       uuid: 39fd14d5-41f8-4e91-877e-5b3cc4bd059c
       component_id: js.figure
       inputs:
+        title: 'Dresser, 1920s, back in use'
+        caption: 'Oak. Cole Street, 2025. Cracked cornice let in and glued. Nothing stripped; it holds the everyday china again.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: f53bd614-0d46-4687-85ba-c63f9aa491ea
             target_type: media
-        title: 'Dresser top, 1920s'
-        caption: 'Oak. Cole Street, 2025. Cracked cornice let in and glued. Nothing stripped, nothing refinished.'
         sheet: S-16
         level: h3
         ratio: tall

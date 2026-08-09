@@ -141,7 +141,7 @@ default:
       inputs:
         marker: '3'
         title: 'We make it and deliver it'
-        text: 'Eight to sixteen weeks, depending on the timber and how dry it is. We deliver and install it ourselves.'
+        text: 'Ten to sixteen weeks, depending on the timber and how dry it is. We deliver and install it ourselves.'
         framed: false
         level: h3
     -

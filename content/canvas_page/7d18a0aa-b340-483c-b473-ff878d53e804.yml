@@ -19,8 +19,8 @@ default:
       component_id: js.hero
       inputs:
         eyebrow: Services
-        title: 'Three things, and we turn down the rest'
-        lede: 'Six of us in one building can still only be in three places. These are the three.'
+        title: 'Three kinds of work'
+        lede: 'Each one below says what it involves, how long it takes, and what we need from you before we can quote.'
     -
       uuid: d78e61cf-eefb-4410-acb1-60f3c03f24e2
       component_id: js.section
@@ -46,7 +46,7 @@ default:
         title: Commissions
         text: '<p>One-off pieces for a room you already live in. We visit, measure, and draw before we quote. <a href="/services/commissions">More</a></p>'
         framed: true
-        level: h3
+        level: h2
     -
       parent_uuid: 1de6760a-2040-4e1d-a8b7-d5cd205b69ed
       slot: content
@@ -56,7 +56,7 @@ default:
         title: 'Small runs'
         text: '<p>Batches of twenty to two hundred, for restaurants, studios and shops that need the same piece repeatedly. <a href="/services/small-runs">More</a></p>'
         framed: true
-        level: h3
+        level: h2
     -
       parent_uuid: 1de6760a-2040-4e1d-a8b7-d5cd205b69ed
       slot: content
@@ -66,7 +66,7 @@ default:
         title: Restoration
         text: '<p>Older furniture back into use, with new joinery where the old has given up. <a href="/services/restoration">More</a></p>'
         framed: true
-        level: h3
+        level: h2
   path:
     -
       alias: /services

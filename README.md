@@ -1,7 +1,7 @@
 # Atelier
 
 A Drupal CMS site template that installs a working, styled site built entirely
-from Drupal Canvas code components — eighteen of them, vendored as config, plus
+from Drupal Canvas code components — nineteen of them, vendored as config, plus
 five pages composed from them.
 
 There is no front-end theme in the usual sense. The theme is a shell that emits
@@ -147,8 +147,9 @@ names.
 
 `canvas push` replaces all of it with whatever is in your codebase.
 
-**Pages, so the site is not empty.** Five Canvas pages, three of them in the
-main menu, all composed from the shipped components:
+**Pages, so the site is not empty.** Ten Canvas pages -- home, studio,
+services and one per service, the journal index, questions, contact and
+privacy -- all composed from the shipped components:
 
 - **Home** at `/home`, set as the front page — hero, a three-up of what the
   studio does, a row of work with captions, a logo row, the journal index
@@ -169,7 +170,7 @@ this template does not install.
 
 Six articles ship as the journal's contents, with pinned publication dates —
 without them every article imports on the install timestamp and the journal
-reads as three posts filed on the same afternoon.
+reads as six posts filed on the same afternoon.
 
 The imagery ships too, as `file` and `media` content plus the JPEGs
 themselves. The photographs come from Unsplash, whose licence allows free use
@@ -209,7 +210,7 @@ entities instead of breaking when an alias changes.
 
 ## The components
 
-Eighteen, and no more: the point is a small library composed well, not breadth.
+Nineteen, and no more: the point is a small library composed well, not breadth.
 
 | Component | What it is |
 | --- | --- |
@@ -219,6 +220,7 @@ Eighteen, and no more: the point is a small library composed well, not breadth.
 | `grid` | Two, three, or four columns on a wide screen, one on a phone. |
 | `feature` | One idea: an optional marker, a heading, and text. Takes a heading level. |
 | `figure` | A drawing or photograph with a title and caption, optionally linked. Takes a heading level. |
+| `post_meta` | The byline, date and reading time under a journal title. Formats the timestamp Drupal hands it, and counts the reading time from the body so it cannot drift from the words above it. |
 | `prose` | Long-form rich text, styled against the same tokens as everything else. |
 | `stat` | A figure and what it measures. The value is a string, so "90 a year" works. |
 | `testimonial` | A quotation, attributed. Quotation marks come from the page language. |
@@ -342,7 +344,7 @@ CANVAS_CLIENT_SECRET=your-secret
 
 ## Change a component
 
-The eighteen components are already on the site, so the first move is to pull
+The nineteen components are already on the site, so the first move is to pull
 them into a codebase rather than to push something new:
 
 ```
@@ -515,12 +517,12 @@ against a disposable site.
 Two regeneration scripts keep the vendored snapshot honest, and both are meant
 to be run against a site you have edited by hand, with the diff reviewed:
 
-- `tests/regenerate-components.sh` — the eighteen components, their wrappers,
+- `tests/regenerate-components.sh` — the nineteen components, their wrappers,
   the header and footer page regions, and the Tailwind build.
 - `tests/regenerate-content.sh` — the five pages, the menu, the media and the
   articles. It also re-pins the article publication dates, which
   `drush content:export` drops: without them every article imports on the
-  install timestamp and the journal reads as three posts filed on the same
+  install timestamp and the journal reads as six posts filed on the same
   afternoon.
 
 ## Where this differs from the marketplace templates

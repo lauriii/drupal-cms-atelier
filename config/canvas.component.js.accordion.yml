@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.accordion
+label: Accordion
+id: js.accordion
+source: js
+source_local_id: accordion
+provider: null
+active_version: a9312a3ed804a1cb
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Questions
+          description: 'Disclosures, stacked. Each one rules off from the next.'

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: accordion
+name: Accordion
+props: {  }
+required: {  }
+slots:
+  content:
+    title: Questions
+    description: 'Disclosures, stacked. Each one rules off from the next.'
+js:
+  original: "/**\n * Accordion — a ruled stack of disclosures.\n *\n * The wrapper exists to draw the top rule and to close the gap Section puts\n * between its children: a list of questions is one object, and rhythm spacing\n * between the rows would break it into eight.\n */\nconst Accordion = ({ content }) => (\n  <div className=\"border-hairline max-w-[58rem] border-t\">{content}</div>\n);\n\nexport default Accordion;\n"
+  compiled: "import { jsx } from \"react/jsx-runtime\";\nconst Accordion = ({ content }) => /* @__PURE__ */ jsx(\"div\", { className: \"border-hairline max-w-[58rem] border-t\", children: content });\nexport {\n  Accordion as default\n};\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: {  }
