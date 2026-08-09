@@ -26,7 +26,7 @@ default:
       component_id: js.section
       inputs:
         background: paper
-        spacing: md
+        spacing: sm
         width: wide
         divider: false
     -
