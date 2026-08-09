@@ -253,19 +253,28 @@ check 'article dates are distinct' 3 \
 
 # Buttons are checked the same way menu links are, and for the same reason: a
 # relabelling pass once left the front page's primary button promising a page
-# and opening a mail client. Every internal button URL must resolve, and one
-# label must not carry two destinations.
-check 'every button URL resolves' 0 \
+# and opening a mail client. Checking that the URL resolves is not enough —
+# `mailto:` always "resolves" — so the label has to agree with the scheme.
+check 'every button URL resolves and matches its label' 0 \
   "$(ev '$bad = 0;
-    $seen = [];
-    $check = function (array $inputs) use (&$bad, &$seen) {
+    $check = function (array $inputs) use (&$bad) {
       $url = $inputs["url"] ?? "";
       $label = $inputs["label"] ?? "";
       if ($url === "") { return; }
-      if (isset($seen[$label]) && $seen[$label] !== $url) { $bad++; }
-      $seen[$label] = $url;
-      if (!str_starts_with($url, "/")) { return; }
-      if (!\Drupal::service("path.validator")->isValid($url)) { $bad++; }
+      // A label that names a destination must not open a mail client, and a
+      // label that asks for contact must not open a page.
+      $asksToWrite = (bool) preg_match("/enquir|email|contact|get in touch/i", $label);
+      $namesAPage = (bool) preg_match("/read|see|about|view|browse|studio|journal/i", $label);
+      if (str_starts_with($url, "mailto:")) {
+        if (!$asksToWrite || $namesAPage) { $bad++; }
+        return;
+      }
+      if ($asksToWrite && !$namesAPage) { $bad++; }
+      if (str_starts_with($url, "/")) {
+        if (!\Drupal::service("path.validator")->isValid($url)) { $bad++; }
+        return;
+      }
+      if (!str_starts_with($url, "http://") && !str_starts_with($url, "https://")) { $bad++; }
     };
     foreach (\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple() as $p) {
       foreach ($p->get("components")->getValue() as $i) {
@@ -280,6 +289,18 @@ check 'every button URL resolves' 0 \
       }
     }
     print $bad;')"
+
+# The footer menu is rendered by the same component as the main one, and its
+# only link points at a node that ships unpublished by default. An anonymous
+# visitor then gets an empty labelled landmark and no privacy statement.
+check 'footer menu has a link for anonymous visitors' 1 \
+  "$(ev '$links = \Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name" => "footer"]);
+    $visible = 0;
+    foreach ($links as $link) {
+      $url = $link->getUrlObject();
+      if ($url->access(\Drupal\user\Entity\User::getAnonymousUser())) { $visible++; }
+    }
+    print (int) ($visible > 0);')"
 
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \

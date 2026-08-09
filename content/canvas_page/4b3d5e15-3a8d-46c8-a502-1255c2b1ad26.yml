@@ -249,7 +249,7 @@ default:
         background: paper
         spacing: md
         width: default
-        divider: true
+        divider: false
     -
       parent_uuid: 50b24838-0022-4a00-8000-000000000022
       slot: content
@@ -275,7 +275,7 @@ default:
         background: wash
         spacing: md
         width: default
-        divider: false
+        divider: true
     -
       parent_uuid: 20d8bcb7-0025-4a00-8000-000000000025
       slot: content
@@ -292,15 +292,15 @@ default:
         background: wash
         spacing: sm
         width: default
-        divider: true
+        divider: false
     -
       parent_uuid: ced6dd9b-0027-4a00-8000-000000000027
       slot: content
       uuid: b9d1ed0d-0028-4a00-8000-000000000028
       component_id: js.cta
       inputs:
-        title: 'Tell us what the piece has to do'
-        lede: 'Send a photograph of the room and a rough size. That is enough for us to draw something.'
+        title: 'Start with a photograph'
+        lede: 'A photograph of the room and a rough size is enough for us to draw something. The drawing is yours either way.'
     -
       parent_uuid: b9d1ed0d-0028-4a00-8000-000000000028
       slot: content

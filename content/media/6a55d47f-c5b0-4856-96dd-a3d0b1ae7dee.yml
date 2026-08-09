@@ -25,8 +25,8 @@ default:
       alias: null
   field_media_image:
     -
-      alt: Stackline
+      alt: 'northam, in lowercase sans-serif'
       title: ''
-      width: 420
+      width: 620
       height: 80
       entity: 50fc8aa3-61b5-4698-8fc5-6ca90ce9ac3d

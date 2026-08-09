@@ -42,7 +42,7 @@ default:
         background: paper
         spacing: sm
         width: default
-        divider: true
+        divider: false
     -
       parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
       slot: content
@@ -117,7 +117,7 @@ default:
         background: paper
         spacing: md
         width: default
-        divider: false
+        divider: true
     -
       parent_uuid: 7f2a1c33-0011-4a00-8000-000000000011
       slot: content
@@ -146,9 +146,9 @@ default:
       uuid: 7f2a1c33-0014-4a00-8000-000000000014
       component_id: js.testimonial
       inputs:
-        quote: 'They talked me out of what I asked for and drew something better on the back of the delivery note. I kept the note.'
+        quote: 'Four years on I have stopped noticing it, which I think is the point.'
         name: 'Ruth Okafor'
-        role: 'Kitchen, Alton'
+        role: 'Kitchen table, Alton'
         avatar: ''
   path:
     -

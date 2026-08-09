@@ -28,7 +28,7 @@ default:
         background: paper
         spacing: sm
         width: default
-        divider: true
+        divider: false
     -
       parent_uuid: 5d6e8a91-0019-4a00-8000-000000000019
       slot: content
