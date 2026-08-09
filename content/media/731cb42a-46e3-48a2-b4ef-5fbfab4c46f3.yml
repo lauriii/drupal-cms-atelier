@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'The machine bay'
+      value: 'Two of us on an armchair'
   revision_translation_affected:
     -
       value: true
@@ -25,7 +25,7 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'An old workshop machine under a low light.'
+      alt: 'Two people working on a leather armchair in a workshop.'
       title: ''
       width: 1800
       height: 2697
