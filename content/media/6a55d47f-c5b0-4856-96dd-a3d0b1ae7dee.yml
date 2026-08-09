@@ -27,6 +27,6 @@ default:
     -
       alt: 'northam, in lowercase sans-serif'
       title: ''
-      width: 445
-      height: 144
+      width: 980
+      height: 190
       entity: 7a0ed33f-9dd9-4ec5-9025-ab7d6de42cb8

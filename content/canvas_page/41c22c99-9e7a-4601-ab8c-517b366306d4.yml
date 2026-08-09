@@ -72,7 +72,7 @@ default:
         sheet: Timber
         title: 'Quartersawn ash'
         caption: 'Cut so the ray figure runs across the board. It costs more per cube and moves less in a warm room.'
-        level: h3
+        level: h2
         url: /sourcing-ash-single-hampshire-woodland
     -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005
@@ -174,24 +174,24 @@ default:
       uuid: b7d40e91-0004-4a00-8000-000000000004
       component_id: js.stat
       inputs:
-        value: '2009'
-        label: 'The year we started, in a rented bay behind a car repair shop'
+        value: '11'
+        label: 'Miles to the woodland near Selborne that mills our ash'
     -
       parent_uuid: b7d40e91-0002-4a00-8000-000000000002
       slot: content
       uuid: b7d40e91-0005-4a00-8000-000000000005
       component_id: js.stat
       inputs:
-        value: Six
-        label: 'People in the workshop, including both of the founders'
+        value: '1 in 3'
+        label: 'Commissions that come from someone we have made for before'
     -
       parent_uuid: b7d40e91-0002-4a00-8000-000000000002
       slot: content
       uuid: b7d40e91-0006-4a00-8000-000000000006
       component_id: js.stat
       inputs:
-        value: ~90
-        label: 'Pieces a year, which is as many as six people can make properly'
+        value: '16'
+        label: 'Weeks for the longest job we took on this year'
   path:
     -
       alias: /studio

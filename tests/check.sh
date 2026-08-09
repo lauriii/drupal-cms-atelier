@@ -230,10 +230,10 @@ check 'privacy page published' 1 \
   "$(ev '$p = \Drupal::entityTypeManager()->getStorage("canvas_page")->loadByProperties(["title" => "Privacy"]);
     $p = reset($p);
     print (int) ($p && $p->isPublished() && $p->get("path")->alias === "/privacy");')"
-for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:29" \
+for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:30" \
             "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:19" \
             "Journal:1797e924-d08c-40da-8f12-69155d704b44:/journal:3" \
-            "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:10"; do
+            "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9"; do
   IFS=: read -r label uuid alias count <<<"$page"
   check "$label page published at $alias" 1 \
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
@@ -324,6 +324,17 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
     "$(probe "document.querySelector('h1') && /Six people/.test(document.querySelector('h1').textContent) ? 'yes' : 'no'")"
   check 'footer renders its links' yes \
     "$(probe "document.querySelectorAll('footer a').length > 0 ? 'yes' : 'no'")"
+  # Three components take a `level` prop so an editor can keep headings in
+  # order; nothing asserted that the shipped content actually does. A skipped
+  # level went out on the studio page while those props existed.
+  for hp in / /studio /journal /contact; do
+    agent-browser --session atelier-check open "$SITE_URL$hp" >/dev/null 2>&1 || true
+    sleep 2
+    check "heading order intact on $hp" yes \
+      "$(probe "(function(){var l=Array.from(document.querySelectorAll('h1,h2,h3,h4')).map(function(h){return +h.tagName[1]});for(var i=1;i<l.length;i++){if(l[i]-l[i-1]>1)return 'no'}return l.length&&l[0]===1?'yes':'no'})()")"
+  done
+  agent-browser --session atelier-check open "$SITE_URL/" >/dev/null 2>&1 || true
+  sleep 2
   check 'no console errors on the front page' 0 \
     "$(agent-browser --session atelier-check console --level error 2>/dev/null | grep -c . | tr -cd '0-9')"
   # The header is one row wherever it fits and must never push the page sideways.
