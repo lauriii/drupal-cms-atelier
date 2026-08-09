@@ -53,7 +53,6 @@ default:
         lede: 'Most of what comes in needs a joint seeing to, not a new surface.'
         align: left
         level: h2
-        note: 'Looking is free'
     -
       parent_uuid: 84a084e5-0545-474e-851b-489b020f80c7
       slot: content
@@ -176,13 +175,6 @@ default:
         variant: solid
         size: md
         fullWidth: false
-    -
-      parent_uuid: 84a084e5-0545-474e-851b-489b020f80c7
-      slot: content
-      uuid: cddfe644-d6f5-4f33-bb3e-f63549f0e2d8
-      component_id: js.prose
-      inputs:
-        text: '<p>Most of what arrives needs a joint seeing to rather than a new surface. A loose chair is almost always failed glue in the mortices, and that is a day at the bench. Stripping is the last resort and usually the wrong one: a patina took eighty years to arrive and twenty minutes to remove.</p><p>We look before we quote, and we do not charge for looking. If the hours are worth more than the piece we say so.</p>'
     -
       uuid: 52bb4066-cb71-4ce6-9c30-230cfb5ca68b
       component_id: js.section

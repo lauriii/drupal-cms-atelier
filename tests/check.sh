@@ -274,9 +274,9 @@ for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:27" \
             "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9" \
             "Questions:e3409902-6bfb-49e5-b972-f29e66c848d1:/faq:14" \
             "Services:7d18a0aa-b340-483c-b473-ff878d53e804:/services:6" \
-            "Commissions:13595cdc-81b1-47ab-926b-e9c715e6ff07:/services/commissions:24" \
-            "Small runs:668cdb84-fc77-4ef1-80f0-121fac00fe1e:/services/small-runs:24" \
-            "Restoration:3b081827-74f6-4ad8-99d0-41ab13f1fafc:/services/restoration:24"; do
+            "Commissions:13595cdc-81b1-47ab-926b-e9c715e6ff07:/services/commissions:23" \
+            "Small runs:668cdb84-fc77-4ef1-80f0-121fac00fe1e:/services/small-runs:23" \
+            "Restoration:3b081827-74f6-4ad8-99d0-41ab13f1fafc:/services/restoration:23"; do
   IFS=: read -r label uuid alias count <<<"$page"
   check "$label page published at $alias" 1 \
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');

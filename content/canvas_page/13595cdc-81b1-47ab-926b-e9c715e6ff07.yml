@@ -53,7 +53,6 @@ default:
         lede: 'Nothing goes on the saw until you have signed the drawing.'
         align: left
         level: h2
-        note: 'Fourteen weeks, typically'
     -
       parent_uuid: 549b698e-3056-4d25-b5a8-61e39439478b
       slot: content
@@ -176,13 +175,6 @@ default:
         variant: solid
         size: md
         fullWidth: false
-    -
-      parent_uuid: 549b698e-3056-4d25-b5a8-61e39439478b
-      slot: content
-      uuid: e814867b-03ad-4761-a751-d7051bda93d4
-      component_id: js.prose
-      inputs:
-        text: '<p>A commission starts in the room, not in the workshop. We measure the space, the light, and the route in, then draw the piece at full size for the joints that decide how it will age. The drawing is what you approve; the quote follows it and does not move unless the brief does.</p><p>Most of what we make is one board wide, because a top taken from a single tree moves as one thing. That is why we buy whole boards and carry stock we have no immediate use for.</p>'
     -
       uuid: ad841d04-aa09-4fed-a147-7b3454c3c332
       component_id: js.section

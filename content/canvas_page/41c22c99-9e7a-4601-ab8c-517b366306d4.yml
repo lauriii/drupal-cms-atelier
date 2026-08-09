@@ -54,7 +54,6 @@ default:
         lede: ''
         align: left
         level: h2
-        note: 'Eleven miles to the woodland'
     -
       parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
       slot: content
@@ -104,7 +103,6 @@ default:
         lede: 'Three steps, in this order. Nothing is cut until the drawing and the price are both agreed.'
         align: left
         level: h2
-        note: 'Sixteen weeks, at the longest'
     -
       parent_uuid: 7f2a1c33-0005-4a00-8000-000000000005
       slot: content

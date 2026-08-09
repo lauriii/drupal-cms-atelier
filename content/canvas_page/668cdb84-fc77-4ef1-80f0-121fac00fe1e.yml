@@ -53,7 +53,6 @@ default:
         lede: 'The two hundredth has to be the same as the sixth. That is the whole problem.'
         align: left
         level: h2
-        note: 'Twenty to two hundred'
     -
       parent_uuid: 861f590e-710f-41c8-95ac-3b22bc632b76
       slot: content
@@ -176,13 +175,6 @@ default:
         variant: solid
         size: md
         fullWidth: false
-    -
-      parent_uuid: 861f590e-710f-41c8-95ac-3b22bc632b76
-      slot: content
-      uuid: b2d7b916-6012-41af-b19a-c0ff9a2f5272
-      component_id: js.prose
-      inputs:
-        text: '<p>A run is a different problem from a piece. The first one teaches you what the jig should have been; the sixth pays for building it properly. We work in batches of twenty, each checked against a master, because cutting two hundred of anything before you have measured one of them is how you get two hundred of a mistake.</p><p>Everything is designed to come apart. A seat or a back is a part with a number, so a damaged one is a replacement rather than a new chair.</p>'
     -
       uuid: 3d0d7032-c6cd-4a4e-9ff2-824f968521e7
       component_id: js.section

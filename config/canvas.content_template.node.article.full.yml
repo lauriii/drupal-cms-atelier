@@ -83,9 +83,10 @@ component_tree:
     slot: content
     uuid: c0a1e11a-0005-4a00-8000-000000000005
     component_id: js.section_intro
-    component_version: 871540b2850e8eae
+    component_version: 1dceaf2e8eb21847
     inputs:
       eyebrow: Journal
+      note: 'Newest first'
       title: 'More from the bench'
       lede: 'Notes on timber, tools, and the things that go wrong.'
       align: left
