@@ -17,7 +17,14 @@ directory = pathlib.Path(sys.argv[1])
 binaries = {p.name for p in directory.iterdir() if p.suffix != '.yml'}
 missing = 0
 for entity in sorted(directory.glob('*.yml')):
-    match = re.search(r"value: '?public://([^'\n]+)'?", entity.read_text())
+    text = entity.read_text()
+    match = re.search(r"value: '?public://([^'\n]+)'?", text)
     if not match or match.group(1) not in binaries:
+        missing += 1
+        continue
+    # A binary replaced without re-running the export leaves the entity
+    # claiming a size the bytes do not have.
+    declared = re.search(r'filesize:\n\s+-\n\s+value: (\d+)', text)
+    if declared and int(declared.group(1)) != (directory / match.group(1)).stat().st_size:
         missing += 1
 print(missing)

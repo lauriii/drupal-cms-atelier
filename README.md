@@ -182,8 +182,7 @@ template's demo content on a public site, keep this table with it:
 | `atelier-work-hero.jpg` | Minh Đức | https://unsplash.com/photos/craftsman-planing-wood-on-a-workbench-P4mxT-OgYho |
 | `atelier-work-1.jpg` | ObjectType RAW | https://unsplash.com/photos/a-wooden-chair-stands-against-a-white-background-ZCarpyNlYPQ |
 | `atelier-work-2.jpg` | Hongly Oung | https://unsplash.com/photos/a-wooden-chair-on-a-white-background-iBxQvOLuKb4 |
-| `atelier-work-3.jpg` | Alinea Design | https://unsplash.com/photos/a-chair-made-out-of-wooden-strips-on-a-white-background-nAcDt_XClxI |
-| `atelier-work-4.jpg` | Minh Đức | https://unsplash.com/photos/carpenters-hands-shaping-wood-on-a-table-saw-RpJIm5Lojyw |
+| `atelier-work-4.jpg` | Minh Đức | https://unsplash.com/photos/man-sanding-a-wooden-plank-in-a-workshop-aTWyvqRJoYY |
 
 Replace them with your own work before you launch. They are here so a fresh
 install has something to look at, not because a furniture workshop in Hampshire
@@ -251,9 +250,13 @@ it: it is there so that a search component you write has an endpoint to query
 without another round of backend setup. Drop them from `recipe.yml` if you would
 rather not carry them.
 
-No content templates, in particular: `canvas.config.json` in a scaffolded
-codebase points at a `content-templates/` directory, but nothing here ships one,
-so building one would be guesswork. Create it in your codebase and push it.
+A content template ships for journal entries:
+`config/canvas.content_template.node.article.full.yml`. It binds the heading to
+the node title and the body to the body field through dynamic prop sources, and
+closes with a call to action, so an article is a composed page rather than
+unstyled markup in a theme that emits no chrome. `tests/check.sh` asserts it is
+enabled — a content template does nothing until it is. If you push from a
+codebase with `sync.contentTemplates` on, pull first or you will overwrite it.
 
 **A screenshot for the installer.** `screenshot.webp`, 500×400, which the
 Drupal CMS installer shows on the template's card. Without one it falls back to
