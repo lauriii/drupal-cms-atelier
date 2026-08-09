@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9503ce5e-82ff-45b6-91ef-af768ccdfe2b
+  bundle: image
+  default_langcode: en
+  depends:
+    7145fab3-fa7c-420b-ae87-8569f45af7b4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: 'Wall shelf, sheet No. 12'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Wall shelf, sheet No. 12'
+      title: ''
+      width: 1800
+      height: 2100
+      entity: 7145fab3-fa7c-420b-ae87-8569f45af7b4

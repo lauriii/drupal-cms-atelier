@@ -324,6 +324,14 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
     "$(probe "document.querySelector('h1') && /Six people/.test(document.querySelector('h1').textContent) ? 'yes' : 'no'")"
   check 'footer renders its links' yes \
     "$(probe "document.querySelectorAll('footer a').length > 0 ? 'yes' : 'no'")"
+  # An <img> that 200s can still fail to decode, and the wall of marks then
+  # renders as blank paper while every server-side assertion stays green.
+  # Force the lazy ones in, then count the images the browser could not decode.
+  # `1` when the page has no images at all, so an empty page cannot pass.
+  probe "(function(){var m=document.querySelectorAll('img');for(var i=0;i<m.length;i++){m[i].loading='eager';m[i].src=m[i].src}return m.length})()" >/dev/null
+  sleep 4
+  undecoded="$(probe "(function(){var n=0,m=document.querySelectorAll('img');for(var i=0;i<m.length;i++){if(!m[i].naturalWidth)n++}return m.length?n:1})()")"
+  check 'every image decodes in the browser' 0 "$undecoded"
   # Three components take a `level` prop so an editor can keep headings in
   # order; nothing asserted that the shipped content actually does. A skipped
   # level went out on the studio page while those props existed.
@@ -521,7 +529,7 @@ echo "$pass passed, $fail failed"
 # tell "did not run" from "passed" -- this suite has twice reported 0 failed
 # with a third of it silently skipped. Assert the count itself. Raise the floor
 # when you add assertions; lower it only when you delete some on purpose.
-expected=101
+expected=102
 if (( pass + fail < expected )); then
   echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
   echo "A block exited early. Do not read the tally above as a pass." >&2

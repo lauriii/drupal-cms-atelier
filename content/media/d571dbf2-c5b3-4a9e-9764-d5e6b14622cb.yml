@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d571dbf2-c5b3-4a9e-9764-d5e6b14622cb
+  bundle: image
+  default_langcode: en
+  depends:
+    8743b722-6086-4dba-986d-b7d8d3a0d202: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: 'Bow-back chair, sheet No. 04'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Bow-back chair, sheet No. 04'
+      title: ''
+      width: 1800
+      height: 2100
+      entity: 8743b722-6086-4dba-986d-b7d8d3a0d202

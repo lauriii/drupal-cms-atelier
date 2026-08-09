@@ -6,10 +6,10 @@ _meta:
   depends:
     62f5db67-143a-4b08-b7ae-2e4814a29834: file
     2fed5eb0-0ebe-4b89-9fd2-e776c4690480: media
-    9121fc97-2a9c-40f4-ad65-05777bc5813a: file
-    38105a5a-27c2-4dd6-825d-3a671f2dbc45: media
-    05dea198-8232-4cb5-8b1d-26f8610a2d3b: file
-    3587db33-00d2-4295-811e-7d7de53ce915: media
+    8743b722-6086-4dba-986d-b7d8d3a0d202: file
+    d571dbf2-c5b3-4a9e-9764-d5e6b14622cb: media
+    7145fab3-fa7c-420b-ae87-8569f45af7b4: file
+    9503ce5e-82ff-45b6-91ef-af768ccdfe2b: media
     a63f9fb8-aba5-42dd-9242-409015f2eb47: file
     98b7f218-a4ab-4a83-934a-3e5c56012de6: media
     7a0ed33f-9dd9-4ec5-9025-ab7d6de42cb8: file
@@ -77,10 +77,10 @@ default:
       component_id: js.section_intro
       inputs:
         eyebrow: 'Selected work'
-        title: 'Recent seating'
+        title: 'Recent work'
         align: left
         level: h2
-        lede: 'Chairs are most of what we make. These two are from the last eighteen months.'
+        lede: 'Two from the last eighteen months. We draw at full size before cutting; these are the sheets.'
     -
       parent_uuid: 2f81adef-0010-4a00-8000-000000000010
       slot: content
@@ -95,12 +95,12 @@ default:
       uuid: e2964a41-0013-4a00-8000-000000000013
       component_id: js.figure
       inputs:
-        title: 'Round-back chair'
-        caption: 'Beech, oiled. Made in runs of twenty for a reading room in Winchester.'
         image:
           CANVAS_ENTITY_REFERENCE:
-            target_uuid: 38105a5a-27c2-4dd6-825d-3a671f2dbc45
+            target_uuid: d571dbf2-c5b3-4a9e-9764-d5e6b14622cb
             target_type: media
+        title: 'Bow-back chair'
+        caption: 'Beech, steam-bent to a 360mm radius. Made in runs of twenty for a reading room in Winchester.'
         level: h3
         sheet: 'No. 04'
         ratio: tall
@@ -110,12 +110,12 @@ default:
       uuid: 95917ad7-0014-4a00-8000-000000000014
       component_id: js.figure
       inputs:
-        title: 'Stacking chair'
-        caption: 'Oak, stacking six high. The back is a pressed shell, screwed to the frame so a damaged one can be replaced.'
         image:
           CANVAS_ENTITY_REFERENCE:
-            target_uuid: 3587db33-00d2-4295-811e-7d7de53ce915
+            target_uuid: 9503ce5e-82ff-45b6-91ef-af768ccdfe2b
             target_type: media
+        title: 'Wall shelf'
+        caption: 'Douglas fir, wall-hung. The wall is 14mm out over its height, so the uprights follow it.'
         level: h3
         sheet: 'No. 12'
         ratio: tall

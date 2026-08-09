@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 8743b722-6086-4dba-986d-b7d8d3a0d202
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-sheet-chair.png
+  uri:
+    -
+      value: 'public://atelier-sheet-chair.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 50530
+  status:
+    -
+      value: true
