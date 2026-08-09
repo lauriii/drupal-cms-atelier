@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'Shelf system'
+      value: 'Bentwood armchair'
   revision_translation_affected:
     -
       value: true
@@ -25,8 +25,8 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'Elevation of a four-bay wall-hung shelf, 1200 wide by 860 high, its uprights following a wall that is 14mm out of plumb.'
+      alt: 'A walnut armchair with a steam-bent back and arms, against a plain concrete wall.'
       title: ''
-      width: 960
-      height: 780
+      width: 1200
+      height: 1400
       entity: 05dea198-8232-4cb5-8b1d-26f8610a2d3b

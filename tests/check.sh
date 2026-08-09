@@ -326,6 +326,20 @@ else
   echo "    (skipped browser checks: agent-browser or SITE_URL unavailable)"
 fi
 
+# Journal entries are node pages, so without a content template they render
+# through the default node display — which in a theme that emits no chrome means
+# unstyled markup. The template binds the heading to the node title and the body
+# to the body field, and it only takes over rendering when it is enabled.
+check 'article content template enabled' 1 \
+  "$(ev '$t = \Drupal::entityTypeManager()->getStorage("content_template")->load("node.article.full");
+    print (int) ($t && $t->status() && count($t->get("component_tree")) > 0);')"
+check 'articles have body copy' 3 \
+  "$(ev '$n = 0;
+    foreach (\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type" => "article"]) as $node) {
+      if (!$node->get("body")->isEmpty()) { $n++; }
+    }
+    print $n;')"
+
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \
   "$(ev 'print (int) \Drupal::entityTypeManager()->getStorage("user_role")->load("anonymous")->hasPermission("access content");')"
@@ -376,6 +390,16 @@ if [[ -n "$base_url" ]]; then
   # The components hydrate in the browser, so curl cannot prove they render.
   # It can prove they were handed this page's copy rather than an empty tree,
   # which is the failure a stale or mis-imported snapshot actually produces.
+  # A specific article, not whichever one loads first, and a phrase from that
+  # article's own body. The body reaches the browser inside the island payload,
+  # so this proves the template's dynamic prop resolved rather than that the
+  # component rendered.
+  article_url="$(ev 'print reset(\Drupal::entityTypeManager()->getStorage("node")->loadByProperties([
+    "type" => "article",
+    "title" => "Notes from the bench: joinery without fixings",
+  ]))->toUrl()->toString();')"
+  check 'journal entry carries its own body' yes \
+    "$(curl -skL "$base_url$article_url" | grep -qF 'wedged through-tenon' && echo yes || echo no)"
   check 'components receive the page copy' yes \
     "$(grep -qF 'Six people, two benches' <<<"$flat" && echo yes || echo no)"
   # The imagery actually resolves to a derivative, rather than a broken ref.

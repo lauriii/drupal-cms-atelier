@@ -124,15 +124,15 @@ default:
       uuid: 7f2a1c33-0012-4a00-8000-000000000012
       component_id: js.figure
       inputs:
-        title: 'Bench No. 4, leg to top'
-        caption: 'The tenon goes through the top and is wedged from above. There is no glue in this joint, so it can be knocked apart and re-wedged.'
+        title: 'Quartersawn ash'
+        caption: 'Quartersawn ash, cut so the ray figure runs across the board. It costs more per cube and moves less in a warm room.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 69d70d3f-4fff-43f0-a8f7-39740a352758
             target_type: media
         url: ''
         level: h3
-        sheet: 'WD 04 / 2'
+        sheet: Timber
     -
       uuid: 7f2a1c33-0013-4a00-8000-000000000013
       component_id: js.section

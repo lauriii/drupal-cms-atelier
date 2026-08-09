@@ -171,10 +171,23 @@ Three articles ship as the journal's contents, with pinned publication dates —
 without them every article imports on the install timestamp and the journal
 reads as three posts filed on the same afternoon.
 
-The imagery ships too, as `file` and `media` content plus the JPEGs themselves.
-They are generated drawings rather than stock photography, so there is no
-licence attached to anything this template vendors, and the captions call them
-working drawings rather than passing them off as photographs of real work.
+The imagery ships too, as `file` and `media` content plus the JPEGs
+themselves. The photographs come from Unsplash, whose licence allows free use
+including commercially and without permission. Attribution is not required by
+the licence but is asked for, so it is given here — and if you keep this
+template's demo content on a public site, keep this table with it:
+
+| File | Photographer | Source |
+| --- | --- | --- |
+| `atelier-work-hero.jpg` | Daniel Chen | https://unsplash.com/photos/brown-wooden-bench-near-window-SoNaNOFT974 |
+| `atelier-work-1.jpg` | Krisztian Tabori | https://unsplash.com/photos/brown-wooden-chair-4nmn1QSbrIA |
+| `atelier-work-2.jpg` | SA . | https://unsplash.com/photos/brown-wooden-chair-near-white-wall-JaQY0oaEL_o |
+| `atelier-work-3.jpg` | ObjectType RAW | https://unsplash.com/photos/a-wooden-chair-with-a-curved-back-wr2xHjbQ00Y |
+| `atelier-work-4.jpg` | yaoyu chen | https://unsplash.com/photos/a-close-up-of-a-wooden-chair-with-a-window-in-the-background-lbiRflem68o |
+
+Replace them with your own work before you launch. They are here so a fresh
+install has something to look at, not because a furniture workshop in Hampshire
+took them.
 
 Component inputs that reference an entity must be exported, not hand-written.
 Canvas rewrites them to `CANVAS_ENTITY_REFERENCE` with a `target_uuid` on
@@ -489,7 +502,7 @@ path:
 vendor/bin/phpunit -c web/core/phpunit.xml.dist recipes/atelier/tests/src/Kernel/RequirementsTest.php
 ```
 
-There is also `tests/check.sh` — 90 assertions — which is not a substitute for
+There is also `tests/check.sh` — 93 assertions — which is not a substitute for
 the above. It installs a throwaway site and asserts the rendered result — the front end
 serving the components, the imagery resolving, the menu exposed over JSON:API,
 Drupal's own CSS staying off the page. Those are things a PHPUnit test of the

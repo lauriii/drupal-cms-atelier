@@ -36,3 +36,8 @@ default:
     -
       alias: /notes-bench-joinery-without-fixings
       langcode: en
+  body:
+    -
+      value: '<p>A visitor asked last week why there are no screws in the bench by the window. The short answer is that a screw is a repair waiting to happen: the timber moves, the thread stays where it is, and in ten years the joint is loose and the only fix is a bigger screw.</p><p>The long answer is that a wedged through-tenon does the same job and gets tighter. The tenon passes through the top and stands a little proud. Two saw kerfs are cut into the end grain, and two oak wedges are driven in, which spreads the tenon inside the mortice. The joint is mechanical. Nothing holds it but its own geometry.</p><p>It also comes apart. Knock the wedges out and the bench is three pieces that fit in a van. We have taken two of them back for re-wedging after a decade in a kitchen with underfloor heating, which is about the worst thing you can do to a piece of ash.</p><p>The cost is time. A wedged tenon takes an hour that a screw takes a minute. We charge for the hour and explain why, and most people say yes.</p>'
+      format: content_format
+      summary: ''

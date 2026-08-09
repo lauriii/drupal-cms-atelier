@@ -36,3 +36,8 @@ default:
     -
       alias: /what-we-learned-making-two-hundred-same-stool
       langcode: en
+  body:
+    -
+      value: '<p>A restaurant in Winchester ordered two hundred stools. We had never made more than twenty of anything, and we said yes before working out what that meant.</p><p>The first thing we learned is that a jig you would not bother with for twenty pays for itself by number six. We built four of them in the first week and they saved something like ninety hours over the run.</p><p>The second is that batching is not free. Cutting two hundred seats and then two hundred legs sounds efficient and is, until a dimension is wrong and you have two hundred of the mistake. We moved to batches of twenty, checked against a master, and lost perhaps a day in changeovers.</p><p>The third is that everybody in the workshop got faster and worse at the same time. By the sixtieth stool the timings were excellent and the shoulders were not. We started rotating who did what, which is slower on paper and produced a better stool.</p><p>We would take the job again. We would quote it differently.</p>'
+      format: content_format
+      summary: ''

@@ -1,0 +1,81 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.js.button
+    - canvas.component.js.cta
+    - canvas.component.js.hero
+    - canvas.component.js.prose
+    - canvas.component.js.section
+    - core.entity_view_mode.node.full
+    - field.field.node.article.body
+    - node.type.article
+  module:
+    - link
+    - node
+    - options
+id: node.article.full
+content_entity_type_id: node
+content_entity_type_bundle: article
+content_entity_type_view_mode: full
+component_tree:
+  c0a1e11a-0001-4a00-8000-000000000001:
+    uuid: c0a1e11a-0001-4a00-8000-000000000001
+    component_id: js.hero
+    component_version: a927b9a9944dcb09
+    inputs:
+      eyebrow: Journal
+      title:
+        sourceType: entity-field
+        expression: 'ℹ︎␜entity:node:article␝title␞␟value'
+  c0a1e11a-0002-4a00-8000-000000000002:
+    uuid: c0a1e11a-0002-4a00-8000-000000000002
+    component_id: js.section
+    component_version: c3517bacb7f345cc
+    inputs:
+      background: paper
+      spacing: md
+      width: default
+      divider: true
+  c0a1e11a-0003-4a00-8000-000000000003:
+    parent_uuid: c0a1e11a-0002-4a00-8000-000000000002
+    slot: content
+    uuid: c0a1e11a-0003-4a00-8000-000000000003
+    component_id: js.prose
+    component_version: e0407f20af1ba1e5
+    inputs:
+      text:
+        sourceType: entity-field
+        expression: 'ℹ︎␜entity:node:article␝body␞␟processed'
+  c0a1e11a-0004-4a00-8000-000000000004:
+    uuid: c0a1e11a-0004-4a00-8000-000000000004
+    component_id: js.section
+    component_version: c3517bacb7f345cc
+    inputs:
+      background: wash
+      spacing: md
+      width: default
+      divider: true
+  c0a1e11a-0005-4a00-8000-000000000005:
+    parent_uuid: c0a1e11a-0004-4a00-8000-000000000004
+    slot: content
+    uuid: c0a1e11a-0005-4a00-8000-000000000005
+    component_id: js.cta
+    component_version: 1a75ef0685f7c7fd
+    inputs:
+      title: 'More from the bench'
+      lede: 'Occasional notes on timber, tools, and the things that go wrong.'
+  c0a1e11a-0006-4a00-8000-000000000006:
+    parent_uuid: c0a1e11a-0005-4a00-8000-000000000005
+    slot: content
+    uuid: c0a1e11a-0006-4a00-8000-000000000006
+    component_id: js.button
+    component_version: f8e3a3c941940e1a
+    inputs:
+      label: 'Read the journal'
+      url: /journal
+      variant: outline
+      size: md
+      fullWidth: false
+exposed_slots: {  }
+

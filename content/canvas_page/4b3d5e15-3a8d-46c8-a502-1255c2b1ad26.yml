@@ -37,7 +37,7 @@ default:
       inputs:
         eyebrow: 'Furniture and objects, Petersfield'
         title: 'Six people, two benches, about ninety pieces a year'
-        lede: 'We design and make furniture in small runs, in solid timber, for houses and the occasional restaurant. Everything is drawn before it is cut, and we publish the drawings.'
+        lede: 'We design and make furniture in small runs, in solid timber, for houses and the occasional restaurant. Everything is drawn before it is cut.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 2fed5eb0-0ebe-4b89-9fd2-e776c4690480
@@ -82,7 +82,7 @@ default:
         title: 'Recent pieces'
         align: left
         level: h2
-        lede: "We publish the drawings. The pieces themselves are in other people's houses."
+        lede: 'Most of what we make leaves and is never seen again, so we photograph it before it goes.'
     -
       parent_uuid: 2f81adef-0010-4a00-8000-000000000010
       slot: content
@@ -97,42 +97,42 @@ default:
       uuid: e2964a41-0013-4a00-8000-000000000013
       component_id: js.figure
       inputs:
-        title: 'Vessel study'
-        caption: 'Turned ash, oiled. One of nine.'
+        title: 'Spindle-back chair'
+        caption: 'Ash and stained oak, one of a pair made for a house in Alton.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 38105a5a-27c2-4dd6-825d-3a671f2dbc45
             target_type: media
         level: h3
-        sheet: 'WD 11'
+        sheet: 'No. 04'
     -
       parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
       slot: content
       uuid: 95917ad7-0014-4a00-8000-000000000014
       component_id: js.figure
       inputs:
-        title: 'Shelf system'
-        caption: 'Douglas fir, wall-hung. The wall is 14mm out over its height, so the uprights follow it.'
+        title: 'Bentwood armchair'
+        caption: 'Steam-bent walnut, made for a reading room in Winchester. The arms are one piece.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 3587db33-00d2-4295-811e-7d7de53ce915
             target_type: media
         level: h3
-        sheet: 'WD 14'
+        sheet: 'No. 12'
     -
       parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
       slot: content
       uuid: 0bf5ef74-0015-4a00-8000-000000000015
       component_id: js.figure
       inputs:
-        title: 'Bow-back chair'
-        caption: 'Steam-bent oak, third prototype. The back is a single bent member.'
+        title: 'Round-back chair'
+        caption: 'Beech, stacking, made in runs of twenty. The back is a single bent lamination.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 8afef070-72a2-49a2-a704-971f5f959d57
             target_type: media
         level: h3
-        sheet: 'WD 19'
+        sheet: 'No. 21'
     -
       uuid: cf5444f1-0004-4a00-8000-000000000004
       component_id: js.section
