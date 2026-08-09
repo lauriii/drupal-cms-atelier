@@ -302,6 +302,30 @@ check 'footer menu has a link for anonymous visitors' 1 \
     }
     print (int) ($visible > 0);')"
 
+# Every component here hydrates in the browser, so curl proves only that the
+# server emitted a custom element: a component that throws on mount still ships
+# green. If a browser is available, mount the front page and read the DOM back.
+# Skipped rather than failed when it is not, so the suite still runs in CI.
+if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
+  export AGENT_BROWSER_IGNORE_HTTPS_ERRORS=1
+  agent-browser --session atelier-check open "$SITE_URL/" >/dev/null 2>&1 || true
+  sleep 4
+  probe() { agent-browser --session atelier-check eval "$1" 2>/dev/null | tr -d '"'; }
+  check 'components mount in a browser' yes \
+    "$(probe "document.querySelector('h1') && /Six people/.test(document.querySelector('h1').textContent) ? 'yes' : 'no'")"
+  check 'no console errors on the front page' 0 \
+    "$(agent-browser --session atelier-check console --level error 2>/dev/null | grep -c . | tr -cd '0-9')"
+  # The header is one row wherever it fits and must never push the page sideways.
+  agent-browser --session atelier-check set viewport 360 800 >/dev/null 2>&1 || true
+  agent-browser --session atelier-check open "$SITE_URL/" >/dev/null 2>&1 || true
+  sleep 3
+  check 'no horizontal overflow at 360px' yes \
+    "$(probe "document.documentElement.scrollWidth <= window.innerWidth ? 'yes' : 'no'")"
+  agent-browser --session atelier-check close >/dev/null 2>&1 || true
+else
+  echo "    (skipped browser checks: agent-browser or SITE_URL unavailable)"
+fi
+
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \
   "$(ev 'print (int) \Drupal::entityTypeManager()->getStorage("user_role")->load("anonymous")->hasPermission("access content");')"

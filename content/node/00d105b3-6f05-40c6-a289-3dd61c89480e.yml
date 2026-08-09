@@ -10,7 +10,7 @@ default:
       target_id: 1
   status:
     -
-      value: true
+      value: false
   uid:
     -
       target_id: 1
@@ -28,14 +28,14 @@ default:
       value: true
   moderation_state:
     -
-      value: published
+      value: draft
   path:
     -
       alias: /privacy-policy
       langcode: en
   field_content:
     -
-      value: '<p>This site stores nothing about you beyond what Drupal needs in order to serve a page: a session identifier if you sign in, and ordinary web server logs. There is no analytics, no advertising, and no third-party tracking.</p><p>If you email the studio, we keep the correspondence until the piece is delivered and for six years after that, because that is how long we have to keep records of work. We do not pass it on.</p><p><strong>Replace this page before you launch.</strong> It describes what this site template does, which is very little. It does not describe what your site does.</p>'
+      value: '<h2>This content needs to be edited before publishing</h2><p>Note that your site requires a privacy statement.</p>'
       format: content_format
   field_description:
     -

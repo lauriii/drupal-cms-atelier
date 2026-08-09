@@ -74,10 +74,10 @@ default:
       uuid: 5d6e8a91-0024-4a00-8000-000000000024
       component_id: js.section
       inputs:
-        background: wash
+        background: ink
         spacing: md
         width: default
-        divider: true
+        divider: false
     -
       parent_uuid: 5d6e8a91-0024-4a00-8000-000000000024
       slot: content

@@ -104,6 +104,7 @@ default:
             target_uuid: 38105a5a-27c2-4dd6-825d-3a671f2dbc45
             target_type: media
         level: h3
+        sheet: 'WD 11'
     -
       parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
       slot: content
@@ -117,6 +118,7 @@ default:
             target_uuid: 3587db33-00d2-4295-811e-7d7de53ce915
             target_type: media
         level: h3
+        sheet: 'WD 14'
     -
       parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
       slot: content
@@ -130,6 +132,7 @@ default:
             target_uuid: 8afef070-72a2-49a2-a704-971f5f959d57
             target_type: media
         level: h3
+        sheet: 'WD 19'
     -
       uuid: cf5444f1-0004-4a00-8000-000000000004
       component_id: js.section
