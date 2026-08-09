@@ -20,6 +20,16 @@ DRUSH="${DRUSH:-drush}"
 RECIPE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONTENT="$RECIPE_DIR/content"
 
+# Exporting from a site that has not had this recipe applied empties the
+# shipped content, because the wipe happens before the export and the export
+# finds nothing. Check before destroying anything.
+existing="$($DRUSH ev 'print count(\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple());' 2>/dev/null | tr -cd '0-9')"
+if [[ "${existing:-0}" -lt 4 ]]; then
+  echo "Refusing to regenerate: the site has ${existing:-0} Canvas pages, expected at least 4." >&2
+  echo "Apply this recipe to the site first, then re-run." >&2
+  exit 1
+fi
+
 for type in canvas_page media menu_link_content node; do
   rm -rf "${CONTENT:?}/$type"
   mkdir -p "$CONTENT/$type"

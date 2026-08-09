@@ -10,8 +10,6 @@ _meta:
     38105a5a-27c2-4dd6-825d-3a671f2dbc45: media
     05dea198-8232-4cb5-8b1d-26f8610a2d3b: file
     3587db33-00d2-4295-811e-7d7de53ce915: media
-    e85a38c0-7c5a-48d0-be3c-dd69d1c3cf1b: file
-    8afef070-72a2-49a2-a704-971f5f959d57: media
     a63f9fb8-aba5-42dd-9242-409015f2eb47: file
     98b7f218-a4ab-4a83-934a-3e5c56012de6: media
     7a0ed33f-9dd9-4ec5-9025-ab7d6de42cb8: file
@@ -89,7 +87,7 @@ default:
       uuid: 7b9f1bfb-0012-4a00-8000-000000000012
       component_id: js.grid
       inputs:
-        columns: '3'
+        columns: '2'
         gap: lg
     -
       parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
@@ -121,22 +119,6 @@ default:
         level: h3
         sheet: 'No. 12'
         ratio: tall
-    -
-      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
-      slot: content
-      uuid: 0bf5ef74-0015-4a00-8000-000000000015
-      component_id: js.figure
-      inputs:
-        title: 'Folded chair'
-        caption: 'Ash laminations, one continuous curve from the back to the floor. Still on its third prototype.'
-        image:
-          CANVAS_ENTITY_REFERENCE:
-            target_uuid: 8afef070-72a2-49a2-a704-971f5f959d57
-            target_type: media
-        level: h3
-        sheet: 'No. 21'
-        ratio: tall
-        availability: 'Not yet for sale'
     -
       uuid: cf5444f1-0004-4a00-8000-000000000004
       component_id: js.section

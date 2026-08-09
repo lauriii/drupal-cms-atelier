@@ -81,8 +81,8 @@ default:
             target_type: media
         ratio: wide
         sheet: Workshop
-        title: Shaping
-        caption: 'Everything is cut here. Two of us have been doing it for fifteen years and still measure twice.'
+        title: 'Sanding a plank'
+        caption: 'Everything is made here. Two of us have been doing it for fifteen years and still measure twice.'
         level: h3
     -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005

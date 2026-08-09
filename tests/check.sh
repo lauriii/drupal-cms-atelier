@@ -208,7 +208,7 @@ check 'recommended add-ons list on disk' 1 \
 check 'Project Browser uses the shipped list' recommended \
   "$(ev 'print \Drupal::config("project_browser.admin_settings")->get("default_source");')"
 
-check 'media shipped' 9 \
+check 'media shipped' 8 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
 check 'hero image reference resolved' 1 \
   "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "4b3d5e15-3a8d-46c8-a502-1255c2b1ad26");
@@ -230,7 +230,7 @@ check 'privacy page published' 1 \
   "$(ev '$p = \Drupal::entityTypeManager()->getStorage("canvas_page")->loadByProperties(["title" => "Privacy"]);
     $p = reset($p);
     print (int) ($p && $p->isPublished() && $p->get("path")->alias === "/privacy");')"
-for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:29" \
+for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:28" \
             "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:20" \
             "Journal:1797e924-d08c-40da-8f12-69155d704b44:/journal:3" \
             "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9"; do
@@ -392,18 +392,7 @@ check 'components exercised by the demo' 1 \
 # importer logs a warning and leaves a managed row pointing at nothing, and the
 # media count assertion cannot see it because no media references it.
 check 'every file entity ships its binary' 0 \
-  "$(python3 - "$RECIPE_DIR/content/file" <<'PYEOF'
-import pathlib, re, sys
-d = pathlib.Path(sys.argv[1])
-shipped = {p.name for p in d.iterdir() if p.suffix != '.yml'}
-missing = 0
-for y in d.glob('*.yml'):
-    m = re.search(r"value: '?public://([^'\n]+)'?", y.read_text())
-    if not m or m.group(1) not in shipped:
-        missing += 1
-print(missing)
-PYEOF
-)"
+  "$(python3 "$RECIPE_DIR/tests/lib/orphan-files.py" "$RECIPE_DIR/content/file")"
 
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \

@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: Shaping
+      value: 'Sanding a plank'
   revision_translation_affected:
     -
       value: true
@@ -25,7 +25,7 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'Two hands guiding a length of timber across a saw, in the low light of a workshop.'
+      alt: 'A maker leaning over a bench, sanding a plank flat by hand in the light of a workshop window.'
       title: ''
       width: 1600
       height: 900
