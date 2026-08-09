@@ -1,11 +1,11 @@
 _meta:
   version: '1.0'
   entity_type: media
-  uuid: 211c97f4-c3b7-4580-9747-bf5e1e0c218d
+  uuid: 2fb5efbf-7490-4c1d-8498-f5b1237489e8
   bundle: image
   default_langcode: en
   depends:
-    48fd871f-fcf7-4342-bdd2-bde958f2b34f: file
+    3557fac7-9d2e-4e0c-acd9-6fb616e9e42c: file
 default:
   status:
     -
@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'The jig wall'
+      value: 'A settle in daylight'
   revision_translation_affected:
     -
       value: true
@@ -25,8 +25,8 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'A workbench under a window with jigs and hand tools racked above.'
+      alt: 'A curved wooden settle lit from a window.'
       title: ''
       width: 1800
-      height: 1200
-      entity: 48fd871f-fcf7-4342-bdd2-bde958f2b34f
+      height: 2691
+      entity: 3557fac7-9d2e-4e0c-acd9-6fb616e9e42c

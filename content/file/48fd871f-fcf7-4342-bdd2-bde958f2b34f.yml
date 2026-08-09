@@ -4,6 +4,9 @@ _meta:
   uuid: 48fd871f-fcf7-4342-bdd2-bde958f2b34f
   default_langcode: en
 default:
+  uid:
+    -
+      target_id: 1
   filename:
     -
       value: atelier-journal-jig.jpg

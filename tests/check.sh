@@ -174,8 +174,39 @@ check 'cms_content search index' 1 \
 # @see tests/regenerate-components.sh
 check 'code components shipped' 18 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple());')"
-check 'global CSS applied' 1 \
-  "$(ev 'print (int) str_contains(\Drupal::config("canvas.asset_library.global")->get("css.compiled") ?? "", "tailwindcss");')"
+# `str_contains(..., "tailwindcss")` passed for a build with zero utilities in
+# it. Count real selectors instead.
+check 'global CSS carries utilities' 1 \
+  "$(ev '$css = \Drupal::config("canvas.asset_library.global")->get("css.compiled") ?? "";
+    print (int) (substr_count($css, "{") > 100 && str_contains($css, "--color-paper"));')"
+# Components are vendored as a `compiled` string beside their source. Editing
+# that string by hand is possible, and a class it introduces that the Tailwind
+# build never saw produces a silently unstyled element with every other
+# assertion still green. Assert that the classes components use actually
+# resolve, and that neither half of a component is empty.
+check 'component classes resolve in the CSS build' 0 \
+  "$(ev '$css = str_replace(chr(92), "", \Drupal::config("canvas.asset_library.global")->get("css.compiled") ?? "");
+    $missing = [];
+    foreach (\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple() as $c) {
+      $js = $c->get("js")["compiled"] ?? "";
+      preg_match_all("/className:\\s*\"([^\"]+)\"/", $js, $m);
+      foreach ($m[1] as $list) {
+        foreach (preg_split("/\\s+/", $list) as $class) {
+          // Arbitrary values and variants are emitted on demand; `group` is a
+          // marker with no rule of its own. Bare utilities are what can vanish.
+          if (!preg_match("/^[a-z][a-z0-9._\\/-]*$/i", $class) || $class === "group") { continue; }
+          if (!preg_match("/\\." . preg_quote($class, "/") . "[\\s,{>~+]/", $css)) { $missing[] = $class; }
+        }
+      }
+    }
+    print count(array_unique($missing));')"
+check 'every component ships source and compiled' 0 \
+  "$(ev '$bad = 0;
+    foreach (\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple() as $c) {
+      $js = $c->get("js");
+      if (empty($js["original"]) || empty($js["compiled"])) { $bad++; }
+    }
+    print $bad;')"
 for region in header footer; do
   check "page region atelier_theme.$region" 1 \
     "$(ev "\$r = \Drupal::entityTypeManager()->getStorage('page_region')->load('atelier_theme.$region');
@@ -208,7 +239,7 @@ check 'recommended add-ons list on disk' 1 \
 check 'Project Browser uses the shipped list' recommended \
   "$(ev 'print \Drupal::config("project_browser.admin_settings")->get("default_source");')"
 
-check 'media shipped' 17 \
+check 'media shipped' 20 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
 check 'hero image reference resolved' 1 \
   "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "4b3d5e15-3a8d-46c8-a502-1255c2b1ad26");
@@ -224,16 +255,28 @@ check 'hero image reference resolved' 1 \
 # Default content: four pages composed from those components, three of them in
 # the main menu. Every menu link must resolve — a template that ships a nav
 # pointing at a 404 is worse than one that ships no nav.
-check 'main menu links' 3 \
+check 'main menu links' 8 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name"=>"main"]));')"
+check 'services menu item has children' 3 \
+  "$(ev '$all = \Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name" => "main"]);
+    $parent = NULL;
+    foreach ($all as $link) { if ($link->getTitle() === "Services") { $parent = $link->uuid(); } }
+    $children = 0;
+    foreach ($all as $link) { if ($link->getParentId() === "menu_link_content:" . $parent) { $children++; } }
+    print $children;')"
 check 'privacy page published' 1 \
   "$(ev '$p = \Drupal::entityTypeManager()->getStorage("canvas_page")->loadByProperties(["title" => "Privacy"]);
     $p = reset($p);
     print (int) ($p && $p->isPublished() && $p->get("path")->alias === "/privacy");')"
-for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:28" \
+for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:27" \
             "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:20" \
             "Journal:1797e924-d08c-40da-8f12-69155d704b44:/journal:3" \
-            "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9"; do
+            "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9" \
+            "Questions:e3409902-6bfb-49e5-b972-f29e66c848d1:/faq:14" \
+            "Services:7d18a0aa-b340-483c-b473-ff878d53e804:/services:6" \
+            "Commissions:13595cdc-81b1-47ab-926b-e9c715e6ff07:/services/commissions:17" \
+            "Small runs:668cdb84-fc77-4ef1-80f0-121fac00fe1e:/services/small-runs:17" \
+            "Restoration:3b081827-74f6-4ad8-99d0-41ab13f1fafc:/services/restoration:17"; do
   IFS=: read -r label uuid alias count <<<"$page"
   check "$label page published at $alias" 1 \
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
@@ -343,8 +386,17 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
   done
   agent-browser --session atelier-check open "$SITE_URL/" >/dev/null 2>&1 || true
   sleep 2
-  check 'no console errors on the front page' 0 \
-    "$(agent-browser --session atelier-check console --level error 2>/dev/null | grep -c . | tr -cd '0-9')"
+  # A dead session prints nothing, `grep -c .` returns 0, and this reported
+  # success while seeing nothing at all. Every other probe here fails safe.
+  console_out="$(agent-browser --session atelier-check console --level error 2>/dev/null || true)"
+  if [[ -z "$(probe "'ok'")" ]]; then
+    errors=probe-failed
+  else
+    # `grep -c .` prints 0 and exits 1 on empty input, which under `pipefail`
+    # kills the whole suite rather than reporting zero errors.
+    errors="$(printf '%s' "$console_out" | grep -c . | tr -cd '0-9' || true)"
+  fi
+  check 'no console errors on the front page' 0 "$errors"
   # The header is one row wherever it fits and must never push the page sideways.
   agent-browser --session atelier-check set viewport 360 800 >/dev/null 2>&1 || true
   agent-browser --session atelier-check open "$SITE_URL/" >/dev/null 2>&1 || true
@@ -413,7 +465,8 @@ if [[ -n "$base_url" ]]; then
   # `/` first: it is the page a human opens after installing, and a stale
   # container or a front page pointing at nothing both surface here and
   # nowhere else.
-  for path in / /home /studio /journal /contact \
+  for path in / /home /studio /journal /contact /faq /services \
+              /services/commissions /services/small-runs /services/restoration \
               /jsonapi /jsonapi/menu_items/main /jsonapi/index/cms_content /jsonapi/node/article; do
     # -L because `/home` 301s to `/`: it is the front page, and Drupal CMS's
     # `redirect` module canonicalises the alias onto it.
@@ -529,7 +582,7 @@ echo "$pass passed, $fail failed"
 # tell "did not run" from "passed" -- this suite has twice reported 0 failed
 # with a third of it silently skipped. Assert the count itself. Raise the floor
 # when you add assertions; lower it only when you delete some on purpose.
-expected=102
+expected=120
 if (( pass + fail < expected )); then
   echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
   echo "A block exited early. Do not read the tally above as a pass." >&2

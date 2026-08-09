@@ -1,0 +1,79 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 7d18a0aa-b340-483c-b473-ff878d53e804
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Services
+  components:
+    -
+      uuid: 16c735b7-0e40-4814-9f05-24decc717cbe
+      component_id: js.hero
+      inputs:
+        eyebrow: Services
+        title: 'Three things, and we turn down the rest'
+        lede: 'Two of us can only be in three places. These are the three.'
+    -
+      uuid: d78e61cf-eefb-4410-acb1-60f3c03f24e2
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: lg
+        width: default
+        divider: true
+    -
+      parent_uuid: d78e61cf-eefb-4410-acb1-60f3c03f24e2
+      slot: content
+      uuid: 1de6760a-2040-4e1d-a8b7-d5cd205b69ed
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 1de6760a-2040-4e1d-a8b7-d5cd205b69ed
+      slot: content
+      uuid: 9e30bf9e-6327-44f9-822e-72545e100876
+      component_id: js.feature
+      inputs:
+        title: Commissions
+        text: '<p>One-off pieces for a room you already live in. We visit, measure, and draw before we quote. <a href="/services/commissions">More</a></p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 1de6760a-2040-4e1d-a8b7-d5cd205b69ed
+      slot: content
+      uuid: 002985dd-569f-49dc-971e-70470d41dbd5
+      component_id: js.feature
+      inputs:
+        title: 'Small runs'
+        text: '<p>Batches of twenty to two hundred, for restaurants, studios and shops that need the same piece repeatedly. <a href="/services/small-runs">More</a></p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 1de6760a-2040-4e1d-a8b7-d5cd205b69ed
+      slot: content
+      uuid: 5a8c315a-b9c8-4360-8a40-3b85d1974d13
+      component_id: js.feature
+      inputs:
+        title: Restoration
+        text: '<p>Older furniture back into use, with new joinery where the old has given up. <a href="/services/restoration">More</a></p>'
+        framed: true
+        level: h3
+  path:
+    -
+      alias: /services
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

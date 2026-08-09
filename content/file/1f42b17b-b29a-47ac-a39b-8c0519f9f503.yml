@@ -4,6 +4,9 @@ _meta:
   uuid: 1f42b17b-b29a-47ac-a39b-8c0519f9f503
   default_langcode: en
 default:
+  uid:
+    -
+      target_id: 1
   filename:
     -
       value: atelier-journal-ash-rack.jpg

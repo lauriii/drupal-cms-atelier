@@ -4,6 +4,9 @@ _meta:
   uuid: de5ff15d-6b8f-453c-9e5c-086af60af3f8
   default_langcode: en
 default:
+  uid:
+    -
+      target_id: 1
   filename:
     -
       value: atelier-journal-ash.jpg

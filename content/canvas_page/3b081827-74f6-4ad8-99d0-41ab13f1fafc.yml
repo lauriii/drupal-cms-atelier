@@ -1,0 +1,181 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 3b081827-74f6-4ad8-99d0-41ab13f1fafc
+  default_langcode: en
+  depends:
+    d8d1517f-6bab-4ae5-8876-4e6aa2961f57: file
+    731cb42a-46e3-48a2-b4ef-5fbfab4c46f3: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Restoration
+  components:
+    -
+      uuid: bb133108-1b0e-44f9-b0a2-f09e0418b569
+      component_id: js.hero
+      inputs:
+        eyebrow: Services
+        title: 'Older furniture, back into use'
+        lede: 'New joinery where the old has given up. We repair pieces to be used, not to be looked at.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 731cb42a-46e3-48a2-b4ef-5fbfab4c46f3
+            target_type: media
+    -
+      uuid: 84a084e5-0545-474e-851b-489b020f80c7
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: lg
+        width: default
+        divider: true
+    -
+      parent_uuid: 84a084e5-0545-474e-851b-489b020f80c7
+      slot: content
+      uuid: 1a612641-ce17-4bcd-8ac9-b75ae4648206
+      component_id: js.section_intro
+      inputs:
+        eyebrow: 'How it goes'
+        title: 'Repair before refinish'
+        lede: 'Most of what comes in needs a joint seeing to, not a new surface.'
+        align: left
+        level: h2
+    -
+      parent_uuid: 84a084e5-0545-474e-851b-489b020f80c7
+      slot: content
+      uuid: 85ff34ff-b741-4626-817a-e2e3fee97375
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 85ff34ff-b741-4626-817a-e2e3fee97375
+      slot: content
+      uuid: 27cad0ca-9f87-426e-8861-514453c8eb50
+      component_id: js.feature
+      inputs:
+        title: 'We keep the surface'
+        text: '<p>A stripped patina is gone for good and it takes the age with it. We refinish only where there is nothing left to keep.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 85ff34ff-b741-4626-817a-e2e3fee97375
+      slot: content
+      uuid: 927f2497-6784-4db7-a895-2e5ff8cdefbd
+      component_id: js.feature
+      inputs:
+        title: 'The joint is usually the problem'
+        text: '<p>A loose chair is almost always failed glue in the mortices rather than broken timber. That is a day, not a rebuild.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 85ff34ff-b741-4626-817a-e2e3fee97375
+      slot: content
+      uuid: 3d751e37-e95c-416c-bcc8-a87fb3dffa7a
+      component_id: js.feature
+      inputs:
+        title: 'We say when not to'
+        text: '<p>If the hours are worth more than the piece we tell you, and we do not charge for looking.</p>'
+        framed: true
+        level: h3
+    -
+      uuid: 25e2e6c8-ba0c-44a3-b3c6-781b485928b5
+      component_id: js.section
+      inputs:
+        background: ink
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: 25e2e6c8-ba0c-44a3-b3c6-781b485928b5
+      slot: content
+      uuid: 30299fed-57d0-4d08-b218-966b980542aa
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 30299fed-57d0-4d08-b218-966b980542aa
+      slot: content
+      uuid: 7982ec98-1d17-4927-a460-7e239f21342d
+      component_id: js.stat
+      inputs:
+        value: '5'
+        label: 'years of free repairs on our own work'
+    -
+      parent_uuid: 30299fed-57d0-4d08-b218-966b980542aa
+      slot: content
+      uuid: 786612fa-2ba6-4269-a7c5-63909ff14dcc
+      component_id: js.stat
+      inputs:
+        value: '1'
+        label: 'day to re-wedge and re-glue a chair'
+    -
+      parent_uuid: 30299fed-57d0-4d08-b218-966b980542aa
+      slot: content
+      uuid: b3ad7ecf-abf7-4215-8d26-58543904ec8a
+      component_id: js.stat
+      inputs:
+        value: '0'
+        label: 'pieces stripped unless you ask'
+    -
+      uuid: bdc2320b-a3c8-40b4-a06a-20a2a7082889
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: bdc2320b-a3c8-40b4-a06a-20a2a7082889
+      slot: content
+      uuid: d27bf49b-07fa-4c73-a1d8-60f53c091112
+      component_id: js.testimonial
+      inputs:
+        quote: "It was my grandmother's and it wobbled for thirty years. It does not now."
+        name: 'Elaine Marsh'
+        role: 'Windsor chair, Petersfield'
+    -
+      uuid: eec16296-1bb3-44fc-b87b-8960b567c9bc
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: default
+        divider: true
+    -
+      parent_uuid: eec16296-1bb3-44fc-b87b-8960b567c9bc
+      slot: content
+      uuid: 19721046-396c-454d-aee6-e131e78e2644
+      component_id: js.cta
+      inputs:
+        title: 'Send photographs'
+        lede: 'Daylight, and one of the joint that has gone.'
+    -
+      parent_uuid: 19721046-396c-454d-aee6-e131e78e2644
+      slot: content
+      uuid: edd0e76a-19fd-47bb-9483-e09768f727e6
+      component_id: js.button
+      inputs:
+        label: Enquire
+        url: 'mailto:studio@atelier.example'
+        variant: solid
+        size: md
+        fullWidth: false
+  path:
+    -
+      alias: /services/restoration
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

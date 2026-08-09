@@ -167,7 +167,7 @@ every button resolves: nothing in the shipped content points at a page that is
 not there, and the enquiry buttons use `mailto:` rather than a contact form
 this template does not install.
 
-Three articles ship as the journal's contents, with pinned publication dates —
+Six articles ship as the journal's contents, with pinned publication dates —
 without them every article imports on the install timestamp and the journal
 reads as three posts filed on the same afternoon.
 
@@ -505,7 +505,7 @@ path:
 vendor/bin/phpunit -c web/core/phpunit.xml.dist recipes/atelier/tests/src/Kernel/RequirementsTest.php
 ```
 
-There is also `tests/check.sh` — 101 assertions — which is not a substitute for
+There is also `tests/check.sh` — 120 assertions — which is not a substitute for
 the above. It installs a throwaway site and asserts the rendered result — the front end
 serving the components, the imagery resolving, the menu exposed over JSON:API,
 Drupal's own CSS staying off the page. Those are things a PHPUnit test of the

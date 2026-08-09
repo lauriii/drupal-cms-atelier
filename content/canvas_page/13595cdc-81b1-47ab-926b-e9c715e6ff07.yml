@@ -1,0 +1,181 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 13595cdc-81b1-47ab-926b-e9c715e6ff07
+  default_langcode: en
+  depends:
+    3557fac7-9d2e-4e0c-acd9-6fb616e9e42c: file
+    2fb5efbf-7490-4c1d-8498-f5b1237489e8: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Commissions
+  components:
+    -
+      uuid: b2792d96-371e-479f-80d7-903d688cd30f
+      component_id: js.hero
+      inputs:
+        eyebrow: Services
+        title: 'One piece, for one room'
+        lede: 'We visit, measure, draw, and quote a fixed price. Then we make it, usually in fourteen weeks.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 2fb5efbf-7490-4c1d-8498-f5b1237489e8
+            target_type: media
+    -
+      uuid: 549b698e-3056-4d25-b5a8-61e39439478b
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: lg
+        width: default
+        divider: true
+    -
+      parent_uuid: 549b698e-3056-4d25-b5a8-61e39439478b
+      slot: content
+      uuid: a69d503d-4d86-44b6-ba5f-49504a2a3dae
+      component_id: js.section_intro
+      inputs:
+        eyebrow: 'How it goes'
+        title: 'Four visits and one drawing'
+        lede: 'Nothing goes on the saw until you have signed the drawing.'
+        align: left
+        level: h2
+    -
+      parent_uuid: 549b698e-3056-4d25-b5a8-61e39439478b
+      slot: content
+      uuid: 69e1ccbf-196e-4de0-84cc-583c39406010
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: 69e1ccbf-196e-4de0-84cc-583c39406010
+      slot: content
+      uuid: 143bbca8-37a0-4d8e-b7d5-082c8052ceab
+      component_id: js.feature
+      inputs:
+        title: 'We come and measure'
+        text: '<p>An hour in the room with a tape and a camera. We measure the route in as well as the room, because a 2.4 metre top has to get through the door.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 69e1ccbf-196e-4de0-84cc-583c39406010
+      slot: content
+      uuid: ad8f6f03-5a12-474e-92ef-515c8ebc80d0
+      component_id: js.feature
+      inputs:
+        title: 'You get a drawing, not a mood board'
+        text: '<p>A dimensioned elevation, and full size for the joints that matter. It is the thing we both agree to.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 69e1ccbf-196e-4de0-84cc-583c39406010
+      slot: content
+      uuid: 61b5f2a7-0172-40db-8b42-4ac698b4db99
+      component_id: js.feature
+      inputs:
+        title: 'Joinery that can be taken apart'
+        text: '<p>Wedged through-tenons and drawbored mortices. Nothing structural relies on glue alone, so a piece can be knocked apart, re-wedged, and put back into use.</p>'
+        framed: true
+        level: h3
+    -
+      uuid: e6607501-9de0-4369-89ac-b320352db384
+      component_id: js.section
+      inputs:
+        background: ink
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: e6607501-9de0-4369-89ac-b320352db384
+      slot: content
+      uuid: ef20e8d7-c68d-42bd-b9a9-0423065663fa
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: ef20e8d7-c68d-42bd-b9a9-0423065663fa
+      slot: content
+      uuid: 178a6baa-87be-431f-abef-c68549fdcd5a
+      component_id: js.stat
+      inputs:
+        value: '14'
+        label: 'weeks, deposit to delivery'
+    -
+      parent_uuid: ef20e8d7-c68d-42bd-b9a9-0423065663fa
+      slot: content
+      uuid: 1a570dfb-b7d9-4016-b344-d299fb661bdb
+      component_id: js.stat
+      inputs:
+        value: '14'
+        label: 'weeks from drawing to delivery'
+    -
+      parent_uuid: ef20e8d7-c68d-42bd-b9a9-0423065663fa
+      slot: content
+      uuid: 7864391e-f460-485d-8474-3fd8696b8657
+      component_id: js.stat
+      inputs:
+        value: '1'
+        label: 'board in most of our table tops'
+    -
+      uuid: d9f7ad11-1675-4d70-9ddb-6f83bc3a43ad
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: d9f7ad11-1675-4d70-9ddb-6f83bc3a43ad
+      slot: content
+      uuid: 71de6e94-2fa7-46c5-af24-8606464045e5
+      component_id: js.testimonial
+      inputs:
+        quote: 'We changed our minds twice and they redrew it twice without a sigh. The third one was right.'
+        name: 'Priya Ganesan'
+        role: 'Sideboard, Alresford'
+    -
+      uuid: a1c77207-8a1e-40e7-bb99-a36ccbbcbe03
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: default
+        divider: true
+    -
+      parent_uuid: a1c77207-8a1e-40e7-bb99-a36ccbbcbe03
+      slot: content
+      uuid: afbd02c5-2591-4263-b36e-32bc2da40ee0
+      component_id: js.cta
+      inputs:
+        title: 'Start with a photograph'
+        lede: 'A photograph of the room and a rough size is enough for a first drawing.'
+    -
+      parent_uuid: afbd02c5-2591-4263-b36e-32bc2da40ee0
+      slot: content
+      uuid: 3072641e-af37-4a98-926c-9c8b4aa14af5
+      component_id: js.button
+      inputs:
+        label: Enquire
+        url: 'mailto:studio@atelier.example'
+        variant: solid
+        size: md
+        fullWidth: false
+  path:
+    -
+      alias: /services/commissions
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

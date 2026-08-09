@@ -1,0 +1,156 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: e3409902-6bfb-49e5-b972-f29e66c848d1
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Questions
+  components:
+    -
+      uuid: 526c060f-634b-40a5-8432-e9eee526b77a
+      component_id: js.hero
+      inputs:
+        eyebrow: Questions
+        title: 'Before you commission'
+        lede: 'The things people email to ask. Anything that is not here, ask us directly.'
+    -
+      uuid: c0dc1175-5d51-4afd-ac23-5f6e5fd16b53
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: lg
+        width: default
+        divider: true
+    -
+      parent_uuid: c0dc1175-5d51-4afd-ac23-5f6e5fd16b53
+      slot: content
+      uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      component_id: js.grid
+      inputs:
+        columns: '2'
+        gap: lg
+    -
+      parent_uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      slot: content
+      uuid: 80aa57ab-c831-48ad-a4a9-7e6be440fed6
+      component_id: js.feature
+      inputs:
+        title: 'How long does a commission take?'
+        text: '<p>Between ten and twenty weeks from the deposit, depending on what is in the rack. A dining table is usually fourteen. We tell you the week, not the month, once the timber is chosen.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      slot: content
+      uuid: fb9ff881-5adc-411c-ac8a-e75eb1685ea3
+      component_id: js.feature
+      inputs:
+        title: 'How do you quote?'
+        text: '<p>A fixed price, given after the drawing and held unless the brief changes. It covers the timber, the making, the finish, and delivery within the south of England.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      slot: content
+      uuid: eebcae1f-0e4d-4018-9002-dbbcac64b7d4
+      component_id: js.feature
+      inputs:
+        title: 'Do you deliver and install?'
+        text: '<p>Ourselves, anywhere in the south of England, in our own van. Further than that we crate and use a specialist. We take the packaging away with us.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      slot: content
+      uuid: d7800cf2-ad2b-4823-ac2e-5ef769c1d1ac
+      component_id: js.feature
+      inputs:
+        title: 'Can you match an existing piece?'
+        text: '<p>Usually, though matching a finish is harder than matching a shape. Send photographs in daylight and we will tell you honestly whether we can get close.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      slot: content
+      uuid: 3fd9ca6a-ed89-4d10-a49b-a875780dfc18
+      component_id: js.feature
+      inputs:
+        title: 'What timber do you use?'
+        text: '<p>Mostly English ash, oak, and douglas fir, bought as whole boards from a woodland near Selborne. We will work in walnut and cherry. We do not use tropical hardwoods.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      slot: content
+      uuid: a4d931f3-decc-4dae-baa4-175c3d1ae74b
+      component_id: js.feature
+      inputs:
+        title: 'How should I look after it?'
+        text: '<p>Re-oil once a year with a cloth and half an hour. Coasters are not necessary; the finish is repairable in place. Keep it out of the path of underfloor heating if you can.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      slot: content
+      uuid: 0771dbef-32f3-4902-a0e1-77c5d80c4a75
+      component_id: js.feature
+      inputs:
+        title: 'Do you do repairs?'
+        text: "<p>On our own work, always, and usually for free in the first five years. On other people's work, yes, if the piece is worth the hours. We will say if it is not.</p>"
+        framed: true
+        level: h3
+    -
+      parent_uuid: 447a176b-4207-4800-ad1a-af0e3ffb2763
+      slot: content
+      uuid: ea0cb77a-50fe-4eec-8e4f-272450c4dd58
+      component_id: js.feature
+      inputs:
+        title: 'What do you need from me to start?'
+        text: '<p>A photograph of the room and a rough size. That is genuinely enough for a first drawing. We visit anything over two metres if you are within an hour of the workshop.</p>'
+        framed: true
+        level: h3
+    -
+      uuid: 9e8ae7c5-7a4b-4db1-9ca5-6de175385c93
+      component_id: js.section
+      inputs:
+        background: ink
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: 9e8ae7c5-7a4b-4db1-9ca5-6de175385c93
+      slot: content
+      uuid: 553733e2-7f47-4514-a45a-17ff5e422b77
+      component_id: js.cta
+      inputs:
+        title: 'Ask us something else'
+        lede: 'We read every enquiry and answer within two working days, including the ones we turn down.'
+    -
+      parent_uuid: 553733e2-7f47-4514-a45a-17ff5e422b77
+      slot: content
+      uuid: baab8e3c-fc25-4194-8c7e-49fc31185166
+      component_id: js.button
+      inputs:
+        label: Enquire
+        url: 'mailto:studio@atelier.example'
+        variant: solid
+        size: md
+        fullWidth: false
+  path:
+    -
+      alias: /faq
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

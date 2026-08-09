@@ -1,0 +1,181 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 668cdb84-fc77-4ef1-80f0-121fac00fe1e
+  default_langcode: en
+  depends:
+    c830eed7-e7a0-4884-a7d5-6b7cb4a93468: file
+    1298229c-9e7c-44d5-ae19-7e84c6f8c490: media
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Small runs'
+  components:
+    -
+      uuid: af2668f7-4af4-444d-abbf-3918db52ac6d
+      component_id: js.hero
+      inputs:
+        eyebrow: Services
+        title: 'Twenty to two hundred of the same thing'
+        lede: 'Batches for restaurants, studios and shops that need the same piece repeatedly, made the same way each time.'
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 1298229c-9e7c-44d5-ae19-7e84c6f8c490
+            target_type: media
+    -
+      uuid: 861f590e-710f-41c8-95ac-3b22bc632b76
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: lg
+        width: default
+        divider: true
+    -
+      parent_uuid: 861f590e-710f-41c8-95ac-3b22bc632b76
+      slot: content
+      uuid: 074714da-afe5-454a-ac62-ce6bd5c39c87
+      component_id: js.section_intro
+      inputs:
+        eyebrow: 'How it goes'
+        title: 'Jigs, batches, and a master'
+        lede: 'The two hundredth has to be the same as the sixth. That is the whole problem.'
+        align: left
+        level: h2
+    -
+      parent_uuid: 861f590e-710f-41c8-95ac-3b22bc632b76
+      slot: content
+      uuid: b9e504d4-a572-4b9b-9ae8-fd40805e6e55
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: b9e504d4-a572-4b9b-9ae8-fd40805e6e55
+      slot: content
+      uuid: ab45ef4c-1a0f-4905-a5ed-777a28c870a8
+      component_id: js.feature
+      inputs:
+        title: 'Jigs, not memory'
+        text: '<p>Every repeated cut gets a jig, dated and named on the side. It is how a Thursday afternoon comes out like a Monday morning.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: b9e504d4-a572-4b9b-9ae8-fd40805e6e55
+      slot: content
+      uuid: 7df11ca8-69cc-48e4-b14e-73b2e9997863
+      component_id: js.feature
+      inputs:
+        title: 'Batches of twenty'
+        text: '<p>Cutting the whole run at once is faster until a dimension is wrong and you have two hundred of the mistake. We check against a master every twenty.</p>'
+        framed: true
+        level: h3
+    -
+      parent_uuid: b9e504d4-a572-4b9b-9ae8-fd40805e6e55
+      slot: content
+      uuid: 5caf00dc-bac7-4374-a95f-9b7bdb87e466
+      component_id: js.feature
+      inputs:
+        title: 'Parts, not pieces'
+        text: '<p>Backs and seats come off. A damaged one is a part to replace, not a chair to remake.</p>'
+        framed: true
+        level: h3
+    -
+      uuid: 9105fadf-ece7-4820-8dce-ce5f6f6a9964
+      component_id: js.section
+      inputs:
+        background: ink
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: 9105fadf-ece7-4820-8dce-ce5f6f6a9964
+      slot: content
+      uuid: a1841751-696a-4223-97df-53753eeadf21
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: lg
+    -
+      parent_uuid: a1841751-696a-4223-97df-53753eeadf21
+      slot: content
+      uuid: cf191c8c-8b3b-42ac-8644-78894ec1d27e
+      component_id: js.stat
+      inputs:
+        value: '200'
+        label: 'stools for one Winchester restaurant'
+    -
+      parent_uuid: a1841751-696a-4223-97df-53753eeadf21
+      slot: content
+      uuid: 55b26a8e-c9fd-4787-8e08-fbe7b9089ea2
+      component_id: js.stat
+      inputs:
+        value: '90'
+        label: 'hours saved by four jigs on that run'
+    -
+      parent_uuid: a1841751-696a-4223-97df-53753eeadf21
+      slot: content
+      uuid: fd6b61f4-c8be-4efa-9cd6-32536ed03c82
+      component_id: js.stat
+      inputs:
+        value: '20'
+        label: 'per batch, checked against a master'
+    -
+      uuid: b15de118-9e3e-4404-a209-70d69b18de96
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: md
+        width: default
+        divider: false
+    -
+      parent_uuid: b15de118-9e3e-4404-a209-70d69b18de96
+      slot: content
+      uuid: 52130c11-e59b-4966-ae7c-6560ff946603
+      component_id: js.testimonial
+      inputs:
+        quote: 'Two years and four hundred covers a week. We have replaced two seats.'
+        name: 'Tom Bewick'
+        role: 'Restaurant, Winchester'
+    -
+      uuid: f79a0695-d653-44fa-a695-394f15511d27
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: md
+        width: default
+        divider: true
+    -
+      parent_uuid: f79a0695-d653-44fa-a695-394f15511d27
+      slot: content
+      uuid: 8ec4e6e9-4dcf-4bc5-b8a0-22e7721f53a1
+      component_id: js.cta
+      inputs:
+        title: 'Tell us the number'
+        lede: 'Quantity, deadline, and where they are going.'
+    -
+      parent_uuid: 8ec4e6e9-4dcf-4bc5-b8a0-22e7721f53a1
+      slot: content
+      uuid: 02b155f0-23aa-4716-84b9-ca097cba1aa9
+      component_id: js.button
+      inputs:
+        label: Enquire
+        url: 'mailto:studio@atelier.example'
+        variant: solid
+        size: md
+        fullWidth: false
+  path:
+    -
+      alias: /services/small-runs
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

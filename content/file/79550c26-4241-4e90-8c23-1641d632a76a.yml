@@ -4,6 +4,9 @@ _meta:
   uuid: 79550c26-4241-4e90-8c23-1641d632a76a
   default_langcode: en
 default:
+  uid:
+    -
+      target_id: 1
   filename:
     -
       value: atelier-journal-bench-detail.jpg

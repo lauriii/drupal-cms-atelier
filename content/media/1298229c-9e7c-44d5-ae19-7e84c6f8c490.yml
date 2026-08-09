@@ -1,11 +1,11 @@
 _meta:
   version: '1.0'
   entity_type: media
-  uuid: 211c97f4-c3b7-4580-9747-bf5e1e0c218d
+  uuid: 1298229c-9e7c-44d5-ae19-7e84c6f8c490
   bundle: image
   default_langcode: en
   depends:
-    48fd871f-fcf7-4342-bdd2-bde958f2b34f: file
+    c830eed7-e7a0-4884-a7d5-6b7cb4a93468: file
 default:
   status:
     -
@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'The jig wall'
+      value: 'Stools waiting on frames'
   revision_translation_affected:
     -
       value: true
@@ -25,8 +25,8 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'A workbench under a window with jigs and hand tools racked above.'
+      alt: 'Stacked stool seats and frames in a workshop.'
       title: ''
       width: 1800
-      height: 1200
-      entity: 48fd871f-fcf7-4342-bdd2-bde958f2b34f
+      height: 2700
+      entity: c830eed7-e7a0-4884-a7d5-6b7cb4a93468

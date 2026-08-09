@@ -4,6 +4,9 @@ _meta:
   uuid: 6b7b5d61-b709-4ef1-b7c5-e41a3d86c8ac
   default_langcode: en
 default:
+  uid:
+    -
+      target_id: 1
   filename:
     -
       value: atelier-journal-stool.jpg

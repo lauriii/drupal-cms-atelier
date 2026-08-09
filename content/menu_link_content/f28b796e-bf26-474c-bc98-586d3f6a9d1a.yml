@@ -1,18 +1,18 @@
 _meta:
   version: '1.0'
   entity_type: menu_link_content
-  uuid: 78276608-15ff-47b4-871d-b17660e538d5
+  uuid: f28b796e-bf26-474c-bc98-586d3f6a9d1a
   bundle: menu_link_content
   default_langcode: en
   depends:
-    41c22c99-9e7a-4601-ab8c-517b366306d4: canvas_page
+    7d18a0aa-b340-483c-b473-ff878d53e804: canvas_page
 default:
   enabled:
     -
       value: true
   title:
     -
-      value: Studio
+      value: Services
   menu_name:
     -
       value: main
@@ -20,7 +20,7 @@ default:
     -
       title: null
       options: {  }
-      target_uuid: 41c22c99-9e7a-4601-ab8c-517b366306d4
+      target_uuid: 7d18a0aa-b340-483c-b473-ff878d53e804
   external:
     -
       value: false
@@ -29,10 +29,10 @@ default:
       value: false
   weight:
     -
-      value: 7
+      value: 1
   expanded:
     -
-      value: false
+      value: true
   revision_translation_affected:
     -
       value: true

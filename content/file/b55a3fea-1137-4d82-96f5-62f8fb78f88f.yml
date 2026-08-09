@@ -4,6 +4,9 @@ _meta:
   uuid: b55a3fea-1137-4d82-96f5-62f8fb78f88f
   default_langcode: en
 default:
+  uid:
+    -
+      target_id: 1
   filename:
     -
       value: atelier-journal-finish.jpg

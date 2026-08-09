@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: 82598872-284e-4abd-b7d8-fbcf70f44159
+  uuid: c830eed7-e7a0-4884-a7d5-6b7cb4a93468
   default_langcode: en
 default:
   uid:
@@ -9,16 +9,16 @@ default:
       target_id: 1
   filename:
     -
-      value: atelier-journal-stool-stack.jpg
+      value: atelier-service-runs.jpg
   uri:
     -
-      value: 'public://atelier-journal-stool-stack.jpg'
+      value: 'public://atelier-service-runs.jpg'
   filemime:
     -
       value: image/jpeg
   filesize:
     -
-      value: 424505
+      value: 373197
   status:
     -
       value: true

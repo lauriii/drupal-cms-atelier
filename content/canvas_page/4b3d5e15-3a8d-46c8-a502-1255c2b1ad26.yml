@@ -16,8 +16,6 @@ _meta:
     6a55d47f-c5b0-4856-96dd-a3d0b1ae7dee: media
     7cb948de-2918-4f2e-ae6b-f8415c630a66: file
     d429ffd1-4902-4d6f-91ac-44ab2118c1aa: media
-    20115fdb-c395-4cc0-9e0a-1607f55fdfd4: file
-    cec4fc43-86ee-4e94-84fc-d46cea329cfd: media
 default:
   status:
     -
@@ -95,12 +93,12 @@ default:
       uuid: e2964a41-0013-4a00-8000-000000000013
       component_id: js.figure
       inputs:
+        title: 'Low bench'
+        caption: 'Oiled hardwood, wedged through-tenons, in the room it was made for.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: f3df0d3f-bb68-4848-ab90-1440d44eefef
             target_type: media
-        title: 'Long bench'
-        caption: 'Ash, 2.4 metres, wedged through-tenons. The top is one board.'
         sheet: 'No. 04'
         level: h3
         ratio: tall
@@ -110,12 +108,12 @@ default:
       uuid: 95917ad7-0014-4a00-8000-000000000014
       component_id: js.figure
       inputs:
+        title: 'Shelf, detail'
+        caption: 'The front edge of a wall-hung shelf. The uprights follow a wall that is 14mm out over its height.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 65c8822a-f870-4caa-b15b-b4a19b2f7116
             target_type: media
-        title: 'Wall shelf'
-        caption: 'Douglas fir, wall-hung. The wall is 14mm out over its height, so the uprights follow it.'
         sheet: 'No. 12'
         level: h3
         ratio: tall
@@ -222,16 +220,6 @@ default:
             target_uuid: d429ffd1-4902-4d6f-91ac-44ab2118c1aa
             target_type: media
     -
-      parent_uuid: e5fb8e58-0017-4a00-8000-000000000017
-      slot: content
-      uuid: 27b578ae-0021-4a00-8000-000000000021
-      component_id: js.logo
-      inputs:
-        image:
-          CANVAS_ENTITY_REFERENCE:
-            target_uuid: cec4fc43-86ee-4e94-84fc-d46cea329cfd
-            target_type: media
-    -
       uuid: 50b24838-0022-4a00-8000-000000000022
       component_id: js.section
       inputs:
@@ -261,10 +249,10 @@ default:
       uuid: 20d8bcb7-0025-4a00-8000-000000000025
       component_id: js.section
       inputs:
-        background: wash
+        background: ink
         spacing: md
         width: default
-        divider: true
+        divider: false
     -
       parent_uuid: 20d8bcb7-0025-4a00-8000-000000000025
       slot: content

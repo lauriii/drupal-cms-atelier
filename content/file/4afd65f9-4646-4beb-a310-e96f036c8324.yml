@@ -4,6 +4,9 @@ _meta:
   uuid: 4afd65f9-4646-4beb-a310-e96f036c8324
   default_langcode: en
 default:
+  uid:
+    -
+      target_id: 1
   filename:
     -
       value: atelier-work-shelf.jpg

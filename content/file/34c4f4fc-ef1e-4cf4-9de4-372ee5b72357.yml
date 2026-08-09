@@ -4,6 +4,9 @@ _meta:
   uuid: 34c4f4fc-ef1e-4cf4-9de4-372ee5b72357
   default_langcode: en
 default:
+  uid:
+    -
+      target_id: 1
   filename:
     -
       value: atelier-work-bench.jpg
