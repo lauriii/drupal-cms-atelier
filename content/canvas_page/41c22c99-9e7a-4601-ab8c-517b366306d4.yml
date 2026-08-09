@@ -81,9 +81,8 @@ default:
             target_type: media
         ratio: wide
         title: 'Sanding a plank'
-        caption: 'Everything is made here. Two of us have been at it for fifteen years and still measure twice.'
+        caption: 'The bench under the window, where anything that needs looking at ends up.'
         level: h3
-        availability: 'Commissions open'
     -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005
       component_id: js.section
@@ -148,10 +147,10 @@ default:
       uuid: 7f2a1c33-0013-4a00-8000-000000000013
       component_id: js.section
       inputs:
-        background: ink
+        background: paper
         spacing: md
         width: default
-        divider: false
+        divider: true
     -
       parent_uuid: 7f2a1c33-0013-4a00-8000-000000000013
       slot: content

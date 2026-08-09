@@ -210,7 +210,7 @@ default:
       component_id: js.figure
       inputs:
         title: 'Table and chairs, garden room'
-        caption: 'Ash, Oakhanger, 2024. The client kept their own chairs; we made the table and two more to sit with them.'
+        caption: 'Ash, Oakhanger, 2024. Made to sit with chairs the room already had.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: dae4d2fc-0f4d-49bb-88e2-b71ba7978f6a

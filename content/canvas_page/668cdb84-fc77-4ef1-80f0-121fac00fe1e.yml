@@ -95,10 +95,10 @@ default:
       uuid: 9105fadf-ece7-4820-8dce-ce5f6f6a9964
       component_id: js.section
       inputs:
-        background: ink
+        background: paper
         spacing: md
         width: default
-        divider: false
+        divider: true
     -
       parent_uuid: 9105fadf-ece7-4820-8dce-ce5f6f6a9964
       slot: content
