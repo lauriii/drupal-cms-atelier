@@ -148,10 +148,10 @@ default:
       uuid: 7f2a1c33-0013-4a00-8000-000000000013
       component_id: js.section
       inputs:
-        background: wash
+        background: ink
         spacing: md
         width: default
-        divider: true
+        divider: false
     -
       parent_uuid: 7f2a1c33-0013-4a00-8000-000000000013
       slot: content
@@ -166,7 +166,7 @@ default:
       uuid: b7d40e91-0001-4a00-8000-000000000001
       component_id: js.section
       inputs:
-        background: wash
+        background: paper
         spacing: sm
         width: default
         divider: true
