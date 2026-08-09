@@ -1,7 +1,7 @@
 #
 # A curated list of recommended add-ons, surfaced by Project Browser. This file
-# is part of Nebula's API and should not be renamed or removed unless you know
-# precisely what you're doing.
+# is part of this site template's API and should not be renamed or removed
+# unless you know precisely what you're doing.
 #
 # Its canonical URL is the raw URL of this file in the project's repository, and
 # is what `project_browser.admin_settings.enabled_sources.recommended.uri` should

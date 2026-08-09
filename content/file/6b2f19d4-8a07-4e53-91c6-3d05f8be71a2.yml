@@ -21,7 +21,7 @@ default:
       value: text/plain
   filesize:
     -
-      value: 1913
+      value: 1925
   status:
     -
       value: true

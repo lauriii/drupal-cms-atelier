@@ -459,12 +459,23 @@ path:
 vendor/bin/phpunit -c web/core/phpunit.xml.dist recipes/atelier/tests/src/Kernel/RequirementsTest.php
 ```
 
-There is also `tests/check.sh`, which is not a substitute for the above. It
-installs a throwaway site and asserts the rendered result — the front end
+There is also `tests/check.sh` — 81 assertions — which is not a substitute for
+the above. It installs a throwaway site and asserts the rendered result — the front end
 serving the components, the imagery resolving, the menu exposed over JSON:API,
 Drupal's own CSS staying off the page. Those are things a PHPUnit test of the
 recipe does not look at. It rebuilds the site's database, so only run it
 against a disposable site.
+
+Two regeneration scripts keep the vendored snapshot honest, and both are meant
+to be run against a site you have edited by hand, with the diff reviewed:
+
+- `tests/regenerate-components.sh` — the eighteen components, their wrappers,
+  the header and footer page regions, and the Tailwind build.
+- `tests/regenerate-content.sh` — the four pages, the menu, the media and the
+  articles. It also re-pins the article publication dates, which
+  `drush content:export` drops: without them every article imports on the
+  install timestamp and the journal reads as three posts filed on the same
+  afternoon.
 
 ## Where this differs from the marketplace templates
 

@@ -81,7 +81,7 @@ default:
         eyebrow: 'What we do'
         title: 'Three things, done properly'
         lede: 'We keep the list short so the work stays good.'
-        align: center
+        align: left
         level: h2
     -
       parent_uuid: cf5444f1-0004-4a00-8000-000000000004

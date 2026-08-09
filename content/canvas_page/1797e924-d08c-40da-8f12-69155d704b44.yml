@@ -9,7 +9,7 @@ default:
       value: true
   owner:
     -
-      target_id: 0
+      target_id: 1
   title:
     -
       value: Journal

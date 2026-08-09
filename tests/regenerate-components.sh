@@ -2,13 +2,13 @@
 #
 # Maintainer tool, not a test.
 #
-# Refreshes the vendored snapshot of the Nebula code components from a site
+# Refreshes the vendored snapshot of the Atelier code components from a site
 # that has had `canvas push` run against it. Run this whenever the paired
-# Nebula codebase changes.
+# paired codebase changes.
 #
 #   1. Install this template on a disposable site.
 #   2. Finish the OAuth setup (see README.md).
-#   3. From your Nebula codebase: `npx canvas push`.
+#   3. From your codebase: `npx canvas push`.
 #   4. tests/regenerate-components.sh
 #
 # Usage:
@@ -98,5 +98,5 @@ PY
 
 echo
 echo "NOTE: the footer page region carries a deliberate 'Powered by Drupal CMS'"
-echo "      credit that a push overwrites with Nebula's default. Check the diff."
+echo "      credit that a push overwrites with the scaffold default. Check the diff."
 echo "==> Done. Review the diff, then re-run tests/check.sh."
