@@ -231,9 +231,9 @@ check 'privacy page published' 1 \
     $p = reset($p);
     print (int) ($p && $p->isPublished() && $p->get("path")->alias === "/privacy");')"
 for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:29" \
-            "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:14" \
+            "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:19" \
             "Journal:1797e924-d08c-40da-8f12-69155d704b44:/journal:3" \
-            "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9"; do
+            "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:10"; do
   IFS=: read -r label uuid alias count <<<"$page"
   check "$label page published at $alias" 1 \
     "$(ev "\$p = \Drupal::service('entity.repository')->loadEntityByUuid('canvas_page', '$uuid');
@@ -350,6 +350,24 @@ check 'articles have body copy' 3 \
       if (!$node->get("body")->isEmpty()) { $n++; }
     }
     print $n;')"
+
+# The demo content is this library's documentation, so a component that renders
+# nowhere is undocumented. This asserts a floor rather than a count: it fails
+# when coverage drops, and does not need editing when content is added — unlike
+# the per-page item counts above, which have been amended to match whatever
+# shipped and so have never once constrained anything.
+check 'components exercised by the demo' 1 \
+  "$(ev '$used = [];
+    foreach (\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple() as $p) {
+      foreach ($p->get("components")->getValue() as $i) { $used[$i["component_id"]] = TRUE; }
+    }
+    foreach (\Drupal::entityTypeManager()->getStorage("page_region")->loadMultiple() as $r) {
+      foreach ($r->get("component_tree") as $i) { $used[$i["component_id"]] = TRUE; }
+    }
+    foreach (\Drupal::entityTypeManager()->getStorage("content_template")->loadMultiple() as $c) {
+      foreach ($c->get("component_tree") as $i) { $used[$i["component_id"]] = TRUE; }
+    }
+    print (int) (count($used) >= 18);')"
 
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \

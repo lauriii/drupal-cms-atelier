@@ -73,6 +73,7 @@ default:
         title: 'Quartersawn ash'
         caption: 'Cut so the ray figure runs across the board. It costs more per cube and moves less in a warm room.'
         level: h3
+        url: /sourcing-ash-single-hampshire-woodland
     -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005
       component_id: js.section
@@ -151,6 +152,46 @@ default:
         name: 'Ruth Okafor'
         role: 'Kitchen table, Alton'
         avatar: ''
+    -
+      uuid: b7d40e91-0001-4a00-8000-000000000001
+      component_id: js.section
+      inputs:
+        background: wash
+        spacing: sm
+        width: default
+        divider: true
+    -
+      parent_uuid: b7d40e91-0001-4a00-8000-000000000001
+      slot: content
+      uuid: b7d40e91-0002-4a00-8000-000000000002
+      component_id: js.grid
+      inputs:
+        columns: '3'
+        gap: md
+    -
+      parent_uuid: b7d40e91-0002-4a00-8000-000000000002
+      slot: content
+      uuid: b7d40e91-0004-4a00-8000-000000000004
+      component_id: js.stat
+      inputs:
+        value: '2009'
+        label: 'The year we started, in a rented bay behind a car repair shop'
+    -
+      parent_uuid: b7d40e91-0002-4a00-8000-000000000002
+      slot: content
+      uuid: b7d40e91-0005-4a00-8000-000000000005
+      component_id: js.stat
+      inputs:
+        value: Six
+        label: 'People in the workshop, including both of the founders'
+    -
+      parent_uuid: b7d40e91-0002-4a00-8000-000000000002
+      slot: content
+      uuid: b7d40e91-0006-4a00-8000-000000000006
+      component_id: js.stat
+      inputs:
+        value: ~90
+        label: 'Pieces a year, which is as many as six people can make properly'
   path:
     -
       alias: /studio

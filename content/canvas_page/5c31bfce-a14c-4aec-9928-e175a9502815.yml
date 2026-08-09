@@ -97,6 +97,14 @@ default:
         variant: solid
         size: lg
         fullWidth: false
+    -
+      parent_uuid: 5d6e8a91-0018-4a00-8000-000000000018
+      slot: content
+      uuid: c8e51f22-0001-4a00-8000-000000000001
+      component_id: js.badge
+      inputs:
+        label: 'Open Tuesday to Friday'
+        variant: boxed
   path:
     -
       alias: /contact

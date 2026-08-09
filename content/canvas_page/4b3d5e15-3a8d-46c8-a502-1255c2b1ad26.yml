@@ -218,6 +218,7 @@ default:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 98b7f218-a4ab-4a83-934a-3e5c56012de6
             target_type: media
+        url: 'https://example.com/bramble-howe'
     -
       parent_uuid: e5fb8e58-0017-4a00-8000-000000000017
       slot: content
@@ -228,6 +229,7 @@ default:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 6a55d47f-c5b0-4856-96dd-a3d0b1ae7dee
             target_type: media
+        url: 'https://example.com/northam'
     -
       parent_uuid: e5fb8e58-0017-4a00-8000-000000000017
       slot: content
@@ -238,6 +240,7 @@ default:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: d429ffd1-4902-4d6f-91ac-44ab2118c1aa
             target_type: media
+        url: 'https://example.com/cole-street'
     -
       parent_uuid: e5fb8e58-0017-4a00-8000-000000000017
       slot: content
@@ -248,6 +251,7 @@ default:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: cec4fc43-86ee-4e94-84fc-d46cea329cfd
             target_type: media
+        url: 'https://example.com/lewes-works'
     -
       uuid: 50b24838-0022-4a00-8000-000000000022
       component_id: js.section
