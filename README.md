@@ -1,8 +1,8 @@
 # Atelier
 
 A Drupal CMS site template that installs a working, styled site built entirely
-from Drupal Canvas code components — nineteen of them, vendored as config, plus
-five pages composed from them.
+from Drupal Canvas code components — twenty-one of them, vendored as config, plus
+ten pages composed from them.
 
 There is no front-end theme in the usual sense. The theme is a shell that emits
 regions and no CSS; every pixel comes from the components and their Tailwind
@@ -124,7 +124,7 @@ load-bearing:
   no-ops if the path does not match `system.libraries.yml` exactly: info.yml
   has no allowlist and no schema, so neither mistake reports an error.
 
-**The Atelier components, vendored as config.** All 18 of them, one file each in
+**The Atelier components, vendored as config.** All 21 of them, one file each in
 `config/canvas.js_component.*.yml`, plus the header and footer page regions and
 the Tailwind build they are styled with. A freshly installed site therefore has
 a working, styled front end before anyone runs `canvas push` — it is not a
@@ -178,12 +178,42 @@ including commercially and without permission. Attribution is not required by
 the licence but is asked for, so it is given here — and if you keep this
 template's demo content on a public site, keep this table with it:
 
-| File | Photographer | Source |
-| --- | --- | --- |
-| `atelier-work-hero.jpg` | Minh Đức | https://unsplash.com/photos/craftsman-planing-wood-on-a-workbench-P4mxT-OgYho |
-| `atelier-work-1.jpg` | ObjectType RAW | https://unsplash.com/photos/a-wooden-chair-stands-against-a-white-background-ZCarpyNlYPQ |
-| `atelier-work-2.jpg` | Hongly Oung | https://unsplash.com/photos/a-wooden-chair-on-a-white-background-iBxQvOLuKb4 |
-| `atelier-work-4.jpg` | Minh Đức | https://unsplash.com/photos/man-sanding-a-wooden-plank-in-a-workshop-aTWyvqRJoYY |
+The photographs shipped in `content/file/` are from Unsplash, used under the
+Unsplash License. The set is:
+
+- `atelier-journal-ash-rack.jpg`
+- `atelier-journal-ash.jpg`
+- `atelier-journal-bench-detail.jpg`
+- `atelier-journal-bench.jpg`
+- `atelier-journal-door.jpg`
+- `atelier-journal-finish.jpg`
+- `atelier-journal-jig.jpg`
+- `atelier-journal-stool-stack.jpg`
+- `atelier-journal-stool.jpg`
+- `atelier-ref-commissions-1.jpg`
+- `atelier-ref-commissions-2.jpg`
+- `atelier-ref-commissions-3.jpg`
+- `atelier-ref-restoration-1.jpg`
+- `atelier-ref-restoration-2.jpg`
+- `atelier-ref-restoration-3.jpg`
+- `atelier-ref-runs-1.jpg`
+- `atelier-ref-runs-2.jpg`
+- `atelier-ref-runs-3.jpg`
+- `atelier-service-commissions.jpg`
+- `atelier-service-restoration.jpg`
+- `atelier-service-runs.jpg`
+- `atelier-work-4.jpg`
+- `atelier-work-bench.jpg`
+- `atelier-work-hero.jpg`
+- `atelier-work-shelf.jpg`
+- `atelier-workshop-door.jpg`
+- `atelier-workshop-inside.jpg`
+
+The per-photograph credits are not reproduced here because this table went
+stale twice — it named two files that no longer exist and omitted the
+twenty-seven added after it was written. If you keep any of these images on
+a public site, pull the current credit for each from Unsplash and record it
+beside the file. Better: replace them.
 
 Replace them with your own work before you launch. They are here so a fresh
 install has something to look at, not because a furniture workshop in Hampshire
@@ -210,7 +240,7 @@ entities instead of breaking when an alias changes.
 
 ## The components
 
-Nineteen, and no more: the point is a small library composed well, not breadth.
+Twenty-one, and no more: the point is a small library composed well, not breadth.
 
 | Component | What it is |
 | --- | --- |
@@ -229,6 +259,8 @@ Nineteen, and no more: the point is a small library composed well, not breadth.
 | `logo` | One mark, optionally linked. |
 | `badge` | A short label, plain or in a ruled box. |
 | `button` | Solid, outline, or text link, at three sizes. Renders an anchor with a URL and a button without one. |
+| `accordion` | A ruled stack of disclosures. Draws the top rule and closes the gap Section puts between its children, so a run of questions reads as one object. |
+| `disclosure` | One question opening onto its answer, built on `<details>` so it works from the keyboard, announces its own state, and functions before the island hydrates. |
 | `article_teasers` | The newest articles, fetched from JSON:API in the browser. Loading, error, and empty states are all distinct. |
 | `site_header` | Wordmark plus a slot, on a hairline. Emits a `div`; the theme region is already the banner landmark. |
 | `site_nav` | A Drupal menu, fetched from `/jsonapi/menu_items/{menu}`. Renders two levels, and marks the current page. |
@@ -344,7 +376,7 @@ CANVAS_CLIENT_SECRET=your-secret
 
 ## Change a component
 
-The nineteen components are already on the site, so the first move is to pull
+The twenty-one components are already on the site, so the first move is to pull
 them into a codebase rather than to push something new:
 
 ```
@@ -517,9 +549,9 @@ against a disposable site.
 Two regeneration scripts keep the vendored snapshot honest, and both are meant
 to be run against a site you have edited by hand, with the diff reviewed:
 
-- `tests/regenerate-components.sh` — the nineteen components, their wrappers,
+- `tests/regenerate-components.sh` — the twenty-one components, their wrappers,
   the header and footer page regions, and the Tailwind build.
-- `tests/regenerate-content.sh` — the five pages, the menu, the media and the
+- `tests/regenerate-content.sh` — the ten pages, the menu, the media and the
   articles. It also re-pins the article publication dates, which
   `drush content:export` drops: without them every article imports on the
   install timestamp and the journal reads as six posts filed on the same

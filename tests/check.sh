@@ -206,6 +206,39 @@ check 'component classes resolve in the CSS build' 0 \
       }
     }
     print count(array_unique($missing));')"
+# A build's worth of type-token work was once written, never pushed, and then
+# described in a commit as shipped. A literal font size in a component is the
+# fingerprint of that drift. (This assertion was itself deleted once by a
+# careless rewrite of the block above it, which is why it sits here with its
+# own comment rather than sharing one.)
+check 'no literal font sizes in shipped components' 0 \
+  "$(ev '$bad = 0;
+    foreach (\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple() as $c) {
+      foreach (["original", "compiled"] as $half) {
+        // Absolute units only: an em on inline code is a ratio to whatever
+        // surrounds it, which is the one case a token would get wrong.
+        $bad += preg_match_all("/text-\\[(?!length:var)[0-9.]+(rem|px)\\]/", $c->get("js")[$half] ?? "");
+      }
+    }
+    print $bad;')"
+# The installer card and the Packagist blurb both said "eighteen components and
+# five pages" while twenty-one and ten shipped. Those are the two sentences a
+# person reads before installing this, so the numbers in them are assertions.
+check 'recipe description states the real counts' yes \
+  "$(ev '$recipe = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(DRUPAL_ROOT . "/../recipes/atelier/recipe.yml"));
+    $words = ["one" => 1, "two" => 2, "three" => 3, "four" => 4, "five" => 5, "six" => 6,
+      "seven" => 7, "eight" => 8, "nine" => 9, "ten" => 10, "eleven" => 11, "twelve" => 12,
+      "thirteen" => 13, "fourteen" => 14, "fifteen" => 15, "sixteen" => 16, "seventeen" => 17,
+      "eighteen" => 18, "nineteen" => 19, "twenty" => 20, "twenty-one" => 21, "twenty-two" => 22];
+    $said = strtolower($recipe["description"] ?? "");
+    $components = count(\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple());
+    $pages = count(\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple());
+    $ok = FALSE; $okPages = FALSE;
+    foreach ($words as $word => $n) {
+      if ($n === $components && str_contains($said, $word . " components")) { $ok = TRUE; }
+      if ($n === $pages && str_contains($said, $word . " pages")) { $okPages = TRUE; }
+    }
+    print $ok && $okPages ? "yes" : "no";')"
 check 'every component ships source and compiled' 0 \
   "$(ev '$bad = 0;
     foreach (\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple() as $c) {
@@ -617,7 +650,7 @@ echo "$pass passed, $fail failed"
 # tell "did not run" from "passed" -- this suite has twice reported 0 failed
 # with a third of it silently skipped. Assert the count itself. Raise the floor
 # when you add assertions; lower it only when you delete some on purpose.
-expected=123
+expected=125
 if (( pass + fail < expected )); then
   echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
   echo "A block exited early. Do not read the tally above as a pass." >&2
