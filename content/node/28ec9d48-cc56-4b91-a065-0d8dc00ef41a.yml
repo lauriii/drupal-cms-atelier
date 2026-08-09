@@ -4,6 +4,8 @@ _meta:
   uuid: 28ec9d48-cc56-4b91-a065-0d8dc00ef41a
   bundle: article
   default_langcode: en
+  depends:
+    6b7b5d61-b709-4ef1-b7c5-e41a3d86c8ac: file
 default:
   revision_uid:
     -
@@ -38,6 +40,13 @@ default:
       langcode: en
   body:
     -
-      value: '<p>A restaurant in Winchester ordered two hundred stools. We had never made more than twenty of anything, and we said yes before working out what that meant.</p><p>The first thing we learned is that a jig you would not bother with for twenty pays for itself by number six. We built four of them in the first week and they saved something like ninety hours over the run.</p><p>The second is that batching is not free. Cutting two hundred seats and then two hundred legs sounds efficient and is, until a dimension is wrong and you have two hundred of the mistake. We moved to batches of twenty, checked against a master, and lost perhaps a day in changeovers.</p><p>The third is that everybody in the workshop got faster and worse at the same time. By the sixtieth stool the timings were excellent and the shoulders were not. We started rotating who did what, which is slower on paper and produced a better stool.</p><p>We would take the job again. We would quote it differently.</p>'
+      value: '<p>A restaurant in Winchester ordered two hundred stools. We had never made more than twenty of anything, and we said yes before working out what that meant.</p><h2>A jig pays for itself by number six</h2><p>The first thing we learned is that a jig you would not bother with for twenty pays for itself by number six. We built four of them in the first week and they saved something like ninety hours over the run.</p><drupal-media data-entity-type="media" data-entity-uuid="98ed9167-5c0a-4f39-ab12-e6612b97bdaf" data-align="center" data-caption="Seats stacked at the end of a run of twenty, waiting on the frames."></drupal-media><h2>Batching is not free</h2><p>We moved to batches of twenty, checked against a master, and lost perhaps a day in changeovers.</p><blockquote><p>Cutting two hundred seats and then two hundred legs sounds efficient, until a dimension is wrong and you have two hundred of the mistake.</p></blockquote><h2>Faster and worse at the same time</h2><p>By the sixtieth stool the timings were excellent and the shoulders were not. We started rotating who did what, which is slower on paper and produced a better stool.</p><p>We would take the job again. We would quote it differently.</p>'
       format: content_format
-      summary: ''
+      summary: 'A restaurant ordered two hundred stools. We had never made more than twenty of anything, and we said yes before working out what that meant.'
+  field_image:
+    -
+      alt: 'Two hundred of the same thing'
+      title: ''
+      width: 1800
+      height: 2700
+      entity: 6b7b5d61-b709-4ef1-b7c5-e41a3d86c8ac

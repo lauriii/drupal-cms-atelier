@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f3df0d3f-bb68-4848-ab90-1440d44eefef
+  bundle: image
+  default_langcode: en
+  depends:
+    34c4f4fc-ef1e-4cf4-9de4-372ee5b72357: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: 'Long bench, Winchester'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A low ash bench under a window, with turned stools beside it.'
+      title: ''
+      width: 1800
+      height: 1200
+      entity: 34c4f4fc-ef1e-4cf4-9de4-372ee5b72357

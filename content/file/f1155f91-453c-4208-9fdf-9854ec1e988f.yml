@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: f1155f91-453c-4208-9fdf-9854ec1e988f
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-journal-bench.jpg
+  uri:
+    -
+      value: 'public://atelier-journal-bench.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1017411
+  status:
+    -
+      value: true

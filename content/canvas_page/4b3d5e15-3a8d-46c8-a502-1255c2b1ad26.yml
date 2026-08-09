@@ -6,10 +6,10 @@ _meta:
   depends:
     62f5db67-143a-4b08-b7ae-2e4814a29834: file
     2fed5eb0-0ebe-4b89-9fd2-e776c4690480: media
-    8743b722-6086-4dba-986d-b7d8d3a0d202: file
-    d571dbf2-c5b3-4a9e-9764-d5e6b14622cb: media
-    7145fab3-fa7c-420b-ae87-8569f45af7b4: file
-    9503ce5e-82ff-45b6-91ef-af768ccdfe2b: media
+    34c4f4fc-ef1e-4cf4-9de4-372ee5b72357: file
+    f3df0d3f-bb68-4848-ab90-1440d44eefef: media
+    4afd65f9-4646-4beb-a310-e96f036c8324: file
+    65c8822a-f870-4caa-b15b-b4a19b2f7116: media
     a63f9fb8-aba5-42dd-9242-409015f2eb47: file
     98b7f218-a4ab-4a83-934a-3e5c56012de6: media
     7a0ed33f-9dd9-4ec5-9025-ab7d6de42cb8: file
@@ -80,7 +80,7 @@ default:
         title: 'Recent work'
         align: left
         level: h2
-        lede: 'Two from the last eighteen months. We draw at full size before cutting; these are the sheets.'
+        lede: 'Two from the last eighteen months, both in daily use.'
     -
       parent_uuid: 2f81adef-0010-4a00-8000-000000000010
       slot: content
@@ -97,12 +97,12 @@ default:
       inputs:
         image:
           CANVAS_ENTITY_REFERENCE:
-            target_uuid: d571dbf2-c5b3-4a9e-9764-d5e6b14622cb
+            target_uuid: f3df0d3f-bb68-4848-ab90-1440d44eefef
             target_type: media
-        title: 'Bow-back chair'
-        caption: 'Beech, steam-bent to a 360mm radius. Made in runs of twenty for a reading room in Winchester.'
-        level: h3
+        title: 'Long bench'
+        caption: 'Ash, 2.4 metres, wedged through-tenons. The top is one board.'
         sheet: 'No. 04'
+        level: h3
         ratio: tall
     -
       parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
@@ -112,12 +112,12 @@ default:
       inputs:
         image:
           CANVAS_ENTITY_REFERENCE:
-            target_uuid: 9503ce5e-82ff-45b6-91ef-af768ccdfe2b
+            target_uuid: 65c8822a-f870-4caa-b15b-b4a19b2f7116
             target_type: media
         title: 'Wall shelf'
         caption: 'Douglas fir, wall-hung. The wall is 14mm out over its height, so the uprights follow it.'
-        level: h3
         sheet: 'No. 12'
+        level: h3
         ratio: tall
     -
       uuid: cf5444f1-0004-4a00-8000-000000000004

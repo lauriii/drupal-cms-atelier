@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: de5ff15d-6b8f-453c-9e5c-086af60af3f8
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-journal-ash.jpg
+  uri:
+    -
+      value: 'public://atelier-journal-ash.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 241984
+  status:
+    -
+      value: true

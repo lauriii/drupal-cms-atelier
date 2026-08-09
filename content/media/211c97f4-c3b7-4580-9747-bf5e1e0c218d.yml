@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 211c97f4-c3b7-4580-9747-bf5e1e0c218d
+  bundle: image
+  default_langcode: en
+  depends:
+    48fd871f-fcf7-4342-bdd2-bde958f2b34f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: 'The jig wall'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A workbench under a window with jigs and hand tools racked above.'
+      title: ''
+      width: 1800
+      height: 1200
+      entity: 48fd871f-fcf7-4342-bdd2-bde958f2b34f

@@ -68,6 +68,9 @@ dates = {
     'Notes from the bench: joinery without fixings': 1784646300,
     'Sourcing ash from a single Hampshire woodland': 1782290400,
     'What we learned making two hundred of the same stool': 1779181920,
+    'Nine coats of nothing special': 1776254400,
+    'A jig is a decision you only make once': 1773576000,
+    'The door is 1.9 metres and the table is 2.4': 1770984000,
 }
 pinned = 0
 for path in (pathlib.Path(sys.argv[1]) / 'node').glob('*.yml'):

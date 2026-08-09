@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 48fd871f-fcf7-4342-bdd2-bde958f2b34f
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-journal-jig.jpg
+  uri:
+    -
+      value: 'public://atelier-journal-jig.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 332251
+  status:
+    -
+      value: true

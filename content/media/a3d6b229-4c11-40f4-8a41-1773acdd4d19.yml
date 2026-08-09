@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a3d6b229-4c11-40f4-8a41-1773acdd4d19
+  bundle: image
+  default_langcode: en
+  depends:
+    6b7b5d61-b709-4ef1-b7c5-e41a3d86c8ac: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: 'Two hundred of the same thing'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Stacked bentwood chair frames seen end on.'
+      title: ''
+      width: 1800
+      height: 2700
+      entity: 6b7b5d61-b709-4ef1-b7c5-e41a3d86c8ac

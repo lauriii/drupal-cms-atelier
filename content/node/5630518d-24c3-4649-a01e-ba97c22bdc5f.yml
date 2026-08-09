@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 5630518d-24c3-4649-a01e-ba97c22bdc5f
+  bundle: article
+  default_langcode: en
+  depends:
+    48fd871f-fcf7-4342-bdd2-bde958f2b34f: file
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  created:
+    -
+      value: 1773576000
+  title:
+    -
+      value: 'A jig is a decision you only make once'
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /jig-decision-you-only-make-once
+      langcode: en
+  body:
+    -
+      value: '<p>A jig is not a time-saver. It is a decision, made once, in wood, so that it cannot be made differently on a Thursday afternoon when everyone is tired.</p><h2>The first one is wrong</h2><p>Every jig we have built has been rebuilt. The first version answers the question you thought you had; you find the real question on about the sixth part. We now expect to build twice and stop being annoyed about it.</p><drupal-media data-entity-type="media" data-entity-uuid="211c97f4-c3b7-4580-9747-bf5e1e0c218d" data-align="center" data-caption="The jig wall. Everything on it was made to answer one repeated question."></drupal-media><h2>What makes a good one</h2><p>It should be impossible to load the part in backwards. It should reference the same face the drawing does. And it should be dated and named on the side, because in a year nobody will remember which of the two mortice jigs is the current one.</p><blockquote><p>An undated jig is a guess with a handle on it.</p></blockquote><h2>What we throw away</h2><p>Anything used once. We keep four and burn the rest, which sounds wasteful and is cheaper than a wall of jigs nobody trusts.</p>'
+      format: content_format
+      summary: 'Four jigs saved about ninety hours on the stool run. Three of them were wrong the first time.'
+  field_image:
+    -
+      alt: 'The jig wall'
+      title: ''
+      width: 1800
+      height: 1200
+      entity: 48fd871f-fcf7-4342-bdd2-bde958f2b34f

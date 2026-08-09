@@ -4,6 +4,8 @@ _meta:
   uuid: 38704492-8089-402d-8501-9194735bc5e6
   bundle: article
   default_langcode: en
+  depends:
+    de5ff15d-6b8f-453c-9e5c-086af60af3f8: file
 default:
   revision_uid:
     -
@@ -38,6 +40,13 @@ default:
       langcode: en
   body:
     -
-      value: '<p>For about four years now most of our ash has come from one woodland near Selborne, eleven miles from the workshop. They mill on site and stack under cover, and we buy the whole board rather than a cutting list.</p><p>Buying whole boards is the part that matters. A merchant selling by the cube has every reason to give you the pieces nobody else wanted; buying the board means the grain runs where we want it to and a table top can come from one tree rather than four. It also means we carry stock we have no immediate use for, which is expensive and occasionally stupid.</p><p>Ash has had a hard decade. Dieback has taken a great deal of it, and a lot of what is coming to market now is standing dead timber felled for safety. It is perfectly good if it is milled quickly and dried properly. It is firewood if it sits.</p><p>We air-dry for a year to the inch and finish in the kiln. Nothing goes into a piece above twelve per cent, and everything that is going into a heated house sits in the workshop for a month first.</p>'
+      value: '<p>For about four years now most of our ash has come from one woodland near Selborne, eleven miles from the workshop. They mill on site and stack under cover, and we buy the whole board rather than a cutting list.</p><h2>Why whole boards</h2><p>A merchant selling by the cube has every reason to give you the pieces nobody else wanted. Buying the board means the grain runs where we want it to, and a table top can come from one tree rather than four. It also means we carry stock we have no immediate use for, which is expensive and occasionally stupid.</p><drupal-media data-entity-type="media" data-entity-uuid="a4ef8905-8997-4f13-b503-c7e52d8d9571" data-align="center" data-caption="Boards stacked in stick. A year to the inch before anything goes near the kiln."></drupal-media><h2>Ash has had a hard decade</h2><p>Dieback has taken a great deal of it, and a lot of what is coming to market now is standing dead timber felled for safety.</p><blockquote><p>It is perfectly good if it is milled quickly and dried properly. It is firewood if it sits.</p></blockquote><h2>Drying</h2><p>We air-dry for a year to the inch and finish in the kiln. Nothing goes into a piece above twelve per cent, and everything that is going into a heated house sits in the workshop for a month first.</p>'
       format: content_format
-      summary: ''
+      summary: 'Most of our ash comes from one woodland eleven miles away. We buy the whole board, not a cutting list.'
+  field_image:
+    -
+      alt: 'Ash in the round'
+      title: ''
+      width: 1800
+      height: 1200
+      entity: de5ff15d-6b8f-453c-9e5c-086af60af3f8

@@ -208,7 +208,7 @@ check 'recommended add-ons list on disk' 1 \
 check 'Project Browser uses the shipped list' recommended \
   "$(ev 'print \Drupal::config("project_browser.admin_settings")->get("default_source");')"
 
-check 'media shipped' 8 \
+check 'media shipped' 17 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("media")->loadMultiple());')"
 check 'hero image reference resolved' 1 \
   "$(ev '$p = \Drupal::service("entity.repository")->loadEntityByUuid("canvas_page", "4b3d5e15-3a8d-46c8-a502-1255c2b1ad26");
@@ -248,7 +248,7 @@ done
 # The journal index prints publication dates, so they have to survive import.
 # Without a pinned `created` every article lands on the install timestamp and
 # the journal reads as three posts filed on the same afternoon.
-check 'article dates are distinct' 3 \
+check 'article dates are distinct' 6 \
   "$(ev '$d = [];
     foreach (\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type" => "article"]) as $n) {
       $d[date("Y-m-d", $n->getCreatedTime())] = TRUE;
@@ -363,7 +363,7 @@ fi
 check 'article content template enabled' 1 \
   "$(ev '$t = \Drupal::entityTypeManager()->getStorage("content_template")->load("node.article.full");
     print (int) ($t && $t->status() && count($t->get("component_tree")) > 0);')"
-check 'articles have body copy' 3 \
+check 'articles have body copy' 6 \
   "$(ev '$n = 0;
     foreach (\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type" => "article"]) as $node) {
       if (!$node->get("body")->isEmpty()) { $n++; }

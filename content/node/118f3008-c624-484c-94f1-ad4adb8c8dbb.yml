@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 118f3008-c624-484c-94f1-ad4adb8c8dbb
+  bundle: article
+  default_langcode: en
+  depends:
+    a9107df8-4b81-4be5-a4ed-7bc6183d8ac0: file
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  created:
+    -
+      value: 1770984000
+  title:
+    -
+      value: 'The door is 1.9 metres and the table is 2.4'
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /door-19-metres-and-table-24
+      langcode: en
+  body:
+    -
+      value: '<p>We measure the room. We also measure the route to the room, which is the measurement people forget and the one that has cost us the most.</p><h2>What we measure now</h2><p>The doorway, the narrowest point of the hall, the turn at the bottom of the stairs, and the diagonal of the stairwell. Then the width of the pavement outside, because a 2.4 metre top has to come off a van somewhere.</p><drupal-media data-entity-type="media" data-entity-uuid="bb4358bf-3760-4788-8129-c98d1d4b3b5e" data-align="center" data-caption="Long boards live on edge along the wall. So does everything that has to leave the building in one piece."></drupal-media><h2>The one that taught us</h2><p>A dining table for a first-floor flat in Petersfield, 2.4 metres, one board. The door to the flat is 1.9. The stairwell turns twice. We took the top back to the workshop, cut a breadboard end joint into it, and delivered it as two pieces that bolt together under the top.</p><blockquote><p>It is a better table for it. That is not why we did it.</p></blockquote><h2>How it changes a quote</h2><p>We now visit anything over two metres before quoting, within an hour of the workshop. Beyond that we ask for photographs of every doorway between the front door and the room, which people find odd until we explain why.</p>'
+      format: content_format
+      summary: 'Every commission has a dimension that is not on the drawing. Usually it is the stairwell.'
+  field_image:
+    -
+      alt: 'Boards on the rack'
+      title: ''
+      width: 1800
+      height: 2768
+      entity: a9107df8-4b81-4be5-a4ed-7bc6183d8ac0

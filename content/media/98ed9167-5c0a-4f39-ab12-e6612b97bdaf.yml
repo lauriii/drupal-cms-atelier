@@ -1,11 +1,11 @@
 _meta:
   version: '1.0'
   entity_type: media
-  uuid: 9503ce5e-82ff-45b6-91ef-af768ccdfe2b
+  uuid: 98ed9167-5c0a-4f39-ab12-e6612b97bdaf
   bundle: image
   default_langcode: en
   depends:
-    7145fab3-fa7c-420b-ae87-8569f45af7b4: file
+    82598872-284e-4abd-b7d8-fbcf70f44159: file
 default:
   status:
     -
@@ -15,7 +15,7 @@ default:
       target_id: 0
   name:
     -
-      value: 'Wall shelf, sheet No. 12'
+      value: 'Seats at the end of a run'
   revision_translation_affected:
     -
       value: true
@@ -25,8 +25,8 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'Wall shelf, sheet No. 12'
+      alt: 'A stack of round stool seats in a workshop.'
       title: ''
       width: 1800
-      height: 2100
-      entity: 7145fab3-fa7c-420b-ae87-8569f45af7b4
+      height: 2700
+      entity: 82598872-284e-4abd-b7d8-fbcf70f44159

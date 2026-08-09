@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f2325657-f7cc-4705-8ac1-d4f93d73c78d
+  bundle: article
+  default_langcode: en
+  depends:
+    b55a3fea-1137-4d82-96f5-62f8fb78f88f: file
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  created:
+    -
+      value: 1776254400
+  title:
+    -
+      value: 'Nine coats of nothing special'
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /nine-coats-nothing-special
+      langcode: en
+  body:
+    -
+      value: '<p>People ask what we finish with, expecting a name. It is raw linseed oil, thinned for the first two coats, and about three weeks.</p><h2>Why not a hard finish</h2><p>A lacquer or a hard-wax oil gives you a film, and a film is a thing that can be scratched through. Once it is, you cannot repair it locally; you strip the whole top and start again. An oiled surface has no film to break.</p><blockquote><p>A dining table gets a wet glass on it in the first fortnight. The question is not whether it happens but what you have to do afterwards.</p></blockquote><drupal-media data-entity-type="media" data-entity-uuid="325262a6-f56c-44f1-8591-5c29944def85" data-align="center" data-caption="Rags go in a bucket of water at the end of the day. Oily rags in a bin are a fire, not a metaphor."></drupal-media><h2>The schedule</h2><p>Two thinned coats a day apart, then four full-strength coats at three-day intervals, then three more over the following fortnight as it will take them. Each one is wiped back within twenty minutes. What is left is what soaked in.</p><p>The owner re-oils it once a year with a cloth and half an hour. That is the whole maintenance schedule, and it is the reason we use it.</p>'
+      format: content_format
+      summary: 'The finish on most of our work is raw linseed oil and time. Here is why we stopped using anything harder.'
+  field_image:
+    -
+      alt: 'Oil and rag'
+      title: ''
+      width: 1800
+      height: 1200
+      entity: b55a3fea-1137-4d82-96f5-62f8fb78f88f

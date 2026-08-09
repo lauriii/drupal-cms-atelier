@@ -1,21 +1,21 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: 7145fab3-fa7c-420b-ae87-8569f45af7b4
+  uuid: 4afd65f9-4646-4beb-a310-e96f036c8324
   default_langcode: en
 default:
   filename:
     -
-      value: atelier-sheet-shelf.png
+      value: atelier-work-shelf.jpg
   uri:
     -
-      value: 'public://atelier-sheet-shelf.png'
+      value: 'public://atelier-work-shelf.jpg'
   filemime:
     -
-      value: image/png
+      value: image/jpeg
   filesize:
     -
-      value: 46662
+      value: 197665
   status:
     -
       value: true

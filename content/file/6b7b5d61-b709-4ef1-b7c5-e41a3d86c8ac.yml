@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 6b7b5d61-b709-4ef1-b7c5-e41a3d86c8ac
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-journal-stool.jpg
+  uri:
+    -
+      value: 'public://atelier-journal-stool.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 657102
+  status:
+    -
+      value: true

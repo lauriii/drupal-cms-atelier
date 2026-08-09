@@ -1,11 +1,11 @@
 _meta:
   version: '1.0'
   entity_type: media
-  uuid: d571dbf2-c5b3-4a9e-9764-d5e6b14622cb
+  uuid: bb4358bf-3760-4788-8129-c98d1d4b3b5e
   bundle: image
   default_langcode: en
   depends:
-    8743b722-6086-4dba-986d-b7d8d3a0d202: file
+    a9107df8-4b81-4be5-a4ed-7bc6183d8ac0: file
 default:
   status:
     -
@@ -15,7 +15,7 @@ default:
       target_id: 0
   name:
     -
-      value: 'Bow-back chair, sheet No. 04'
+      value: 'Boards on the rack'
   revision_translation_affected:
     -
       value: true
@@ -25,8 +25,8 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'Bow-back chair, sheet No. 04'
+      alt: 'Long boards stacked on edge along a workshop wall.'
       title: ''
       width: 1800
-      height: 2100
-      entity: 8743b722-6086-4dba-986d-b7d8d3a0d202
+      height: 2768
+      entity: a9107df8-4b81-4be5-a4ed-7bc6183d8ac0

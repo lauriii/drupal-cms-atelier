@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5fe240f3-152c-4a34-b1b8-646c501377ce
+  bundle: image
+  default_langcode: en
+  depends:
+    f1155f91-453c-4208-9fdf-9854ec1e988f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: 'The bench by the window'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A workbench with hand tools racked above it.'
+      title: ''
+      width: 1800
+      height: 2685
+      entity: f1155f91-453c-4208-9fdf-9854ec1e988f

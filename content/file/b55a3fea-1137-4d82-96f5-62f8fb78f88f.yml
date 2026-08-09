@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: b55a3fea-1137-4d82-96f5-62f8fb78f88f
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-journal-finish.jpg
+  uri:
+    -
+      value: 'public://atelier-journal-finish.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 155393
+  status:
+    -
+      value: true

@@ -2,13 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - canvas.component.js.button
-    - canvas.component.js.cta
+    - canvas.component.js.article_teasers
     - canvas.component.js.hero
     - canvas.component.js.prose
+    - canvas.component.js.section_intro
     - canvas.component.js.section
     - core.entity_view_mode.node.full
     - field.field.node.article.body
+    - field.field.node.article.field_image
     - node.type.article
   module:
     - link
@@ -28,6 +29,12 @@ component_tree:
       title:
         sourceType: entity-field
         expression: 'ℹ︎␜entity:node:article␝title␞␟value'
+      lede:
+        sourceType: entity-field
+        expression: 'ℹ︎␜entity:node:article␝body␞␟summary'
+      image:
+        sourceType: entity-field
+        expression: 'ℹ︎␜entity:node:article␝field_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}'
   c0a1e11a-0002-4a00-8000-000000000002:
     uuid: c0a1e11a-0002-4a00-8000-000000000002
     component_id: js.section
@@ -60,22 +67,23 @@ component_tree:
     parent_uuid: c0a1e11a-0004-4a00-8000-000000000004
     slot: content
     uuid: c0a1e11a-0005-4a00-8000-000000000005
-    component_id: js.cta
-    component_version: 1a75ef0685f7c7fd
+    component_id: js.section_intro
+    component_version: 871540b2850e8eae
     inputs:
+      eyebrow: Journal
       title: 'More from the bench'
-      lede: 'Occasional notes on timber, tools, and the things that go wrong.'
+      lede: 'Notes on timber, tools, and the things that go wrong.'
+      align: left
+      level: h2
   c0a1e11a-0006-4a00-8000-000000000006:
-    parent_uuid: c0a1e11a-0005-4a00-8000-000000000005
+    parent_uuid: c0a1e11a-0004-4a00-8000-000000000004
     slot: content
     uuid: c0a1e11a-0006-4a00-8000-000000000006
-    component_id: js.button
-    component_version: f8e3a3c941940e1a
+    component_id: js.article_teasers
+    component_version: 21f8ad9ed9397b58
     inputs:
-      label: 'Read the journal'
-      url: /journal
-      variant: outline
-      size: md
-      fullWidth: false
+      count: '3'
+      excerpt: true
+      level: h3
 exposed_slots: {  }
 

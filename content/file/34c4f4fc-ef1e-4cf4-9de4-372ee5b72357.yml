@@ -1,21 +1,21 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: 8743b722-6086-4dba-986d-b7d8d3a0d202
+  uuid: 34c4f4fc-ef1e-4cf4-9de4-372ee5b72357
   default_langcode: en
 default:
   filename:
     -
-      value: atelier-sheet-chair.png
+      value: atelier-work-bench.jpg
   uri:
     -
-      value: 'public://atelier-sheet-chair.png'
+      value: 'public://atelier-work-bench.jpg'
   filemime:
     -
-      value: image/png
+      value: image/jpeg
   filesize:
     -
-      value: 50530
+      value: 338413
   status:
     -
       value: true

@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 82598872-284e-4abd-b7d8-fbcf70f44159
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-journal-stool-stack.jpg
+  uri:
+    -
+      value: 'public://atelier-journal-stool-stack.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 424505
+  status:
+    -
+      value: true

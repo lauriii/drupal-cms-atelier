@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1f42b17b-b29a-47ac-a39b-8c0519f9f503
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-journal-ash-rack.jpg
+  uri:
+    -
+      value: 'public://atelier-journal-ash-rack.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 468665
+  status:
+    -
+      value: true

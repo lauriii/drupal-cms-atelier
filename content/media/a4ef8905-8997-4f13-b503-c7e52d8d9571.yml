@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a4ef8905-8997-4f13-b503-c7e52d8d9571
+  bundle: image
+  default_langcode: en
+  depends:
+    1f42b17b-b29a-47ac-a39b-8c0519f9f503: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  name:
+    -
+      value: 'Boards in stick'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Sawn boards stacked with spacers to dry.'
+      title: ''
+      width: 1800
+      height: 1200
+      entity: 1f42b17b-b29a-47ac-a39b-8c0519f9f503

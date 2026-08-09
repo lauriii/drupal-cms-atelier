@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: a9107df8-4b81-4be5-a4ed-7bc6183d8ac0
+  default_langcode: en
+default:
+  filename:
+    -
+      value: atelier-journal-door.jpg
+  uri:
+    -
+      value: 'public://atelier-journal-door.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1240184
+  status:
+    -
+      value: true
