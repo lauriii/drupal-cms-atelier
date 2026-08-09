@@ -27,6 +27,6 @@ default:
     -
       alt: 'Shelf system'
       title: ''
-      width: 1100
-      height: 1200
+      width: 960
+      height: 780
       entity: 05dea198-8232-4cb5-8b1d-26f8610a2d3b

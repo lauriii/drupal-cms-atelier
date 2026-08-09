@@ -251,6 +251,36 @@ check 'article dates are distinct' 3 \
     }
     print count($d);')"
 
+# Buttons are checked the same way menu links are, and for the same reason: a
+# relabelling pass once left the front page's primary button promising a page
+# and opening a mail client. Every internal button URL must resolve, and one
+# label must not carry two destinations.
+check 'every button URL resolves' 0 \
+  "$(ev '$bad = 0;
+    $seen = [];
+    $check = function (array $inputs) use (&$bad, &$seen) {
+      $url = $inputs["url"] ?? "";
+      $label = $inputs["label"] ?? "";
+      if ($url === "") { return; }
+      if (isset($seen[$label]) && $seen[$label] !== $url) { $bad++; }
+      $seen[$label] = $url;
+      if (!str_starts_with($url, "/")) { return; }
+      if (!\Drupal::service("path.validator")->isValid($url)) { $bad++; }
+    };
+    foreach (\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple() as $p) {
+      foreach ($p->get("components")->getValue() as $i) {
+        if ($i["component_id"] === "js.button") { $check(json_decode($i["inputs"], TRUE)); }
+      }
+    }
+    foreach (\Drupal::entityTypeManager()->getStorage("page_region")->loadMultiple() as $r) {
+      foreach ($r->get("component_tree") as $i) {
+        if (($i["component_id"] ?? "") !== "js.button") { continue; }
+        $raw = $i["inputs"] ?? [];
+        $check(is_string($raw) ? json_decode($raw, TRUE) : $raw);
+      }
+    }
+    print $bad;')"
+
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \
   "$(ev 'print (int) \Drupal::entityTypeManager()->getStorage("user_role")->load("anonymous")->hasPermission("access content");')"
@@ -298,6 +328,11 @@ if [[ -n "$base_url" ]]; then
   # hydrated client-side, so count those rather than looking for prose.
   check 'front end renders Canvas components' yes \
     "$(grep -qE '<canvas-island' <<<"$flat" && echo yes || echo no)"
+  # The components hydrate in the browser, so curl cannot prove they render.
+  # It can prove they were handed this page's copy rather than an empty tree,
+  # which is the failure a stale or mis-imported snapshot actually produces.
+  check 'components receive the page copy' yes \
+    "$(grep -qF 'Six people, two benches' <<<"$flat" && echo yes || echo no)"
   # The imagery actually resolves to a derivative, rather than a broken ref.
   check 'front end renders the shipped imagery' yes \
     "$(grep -qE 'atelier-work-(hero|[123])\.jpg' <<<"$flat" && echo yes || echo no)"

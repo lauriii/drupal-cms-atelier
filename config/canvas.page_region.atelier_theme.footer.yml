@@ -2,11 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - canvas.component.js.button
     - canvas.component.js.site_footer
-  module:
-    - link
-    - options
+    - canvas.component.js.site_nav
   theme:
     - atelier_theme
 id: atelier_theme.footer
@@ -20,29 +17,12 @@ component_tree:
     inputs:
       wordmark: Atelier
       note: 'Powered by Drupal CMS'
-  3c176124-e504-5bf6-bc02-31ff6b7bd022:
+  f00be7a1-0001-4a00-8000-000000000001:
     parent_uuid: 873ad49d-a55c-5d31-9ea6-0a2ea597629c
     slot: content
-    uuid: 3c176124-e504-5bf6-bc02-31ff6b7bd022
-    component_id: js.button
-    component_version: 7f1fc8c10644f943
+    uuid: f00be7a1-0001-4a00-8000-000000000001
+    component_id: js.site_nav
+    component_version: 38b31d1f5c40ccef
     inputs:
-      label: Documentation
-      url: 'https://www.drupal.org/docs/develop/drupal-canvas'
-      variant: link
-      size: sm
-      fullWidth: false
-  58c40fa3-2ef9-5ab1-9121-de23258cbcb2:
-    parent_uuid: 873ad49d-a55c-5d31-9ea6-0a2ea597629c
-    slot: content
-    uuid: 58c40fa3-2ef9-5ab1-9121-de23258cbcb2
-    component_id: js.button
-    component_version: 7f1fc8c10644f943
-    inputs:
-      label: Drupal.org
-      url:
-        uri: 'https://www.drupal.org/project/canvas'
-        options: {  }
-      variant: link
-      size: sm
-      fullWidth: false
+      menu: footer
+      label: Footer

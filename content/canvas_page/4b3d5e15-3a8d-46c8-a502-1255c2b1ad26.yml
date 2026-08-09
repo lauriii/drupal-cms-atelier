@@ -49,7 +49,7 @@ default:
       component_id: js.button
       inputs:
         label: 'About the studio'
-        url: 'mailto:studio@atelier.example'
+        url: /studio
         variant: solid
         size: lg
         fullWidth: false

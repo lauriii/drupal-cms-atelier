@@ -27,6 +27,6 @@ default:
     -
       alt: 'Folded chair'
       title: ''
-      width: 1100
-      height: 1200
+      width: 910
+      height: 590
       entity: e85a38c0-7c5a-48d0-be3c-dd69d1c3cf1b

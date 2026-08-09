@@ -27,6 +27,6 @@ default:
     -
       alt: Stackline
       title: ''
-      width: 760
-      height: 180
+      width: 420
+      height: 80
       entity: 50fc8aa3-61b5-4698-8fc5-6ca90ce9ac3d
