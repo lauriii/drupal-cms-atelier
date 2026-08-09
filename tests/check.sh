@@ -516,4 +516,16 @@ check 'nodes not duplicated' "$before_nodes" \
 
 echo
 echo "$pass passed, $fail failed"
+
+# A block that dies early takes its assertions with it, and the tally cannot
+# tell "did not run" from "passed" -- this suite has twice reported 0 failed
+# with a third of it silently skipped. Assert the count itself. Raise the floor
+# when you add assertions; lower it only when you delete some on purpose.
+expected=101
+if (( pass + fail < expected )); then
+  echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
+  echo "A block exited early. Do not read the tally above as a pass." >&2
+  exit 1
+fi
+
 exit $(( fail > 0 ? 1 : 0 ))
