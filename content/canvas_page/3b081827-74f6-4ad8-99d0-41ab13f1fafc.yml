@@ -53,6 +53,7 @@ default:
         lede: 'Most of what comes in needs a joint seeing to, not a new surface.'
         align: left
         level: h2
+        note: 'Looking is free'
     -
       parent_uuid: 84a084e5-0545-474e-851b-489b020f80c7
       slot: content
@@ -201,6 +202,7 @@ default:
         lede: 'Owners of these are happy to be asked. We will put you in touch.'
         align: left
         level: h2
+        note: 'Nos. S-03 to S-16'
     -
       parent_uuid: 52bb4066-cb71-4ce6-9c30-230cfb5ca68b
       slot: content

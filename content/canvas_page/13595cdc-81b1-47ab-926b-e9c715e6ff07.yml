@@ -53,6 +53,7 @@ default:
         lede: 'Nothing goes on the saw until you have signed the drawing.'
         align: left
         level: h2
+        note: 'Fourteen weeks, typically'
     -
       parent_uuid: 549b698e-3056-4d25-b5a8-61e39439478b
       slot: content
@@ -201,6 +202,7 @@ default:
         lede: 'Owners of these are happy to be asked. We will put you in touch.'
         align: left
         level: h2
+        note: 'Nos. C-38 to C-52'
     -
       parent_uuid: ad841d04-aa09-4fed-a147-7b3454c3c332
       slot: content

@@ -79,6 +79,7 @@ default:
         align: left
         level: h2
         lede: 'Two from the last eighteen months, both in daily use.'
+        note: 'Sheets No. 04 and No. 12'
     -
       parent_uuid: 2f81adef-0010-4a00-8000-000000000010
       slot: content
@@ -136,6 +137,7 @@ default:
         lede: 'Commissions, small runs, restoration.'
         align: left
         level: h2
+        note: 'Six of us, since 2009'
     -
       parent_uuid: cf5444f1-0004-4a00-8000-000000000004
       slot: content
@@ -238,6 +240,7 @@ default:
         lede: 'Notes on timber, tools, and the things that go wrong.'
         align: left
         level: h2
+        note: 'Six entries'
     -
       parent_uuid: 50b24838-0022-4a00-8000-000000000022
       slot: content

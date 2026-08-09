@@ -53,6 +53,7 @@ default:
         lede: 'The two hundredth has to be the same as the sixth. That is the whole problem.'
         align: left
         level: h2
+        note: 'Twenty to two hundred'
     -
       parent_uuid: 861f590e-710f-41c8-95ac-3b22bc632b76
       slot: content
@@ -201,6 +202,7 @@ default:
         lede: 'Owners of these are happy to be asked. We will put you in touch.'
         align: left
         level: h2
+        note: 'Nos. R-07 to R-19'
     -
       parent_uuid: 3d0d7032-c6cd-4a4e-9ff2-824f968521e7
       slot: content

@@ -20,7 +20,7 @@ default:
       inputs:
         eyebrow: Services
         title: 'Three things, and we turn down the rest'
-        lede: 'Two of us can only be in three places. These are the three.'
+        lede: 'Six of us in one building can still only be in three places. These are the three.'
     -
       uuid: d78e61cf-eefb-4410-acb1-60f3c03f24e2
       component_id: js.section
