@@ -2,7 +2,7 @@
 
 A Drupal CMS site template that installs a working, styled site built entirely
 from Drupal Canvas code components — eighteen of them, vendored as config, plus
-four pages composed from them.
+five pages composed from them.
 
 There is no front-end theme in the usual sense. The theme is a shell that emits
 regions and no CSS; every pixel comes from the components and their Tailwind
@@ -147,14 +147,14 @@ names.
 
 `canvas push` replaces all of it with whatever is in your codebase.
 
-**Pages, so the site is not empty.** Four Canvas pages, three of them in the
+**Pages, so the site is not empty.** Five Canvas pages, three of them in the
 main menu, all composed from the shipped components:
 
 - **Home** at `/home`, set as the front page — hero, a three-up of what the
   studio does, a row of work with captions, a logo row, the journal index
   pulled live over JSON:API, a testimonial, and a closing call to action.
-- **The studio** at `/studio` — long-form prose, a numbered three-step process,
-  a full-width figure, and a pull quote.
+- **The studio** at `/studio` — prose sharing a two-column band with a timber
+  detail, a numbered three-step process, and a pull quote.
 - **Journal** at `/journal` — the `article_teasers` component on its own,
   fetching articles over JSON:API in the browser.
 - **Contact** at `/contact` — a three-up of practical detail, and a call to
@@ -514,7 +514,7 @@ to be run against a site you have edited by hand, with the diff reviewed:
 
 - `tests/regenerate-components.sh` — the eighteen components, their wrappers,
   the header and footer page regions, and the Tailwind build.
-- `tests/regenerate-content.sh` — the four pages, the menu, the media and the
+- `tests/regenerate-content.sh` — the five pages, the menu, the media and the
   articles. It also re-pins the article publication dates, which
   `drush content:export` drops: without them every article imports on the
   install timestamp and the journal reads as three posts filed on the same

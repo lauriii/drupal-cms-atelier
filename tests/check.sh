@@ -231,7 +231,7 @@ check 'privacy page published' 1 \
     $p = reset($p);
     print (int) ($p && $p->isPublished() && $p->get("path")->alias === "/privacy");')"
 for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:29" \
-            "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:13" \
+            "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:14" \
             "Journal:1797e924-d08c-40da-8f12-69155d704b44:/journal:3" \
             "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9"; do
   IFS=: read -r label uuid alias count <<<"$page"

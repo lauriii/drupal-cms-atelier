@@ -44,6 +44,36 @@ default:
         width: default
         divider: false
     -
+      parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
+      slot: content
+      uuid: a3f19c62-0001-4a00-8000-000000000001
+      component_id: js.grid
+      inputs:
+        columns: '2'
+        gap: lg
+    -
+      parent_uuid: a3f19c62-0001-4a00-8000-000000000001
+      slot: content
+      uuid: a3f19c62-0002-4a00-8000-000000000002
+      component_id: js.prose
+      inputs:
+        text: "<p>Everything is made here. We don't subcontract carcassing, we don't buy in doors, and nothing gets finished in a spray booth on an industrial estate forty miles away.</p><p>Timber comes from two merchants we've used for fifteen years, and increasingly from one woodland near Selborne that mills its own ash. We work in solid stock; where a piece needs a panel, we make the panel.</p><p>We don't stain. If you want a darker piece we find a darker timber.</p>"
+    -
+      parent_uuid: a3f19c62-0001-4a00-8000-000000000001
+      slot: content
+      uuid: a3f19c62-0003-4a00-8000-000000000003
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 69d70d3f-4fff-43f0-a8f7-39740a352758
+            target_type: media
+        ratio: wide
+        sheet: Timber
+        title: 'Quartersawn ash'
+        caption: 'Cut so the ray figure runs across the board. It costs more per cube and moves less in a warm room.'
+        level: h3
+    -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005
       component_id: js.section
       inputs:
@@ -103,29 +133,6 @@ default:
         text: 'Eight to sixteen weeks, depending on the timber and how dry it is. We deliver and install it ourselves.'
         framed: false
         level: h3
-    -
-      uuid: 7f2a1c33-0011-4a00-8000-000000000011
-      component_id: js.section
-      inputs:
-        background: paper
-        spacing: md
-        width: default
-        divider: true
-    -
-      parent_uuid: 7f2a1c33-0011-4a00-8000-000000000011
-      slot: content
-      uuid: 7f2a1c33-0012-4a00-8000-000000000012
-      component_id: js.figure
-      inputs:
-        title: 'Quartersawn ash'
-        caption: 'Quartersawn ash, cut so the ray figure runs across the board. It costs more per cube and moves less in a warm room.'
-        image:
-          CANVAS_ENTITY_REFERENCE:
-            target_uuid: 69d70d3f-4fff-43f0-a8f7-39740a352758
-            target_type: media
-        url: ''
-        level: h3
-        sheet: Timber
     -
       uuid: 7f2a1c33-0013-4a00-8000-000000000013
       component_id: js.section

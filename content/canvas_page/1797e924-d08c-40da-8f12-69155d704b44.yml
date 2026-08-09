@@ -35,8 +35,9 @@ default:
       uuid: 3c9b74d2-0017-4a00-8000-000000000017
       component_id: js.article_teasers
       inputs:
-        count: '8'
+        count: '3'
         excerpt: true
+        level: h2
   path:
     -
       alias: /journal
