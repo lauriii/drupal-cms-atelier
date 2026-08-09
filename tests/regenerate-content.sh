@@ -24,8 +24,8 @@ CONTENT="$RECIPE_DIR/content"
 # shipped content, because the wipe happens before the export and the export
 # finds nothing. Check before destroying anything.
 existing="$($DRUSH ev 'print count(\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple());' 2>/dev/null | tr -cd '0-9')"
-if [[ "${existing:-0}" -lt 4 ]]; then
-  echo "Refusing to regenerate: the site has ${existing:-0} Canvas pages, expected at least 4." >&2
+if [[ "${existing:-0}" -lt 5 ]]; then
+  echo "Refusing to regenerate: the site has ${existing:-0} Canvas pages, expected at least 5." >&2
   echo "Apply this recipe to the site first, then re-run." >&2
   exit 1
 fi

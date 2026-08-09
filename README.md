@@ -213,7 +213,7 @@ Eighteen, and no more: the point is a small library composed well, not breadth.
 
 | Component | What it is |
 | --- | --- |
-| `hero` | The opening statement, optionally over a full-width image. Renders the page's `h1`. |
+| `hero` | The opening statement, with an optional image beside it on a wide screen and above it on a phone. Renders the page's `h1`. |
 | `section` | Every band on a page. Owns the padding above and below it, the gap between the components stacked inside it, its ground (paper, wash, or an inverted ink), and an optional rule along the top. |
 | `section_intro` | The eyebrow, heading, and lede that name a band. Takes a heading level. |
 | `grid` | Two, three, or four columns on a wide screen, one on a phone. |
@@ -229,7 +229,7 @@ Eighteen, and no more: the point is a small library composed well, not breadth.
 | `button` | Solid, outline, or text link, at three sizes. Renders an anchor with a URL and a button without one. |
 | `article_teasers` | The newest articles, fetched from JSON:API in the browser. Loading, error, and empty states are all distinct. |
 | `site_header` | Wordmark plus a slot, on a hairline. Emits a `div`; the theme region is already the banner landmark. |
-| `site_nav` | A Drupal menu, fetched from `/jsonapi/menu_items/{menu}`. One level deep. |
+| `site_nav` | A Drupal menu, fetched from `/jsonapi/menu_items/{menu}`. Renders two levels, and marks the current page. |
 | `site_footer` | Wordmark, a credit line, and a slot. |
 
 Two of them prove the argument for code components over a static library:

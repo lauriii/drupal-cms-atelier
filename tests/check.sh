@@ -459,7 +459,7 @@ if [[ -n "$base_url" ]]; then
     "$(grep -qF 'Six people, two benches' <<<"$flat" && echo yes || echo no)"
   # The imagery actually resolves to a derivative, rather than a broken ref.
   check 'front end renders the shipped imagery' yes \
-    "$(grep -qE 'atelier-work-(hero|[123])\.jpg' <<<"$flat" && echo yes || echo no)"
+    "$(grep -qE 'atelier-work-(hero|[124])\.jpg' <<<"$flat" && echo yes || echo no)"
   check 'front end renders the logo row' yes \
     "$(grep -qE 'atelier-logo-[1234].png' <<<"$flat" && echo yes || echo no)"
   check 'footer credits Drupal CMS' yes \

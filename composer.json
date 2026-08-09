@@ -1,6 +1,6 @@
 {
     "name": "drupal/atelier",
-    "description": "A Drupal CMS site template whose entire front end is Drupal Canvas code components: eighteen components and four pages, styled by their own Tailwind build rather than by a theme.",
+    "description": "A Drupal CMS site template whose entire front end is Drupal Canvas code components: eighteen components and five pages, styled by their own Tailwind build rather than by a theme.",
     "type": "drupal-recipe",
     "license": [
         "GPL-2.0-or-later"
