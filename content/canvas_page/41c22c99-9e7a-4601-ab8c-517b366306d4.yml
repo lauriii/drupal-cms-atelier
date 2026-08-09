@@ -23,7 +23,7 @@ default:
       inputs:
         eyebrow: 'The studio'
         title: 'What we are for'
-        lede: 'We started in 2009 in a rented bay behind a car repair shop in Petersfield. We are still in Petersfield, in a better building, doing roughly the same thing.'
+        lede: "We started in 2009 in a rented bay behind a car repair shop in Petersfield. We're still in Petersfield, in a better building."
     -
       parent_uuid: 7f2a1c33-0001-4a00-8000-000000000001
       slot: content
@@ -43,13 +43,6 @@ default:
         spacing: sm
         width: default
         divider: false
-    -
-      parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
-      slot: content
-      uuid: 7f2a1c33-0004-4a00-8000-000000000004
-      component_id: js.prose
-      inputs:
-        text: "<p>Everything is made here. We do not subcontract carcassing, we do not buy in doors, and we do not finish anything in a spray booth on an industrial estate forty miles away. It is slower and it is the entire point.</p><p>Timber comes from two merchants we have used for fifteen years, and increasingly from a single woodland near Selborne that mills its own ash. We work in solid stock. Where a piece needs a panel we make the panel.</p><p>We do not stain. If a client wants a darker piece we find a darker timber, which costs more and takes longer and looks correct in ten years' time.</p>"
     -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005
       component_id: js.section
