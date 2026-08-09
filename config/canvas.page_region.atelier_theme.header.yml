@@ -37,6 +37,6 @@ component_tree:
     inputs:
       label: Enquire
       url: 'mailto:studio@atelier.example'
-      variant: outline
+      variant: link
       size: sm
       fullWidth: false

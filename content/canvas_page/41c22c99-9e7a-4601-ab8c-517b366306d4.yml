@@ -46,6 +46,17 @@ default:
     -
       parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
       slot: content
+      uuid: e2c9b731-0001-4a00-8000-000000000001
+      component_id: js.section_intro
+      inputs:
+        eyebrow: ''
+        title: 'How we work'
+        lede: ''
+        align: left
+        level: h2
+    -
+      parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
+      slot: content
       uuid: a3f19c62-0001-4a00-8000-000000000001
       component_id: js.grid
       inputs:
@@ -72,8 +83,7 @@ default:
         sheet: Workshop
         title: Shaping
         caption: 'Everything is cut here. Two of us have been doing it for fifteen years and still measure twice.'
-        level: h2
-        url: /sourcing-ash-single-hampshire-woodland
+        level: h3
     -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005
       component_id: js.section

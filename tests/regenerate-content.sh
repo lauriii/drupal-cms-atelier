@@ -72,4 +72,25 @@ if pinned != len(dates):
     raise SystemExit('article titles changed: update the mapping in this script')
 PY
 
+# The site carries file entities from the base recipe whose bytes this recipe
+# does not ship. Exported, they make the importer log a warning and leave a
+# managed row pointing at nothing, so they go here rather than being deleted by
+# hand after every run.
+echo "==> Dropping file entities with no binary"
+python3 - "$CONTENT/file" <<'PYEOF'
+import pathlib
+import re
+import sys
+
+d = pathlib.Path(sys.argv[1])
+shipped = {p.name for p in d.iterdir() if p.suffix != '.yml'}
+dropped = []
+for y in sorted(d.glob('*.yml')):
+    m = re.search(r"value: '?public://([^'\n]+)'?", y.read_text())
+    if not m or m.group(1) not in shipped:
+        dropped.append(m.group(1) if m else y.name)
+        y.unlink()
+print(f"    dropped {len(dropped)}: {', '.join(dropped) if dropped else 'none'}")
+PYEOF
+
 echo "==> Done. Review the diff, then run tests/check.sh."

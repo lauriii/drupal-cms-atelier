@@ -136,6 +136,7 @@ default:
         level: h3
         sheet: 'No. 21'
         ratio: tall
+        availability: 'Not yet for sale'
     -
       uuid: cf5444f1-0004-4a00-8000-000000000004
       component_id: js.section
@@ -318,14 +319,6 @@ default:
         variant: solid
         size: lg
         fullWidth: false
-    -
-      parent_uuid: 7b9f1bfb-0012-4a00-8000-000000000012
-      slot: content
-      uuid: d41f8a03-0001-4a00-8000-000000000001
-      component_id: js.badge
-      inputs:
-        label: 'Not yet for sale'
-        variant: boxed
   path:
     -
       alias: /home

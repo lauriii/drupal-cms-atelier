@@ -230,8 +230,8 @@ check 'privacy page published' 1 \
   "$(ev '$p = \Drupal::entityTypeManager()->getStorage("canvas_page")->loadByProperties(["title" => "Privacy"]);
     $p = reset($p);
     print (int) ($p && $p->isPublished() && $p->get("path")->alias === "/privacy");')"
-for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:30" \
-            "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:19" \
+for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:29" \
+            "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:20" \
             "Journal:1797e924-d08c-40da-8f12-69155d704b44:/journal:3" \
             "Contact:5c31bfce-a14c-4aec-9928-e175a9502815:/contact:9"; do
   IFS=: read -r label uuid alias count <<<"$page"
@@ -367,6 +367,14 @@ check 'articles have body copy' 3 \
 # when coverage drops, and does not need editing when content is added — unlike
 # the per-page item counts above, which have been amended to match whatever
 # shipped and so have never once constrained anything.
+#
+# The floor is 17, not 18. `badge` is deliberately unused: it was placed twice
+# to satisfy this assertion and both times it read as a disabled control — once
+# as a button in a hero's actions slot, once as a text input filling a grid
+# column. Availability, the one thing it was carrying, is a `figure` prop now,
+# in the caption of the piece it describes. A component with no honest home in
+# this demo is better documented by its schema than by a bad placement, and an
+# assertion that drives composition is worse than a gap it is covering up.
 check 'components exercised by the demo' 1 \
   "$(ev '$used = [];
     foreach (\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple() as $p) {
@@ -378,7 +386,24 @@ check 'components exercised by the demo' 1 \
     foreach (\Drupal::entityTypeManager()->getStorage("content_template")->loadMultiple() as $c) {
       foreach ($c->get("component_tree") as $i) { $used[$i["component_id"]] = TRUE; }
     }
-    print (int) (count($used) >= 18);')"
+    print (int) (count($used) >= 17);')"
+
+# Every shipped file entity needs its bytes beside it. Without them the
+# importer logs a warning and leaves a managed row pointing at nothing, and the
+# media count assertion cannot see it because no media references it.
+check 'every file entity ships its binary' 0 \
+  "$(python3 - "$RECIPE_DIR/content/file" <<'PYEOF'
+import pathlib, re, sys
+d = pathlib.Path(sys.argv[1])
+shipped = {p.name for p in d.iterdir() if p.suffix != '.yml'}
+missing = 0
+for y in d.glob('*.yml'):
+    m = re.search(r"value: '?public://([^'\n]+)'?", y.read_text())
+    if not m or m.group(1) not in shipped:
+        missing += 1
+print(missing)
+PYEOF
+)"
 
 # Anonymous JSON:API reads, which every data-fetching code component depends on.
 check 'anonymous can access content' 1 \
