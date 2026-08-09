@@ -79,10 +79,10 @@ default:
       component_id: js.section_intro
       inputs:
         eyebrow: 'Selected work'
-        title: 'Recent pieces'
+        title: 'Recent seating'
         align: left
         level: h2
-        lede: 'Most of what we make leaves and is never seen again, so we photograph it before it goes.'
+        lede: 'Chairs are most of what leaves the workshop, and none of it is seen again, so we photograph it before it goes.'
     -
       parent_uuid: 2f81adef-0010-4a00-8000-000000000010
       slot: content
@@ -97,8 +97,8 @@ default:
       uuid: e2964a41-0013-4a00-8000-000000000013
       component_id: js.figure
       inputs:
-        title: 'Spindle-back chair'
-        caption: 'Ash and stained oak, one of a pair made for a house in Alton.'
+        title: 'Round-back chair'
+        caption: 'Beech, oiled. Made in runs of twenty for a reading room in Winchester.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 38105a5a-27c2-4dd6-825d-3a671f2dbc45
@@ -111,8 +111,8 @@ default:
       uuid: 95917ad7-0014-4a00-8000-000000000014
       component_id: js.figure
       inputs:
-        title: 'Bentwood armchair'
-        caption: 'Steam-bent walnut, made for a reading room in Winchester. The arms are one piece.'
+        title: 'Stacking chair'
+        caption: 'Ash, stacking six high. The back rail is one steam-bent piece.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 3587db33-00d2-4295-811e-7d7de53ce915
@@ -125,8 +125,8 @@ default:
       uuid: 0bf5ef74-0015-4a00-8000-000000000015
       component_id: js.figure
       inputs:
-        title: 'Round-back chair'
-        caption: 'Beech, stacking, made in runs of twenty. The back is a single bent lamination.'
+        title: 'Folded chair'
+        caption: 'Ash laminations, one continuous curve from the back to the floor. Still on its third prototype.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 8afef070-72a2-49a2-a704-971f5f959d57

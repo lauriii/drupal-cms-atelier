@@ -1,0 +1,47 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 91b7dbdc-dc05-4ec0-99fa-31944c299a09
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Privacy
+  components:
+    -
+      uuid: 9b7c1d5e-0001-4a00-8000-000000000001
+      component_id: js.hero
+      inputs:
+        eyebrow: Legal
+        title: Privacy
+    -
+      uuid: 9b7c1d5e-0002-4a00-8000-000000000002
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: sm
+        width: default
+        divider: true
+    -
+      parent_uuid: 9b7c1d5e-0002-4a00-8000-000000000002
+      slot: content
+      uuid: 9b7c1d5e-0003-4a00-8000-000000000003
+      component_id: js.prose
+      inputs:
+        text: '<p>This site stores nothing about you beyond what Drupal needs in order to serve a page: a session identifier if you sign in, and ordinary web server logs. There is no analytics, no advertising, and no third-party tracking. The typefaces are served from this domain, not from Google.</p><p>If you email the studio we keep the correspondence until the piece is delivered, and for six years after that, because that is how long we have to keep records of work. We do not pass it on.</p><p><strong>Replace this page before you launch.</strong> It describes what this site template does, which is very little. It does not describe what your site does.</p>'
+  path:
+    -
+      alias: /privacy
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"canonical_url":"[canvas_page:url]","description":"[canvas_page:description]","image_src":"[canvas_page:image:entity:field_media_image:entity:url]","title":"[canvas_page:title] | [site:name]"}'

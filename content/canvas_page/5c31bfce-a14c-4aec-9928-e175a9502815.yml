@@ -67,7 +67,7 @@ default:
       inputs:
         marker: ''
         title: 'How to reach us'
-        text: 'studio@atelier.example, or 01730 000 000. Email is read twice a day; the phone is answered when someone is near it.'
+        text: '<a href="mailto:studio@atelier.example">studio@atelier.example</a>, or <a href="tel:+441730000000">01730 000 000</a>. Email is read twice a day; the phone is answered when someone is near it.'
         framed: false
         level: h2
     -

@@ -226,6 +226,10 @@ check 'hero image reference resolved' 1 \
 # pointing at a 404 is worse than one that ships no nav.
 check 'main menu links' 3 \
   "$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name"=>"main"]));')"
+check 'privacy page published' 1 \
+  "$(ev '$p = \Drupal::entityTypeManager()->getStorage("canvas_page")->loadByProperties(["title" => "Privacy"]);
+    $p = reset($p);
+    print (int) ($p && $p->isPublished() && $p->get("path")->alias === "/privacy");')"
 for page in "Home:4b3d5e15-3a8d-46c8-a502-1255c2b1ad26:/home:29" \
             "Studio:41c22c99-9e7a-4601-ab8c-517b366306d4:/studio:14" \
             "Journal:1797e924-d08c-40da-8f12-69155d704b44:/journal:3" \
@@ -297,7 +301,12 @@ check 'footer menu has a link for anonymous visitors' 1 \
   "$(ev '$links = \Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name" => "footer"]);
     $visible = 0;
     foreach ($links as $link) {
+      // A disabled link pointing at `#` grants access to everyone and renders
+      // to nobody, which is how this check passed while the footer was empty.
+      if (!$link->isEnabled()) { continue; }
       $url = $link->getUrlObject();
+      $target = $url->toString();
+      if (strlen($target) === 0 || $target === "#") { continue; }
       if ($url->access(\Drupal\user\Entity\User::getAnonymousUser())) { $visible++; }
     }
     print (int) ($visible > 0);')"
@@ -313,6 +322,8 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
   probe() { agent-browser --session atelier-check eval "$1" 2>/dev/null | tr -d '"'; }
   check 'components mount in a browser' yes \
     "$(probe "document.querySelector('h1') && /Six people/.test(document.querySelector('h1').textContent) ? 'yes' : 'no'")"
+  check 'footer renders its links' yes \
+    "$(probe "document.querySelectorAll('footer a').length > 0 ? 'yes' : 'no'")"
   check 'no console errors on the front page' 0 \
     "$(agent-browser --session atelier-check console --level error 2>/dev/null | grep -c . | tr -cd '0-9')"
   # The header is one row wherever it fits and must never push the page sideways.

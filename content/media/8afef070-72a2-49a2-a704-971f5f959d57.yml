@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'Round-back chair'
+      value: 'Folded chair'
   revision_translation_affected:
     -
       value: true
@@ -25,8 +25,8 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'A pale beech chair with a single curved back rail and a round seat.'
+      alt: 'A chair formed from laminated strips curving in one continuous line from the back to the floor.'
       title: ''
       width: 1200
-      height: 1450
+      height: 1400
       entity: e85a38c0-7c5a-48d0-be3c-dd69d1c3cf1b
