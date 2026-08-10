@@ -108,6 +108,20 @@ check 'shell theme keeps hidden.module.css' 1 \
 check 'shell theme regions' content,footer,header \
   "$(ev '$t = \Drupal::service("theme_handler")->getTheme("atelier_theme");
     $r = array_keys($t->info["regions"] ?? []); sort($r); print implode(",", $r);')"
+# The shell theme is not shipped as files: site_template_helper generates it at
+# composer install from `extra.drupal-site-template.generate-theme` in this
+# recipe's composer.json. Every other theme assertion here reads the installed
+# site, where the theme already exists -- so if that declaration were dropped,
+# they would all stay green while the recipe broke on every site but this one.
+# Assert the declaration itself, and that it names the theme the recipe sets.
+check 'shell theme is declared for generation' yes \
+  "$(ev '$composer = json_decode(file_get_contents(DRUPAL_ROOT . "/../recipes/atelier/composer.json"), TRUE);
+    $generated = $composer["extra"]["drupal-site-template"]["generate-theme"] ?? [];
+    $default = \Drupal::config("system.theme")->get("default");
+    $declares = ($generated["name"] ?? NULL) === $default;
+    $hasRegions = !empty($generated["info"]["regions"]);
+    $requiresHelper = isset($composer["require"]["drupal/site_template_helper"]);
+    print $declares && $hasRegions && $requiresHelper ? "yes" : "no";')"
 check 'no Mercury installed' 0 \
   "$(ev 'print (int) \Drupal::service("theme_handler")->themeExists("mercury");')"
 
@@ -650,7 +664,7 @@ echo "$pass passed, $fail failed"
 # tell "did not run" from "passed" -- this suite has twice reported 0 failed
 # with a third of it silently skipped. Assert the count itself. Raise the floor
 # when you add assertions; lower it only when you delete some on purpose.
-expected=125
+expected=126
 if (( pass + fail < expected )); then
   echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
   echo "A block exited early. Do not read the tally above as a pass." >&2

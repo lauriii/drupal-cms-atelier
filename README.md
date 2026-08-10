@@ -255,6 +255,44 @@ the shell theme emits no chrome, so the menu is data, not markup. Its links
 reference their targets by `target_uuid` rather than by path, so they follow the
 entities instead of breaking when an alias changes.
 
+## Shipping this on drupal.org
+
+One project, not two. `"type": "drupal-recipe"` puts it in `recipes/atelier`,
+and the shell theme is generated at `composer install` rather than shipped:
+`drupal/site_template_helper` reads `extra.drupal-site-template.generate-theme`
+from this recipe's own `composer.json` and writes the theme into the site.
+
+That works because the theme is genuinely a shell -- three regions and four
+`libraries-override` entries switching off Drupal's component CSS, and nothing
+else. It is one `.info.yml` and it is entirely expressible as data. Site
+templates that need a second repository are the ones with a real theme:
+templates, CSS, JavaScript, assets. None of that can be generated from a
+declaration.
+
+`tests/check.sh` asserts the declaration itself, because it cannot be caught
+any other way. Every other theme assertion reads the installed site, where the
+theme already exists -- so dropping the declaration would leave all of them
+green here while the recipe broke on every other site.
+
+Four things to settle before it goes up:
+
+- **Photography licensing, which is the real gate.** The fonts are fine: both
+  are SIL OFL and GPL-compatible. The photographs are under the Unsplash
+  License, which is permissive but is not GPL, and drupal.org wants everything
+  in a project repository to be GPL-compatible. Check that before assuming it
+  passes. Shipping with no stock photography is the clean answer -- the recipe
+  installs without it and this file already tells adopters to replace it.
+- **Size.** 36MB, of which 13MB is `content/file`. The images are 1800px at
+  q80; 1200px roughly halves the payload, and `tests/lib/measure-images.py`
+  will tell you whether the set still holds together afterwards.
+- **CI.** `tests/check.sh` is bash and drupal.org's GitLab CI runs PHPUnit. As
+  a standalone project the assertions want porting to a FunctionalJavascript
+  test, where CI can finally see them -- the note at the top of check.sh
+  explains why they are not one already.
+- **The name.** `atelier` has to be free both as a drupal.org project and as
+  the `recipes/atelier` path. It is baked into the page-region config
+  filenames, so decide it early.
+
 ## The components
 
 Twenty-one, and no more: the point is a small library composed well, not breadth.
