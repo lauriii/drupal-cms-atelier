@@ -24,6 +24,16 @@ RECIPE_NAME="$(basename "$RECIPE_DIR")"
 pass=0
 fail=0
 
+# The floor below is assembled from the blocks that actually ran. A fixed
+# number made the optional browser block mandatory: without it the suite can
+# reach 115 assertions and the floor was 128, so "skipped" reported as "a block
+# exited early" and the message pointed at the wrong thing.
+floor_base=86
+floor_browser=20
+floor_http=29
+ran_browser=0
+ran_http=0
+
 check() {
   local label="$1" expected="$2" actual="$3"
   if [[ "$actual" == "$expected" ]]; then
@@ -115,13 +125,13 @@ check 'shell theme regions' content,footer,header \
 # they would all stay green while the recipe broke on every site but this one.
 # Assert the declaration itself, and that it names the theme the recipe sets.
 check 'shell theme is declared for generation' yes \
-  "$(ev '$composer = json_decode(file_get_contents(DRUPAL_ROOT . "/../recipes/atelier/composer.json"), TRUE);
-    $generated = $composer["extra"]["drupal-site-template"]["generate-theme"] ?? [];
-    $default = \Drupal::config("system.theme")->get("default");
-    $declares = ($generated["name"] ?? NULL) === $default;
-    $hasRegions = !empty($generated["info"]["regions"]);
-    $requiresHelper = isset($composer["require"]["drupal/site_template_helper"]);
-    print $declares && $hasRegions && $requiresHelper ? "yes" : "no";')"
+  "$(ev "\$composer = json_decode(file_get_contents(DRUPAL_ROOT . '/../recipes/$RECIPE_NAME/composer.json'), TRUE);
+    \$generated = \$composer['extra']['drupal-site-template']['generate-theme'] ?? [];
+    \$default = \Drupal::config('system.theme')->get('default');
+    \$declares = (\$generated['name'] ?? NULL) === \$default;
+    \$hasRegions = !empty(\$generated['info']['regions']);
+    \$requiresHelper = isset(\$composer['require']['drupal/site_template_helper']);
+    print \$declares && \$hasRegions && \$requiresHelper ? 'yes' : 'no';")"
 check 'no Mercury installed' 0 \
   "$(ev 'print (int) \Drupal::service("theme_handler")->themeExists("mercury");')"
 
@@ -242,20 +252,20 @@ check 'no literal font sizes in shipped components' 0 \
 # five pages" while twenty-one and ten shipped. Those are the two sentences a
 # person reads before installing this, so the numbers in them are assertions.
 check 'recipe description states the real counts' yes \
-  "$(ev '$recipe = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(DRUPAL_ROOT . "/../recipes/atelier/recipe.yml"));
-    $words = ["one" => 1, "two" => 2, "three" => 3, "four" => 4, "five" => 5, "six" => 6,
-      "seven" => 7, "eight" => 8, "nine" => 9, "ten" => 10, "eleven" => 11, "twelve" => 12,
-      "thirteen" => 13, "fourteen" => 14, "fifteen" => 15, "sixteen" => 16, "seventeen" => 17,
-      "eighteen" => 18, "nineteen" => 19, "twenty" => 20, "twenty-one" => 21, "twenty-two" => 22];
-    $said = strtolower($recipe["description"] ?? "");
-    $components = count(\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple());
-    $pages = count(\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple());
-    $ok = FALSE; $okPages = FALSE;
-    foreach ($words as $word => $n) {
-      if ($n === $components && str_contains($said, $word . " components")) { $ok = TRUE; }
-      if ($n === $pages && str_contains($said, $word . " pages")) { $okPages = TRUE; }
+  "$(ev "\$recipe = \Symfony\Component\Yaml\Yaml::parse(file_get_contents(DRUPAL_ROOT . '/../recipes/$RECIPE_NAME/recipe.yml'));
+    \$words = ['one' => 1, 'two' => 2, 'three' => 3, 'four' => 4, 'five' => 5, 'six' => 6,
+      'seven' => 7, 'eight' => 8, 'nine' => 9, 'ten' => 10, 'eleven' => 11, 'twelve' => 12,
+      'thirteen' => 13, 'fourteen' => 14, 'fifteen' => 15, 'sixteen' => 16, 'seventeen' => 17,
+      'eighteen' => 18, 'nineteen' => 19, 'twenty' => 20, 'twenty-one' => 21, 'twenty-two' => 22];
+    \$said = strtolower(\$recipe['description'] ?? '');
+    \$components = count(\Drupal::entityTypeManager()->getStorage('js_component')->loadMultiple());
+    \$pages = count(\Drupal::entityTypeManager()->getStorage('canvas_page')->loadMultiple());
+    \$ok = FALSE; \$okPages = FALSE;
+    foreach (\$words as \$word => \$n) {
+      if (\$n === \$components && str_contains(\$said, \$word . ' components')) { \$ok = TRUE; }
+      if (\$n === \$pages && str_contains(\$said, \$word . ' pages')) { \$okPages = TRUE; }
     }
-    print $ok && $okPages ? "yes" : "no";')"
+    print \$ok && \$okPages ? 'yes' : 'no';")"
 check 'every component ships source and compiled' 0 \
   "$(ev '$bad = 0;
     foreach (\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple() as $c) {
@@ -424,12 +434,14 @@ check 'footer menu has a link for anonymous visitors' 1 \
 # Every component here hydrates in the browser, so curl proves only that the
 # server emitted a custom element: a component that throws on mount still ships
 # green. If a browser is available, mount the front page and read the DOM back.
-# Skipped rather than failed when it is not, so the suite still runs in CI.
+# Skipped when it is not, and the floor below drops by the number skipped, so
+# the suite still runs -- it just covers less and says so.
 if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
+  ran_browser=1
   export AGENT_BROWSER_IGNORE_HTTPS_ERRORS=1
   agent-browser --session atelier-check open "$SITE_URL/" >/dev/null 2>&1 || true
   sleep 4
-  probe() { agent-browser --session atelier-check eval "$1" 2>/dev/null | tr -d '"'; }
+  probe() { agent-browser --session atelier-check eval "$1" 2>/dev/null | tr -d '"' || true; }
   check 'components mount in a browser' yes \
     "$(probe "document.querySelector('h1') && /Six people/.test(document.querySelector('h1').textContent) ? 'yes' : 'no'")"
   check 'footer renders its links' yes \
@@ -440,7 +452,11 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
   # `1` when the page has no images at all, so an empty page cannot pass.
   probe "(function(){var m=document.querySelectorAll('img');for(var i=0;i<m.length;i++){m[i].loading='eager';m[i].src=m[i].src}return m.length})()" >/dev/null
   sleep 4
-  undecoded="$(probe "(function(){var n=0,m=document.querySelectorAll('img');for(var i=0;i<m.length;i++){if(!m[i].naturalWidth)n++}return m.length?n:1})()")"
+  # Every assignment below takes its value from a pipeline, and `set -euo
+  # pipefail` turns a grep that matched nothing into a dead suite -- the tally
+  # and the floor below never run, so the failure reads as silence. `|| true`
+  # lets the emptiness reach the code written to handle it.
+  undecoded="$(probe "(function(){var n=0,m=document.querySelectorAll('img');for(var i=0;i<m.length;i++){if(!m[i].naturalWidth)n++}return m.length?n:1})()" || true)"
   check 'every image decodes in the browser' 0 "$undecoded"
   # Three components take a `level` prop so an editor can keep headings in
   # order; nothing asserted that the shipped content actually does. A skipped
@@ -448,7 +464,7 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
   # `ev` strips whitespace, so the aliases come back comma-separated.
   heading_paths="$(ev 'foreach (\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple() as $p) {
       if ($p->isPublished()) { print $p->get("path")->alias . ","; }
-    }' | tr ',' ' ')"
+    }' | tr ',' ' ' || true)"
   # The form page and an article are rendered by Drupal and by the content
   # template, not by a canvas_page, so neither appeared in the derived list.
   heading_paths="$heading_paths /contact/enquiry /notes-bench-joinery-without-fixings"
@@ -507,15 +523,13 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
     agent-browser --session atelier-check open "$SITE_URL$op" >/dev/null 2>&1 || true
     sleep 2
     if [[ "$(probe "document.documentElement.scrollWidth > document.documentElement.clientWidth + 1 ? 'over' : 'ok'")" == "over" ]]; then
-      overflow="overflows on $op"
+      overflow="${overflow%ok} overflows on $op"
     fi
   done
   check 'no page overflows a 360px viewport' ok "$overflow"
-  check 'no horizontal overflow at 360px' yes \
-    "$(probe "document.documentElement.scrollWidth <= window.innerWidth ? 'yes' : 'no'")"
   agent-browser --session atelier-check close >/dev/null 2>&1 || true
 else
-  echo "    (skipped browser checks: agent-browser or SITE_URL unavailable)"
+  echo "    (skipped $floor_browser browser checks: agent-browser or SITE_URL unavailable)"
 fi
 
 # Journal entries are node pages, so without a content template they render
@@ -569,10 +583,11 @@ check 'every file entity ships its binary' 0 \
 check 'anonymous can access content' 1 \
   "$(ev 'print (int) \Drupal::entityTypeManager()->getStorage("user_role")->load("anonymous")->hasPermission("access content");')"
 
-base_url="$(ev 'print \Drupal::request()->getSchemeAndHttpHost();')"
+base_url="$(ev 'print \Drupal::request()->getSchemeAndHttpHost();' || true)"
 if [[ -n "$base_url" && "$base_url" != http* ]]; then base_url=""; fi
 if [[ -n "${SITE_URL:-}" ]]; then base_url="$SITE_URL"; fi
 if [[ -n "$base_url" ]]; then
+  ran_http=1
   # `/` first: it is the page a human opens after installing, and a stale
   # container or a front page pointing at nothing both surface here and
   # nowhere else.
@@ -584,14 +599,14 @@ if [[ -n "$base_url" ]]; then
     check "GET $path (anonymous)" 200 \
       "$(curl -skL -o /dev/null -w '%{http_code}' "$base_url$path")"
   done
-  body="$(curl -skL "$base_url/")"
-  flat="$(tr -d '\n' <<<"$body")"
+  body="$(curl -skL "$base_url/" || true)"
+  flat="$(tr -d '\n' <<<"$body" || true)"
 
   # There is deliberately no server-rendered navigation: the shell theme emits
   # no chrome, and the site_nav component renders the menu itself in the
   # browser. So the menu has to be available as *data*,
   # which is what that component consumes, rather than as markup.
-  menu_json="$(curl -sk "$base_url/jsonapi/menu_items/main")"
+  menu_json="$(curl -sk "$base_url/jsonapi/menu_items/main" || true)"
   for item in Studio Journal Contact; do
     check "main menu exposes '$item' over JSON:API" yes \
       "$(grep -qF "\"title\":\"$item\"" <<<"$menu_json" && echo yes || echo no)"
@@ -623,7 +638,7 @@ if [[ -n "$base_url" ]]; then
   article_url="$(ev 'print reset(\Drupal::entityTypeManager()->getStorage("node")->loadByProperties([
     "type" => "article",
     "title" => "Notes from the bench: joinery without fixings",
-  ]))->toUrl()->toString();')"
+  ]))->toUrl()->toString();' || true)"
   curl -skL "$base_url$article_url" >/dev/null 2>&1 || true
   check 'journal entry carries its own body' yes \
     "$(curl -skL "$base_url$article_url" | grep -qF 'wedged through-tenon' && echo yes || echo no)"
@@ -643,9 +658,9 @@ if [[ -n "$base_url" ]]; then
   # Drupal aggregates every stylesheet into one file, so a path check proves
   # nothing — fetch the aggregate and look for core's own base CSS in it.
   css_href="$(grep -oE 'href="/sites/default/files/css/[^"]*"' <<<"$flat" \
-    | head -1 | sed 's/href="//; s/"$//; s/&amp;/\&/g')"
+    | head -1 | sed 's/href="//; s/"$//; s/&amp;/\&/g' || true)"
   if [[ -n "$css_href" ]]; then
-    agg="$(curl -sk "$base_url$css_href")"
+    agg="$(curl -sk "$base_url$css_href" || true)"
     # Drupal's styling CSS must be gone...
     check 'stylesheet carries no Drupal styling CSS' yes \
       "$(grep -qE '\.clearfix|\.js-hide|\.container-inline' <<<"$agg" && echo no || echo yes)"
@@ -659,12 +674,12 @@ if [[ -n "$base_url" ]]; then
   fi
 
 else
-  echo "  skip  HTTP checks (set SITE_URL to enable)"
+  echo "  skip  $floor_http HTTP checks (set SITE_URL to enable)"
 fi
 
 echo "==> Re-applying the recipe (idempotency)"
-before_links="$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadMultiple());')"
-before_nodes="$(ev 'print count(\Drupal::entityTypeManager()->getStorage("node")->loadMultiple());')"
+before_links="$(ev 'print count(\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadMultiple());' || true)"
+before_nodes="$(ev 'print count(\Drupal::entityTypeManager()->getStorage("node")->loadMultiple());' || true)"
 
 reapply_start=$SECONDS
 if $DRUSH recipe "$RECIPE_DIR" -y >/dev/null 2>&1; then
@@ -691,12 +706,22 @@ echo "$pass passed, $fail failed"
 
 # A block that dies early takes its assertions with it, and the tally cannot
 # tell "did not run" from "passed" -- this suite has twice reported 0 failed
-# with a third of it silently skipped. Assert the count itself. Raise the floor
-# when you add assertions; lower it only when you delete some on purpose.
-expected=128
+# with a third of it silently skipped. Assert the count itself, exactly: a
+# one-sided floor drifted eight assertions below reality because forgetting to
+# raise it cost nothing. Bump the matching floor_* constant in the same commit
+# that adds or deletes an assertion.
+expected=$floor_base
+(( ran_browser )) && expected=$(( expected + floor_browser ))
+(( ran_http )) && expected=$(( expected + floor_http ))
 if (( pass + fail < expected )); then
-  echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
+  echo "Only $(( pass + fail )) assertions ran, expected at least $expected" >&2
+  echo "for the blocks that were enabled (browser=$ran_browser http=$ran_http)." >&2
   echo "A block exited early. Do not read the tally above as a pass." >&2
+  exit 1
+fi
+if (( pass + fail > expected )); then
+  echo "$(( pass + fail )) assertions ran, expected $expected." >&2
+  echo "Assertions were added without updating floor_base/floor_browser/floor_http." >&2
   exit 1
 fi
 

@@ -627,7 +627,9 @@ path:
 vendor/bin/phpunit -c web/core/phpunit.xml.dist recipes/atelier/tests/src/Kernel/RequirementsTest.php
 ```
 
-There is also `tests/check.sh` — 133 assertions, with a floor of 127 — which is not a substitute for
+There is also `tests/check.sh` — 135 assertions, of which 20 need a browser and
+29 need HTTP access, and the suite asserts the count of whatever ran — which is
+not a substitute for
 the above. It installs a throwaway site and asserts the rendered result — the front end
 serving the components, the imagery resolving, the menu exposed over JSON:API,
 Drupal's own CSS staying off the page. Those are things a PHPUnit test of the

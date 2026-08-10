@@ -16,7 +16,7 @@ highest-leverage findings, and everything else is recorded below under
 |------|-------|----------|--------|------|------------|--------|
 | 001 | Remove the committed third-party API credential, and record that it must be rotated | P1 | S | LOW | — | DONE — code side complete; **rotation at the provider is still outstanding on the human side** |
 | 002 | Ship the file entity for `recommended-add-ons.yaml`, so Project Browser works on a cold install | P1 | S | LOW | — | DONE — cold-install check not run (no Drupal site available) |
-| 003 | Stop `tests/check.sh` aborting silently, and make its floor, skip path and recipe-name handling honest | P1 | M | LOW | — | TODO |
+| 003 | Stop `tests/check.sh` aborting silently, and make its floor, skip path and recipe-name handling honest | P1 | M | LOW | — | DONE — static verification only; the suite needs a disposable Drupal site and was not executed |
 | 004 | Add a site-free validator for the shipped snapshot, and run it plus the PHPUnit tests in CI | P1 | M | LOW | 002 (soft) | TODO |
 | 005 | Give the vendored snapshot a provenance record, fix the stale version pin, make the refresh script runnable off DDEV | P2 | M | MED | — | TODO |
 | 006 | Cut the shipped photograph payload by ~60%, and make every declared image dimension match its file | P2 | M | MED | — | TODO |
