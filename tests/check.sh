@@ -10,7 +10,7 @@
 #   tests/check.sh                       # uses `drush`
 #   DRUSH="ddev drush" tests/check.sh    # inside DDEV
 #
-# ponytail: a shell script rather than a BrowserTestBase pair, because core's
+# This is a shell script rather than a BrowserTestBase pair because core's
 # phpunit.xml.dist only discovers tests under `core/recipes/*`, not under a
 # project-root `recipes/`. Swap in PHPUnit if this recipe ever ships as its own
 # drupal.org project, where GitLab CI places it where discovery can see it.
