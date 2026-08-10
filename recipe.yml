@@ -124,6 +124,11 @@ config:
       grantPermissions:
         - 'access content'
         - 'view media'
+        # Not inherited from anonymous -- Drupal roles do not nest -- so
+        # without this line every page's primary call to action 403s the
+        # moment a visitor logs in, including for the `content_editor` role
+        # this template creates.
+        - 'access site-wide contact form'
     # The global CSS the components are styled with — their Tailwind build. It
     # has to be a config action rather than a shipped
     # config file: `canvas.asset_library.global` already exists by the time

@@ -20,7 +20,7 @@ highest-leverage findings, and everything else is recorded below under
 | 004 | Add a site-free validator for the shipped snapshot, and run it plus the PHPUnit tests in CI | P1 | M | LOW | 002 (soft) | DONE (validator + `tests/lint.sh`) / **CI half deliberately SKIPPED** — no `.github/` was added because this repository is moving to drupal.org. Whoever sets up GitLab CI there must wire `tests/lint.sh` (and the PHPUnit tests) in; nothing covers them today |
 | 005 | Give the vendored snapshot a provenance record, fix the stale version pin, make the refresh script runnable off DDEV | P2 | M | MED | — | DONE — static verification only; neither regeneration script can run without a live site and both are destructive |
 | 006 | Cut the shipped photograph payload by ~60%, and make every declared image dimension match its file | P2 | M | MED | — | DONE — 12.89 MB → 5.01 MB, all 37 declarations re-derived; no visual check performed (no site available) |
-| 007 | Let logged-in visitors reach the enquiry form, and stop a fresh install mailing enquiries into a reserved domain | P2 | S | LOW | 003 | TODO |
+| 007 | Let logged-in visitors reach the enquiry form, and stop a fresh install mailing enquiries into a reserved domain | P2 | S | LOW | 003 | DONE — `floor_base` 86 → 88 (003 had landed); `tests/check.sh` not executed, it needs a disposable site |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale).

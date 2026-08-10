@@ -282,6 +282,29 @@ ruled baseline you type on, the label set as a key above it, and the accent as
 the focus colour. It is the one place on the site where the accent does
 something rather than labelling something.
 
+### Before you go live
+
+`contact.form.enquiry` ships with a recipient on a reserved domain
+(`.example`), which by design can never receive mail — a recipe is applied
+without ever asking for your address, so there is nothing honest to put there.
+Until you change it, every enquiry the site accepts is mailed nowhere, and the
+sender is told you will reply within two working days.
+
+Set it at `/admin/structure/contact/manage/enquiry`, or:
+
+```
+drush config:set contact.form.enquiry recipients.0 you@example.com
+```
+
+The welcome dashboard carries a "Set who receives enquiries" task pointing at
+the same place, above the five Drupal CMS puts there.
+
+Two things are already handled and need no action: logged-in visitors can reach
+the form (`recipe.yml` grants `access site-wide contact form` to both the
+anonymous and the authenticated role — Drupal roles do not nest, so both are
+needed), and spam protection comes from `drupal_cms_anti_spam`, which the base
+recipe applies.
+
 ## Shipping this on drupal.org
 
 One project, not two. `"type": "drupal-recipe"` puts it in `recipes/atelier`,

@@ -28,7 +28,7 @@ fail=0
 # number made the optional browser block mandatory: without it the suite can
 # reach 115 assertions and the floor was 128, so "skipped" reported as "a block
 # exited early" and the message pointed at the wrong thing.
-floor_base=86
+floor_base=88
 floor_browser=20
 floor_http=29
 ran_browser=0
@@ -336,6 +336,22 @@ check 'enquiry form exists and anonymous can reach it' yes \
   "$(ev '$form = \Drupal::entityTypeManager()->getStorage("contact_form")->load("enquiry");
     $anon = \Drupal::entityTypeManager()->getStorage("user_role")->load("anonymous");
     print $form && $anon->hasPermission("access site-wide contact form") ? "yes" : "no";')"
+# Roles do not nest, so a permission on anonymous does nothing for a logged-in
+# visitor. Nine buttons point at this form; it 403'd for every authenticated
+# user until the grant was added to both roles.
+check 'enquiry form reachable when logged in' yes \
+  "$(ev '$auth = \Drupal::entityTypeManager()->getStorage("user_role")->load("authenticated");
+    print $auth && $auth->hasPermission("access site-wide contact form") ? "yes" : "no";')"
+# The shipped recipient is on a reserved domain and can never resolve, because
+# a recipe cannot know the operator's address. That is fine only for as long as
+# the operator is told: this asserts the dashboard task that tells them exists
+# and points at the form's own settings.
+check 'a top task points at the enquiry recipient' yes \
+  "$(ev '$found = "no";
+    foreach (\Drupal::entityTypeManager()->getStorage("menu_link_content")->loadByProperties(["menu_name" => "top-tasks"]) as $link) {
+      if (str_contains($link->getUrlObject()->toString(), "/contact/manage/enquiry")) { $found = "yes"; }
+    }
+    print $found;')"
 check 'privacy page published' 1 \
   "$(ev '$p = \Drupal::entityTypeManager()->getStorage("canvas_page")->loadByProperties(["title" => "Privacy"]);
     $p = reset($p);
