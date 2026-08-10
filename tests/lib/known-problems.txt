@@ -1,0 +1,25 @@
+# Problems that ship at the commit this file was generated from. They are real
+# and each has a plan in `plans/`; they are listed here so CI can fail on
+# anything *new* rather than staying off until they are all fixed.
+#
+# Remove a line when its problem is fixed. A line here that no longer matches
+# anything is an error: this file is not allowed to describe a past.
+#
+# Generated at: 8d2e278
+#
+# image-dimensions and the js.button version pin are fixed by plans 006 and 005.
+# The two integer enum values are finding 7 in plans/README.md and have no plan yet.
+image-dimensions: 1298229c-9e7c-44d5-ae19-7e84c6f8c490.yml atelier-service-runs.jpg declared 1800x2700 actual 1600x1067
+image-dimensions: 5eb80978-a637-4707-8b4d-8b6e9103084c.yml atelier-workshop-inside.jpg declared 1800x2700 actual 1600x900
+image-dimensions: 65c8822a-f870-4caa-b15b-b4a19b2f7116.yml atelier-work-shelf.jpg declared 1800x1125 actual 1600x2133
+image-dimensions: 731cb42a-46e3-48a2-b4ef-5fbfab4c46f3.yml atelier-service-restoration.jpg declared 1800x2697 actual 1800x1404
+image-dimensions: 7a772863-f13b-4772-b5e9-395057248765.yml atelier-ref-runs-2.jpg declared 1400x933 actual 1600x1067
+image-dimensions: 9788969e-bbe4-4e49-b8dd-12645cde8f5c.yml atelier-ref-runs-1.jpg declared 1400x2100 actual 1600x1067
+image-dimensions: b89493b3-3079-457d-b4c4-484108554830.yml atelier-ref-commissions-2.jpg declared 1400x930 actual 1600x1067
+image-dimensions: dae4d2fc-0f4d-49bb-88e2-b71ba7978f6a.yml atelier-ref-commissions-1.jpg declared 1400x2070 actual 1600x2400
+image-dimensions: f1a3c47b-6333-499e-bcf4-09eac059e143.yml atelier-workshop-door.jpg declared 1800x1200 actual 1800x2700
+image-dimensions: f53bd614-0d46-4687-85ba-c63f9aa491ea.yml atelier-ref-restoration-3.jpg declared 1400x2100 actual 1600x1067
+image-dimensions: fedfd51b-e5e4-4cdc-9bb1-7b810fbce2d7.yml atelier-ref-restoration-2.jpg declared 1400x2100 actual 1800x1200
+version-pins-are-active: canvas.page_region.atelier_theme.header.yml js.button pinned 7f1fc8c10644f943 active f8e3a3c941940e1a
+enum-inputs-are-strings: 41c22c99-9e7a-4601-ab8c-517b366306d4.yml js.grid.columns is int 3
+enum-inputs-are-strings: 5c31bfce-a14c-4aec-9928-e175a9502815.yml js.grid.columns is int 3

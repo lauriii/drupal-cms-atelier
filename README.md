@@ -636,6 +636,27 @@ Drupal's own CSS staying off the page. Those are things a PHPUnit test of the
 recipe does not look at. It rebuilds the site's database, so only run it
 against a disposable site.
 
+`tests/lint.sh` is the half that needs no site: it parses every shipped YAML,
+checks that every binary in `content/file/` is claimed by an entity and vice
+versa, that declared image dimensions match the files, that every
+`component_id` resolves to both halves of its config, that every pinned
+`component_version` is the wrapper's active one, that enum-typed inputs are
+strings, and that `recipe.yml`'s description states the counts that actually
+ship. It takes about a second, so it is the one to run before a commit — and
+especially straight after either regeneration script below, which rewrite
+exactly the files it reads. `tests/lib/known-problems.txt` lists the problems
+that ship today so the gate fails on new ones rather than staying off until
+they are all fixed; a line there that no longer matches anything is itself an
+error, so the file cannot outlive the problems it describes.
+
+Nothing runs it automatically. This repository has no CI: it is moving to
+drupal.org, so the GitHub Actions workflow that would have run `tests/lint.sh`
+and the PHPUnit tests above was deliberately not added. Whoever sets up GitLab
+CI there should wire `tests/lint.sh` in — nothing else covers it.
+
+Both `tests/lint.sh` and `tests/lib/measure-images.py` need Python packages:
+`python3 -m pip install -r tests/lib/requirements.txt`.
+
 Two regeneration scripts keep the vendored snapshot honest, and both are meant
 to be run against a site you have edited by hand, with the diff reviewed:
 

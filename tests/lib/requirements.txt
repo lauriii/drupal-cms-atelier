@@ -1,3 +1,6 @@
-# Both measure-images.py and source-images.py need Pillow to read image data.
+# measure-images.py and source-images.py need Pillow to read image data;
+# validate-snapshot.py needs both, PyYAML to read the shipped YAML and Pillow
+# to read the real dimensions of the binaries beside it.
 # Install with: python3 -m pip install -r tests/lib/requirements.txt
 Pillow>=10
+PyYAML>=6
