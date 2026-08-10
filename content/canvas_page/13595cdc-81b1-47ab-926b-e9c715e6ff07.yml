@@ -171,7 +171,7 @@ default:
       component_id: js.button
       inputs:
         label: Enquire
-        url: 'mailto:studio@atelier.example'
+        url: /contact/enquiry
         variant: solid
         size: md
         fullWidth: false

@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: enquiry
+label: Enquiry
+recipients:
+  - studio@atelier.example
+reply: ''
+weight: 0
+message: 'Thank you. We read every enquiry and reply within two working days.'
+redirect: ''

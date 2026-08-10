@@ -317,6 +317,12 @@ check 'services menu item has children' 3 \
     $children = 0;
     foreach ($all as $link) { if ($link->getParentId() === "menu_link_content:" . $parent) { $children++; } }
     print $children;')"
+# Nine buttons ask the reader to enquire. Before this there was no form behind
+# any of them, and nothing noticed, because a mailto: always "works".
+check 'enquiry form exists and anonymous can reach it' yes \
+  "$(ev '$form = \Drupal::entityTypeManager()->getStorage("contact_form")->load("enquiry");
+    $anon = \Drupal::entityTypeManager()->getStorage("user_role")->load("anonymous");
+    print $form && $anon->hasPermission("access site-wide contact form") ? "yes" : "no";')"
 check 'privacy page published' 1 \
   "$(ev '$p = \Drupal::entityTypeManager()->getStorage("canvas_page")->loadByProperties(["title" => "Privacy"]);
     $p = reset($p);
@@ -362,14 +368,19 @@ check 'every button URL resolves and matches its label' 0 \
       $label = $inputs["label"] ?? "";
       if ($url === "") { return; }
       // A label that names a destination must not open a mail client, and a
-      // label that asks for contact must not open a page.
+      // label that asks the reader to write must land somewhere they can. That
+      // used to mean mailto: only; there is a real enquiry form now, so the
+      // form path counts and a mailto no longer does.
       $asksToWrite = (bool) preg_match("/enquir|email|contact|get in touch/i", $label);
       $namesAPage = (bool) preg_match("/read|see|about|view|browse|studio|journal/i", $label);
+      $reachesTheForm = str_starts_with($url, "/contact/");
       if (str_starts_with($url, "mailto:")) {
-        if (!$asksToWrite || $namesAPage) { $bad++; }
+        // A form exists; sending a visitor to their mail client instead is a
+        // regression, not an alternative.
+        $bad++;
         return;
       }
-      if ($asksToWrite && !$namesAPage) { $bad++; }
+      if ($asksToWrite && !$namesAPage && !$reachesTheForm) { $bad++; }
       if (str_starts_with($url, "/")) {
         if (!\Drupal::service("path.validator")->isValid($url)) { $bad++; }
         return;
@@ -664,7 +675,7 @@ echo "$pass passed, $fail failed"
 # tell "did not run" from "passed" -- this suite has twice reported 0 failed
 # with a third of it silently skipped. Assert the count itself. Raise the floor
 # when you add assertions; lower it only when you delete some on purpose.
-expected=126
+expected=127
 if (( pass + fail < expected )); then
   echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
   echo "A block exited early. Do not read the tally above as a pass." >&2

@@ -255,6 +255,29 @@ the shell theme emits no chrome, so the menu is data, not markup. Its links
 reference their targets by `target_uuid` rather than by path, so they follow the
 entities instead of breaking when an alias changes.
 
+## The enquiry form
+
+Drupal renders it, not a code component. Every page asks the reader to
+enquire, and a form needs a backend: a component that posted enquiries itself
+would mean making JSON:API writable and granting anonymous users POST access
+to a content entity, which is not a default worth handing to everyone who
+installs this.
+
+So `contact` is installed, a `contact.form.enquiry` config entity ships (core
+provides only the personal form), the anonymous role is granted
+`access site-wide contact form`, and the form renders at `/contact/enquiry`.
+
+It is styled from the global CSS rather than from theme CSS, which is possible
+because that stylesheet is the global asset library and loads on every
+front-end page -- not only on pages holding components. The Canvas header and
+footer are page regions, so they render there too, and the form arrives inside
+the site rather than beside it. The shell theme stays empty.
+
+The styling is the site's own vocabulary rather than Drupal's: no boxes, a
+ruled baseline you type on, the label set as a key above it, and the accent as
+the focus colour. It is the one place on the site where the accent does
+something rather than labelling something.
+
 ## Shipping this on drupal.org
 
 One project, not two. `"type": "drupal-recipe"` puts it in `recipes/atelier`,

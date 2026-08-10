@@ -36,7 +36,7 @@ component_tree:
     component_version: 7f1fc8c10644f943
     inputs:
       label: Enquire
-      url: 'mailto:studio@atelier.example'
+      url: /contact/enquiry
       variant: link
       size: sm
       fullWidth: false
