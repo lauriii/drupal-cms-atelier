@@ -44,6 +44,26 @@ default:
         width: default
         divider: false
     -
+      uuid: 4b2458a6-50f5-44bd-81a9-3856c2d2042b
+      component_id: js.section
+      inputs:
+        background: paper
+        spacing: sm
+        width: full
+        divider: false
+    -
+      parent_uuid: 4b2458a6-50f5-44bd-81a9-3856c2d2042b
+      slot: content
+      uuid: a3f19c62-0003-4a00-8000-000000000003
+      component_id: js.figure
+      inputs:
+        image:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 69d70d3f-4fff-43f0-a8f7-39740a352758
+            target_type: media
+        ratio: wide
+        level: h3
+    -
       parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
       slot: content
       uuid: e2c9b731-0001-4a00-8000-000000000001
@@ -54,35 +74,14 @@ default:
         lede: ''
         align: left
         level: h2
+        note: 'Unit 4, Ramshill Yard'
     -
       parent_uuid: 7f2a1c33-0003-4a00-8000-000000000003
-      slot: content
-      uuid: a3f19c62-0001-4a00-8000-000000000001
-      component_id: js.grid
-      inputs:
-        columns: '2'
-        gap: lg
-    -
-      parent_uuid: a3f19c62-0001-4a00-8000-000000000001
       slot: content
       uuid: a3f19c62-0002-4a00-8000-000000000002
       component_id: js.prose
       inputs:
         text: "<p>Everything is made here. We don't subcontract carcassing, we don't buy in doors, and nothing gets finished in a spray booth on an industrial estate forty miles away.</p><p>Timber comes from two merchants we've used for fifteen years, and increasingly from one woodland near Selborne that mills its own ash. We work in solid stock; where a piece needs a panel, we make the panel.</p><p>We don't stain. If you want a darker piece we find a darker timber.</p>"
-    -
-      parent_uuid: a3f19c62-0001-4a00-8000-000000000001
-      slot: content
-      uuid: a3f19c62-0003-4a00-8000-000000000003
-      component_id: js.figure
-      inputs:
-        image:
-          CANVAS_ENTITY_REFERENCE:
-            target_uuid: 69d70d3f-4fff-43f0-a8f7-39740a352758
-            target_type: media
-        ratio: wide
-        title: 'Sanding a plank'
-        caption: 'The bench under the window, where anything that needs looking at ends up.'
-        level: h3
     -
       uuid: 7f2a1c33-0005-4a00-8000-000000000005
       component_id: js.section
