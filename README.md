@@ -132,7 +132,9 @@ backend waiting to be filled in.
 
 That snapshot is generated, not hand-written: `tests/regenerate-components.sh`
 re-exports it from a site you have pushed to. Run it whenever the paired
-codebase changes, then review the diff.
+codebase changes, then review the diff. It needs a `drush` that can reach the
+site and nothing else — until recently it also needed one specific machine,
+because it wrote to a container path with the recipe name baked in.
 
 The global CSS is applied as a `setProperties` config action rather than a
 shipped config file. `canvas.asset_library.global` already exists by the time
@@ -182,7 +184,8 @@ current credit for each file and record it beside the image:
 Photographs are measured, not chosen by eye. `tests/lib/measure-images.py`
 reports mean luminance, mean saturation and a saturation-weighted circular
 mean hue for everything in `content/file/`, and `tests/lib/source-images.py`
-searches Unsplash and returns only candidates already inside the band.
+searches Unsplash and returns only candidates already inside the band; it needs
+`UNSPLASH_ACCESS_KEY` set and Pillow installed.
 
 The band -- luminance 62-118, saturation 0.22-0.48, hue 18-46 -- is empirical.
 Warm workshop interiors land there on their own, and wood keeps the hue narrow
@@ -279,6 +282,29 @@ ruled baseline you type on, the label set as a key above it, and the accent as
 the focus colour. It is the one place on the site where the accent does
 something rather than labelling something.
 
+### Before you go live
+
+`contact.form.enquiry` ships with a recipient on a reserved domain
+(`.example`), which by design can never receive mail — a recipe is applied
+without ever asking for your address, so there is nothing honest to put there.
+Until you change it, every enquiry the site accepts is mailed nowhere, and the
+sender is told you will reply within two working days.
+
+Set it at `/admin/structure/contact/manage/enquiry`, or:
+
+```
+drush config:set contact.form.enquiry recipients.0 you@example.com
+```
+
+The welcome dashboard carries a "Set who receives enquiries" task pointing at
+the same place, above the five Drupal CMS puts there.
+
+Two things are already handled and need no action: logged-in visitors can reach
+the form (`recipe.yml` grants `access site-wide contact form` to both the
+anonymous and the authenticated role — Drupal roles do not nest, so both are
+needed), and spam protection comes from `drupal_cms_anti_spam`, which the base
+recipe applies.
+
 ## Shipping this on drupal.org
 
 One project, not two. `"type": "drupal-recipe"` puts it in `recipes/atelier`,
@@ -306,9 +332,13 @@ Four things to settle before it goes up:
   in a project repository to be GPL-compatible. Check that before assuming it
   passes. Shipping with no stock photography is the clean answer -- the recipe
   installs without it and this file already tells adopters to replace it.
-- **Size.** 36MB, of which 13MB is `content/file`. The images are 1800px at
-  q80; 1200px roughly halves the payload, and `tests/lib/measure-images.py`
-  will tell you whether the set still holds together afterwards.
+- **Size.** About 5MB, nearly all of it `content/file`. The photographs are
+  capped at a 1400px long edge at q82; they were 1800px and 13MB until
+  `plans/006` re-encoded them. Going further is possible — 1200px is 3.8MB and
+  1000px is 2.5MB — but each step costs detail on the hero, which is the one
+  image reproduced near full width. `tests/lib/measure-images.py` measures the
+  set's colour, not its resolution, so it will report the same 15 of 27 at any
+  size; it is the wrong tool for judging a resize.
 - **CI.** `tests/check.sh` is bash and drupal.org's GitLab CI runs PHPUnit. As
   a standalone project the assertions want porting to a FunctionalJavascript
   test, where CI can finally see them -- the note at the top of check.sh
@@ -596,6 +626,14 @@ not need this site for day-to-day component work — only to push.
   cached page keeps serving the pre-push markup — byte for byte, which makes it
   look like the push did nothing. `drush cr`.
 
+- **The image-sourcing script needs an Unsplash key in the environment.**
+  `tests/lib/source-images.py` reads `UNSPLASH_ACCESS_KEY`; it used to carry a
+  key as a literal, which was committed to a public repository and must be
+  treated as burned. If you are the maintainer of that Unsplash application,
+  revoke the old key in the Unsplash developer console — deleting the line from
+  the working tree does not remove it from the git history. Both scripts in
+  `tests/lib/` also need Pillow: `python3 -m pip install -r tests/lib/requirements.txt`.
+
 ## Tests
 
 The three tests every Drupal CMS site template ships, modelled on the
@@ -618,12 +656,35 @@ path:
 vendor/bin/phpunit -c web/core/phpunit.xml.dist recipes/atelier/tests/src/Kernel/RequirementsTest.php
 ```
 
-There is also `tests/check.sh` — 133 assertions, with a floor of 127 — which is not a substitute for
+There is also `tests/check.sh` — 135 assertions, of which 20 need a browser and
+29 need HTTP access, and the suite asserts the count of whatever ran — which is
+not a substitute for
 the above. It installs a throwaway site and asserts the rendered result — the front end
 serving the components, the imagery resolving, the menu exposed over JSON:API,
 Drupal's own CSS staying off the page. Those are things a PHPUnit test of the
 recipe does not look at. It rebuilds the site's database, so only run it
 against a disposable site.
+
+`tests/lint.sh` is the half that needs no site: it parses every shipped YAML,
+checks that every binary in `content/file/` is claimed by an entity and vice
+versa, that declared image dimensions match the files, that every
+`component_id` resolves to both halves of its config, that every pinned
+`component_version` is the wrapper's active one, that enum-typed inputs are
+strings, and that `recipe.yml`'s description states the counts that actually
+ship. It takes about a second, so it is the one to run before a commit — and
+especially straight after either regeneration script below, which rewrite
+exactly the files it reads. `tests/lib/known-problems.txt` lists the problems
+that ship today so the gate fails on new ones rather than staying off until
+they are all fixed; a line there that no longer matches anything is itself an
+error, so the file cannot outlive the problems it describes.
+
+Nothing runs it automatically. This repository has no CI: it is moving to
+drupal.org, so the GitHub Actions workflow that would have run `tests/lint.sh`
+and the PHPUnit tests above was deliberately not added. Whoever sets up GitLab
+CI there should wire `tests/lint.sh` in — nothing else covers it.
+
+Both `tests/lint.sh` and `tests/lib/measure-images.py` need Python packages:
+`python3 -m pip install -r tests/lib/requirements.txt`.
 
 Two regeneration scripts keep the vendored snapshot honest, and both are meant
 to be run against a site you have edited by hand, with the diff reviewed:
@@ -635,6 +696,14 @@ to be run against a site you have edited by hand, with the diff reviewed:
   `drush content:export` drops: without them every article imports on the
   install timestamp and the journal reads as six posts filed on the same
   afternoon.
+
+The snapshot records what it came from: `extra.atelier.snapshot` in
+`composer.json` carries the paired codebase's URL and revision, the Canvas CLI
+version, the `drupal/canvas` version on the export site, and the export date.
+`tests/regenerate-components.sh` stamps it, reading the first three from
+`ATELIER_UPSTREAM`, `ATELIER_UPSTREAM_REVISION` and `ATELIER_CANVAS_CLI`. An
+unstamped snapshot cannot be diffed against the code it was exported from, so
+set them.
 
 ## Where this differs from the marketplace templates
 

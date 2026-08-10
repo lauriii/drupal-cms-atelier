@@ -1,0 +1,30 @@
+# The bytes of this file ship beside it as `recommended-add-ons.yaml`. Default
+# content only copies a binary into `public://` when an entity claims it, so
+# without this file the list Project Browser is pointed at never lands on disk
+# and its default source resolves to nothing. That is what happened between
+# `cfc17de` and this commit.
+# @see recipe.yml, the `project_browser.admin_settings` action.
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1e0a9a30-3d7f-4a4c-9d1b-5f2c7e6b4a10
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: recommended-add-ons.yaml
+  uri:
+    -
+      value: 'public://recommended-add-ons.yaml'
+  filemime:
+    -
+      value: text/plain
+  filesize:
+    -
+      value: 1925
+  status:
+    -
+      value: true

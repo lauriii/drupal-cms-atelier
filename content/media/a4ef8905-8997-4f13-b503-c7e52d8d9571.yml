@@ -27,6 +27,6 @@ default:
     -
       alt: 'Sawn boards stacked with spacers to dry.'
       title: ''
-      width: 1800
-      height: 1200
+      width: 1400
+      height: 933
       entity: 1f42b17b-b29a-47ac-a39b-8c0519f9f503

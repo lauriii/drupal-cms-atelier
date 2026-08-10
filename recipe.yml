@@ -102,7 +102,9 @@ config:
     # Point Project Browser at the recommended add-ons list this template
     # ships as a file, rather than at a remote URL. Same approach as
     # drupal_cms_blank, and it works on a site with no network access.
-    # @see content/file/6b2f19d4-8a07-4e53-91c6-3d05f8be71a2.yml
+    # @see content/file/1e0a9a30-3d7f-4a4c-9d1b-5f2c7e6b4a10.yml, the file
+    # entity that puts those bytes in `public://`. Without it the list is
+    # never copied and this source resolves to a file that is not there.
     project_browser.admin_settings:
       simpleConfigUpdate:
         enabled_sources.recommended:
@@ -122,6 +124,11 @@ config:
       grantPermissions:
         - 'access content'
         - 'view media'
+        # Not inherited from anonymous -- Drupal roles do not nest -- so
+        # without this line every page's primary call to action 403s the
+        # moment a visitor logs in, including for the `content_editor` role
+        # this template creates.
+        - 'access site-wide contact form'
     # The global CSS the components are styled with — their Tailwind build. It
     # has to be a config action rather than a shipped
     # config file: `canvas.asset_library.global` already exists by the time

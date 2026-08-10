@@ -27,6 +27,6 @@ default:
     -
       alt: 'A maker planing a board flat at a workbench, hand planes and shavings around the work.'
       title: ''
-      width: 1700
-      height: 1050
+      width: 1400
+      height: 865
       entity: 62f5db67-143a-4b08-b7ae-2e4814a29834

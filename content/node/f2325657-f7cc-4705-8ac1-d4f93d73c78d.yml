@@ -47,6 +47,6 @@ default:
     -
       alt: 'Oil and rag'
       title: ''
-      width: 1800
-      height: 1200
+      width: 1400
+      height: 933
       entity: b55a3fea-1137-4d82-96f5-62f8fb78f88f
