@@ -47,6 +47,6 @@ default:
     -
       alt: 'Boards on the rack'
       title: ''
-      width: 1800
-      height: 2768
+      width: 910
+      height: 1400
       entity: a9107df8-4b81-4be5-a4ed-7bc6183d8ac0

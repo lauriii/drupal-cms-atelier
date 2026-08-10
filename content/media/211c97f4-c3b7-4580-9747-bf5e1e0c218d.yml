@@ -27,6 +27,6 @@ default:
     -
       alt: 'A workbench under a window with jigs and hand tools racked above.'
       title: ''
-      width: 1800
-      height: 1200
+      width: 1400
+      height: 933
       entity: 48fd871f-fcf7-4342-bdd2-bde958f2b34f

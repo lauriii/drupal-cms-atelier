@@ -27,6 +27,6 @@ default:
     -
       alt: 'Fitted shelves in an alcove.'
       title: ''
-      width: 1400
-      height: 1867
+      width: 1050
+      height: 1400
       entity: b3900c32-a317-45fb-b559-6a78b6d0914a

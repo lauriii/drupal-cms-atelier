@@ -309,9 +309,13 @@ Four things to settle before it goes up:
   in a project repository to be GPL-compatible. Check that before assuming it
   passes. Shipping with no stock photography is the clean answer -- the recipe
   installs without it and this file already tells adopters to replace it.
-- **Size.** 36MB, of which 13MB is `content/file`. The images are 1800px at
-  q80; 1200px roughly halves the payload, and `tests/lib/measure-images.py`
-  will tell you whether the set still holds together afterwards.
+- **Size.** About 5MB, nearly all of it `content/file`. The photographs are
+  capped at a 1400px long edge at q82; they were 1800px and 13MB until
+  `plans/006` re-encoded them. Going further is possible — 1200px is 3.8MB and
+  1000px is 2.5MB — but each step costs detail on the hero, which is the one
+  image reproduced near full width. `tests/lib/measure-images.py` measures the
+  set's colour, not its resolution, so it will report the same 15 of 27 at any
+  size; it is the wrong tool for judging a resize.
 - **CI.** `tests/check.sh` is bash and drupal.org's GitLab CI runs PHPUnit. As
   a standalone project the assertions want porting to a FunctionalJavascript
   test, where CI can finally see them -- the note at the top of check.sh
