@@ -165,8 +165,8 @@ The demo content is a small furniture workshop. It is written as a site that
 already exists rather than as a pitch for the template, because by the time
 anyone sees it they have installed the template already. Every menu link and
 every button resolves: nothing in the shipped content points at a page that is
-not there, and the enquiry buttons use `mailto:` rather than a contact form
-this template does not install.
+not there, and every enquiry button opens the enquiry form at
+`/contact/enquiry`, which this template installs.
 
 Six articles ship as the journal's contents, with pinned publication dates —
 without them every article imports on the install timestamp and the journal
@@ -175,8 +175,9 @@ reads as six posts filed on the same afternoon.
 The imagery ships too, as `file` and `media` content plus the JPEGs
 themselves. The photographs come from Unsplash, whose licence allows free use
 including commercially and without permission. Attribution is not required by
-the licence but is asked for, so it is given here — and if you keep this
-template's demo content on a public site, keep this table with it:
+the licence but is asked for. It is not reproduced here, for the reason
+below. If you keep this template's demo content on a public site, pull the
+current credit for each file and record it beside the image:
 
 Photographs are measured, not chosen by eye. `tests/lib/measure-images.py`
 reports mean luminance, mean saturation and a saturation-weighted circular
@@ -617,7 +618,7 @@ path:
 vendor/bin/phpunit -c web/core/phpunit.xml.dist recipes/atelier/tests/src/Kernel/RequirementsTest.php
 ```
 
-There is also `tests/check.sh` — 123 assertions — which is not a substitute for
+There is also `tests/check.sh` — 133 assertions, with a floor of 127 — which is not a substitute for
 the above. It installs a throwaway site and asserts the rendered result — the front end
 serving the components, the imagery resolving, the menu exposed over JSON:API,
 Drupal's own CSS staying off the page. Those are things a PHPUnit test of the

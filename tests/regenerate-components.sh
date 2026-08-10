@@ -33,6 +33,21 @@ set -euo pipefail
 
 DRUSH="${DRUSH:-drush}"
 RECIPE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Exporting from a site that is broken or half-installed writes the emptiness
+# over the vendored snapshot: this script deletes all 21 component files and
+# both page regions before it re-exports them, so an empty site silently
+# becomes an empty recipe. That happened -- a failed install left no page
+# regions, this ran against it, and the header and footer configs were lost.
+# `regenerate-content.sh` has had a guard since a similar loss; this did not.
+components="$($DRUSH ev 'print count(\Drupal::entityTypeManager()->getStorage("js_component")->loadMultiple());' 2>/dev/null | tr -cd '0-9')"
+regions="$($DRUSH ev 'print count(\Drupal::entityTypeManager()->getStorage("page_region")->loadMultiple());' 2>/dev/null | tr -cd '0-9')"
+if [[ "${components:-0}" -lt 15 || "${regions:-0}" -lt 2 ]]; then
+  echo "Refusing to regenerate: the site has ${components:-0} components and ${regions:-0} page regions." >&2
+  echo "Expected at least 15 and 2. Install this template on the site first, then re-run." >&2
+  exit 1
+fi
+
 CONFIG_DIR="$RECIPE_DIR/config"
 
 echo "==> Exporting code components and page regions"

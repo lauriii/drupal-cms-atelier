@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: 'The workshop, late afternoon'
+      value: 'The workshop, mid-week'
   revision_translation_affected:
     -
       value: true
@@ -25,7 +25,7 @@ default:
       alias: null
   field_media_image:
     -
-      alt: 'A workbench under a window, crowded with hand tools and offcuts.'
+      alt: 'A timber-lined workshop: racked hand tools, a mitre saw, offcuts and a tin of raw linseed oil.'
       title: ''
       width: 1800
       height: 2700

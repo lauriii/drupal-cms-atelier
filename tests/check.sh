@@ -212,10 +212,13 @@ check 'component classes resolve in the CSS build' 0 \
         foreach (preg_split("/\\s+/", $list) as $x) {
           // A utility carries a hyphen or is one of the few bare ones; prose
           // and module paths are neither.
-          $shaped = preg_match("/^[a-z][a-z0-9._\\/-]*$/", $x)
-            && (str_contains($x, "-") || in_array($x, $bare, TRUE));
-          if (!$shaped || $x === "group") { continue; }
-          if (!preg_match("/\\." . preg_quote($x, "/") . "[\\s,{>~+]/", $css)) { $missing[] = $x; }
+          if ($x === "" || $x === "group") { continue; }
+          // Tailwind escapes the punctuation in a selector, so md:px-10 is
+          // written .md\\:px-10 and text-[length:var(--x)] becomes
+          // .text-\\[length\\:var\\(--x\\)\\]. Match the escaped form and the
+          // variants become checkable instead of skipped.
+          $escaped = preg_replace("/([:\\[\\]().\\/%!#,])/", "\\\\\\\\$1", $x);
+          if (!preg_match("/\\." . $escaped . "[\\s,{>~+]/", $css)) { $missing[] = $x; }
         }
       }
     }
@@ -446,6 +449,9 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
   heading_paths="$(ev 'foreach (\Drupal::entityTypeManager()->getStorage("canvas_page")->loadMultiple() as $p) {
       if ($p->isPublished()) { print $p->get("path")->alias . ","; }
     }' | tr ',' ' ')"
+  # The form page and an article are rendered by Drupal and by the content
+  # template, not by a canvas_page, so neither appeared in the derived list.
+  heading_paths="$heading_paths /contact/enquiry /notes-bench-joinery-without-fixings"
   for hp in $heading_paths; do
     agent-browser --session atelier-check open "$SITE_URL$hp" >/dev/null 2>&1 || true
     sleep 2
@@ -494,6 +500,17 @@ if command -v agent-browser >/dev/null 2>&1 && [[ -n "${SITE_URL:-}" ]]; then
   agent-browser --session atelier-check set viewport 360 800 >/dev/null 2>&1 || true
   agent-browser --session atelier-check open "$SITE_URL/" >/dev/null 2>&1 || true
   sleep 3
+  # This ran on the front page only, so a form that overflowed a phone by
+  # 207px shipped with it green. Every template the site renders gets checked.
+  overflow=ok
+  for op in / /studio /journal /faq /contact /contact/enquiry /services/commissions /notes-bench-joinery-without-fixings; do
+    agent-browser --session atelier-check open "$SITE_URL$op" >/dev/null 2>&1 || true
+    sleep 2
+    if [[ "$(probe "document.documentElement.scrollWidth > document.documentElement.clientWidth + 1 ? 'over' : 'ok'")" == "over" ]]; then
+      overflow="overflows on $op"
+    fi
+  done
+  check 'no page overflows a 360px viewport' ok "$overflow"
   check 'no horizontal overflow at 360px' yes \
     "$(probe "document.documentElement.scrollWidth <= window.innerWidth ? 'yes' : 'no'")"
   agent-browser --session atelier-check close >/dev/null 2>&1 || true
@@ -521,7 +538,8 @@ check 'articles have body copy' 6 \
 # the per-page item counts above, which have been amended to match whatever
 # shipped and so have never once constrained anything.
 #
-# The floor is 17, not 18. `badge` is deliberately unused: it was placed twice
+# The floor is 20 of 21. `badge` is the only component the demo does not use:
+# it was placed twice
 # to satisfy this assertion and both times it read as a disabled control — once
 # as a button in a hero's actions slot, once as a text input filling a grid
 # column. Availability, the one thing it was carrying, is a `figure` prop now,
@@ -539,7 +557,7 @@ check 'components exercised by the demo' 1 \
     foreach (\Drupal::entityTypeManager()->getStorage("content_template")->loadMultiple() as $c) {
       foreach ($c->get("component_tree") as $i) { $used[$i["component_id"]] = TRUE; }
     }
-    print (int) (count($used) >= 17);')"
+    print (int) (count($used) >= 20);')"
 
 # Every shipped file entity needs its bytes beside it. Without them the
 # importer logs a warning and leaves a managed row pointing at nothing, and the
@@ -675,7 +693,7 @@ echo "$pass passed, $fail failed"
 # tell "did not run" from "passed" -- this suite has twice reported 0 failed
 # with a third of it silently skipped. Assert the count itself. Raise the floor
 # when you add assertions; lower it only when you delete some on purpose.
-expected=127
+expected=128
 if (( pass + fail < expected )); then
   echo "Only $(( pass + fail )) assertions ran, expected at least $expected." >&2
   echo "A block exited early. Do not read the tally above as a pass." >&2
