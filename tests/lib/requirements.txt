@@ -1,0 +1,3 @@
+# Both measure-images.py and source-images.py need Pillow to read image data.
+# Install with: python3 -m pip install -r tests/lib/requirements.txt
+Pillow>=10

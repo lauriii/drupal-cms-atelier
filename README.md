@@ -182,7 +182,8 @@ current credit for each file and record it beside the image:
 Photographs are measured, not chosen by eye. `tests/lib/measure-images.py`
 reports mean luminance, mean saturation and a saturation-weighted circular
 mean hue for everything in `content/file/`, and `tests/lib/source-images.py`
-searches Unsplash and returns only candidates already inside the band.
+searches Unsplash and returns only candidates already inside the band; it needs
+`UNSPLASH_ACCESS_KEY` set and Pillow installed.
 
 The band -- luminance 62-118, saturation 0.22-0.48, hue 18-46 -- is empirical.
 Warm workshop interiors land there on their own, and wood keeps the hue narrow
@@ -595,6 +596,14 @@ not need this site for day-to-day component work — only to push.
 - **The anonymous page cache hides a push.** After `canvas push`, an already
   cached page keeps serving the pre-push markup — byte for byte, which makes it
   look like the push did nothing. `drush cr`.
+
+- **The image-sourcing script needs an Unsplash key in the environment.**
+  `tests/lib/source-images.py` reads `UNSPLASH_ACCESS_KEY`; it used to carry a
+  key as a literal, which was committed to a public repository and must be
+  treated as burned. If you are the maintainer of that Unsplash application,
+  revoke the old key in the Unsplash developer console — deleting the line from
+  the working tree does not remove it from the git history. Both scripts in
+  `tests/lib/` also need Pillow: `python3 -m pip install -r tests/lib/requirements.txt`.
 
 ## Tests
 
