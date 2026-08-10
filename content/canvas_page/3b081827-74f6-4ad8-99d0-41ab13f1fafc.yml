@@ -240,7 +240,7 @@ default:
       component_id: js.figure
       inputs:
         title: 'Dresser, 1920s, back in use'
-        caption: 'Oak. Cole Street, 2025. Cracked cornice let in and glued. Nothing stripped; it holds the everyday china again.'
+        caption: 'Oak. Cole Street, 2025. Cracked cornice let in and glued, drawers re-run. Nothing stripped.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: f53bd614-0d46-4687-85ba-c63f9aa491ea

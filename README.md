@@ -189,7 +189,7 @@ without being asked. An image outside it is not necessarily a bad picture; it
 is necessarily a different picture from the rest, which is what reads on a
 page holding six of them.
 
-**The shipped set does not meet its own brief: 9 of 27.** That is recorded
+**The shipped set does not meet its own brief: 15 of 27.** That is recorded
 here rather than hidden because it is the largest outstanding piece of work in
 this template, and because a measure script that fails on the day it ships
 teaches everyone to ignore it. Replace these photographs with real ones of

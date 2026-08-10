@@ -209,12 +209,12 @@ default:
       uuid: 101fa507-8ac7-4416-9227-b70db1a9ff5b
       component_id: js.figure
       inputs:
+        title: 'The Pantry, Winchester'
+        caption: 'Two hundred stools in beech, stacking, delivered over four months in batches of twenty.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 9788969e-bbe4-4e49-b8dd-12645cde8f5c
             target_type: media
-        title: 'Two hundred stools'
-        caption: 'Beech, stacking. The Pantry, Winchester, 2024. Four jigs, ten batches of twenty, one master.'
         sheet: R-12
         level: h3
         ratio: tall
@@ -224,12 +224,12 @@ default:
       uuid: 3cba9f9d-3288-4acd-962f-fabb535828b8
       component_id: js.figure
       inputs:
+        title: 'Stool, one of ninety'
+        caption: 'Ash, turned. For a shop in Lewes, 2023. Nine of the first run were kept; the rest went out.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 7a772863-f13b-4772-b5e9-395057248765
             target_type: media
-        title: 'Turned vessels, ninety'
-        caption: 'Ash and sycamore. For a shop in Lewes, 2023. Nine of the first run were kept; the rest went out.'
         sheet: R-07
         level: h3
         ratio: tall

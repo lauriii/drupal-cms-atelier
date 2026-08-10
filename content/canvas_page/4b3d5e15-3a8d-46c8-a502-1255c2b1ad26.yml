@@ -108,8 +108,8 @@ default:
       uuid: 95917ad7-0014-4a00-8000-000000000014
       component_id: js.figure
       inputs:
-        title: 'Shelf, detail'
-        caption: 'The front edge of a wall-hung shelf. The uprights follow a wall that is 14mm out over its height.'
+        title: 'Wall shelves'
+        caption: 'Douglas fir, wall-hung. The wall is 14mm out over its height, so the uprights follow it.'
         image:
           CANVAS_ENTITY_REFERENCE:
             target_uuid: 65c8822a-f870-4caa-b15b-b4a19b2f7116
