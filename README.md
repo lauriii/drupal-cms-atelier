@@ -132,7 +132,9 @@ backend waiting to be filled in.
 
 That snapshot is generated, not hand-written: `tests/regenerate-components.sh`
 re-exports it from a site you have pushed to. Run it whenever the paired
-codebase changes, then review the diff.
+codebase changes, then review the diff. It needs a `drush` that can reach the
+site and nothing else — until recently it also needed one specific machine,
+because it wrote to a container path with the recipe name baked in.
 
 The global CSS is applied as a `setProperties` config action rather than a
 shipped config file. `canvas.asset_library.global` already exists by the time
@@ -667,6 +669,14 @@ to be run against a site you have edited by hand, with the diff reviewed:
   `drush content:export` drops: without them every article imports on the
   install timestamp and the journal reads as six posts filed on the same
   afternoon.
+
+The snapshot records what it came from: `extra.atelier.snapshot` in
+`composer.json` carries the paired codebase's URL and revision, the Canvas CLI
+version, the `drupal/canvas` version on the export site, and the export date.
+`tests/regenerate-components.sh` stamps it, reading the first three from
+`ATELIER_UPSTREAM`, `ATELIER_UPSTREAM_REVISION` and `ATELIER_CANVAS_CLI`. An
+unstamped snapshot cannot be diffed against the code it was exported from, so
+set them.
 
 ## Where this differs from the marketplace templates
 

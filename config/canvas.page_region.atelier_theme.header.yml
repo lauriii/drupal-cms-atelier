@@ -33,7 +33,7 @@ component_tree:
     slot: content
     uuid: 9004d66b-54b5-54e8-8a3e-e231b5096dc1
     component_id: js.button
-    component_version: 7f1fc8c10644f943
+    component_version: f8e3a3c941940e1a
     inputs:
       label: Enquire
       url: /contact/enquiry
